@@ -12,9 +12,9 @@ _cupcakes_blog-detail:
     path:     /blog-detail
     defaults: { _controller: AppBundle:Blog:blogdetail }
 _cupcakes_about:
-    path:     /About
+    path:     /about
     defaults: { _controller: AppBundle:About:About }
 
 _cupcakes_contact:
-    path:     /Contact
+    path:     /contact
     defaults: { _controller: AppBundle:Contact:Contact }

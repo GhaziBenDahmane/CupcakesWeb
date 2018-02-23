@@ -1,9 +1,9 @@
 e_commerce_product:
     resource: "@ECommerceBundle/Resources/config/routing/product.yml"
-    prefix:   /Cupadmin/product
+    prefix:   /admin/product
 e_commerce_promotion:
     resource: "@ECommerceBundle/Resources/config/routing/promotion.yml"
-    prefix:   /Cupadmin/promotion
+    prefix:   /admin/promotion
 
 _cupcakes_product-grid:
     path:     /product-grid
@@ -16,11 +16,12 @@ _cupcakes_product-listing:
     path:     /product-listing
     defaults: { _controller: ECommerceBundle:Default:ProductListing}
 _cupcakes_cart:
-    path:     /Cart
+    path:     /cart
     defaults: { _controller: ECommerceBundle:Default:Cart }
+
 _cupcakes_order_form:
-    path:     /OrderForm
+    path:     /order
     defaults: { _controller: ECommerceBundle:Default:OrderForm }
 _cupcakes_checkout:
-    path:     /Checkout
+    path:     /checkout
     defaults: { _controller: ECommerceBundle:Default:Checkout }

@@ -24,7 +24,7 @@ e_commerce:
 
 back_office:
     resource: "@BackOfficeBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /admin
 
 user:
     resource: "@UserBundle/Resources/config/routing.yml"
@@ -32,3 +32,5 @@ user:
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+
