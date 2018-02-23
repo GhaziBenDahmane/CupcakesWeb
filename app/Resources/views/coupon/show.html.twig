@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Coupon</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ coupon.id }}</td>
+            </tr>
+            <tr>
+                <th>Code</th>
+                <td>{{ coupon.code }}</td>
+            </tr>
+            <tr>
+                <th>Percentage</th>
+                <td>{{ coupon.percentage }}</td>
+            </tr>
+            <tr>
+                <th>Expirationdate</th>
+                <td>{% if coupon.expirationDate %}{{ coupon.expirationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('coupon_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('coupon_edit', { 'id': coupon.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

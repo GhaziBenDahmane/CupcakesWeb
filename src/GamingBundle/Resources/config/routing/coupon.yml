@@ -1,0 +1,24 @@
+coupon_index:
+    path:     /
+    defaults: { _controller: "GamingBundle:Coupon:index" }
+    methods:  GET
+
+coupon_show:
+    path:     /show/{id}
+    defaults: { _controller: "GamingBundle:Coupon:show" }
+    methods:  GET
+
+coupon_new:
+    path:     /new
+    defaults: { _controller: "GamingBundle:Coupon:new" }
+    methods:  [GET, POST]
+
+coupon_edit:
+    path:     /edit/{id}
+    defaults: { _controller: "GamingBundle:Coupon:edit" }
+    methods:  [GET, POST]
+
+coupon_delete:
+    path:     /delete/{id}
+    defaults: { _controller: "GamingBundle:Coupon:delete" }
+    methods:  DELETE

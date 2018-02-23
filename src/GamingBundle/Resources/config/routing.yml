@@ -1,3 +1,7 @@
+gaming_coupon:
+    resource: "@GamingBundle/Resources/config/routing/coupon.yml"
+    prefix:   /coupon
+
 gaming_homepage:
     path:     /
     defaults: { _controller: GamingBundle:Default:index }
