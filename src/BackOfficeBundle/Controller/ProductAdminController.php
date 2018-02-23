@@ -24,7 +24,7 @@ class ProductAdminController extends Controller
 
         $products = $em->getRepository('ECommerceBundle:Product')->findAll();
 
-        return $this->render('ECommerceBundle:product:index.html.twig', array(
+        return $this->render('ECommerceBundle:Product:index.html.twig', array(
             'products' => $products,
         ));
     }
@@ -44,7 +44,7 @@ class ProductAdminController extends Controller
 
 
 
-        return $this->render('@ECommerce/product/new.html.twig', array(
+        return $this->render('ECommerceBundle:Product:new.html.twig', array(
             'product' => $product,
             'form'   => $form->createView(),
         ));

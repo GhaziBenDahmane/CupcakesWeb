@@ -35,7 +35,7 @@ var mainState = {
         game.input.onDown.add(this.jump, this);
 
         this.score = 0;
-        this.labelScore = game.add.text(20, 20, "0", { font: "30px Arial", fill: "#ffffff" });
+        this.labelScore = game.add.text(20, 20, "0", {font: "30px Arial", fill: "#ffffff"});
 
         this.jumpSound = game.add.audio('jump');
         this.jumpSound.volume = 0.2;
@@ -57,7 +57,7 @@ var mainState = {
 
         this.bird.body.velocity.y = -350;
 
-        game.add.tween(this.bird).to({ angle: -20 }, 100).start();
+        game.add.tween(this.bird).to({angle: -20}, 100).start();
 
         this.jumpSound.play();
     },
@@ -76,11 +76,17 @@ var mainState = {
     },
 
     gameEnded: function () {
-        button = game.add.button(game.world.centerX - 95, 300, 'shop', function () { location.href = '/store' }, this, 2, 1, 0);
-        button = game.add.button(game.world.centerX - 95, 350, 'play', function () { game.state.start('main') }, this, 2, 1, 0);
-        setTimeout(function() {
+        button = game.add.button(game.world.centerX - 95, 300, 'shop', function () {
+            location.href = '/store'
+        }, this, 2, 1, 0);
+        button = game.add.button(game.world.centerX - 95, 350, 'play', function () {
+            game.lockRender = false;
+            game.state.start('main')
+        }, this, 2, 1, 0);
+        setTimeout(function () {
             game.lockRender = true;
         }, 500)
+
 
 
     },

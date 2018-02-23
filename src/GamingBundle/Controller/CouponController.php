@@ -5,6 +5,7 @@ namespace GamingBundle\Controller;
 use GamingBundle\Entity\Coupon;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Coupon controller.
@@ -36,12 +37,15 @@ class CouponController extends Controller
         $coupon = new Coupon();
         $form = $this->createForm('GamingBundle\Form\CouponType', $coupon);
         $form->handleRequest($request);
+        if ($request->isXmlHttpRequest()) {
+            var_dump($request);
 
+        }
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $coupon->setCode(uniqid());
             $em->persist($coupon);
             $em->flush();
-
             return $this->redirectToRoute('coupon_show', array('id' => $coupon->getId()));
         }
 
@@ -118,7 +122,6 @@ class CouponController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('coupon_delete', array('id' => $coupon->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

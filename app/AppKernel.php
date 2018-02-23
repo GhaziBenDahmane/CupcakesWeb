@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new TrainingBundle\TrainingBundle(),
             new AppBundle\AppBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new Vresh\TwilioBundle\VreshTwilioBundle(),
 
         ];
 

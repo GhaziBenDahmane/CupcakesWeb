@@ -82,3 +82,10 @@ fos_user:
     from_email:
         address: "%mailer_user%"
         sender_name: "%mailer_user%"
+vresh_twilio:
+    #(Required) Your Account SID from www.twilio.com/user/account
+    sid: 'AC1c0bd1ebca8e2ecd2ea5ddc919e950a0'
+    #(Required) Your Auth Token from www.twilio.com/user/account
+    authToken: '65063fd6f5f0b228ff625955eb0fb4ca'
+    #(Optional, default: 1) Number of times to retry failed requests
+    retryAttempts: 3

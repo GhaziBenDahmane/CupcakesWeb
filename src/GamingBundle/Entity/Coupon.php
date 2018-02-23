@@ -29,6 +29,29 @@ class Coupon
     private $code;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="$used", type="boolean")
+     */
+    private $used=false;
+
+    /**
+     * @return bool
+     */
+    public function isUsed()
+    {
+        return $this->used;
+    }
+
+    /**
+     * @param bool $used
+     */
+    public function setUsed($used)
+    {
+        $this->used = $used;
+    }
+
+    /**
      * @var float
      *
      * @ORM\Column(name="percentage", type="float")

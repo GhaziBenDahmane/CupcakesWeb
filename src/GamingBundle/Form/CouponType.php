@@ -13,8 +13,11 @@ class CouponType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('code')->add('percentage')->add('expirationDate');
-    }/**
+        $builder->add('percentage')
+            ->add('expirationDate');
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
