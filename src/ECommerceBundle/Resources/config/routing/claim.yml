@@ -1,0 +1,24 @@
+claim_index:
+    path:     /
+    defaults: { _controller: "ECommerceBundle:Claim:index" }
+    methods:  GET
+
+claim_show:
+    path:     /{id}/show
+    defaults: { _controller: "ECommerceBundle:Claim:show" }
+    methods:  GET
+
+claim_new:
+    path:     /new
+    defaults: { _controller: "ECommerceBundle:Claim:new" }
+    methods:  [GET, POST]
+
+claim_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ECommerceBundle:Claim:edit" }
+    methods:  [GET, POST]
+
+claim_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ECommerceBundle:Claim:delete" }
+    methods:  DELETE

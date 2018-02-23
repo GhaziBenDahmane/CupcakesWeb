@@ -5,7 +5,7 @@
 
 {% block content %}
     {% block title %}
-        <title>Bakery | Cart</title>
+        <title>Bakery | Event</title>
     {% endblock %}
     <!--section-->
     <div class="ps-section--hero"><img src="{{ asset('assets/front/images/hero/01.jpg') }}" alt="">
@@ -14,62 +14,68 @@
             <div class="ps-breadcrumb">
                 <ol class="breadcrumb">
                     <li><a href="{{ path('_cupcakes_homepage') }}">Home</a></li>
-                    <li class="active">Cart</li>
+                    <li class="active">Event</li>
                 </ol>
             </div>
         </div>
     </div>
     <div class="ps-section--cart pt-100 pb-100">
         <div class="container">
+            <h3>Event list</h3>
             <div class="table-responsive">
-
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Starting date</th>
-                    <th>Endingd ate</th>
-                    <th>Number of person</th>
-                    <th>Nbtable</th>
-                    <th>Band</th>
-                    <th>Cost</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for event in events %}
+                <table class="table" id="table">
+                    <thead>
                     <tr>
-                        <td><a href="{{ path('event_show', { 'id': event.id }) }}">{{ event.id }}</a></td>
-                        <td>{% if event.startingDate %}{{ event.startingDate|date('Y-m-d') }}{% endif %}</td>
-                        <td>{% if event.endingDate %}{{ event.endingDate|date('Y-m-d') }}{% endif %}</td>
-                        <td>{{ event.nbPerson }}</td>
-                        <td>{{ event.nbTable }}</td>
-                        <td>{% if event.band %}Yes{% else %}No{% endif %}</td>
-                        <td>{{ event.cost }}</td>
-                        <td>
-                            <ul>
-                                <li>
-                                    <a href="{{ path('event_show', { 'id': event.id }) }}">show</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('event_edit', { 'id': event.id }) }}">edit</a>
-                                </li>
-                            </ul>
-                        </td>
+                        <th>Starting date</th>
+                        <th>Ending date</th>
+                        <th>Number of person</th>
+                        <th>Number of place</th>
+                        <th>Band</th>
+                        <th>Cost</th>
+                        <th>Action</th>
                     </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-                </div >
+                    </thead>
+                    <tbody>
+                    {% for event in events %}
+                        <tr id="addr{{ event.id }}">
+                            <td>{% if event.startingDate %}{{ event.startingDate|date('Y-m-d') }}{% endif %}</td>
+                            <td>{% if event.endingDate %}{{ event.endingDate|date('Y-m-d') }}{% endif %}</td>
+                            <td>{{ event.nbPerson }}</td>
+                            <td>{{ event.nbTable }}</td>
+                            <td>{% if event.band %}Yes{% else %}No{% endif %}</td>
+                            <td>{{ event.cost }}</td>
+                            <td>
+                                <ul>
+                                    <li>
+                                        <a id="" class="glyphicon glyphicon-trash" onclick="delete_entry({{ event.id }})"> </a>
+                                    </li>
+                                    <li>
+                                        <a class="glyphicon glyphicon-ok-circle" onclick="validate_row(id)"></a>
+                                    </li>
+                                </ul>
+                            </td>
 
 
-                <ul>
-                <li>
-                    <a href="{{ path('event_new') }}">Create a new event</a>
-                </li>
-            </ul>
+
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+
+            </div>
+            <div class="form-group text-left">
+                <button id="add_row" class="ps-btn">New Event<i class="fa fa-angle-right"></i></button>
+            </div>
         </div>
+
+        <center>
+            <div class="navigation">
+                {{ knp_pagination_render(events) }}
+            </div>
+        </center>
     </div>
+
 {% endblock %}
 
 {% block footer %}
@@ -89,4 +95,4 @@
 
 {% block CustomScripts %}
     {{ parent() }}
-{% endblock  %}
+{% endblock %}

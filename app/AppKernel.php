@@ -24,6 +24,8 @@ class AppKernel extends Kernel
             new TrainingBundle\TrainingBundle(),
             new AppBundle\AppBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+
 
         ];
 

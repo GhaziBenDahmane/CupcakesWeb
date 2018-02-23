@@ -1,5 +1,5 @@
 _cupcakes_homepage:
-    path:     /
+    path:     /index
     defaults: { _controller: AppBundle:Default:index }
 _Cupcakes_front_logout:
     path:     /logout
@@ -14,7 +14,10 @@ _cupcakes_blog-detail:
 _cupcakes_about:
     path:     /About
     defaults: { _controller: AppBundle:About:About }
+_cupcakes404_page:
+    path:     /404Page
+    defaults: { _controller: AppBundle:Pages:NotFound }
 
 _cupcakes_contact:
-    path:     /Contact
+    path:     /contact
     defaults: { _controller: AppBundle:Contact:Contact }

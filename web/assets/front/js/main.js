@@ -8,7 +8,188 @@ function showLogin() {
     }, 0);
 
 }
+function delete_row(id) {
+
+    $("#addr1").remove();
+    $("#add_row").removeAttr("disabled");
+
+}
+
+function  delete_entry(id) {
+    axios.get('/event/'+id+'/delete')
+        .then(function (response) {
+            $("#addr"+id).remove();
+
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+function  delete_entry_res(id) {
+    axios.get('/reservation/'+id+'/delete')
+        .then(function (response) {
+            $("#addr"+id).remove();
+
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
+/*Add Reservation ajax */
+
+function validate_row_res(id){
+    axios.post("/reservation/new", {
+        dateReservation : $("#dateReservation").val(),
+        nbPerson: $("#nbPerson").val(),
+        nbTable: $("#nbTable").val(),
+        ajax:"true"
+    } )
+        .then(function () {
+            $('#addr1').html(
+                '<td>'+$("#dateReservation").val()+'</td>'+
+                '<td>'+$("#nbPerson").val()+'</td>'+
+                '<td>'+$("#nbTable").val()+'</td>'+
+                '<td><ul><li><a id=" " class="glyphicon glyphicon-trash" onclick="delete_row(id)"> </a></li>'+
+                '<li><a class="glyphicon glyphicon-ok-circle" onclick="validate_row(id)"></a> </li></ul></td>'
+            );
+            $("#add_row").removeAttr("disabled");
+        })
+        .catch(function (error) {
+        });
+}
+/*Add Event ajax */
+function validate_row(id){
+    axios.post("/event/new", {
+        "startingDate" : $("#startingDate").val(),
+        "endingDate": $("#endingDate").val(),
+        "nbPerson": $("#nbPerson").val(),
+        "nbTable": $("#nbTable").val(),
+        "band": $("#band").val(),
+        "cost":$("#cost").val(),
+        "ajax":'true'
+    } )
+       .then(function () {
+           $('#addr1').html(
+               '<td>'+$("#startingDate").val()+'</td>'+
+               '<td>'+$("#endingDate").val()+'</td>'+
+               '<td>'+$("#nbPerson").val()+'</td>'+
+               '<td>'+$("#nbTable").val()+'</td>'+
+               '<td>'+$("#band").val()+'</td>'+
+               '<td>'+$("#cost").val()+'</td>'+
+               '<td><ul><li><a id=" " class="glyphicon glyphicon-trash" onclick="delete_row(id)"> </a></li>'+
+               '<li><a class="glyphicon glyphicon-ok-circle" onclick="validate_row(id)"></a> </li></ul></td>'
+           );
+           $("#add_row").removeAttr("disabled");
+
+        })
+        .catch(function (error) {
+        });
+}
 (function ($) {
+    var i=1;
+        $("#add_row").click(function(){
+
+            if( $(location).attr('pathname')=='/reservation/')
+            {
+                $('#table').append(
+                    '<tr id=addr' + i + '>' +
+                    '<td>' + ' <input id="dateReservation" class="form-control form-control-xs"' + ' type="date"  > </td>' +
+                    '<td>' + ' <input id="nbPerson" class="form-control form-control-xs"' + ' type="number"  > </td>' +
+                    '<td>' + ' <input id="nbTable" class="form-control form-control-xs"' + ' type="number"  > </td>' +
+                    '<td>' + ' <a id="' + i + '" class="glyphicon glyphicon-trash" onclick="delete_row(id)"> </a> ' +
+                    '<a class="glyphicon glyphicon-ok-circle" onclick="validate_row_res(id)"></a> ' +
+
+                    '</td>' +
+                    '</tr>');            }
+            else {
+
+                $('#table').append(
+                    '<tr id=addr' + i + '>' +
+                    '<td>' + ' <input id="startingDate" class="form-control form-control-xs"' + ' type="date"  > </td>' +
+                    '<td>' + ' <input id="endingDate" class="form-control form-control-xs"' + ' type="date" > </td>' +
+                    '<td>' + ' <input id="nbPerson" class="form-control form-control-xs"' + ' type="number"  > </td>' +
+                    '<td>' + ' <input id="nbTable" class="form-control form-control-xs"' + ' type="number"  > </td>' +
+                    '<td>' + ' <input id="band" class="form-control form-control-xs"' + ' type="text"  > </td>' +
+                    '<td>' + ' <input id="cost" class="form-control form-control-xs"' + ' type="number"  > </td>' +
+                    '<td>' + ' <a id="' + i + '" class="glyphicon glyphicon-trash" onclick="delete_row(id)"> </a> ' +
+                    '<a class="glyphicon glyphicon-ok-circle" onclick="validate_row(id)"></a> ' +
+
+                    '</td>' +
+                    '</tr>');
+            }
+            $("#add_row").attr("disabled", "disabled");
+
+    });
+
+
+    $("#RSubmit").click(function(){
+
+        axios.post('/claim/new', {
+            firstName: $("#RFirstName").val(),
+            email: $("#REmail").val(),
+            message: $("#RMsg").val(),
+            type: $("#RType").val(),
+            tel: $("#RTel").val(),
+            ajax: "true"
+
+        })
+            .then(function (response) {
+                $('.alert').append(' ' +
+                    ' <strong>Reclamation submited!</strong>  ');
+
+                $('.alert').attr("class","alert alert-success");
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    });
+    $("#CSubmit").click(function(){
+
+        axios.post('/Contact', {
+            firstName: $("#CFirstName").val(),
+            email: $("#CEmail").val(),
+            message: $("#CMsg").val(),
+            tel: $("#CTel").val(),
+            ajax: "true"
+
+        })
+            .then(function (response) {
+                    $('.alert').append(' ' +
+                        ' <strong>successful!</strong>  ');
+
+                $('.alert').attr("class","alert alert-success");
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    });
+    $("#PSubmit").click(function(){
+
+        axios.post('/partnership/new', {
+            firstName: $("#PFirstName").val(),
+            lastName: $("#PFirstName").val(),
+            email: $("#PEmail").val(),
+            address: $("#Paddress").val(),
+            tel: $("#PTel").val(),
+            fiscal_code: $("#Pfiscal_code").val(),
+            RIB: $("#PRIB_code").val(),
+            ajax: "true"
+
+        })
+            .then(function (response) {
+                $('.alert').append(' ' +
+                    ' <strong>we will send you a confirmation email</strong>  ');
+
+                $('.alert').attr("class","alert alert-success");
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    });
     'use strict';
     var isMobile = {
         Android: function () {
@@ -256,16 +437,19 @@ function showLogin() {
     }
 
     function mapConfig() {
+
+
         $.gmap3({
             key: 'AIzaSyAx39JFH5nhxze1ZydH-Kl8xXM3OK4fvcg'
         });
         var map = $('#contact-map');
+        var center = [36.8064948, 10.1815316];
+
         if (map.length > 0) {
             map.gmap3({
-                address: map.data('address'),
-                zoom: map.data('zoom'),
-                scrollwheel: false,
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                center: center,
+                zoom: 13,
+                mapTypeId : google.maps.MapTypeId.ROADMAP,
                 styles: [{
                     "featureType": "administrative",
                     "elementType": "all",
@@ -303,21 +487,23 @@ function showLogin() {
                     "elementType": "all",
                     "stylers": [{ "visibility": "on" }, { "color": "#acbcc9" }]
                 }]
-            }).marker(function (map) {
-                return {
-                    position: map.getCenter(),
-                    icon: 'images/marker.png',
-                    animation: google.maps.Animation.BOUNCE
-                };
-            }).infowindow({
+
+
+            })
+                .infowindow({
                 content: map.data('address')
             }).then(function (infowindow) {
                 var map = this.get(0);
                 var marker = this.get(1);
+
                 marker.addListener('click', function () {
                     infowindow.open(map, marker);
                 });
             });
+
+
+
+
         }
         else {
             console.log("Notice: Don't have map on this page!!!");
@@ -615,3 +801,5 @@ function showLogin() {
         stickyHeader();
     });
 })(jQuery);
+
+

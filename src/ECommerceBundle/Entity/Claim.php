@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Claim
  *
- * @ORM\Table(name="reclamation")
+ * @ORM\Table(name="claim")
  * @ORM\Entity(repositoryClass="ECommerceBundle\Repository\ClaimRepository")
  */
 class Claim
@@ -39,6 +39,70 @@ class Claim
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User" , inversedBy="id")
      */
     private $client;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $tel;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $firstname;
+
+    /**
+     * @return mixed
+     */
+    public function getTel()
+    {
+        return $this->tel;
+    }
+
+    /**
+     * @param mixed $tel
+     */
+    public function setTel($tel)
+    {
+        $this->tel = $tel;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+
+    /**
+     * @param mixed $firstname
+     */
+    public function setFirstname($firstname)
+    {
+        $this->firstname = $firstname;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $email;
+
 
     /**
      * @return mixed
