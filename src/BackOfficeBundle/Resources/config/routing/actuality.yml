@@ -1,0 +1,35 @@
+actuality_index:
+    path:     /
+    defaults: { _controller: "BackOfficeBundle:Actuality:index" }
+    methods:  [GET, POST]
+
+actuality_show:
+    path:     /{id}/show
+    defaults: { _controller: "BackOfficeBundle:Actuality:show" }
+    methods:  GET
+
+actuality_new:
+    path:     /new
+    defaults: { _controller: "BackOfficeBundle:Actuality:new" }
+
+actuality_create:
+    path:     /create
+    defaults: { _controller: "BackOfficeBundle:Actuality:create" }
+    requirements: { _method: post }
+
+actuality_update:
+    path:     /{id}/update
+    defaults: { _controller: "BackOfficeBundle:Actuality:update" }
+
+
+actuality_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BackOfficeBundle:Actuality:edit" }
+
+
+actuality_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BackOfficeBundle:Actuality:delete" }
+    methods:  [GET, DELETE]
+
+

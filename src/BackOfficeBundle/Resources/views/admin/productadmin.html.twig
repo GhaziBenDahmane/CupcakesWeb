@@ -1,0 +1,17 @@
+{% extends 'layoutAdmin.html.twig' %}
+{% block header %}
+    {{ parent() }}
+    {% endblock %}
+{% block menu %}
+    {{ parent() }}
+{% endblock %}
+{% block content %}
+{{ form_start(form) }}
+    {{ form_end(form) }}
+{% endblock %}
+{% block nav %}
+    {{ parent() }}
+{% endblock %}
+{% block script %}
+    {{ parent() }}
+{% endblock %}

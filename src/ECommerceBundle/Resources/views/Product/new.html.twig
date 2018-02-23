@@ -1,0 +1,72 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+
+    <button class="btn btn-success" data-toggle="modal" data-target="#add_new_record_modal">Add Product</button>
+    <div class="modal fade" id="add_new_record_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        {{ form_start(form) }}
+        {%  for flashMessage in app.session.flashbag.get('succes') %}
+            <div class="alert-success">
+                {{ flashMessage   }}
+            </div>
+        {% endfor %}
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span> </button>
+                    <h4 class="modal-title" id="myModalLabel">Add Product</h4>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        {{ form_widget(form.name,{'attr':{'class':'form-control'}} ) }}
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="type">Type</label>
+                        {{ form_widget(form.type,{'attr':{'class':'form-control'}} ) }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="price"> Price</label>
+                        {{ form_widget(form.price,{'attr':{'class':'form-control'}} ) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="photo"> Photo</label>
+                        {{ form_widget(form.photo,{'attr':{'class':'form-control'}} ) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="promotion"> Promotion</label>
+                        {{ form_widget(form.promotion,{'attr':{'class':'form-select'}} ) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="description"> Description</label>
+                        {{ form_widget(form.description,{'attr':{'class':'form-control'}} ) }}
+                    </div>
+                    <div id="test"></div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <table border="0" align="right"><tr>
+
+                            <td>
+                                {{ form_row(form.submit,{'attr':{'class':'btn btn-primary'}}) }}
+
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="ajout()">Cancel</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            {{ form_rest(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock %}

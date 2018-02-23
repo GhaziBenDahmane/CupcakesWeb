@@ -1,0 +1,15 @@
+user_homepage:
+    path:     /
+    defaults: { _controller: UserBundle:Default:index }
+
+proprite_signup:
+    path:     /registration
+    defaults: { _controller: UserBundle:Default:SignUp }
+
+login_page:
+    path:     /login
+    defaults: { _controller: UserBundle:Default:Login }
+
+profile_page:
+    path:     /profile
+    defaults: { _controller: UserBundle:Profile:edit }

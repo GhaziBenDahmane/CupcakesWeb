@@ -1,0 +1,7 @@
+gaming_homepage:
+    path:     /
+    defaults: { _controller: GamingBundle:Default:index }
+
+flappy_page:
+    path:     /flappy
+    defaults: { _controller: GamingBundle:Default:flappy }

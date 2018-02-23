@@ -1,0 +1,34 @@
+app:
+    resource: "@AppBundle/Resources/config/routing.yml"
+    prefix:   /
+
+training:
+    resource: "@TrainingBundle/Resources/config/routing.yml"
+    prefix:   /
+
+pastry:
+    resource: "@PastryBundle/Resources/config/routing.yml"
+    prefix:   /
+
+gaming:
+    resource: "@GamingBundle/Resources/config/routing.yml"
+    prefix:   /
+
+event:
+    resource: "@EventBundle/Resources/config/routing.yml"
+    prefix:   /
+
+e_commerce:
+    resource: "@ECommerceBundle/Resources/config/routing.yml"
+    prefix:   /
+
+back_office:
+    resource: "@BackOfficeBundle/Resources/config/routing.yml"
+    prefix:   /
+
+user:
+    resource: "@UserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

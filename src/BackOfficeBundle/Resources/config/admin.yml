@@ -1,0 +1,6 @@
+_cupcakes_admin:
+    path:     /
+    defaults: { _controller: BackOfficeBundle:Default:index}
+_cupcakes_adminLogin:
+    path:     /login
+    defaults: { _controller: BackOfficeBundle:Default:index }

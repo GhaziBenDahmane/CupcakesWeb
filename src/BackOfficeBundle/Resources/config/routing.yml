@@ -1,0 +1,14 @@
+back_office_homepage:
+    path:     /
+    defaults: { _controller: BackOfficeBundle:Default:index }
+
+_admin:
+    resource: "@BackOfficeBundle/Resources/config/routing/product.yml"
+    prefix:   /Cupadmin/product
+
+back_office_actuality:
+    resource: "@BackOfficeBundle/Resources/config/routing/actuality.yml"
+    prefix:   /Cupadmin/Actuality
+back_office_promotion:
+    resource: "@BackOfficeBundle/Resources/config/routing/promotion.yml"
+    prefix:   /Cupadmin/promotion/

@@ -1,0 +1,33 @@
+product_index:
+    path:     /
+    defaults: { _controller: "ECommerceBundle:Product:index" }
+    methods:  [GET, POST]
+
+product_show:
+    path:     /{id}/show
+    defaults: { _controller: "ECommerceBundle:Product:show" }
+    methods:  GET
+
+product_new:
+    path:     /new
+    defaults: { _controller: "ECommerceBundle:Product:new" }
+
+product_create:
+    path:     /create
+    defaults: { _controller: "ECommerceBundle:Product:create" }
+    requirements: { _method: post }
+
+product_update:
+    path:     /{id}/update
+    defaults: { _controller: "ECommerceBundle:Product:update" }
+
+
+product_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ECommerceBundle:Product:edit" }
+
+
+product_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ECommerceBundle:Product:delete" }
+    methods:  [GET, DELETE]

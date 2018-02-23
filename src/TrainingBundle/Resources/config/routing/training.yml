@@ -1,0 +1,34 @@
+training_index:
+    path:     /
+    defaults: { _controller: "TrainingBundle:Training:index" }
+    methods:  [GET, POST]
+
+training_show:
+    path:     /{id}/show
+    defaults: { _controller: "TrainingBundle:Training:show" }
+    methods:  GET
+
+training_new:
+    path:     /new
+    defaults: { _controller: "TrainingBundle:Training:new" }
+
+training_create:
+    path:     /create
+    defaults: { _controller: "TrainingBundle:Training:create" }
+    requirements: { _method: post }
+
+training_update:
+    path:     /{id}/update
+    defaults: { _controller: "TrainingBundle:Training:update" }
+
+
+training_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "TrainingBundle:Training:edit" }
+
+
+training_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "TrainingBundle:Training:delete" }
+    methods:  [GET, DELETE]
+

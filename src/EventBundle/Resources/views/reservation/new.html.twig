@@ -1,0 +1,57 @@
+{% extends 'layoutPages.html.twig' %}
+{% block header %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    {% block title %}
+        <title>Bakery | Cart</title>
+    {% endblock %}
+    <!--section-->
+    <div class="ps-section--hero"><img src="{{ asset('assets/front/images/hero/01.jpg') }}" alt="">
+        <div class="ps-section__content text-center">
+            <h3 class="ps-section__title">OUR BAKERY</h3>
+            <div class="ps-breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="{{ path('_cupcakes_homepage') }}">Home</a></li>
+                    <li class="active">Cart</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="ps-section--cart pt-100 pb-100">
+        <div class="container">
+            <h1>Reservation creation</h1>
+
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <input type="submit" value="Create" />
+            {{ form_end(form) }}
+
+            <ul>
+                <li>
+                    <a href="{{ path('reservation_index') }}">Back to the list</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
+
+{% endblock %}
+
+{% block jsLibrary %}
+    {{ parent() }}
+
+{% endblock %}
+
+{% block slider %}
+    {{ parent() }}
+
+{% endblock %}
+
+{% block CustomScripts %}
+    {{ parent() }}
+{% endblock  %}

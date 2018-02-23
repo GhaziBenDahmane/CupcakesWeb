@@ -1,0 +1,99 @@
+{% extends 'layoutPages.html.twig' %}
+{% block header %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    {% block title %}
+        <title>Bakery | Cart</title>
+    {% endblock %}
+    <!--section-->
+    <div class="ps-section--hero"><img src="{{ asset('assets/front/images/hero/01.jpg') }}" alt="">
+        <div class="ps-section__content text-center">
+            <h3 class="ps-section__title">OUR BAKERY</h3>
+            <div class="ps-breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="">Home</a></li>
+                    <li class="active">Cart</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="ps-section--cart pt-100 pb-100">
+        <div class="container">
+
+            <div class="ps-section pt-80 pb-80">
+                <div class="container">
+                    <div class="ps-contact">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+                                <div class="ps-contact__info">
+                                    <h4>Your last location</h4>
+                                    <div class="mb-60" id="contact-map" data-address="New York, NY" data-title="BAKERY LOCATION!" data-zoom="17"></div>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+                                <div class="ps-contact__form">
+                                    {{ form_start(form, { 'action': '/profile'}) }}
+
+                                    <div class="form-group">
+                                        Username:
+                                        {{ form_widget(form.username,{'attr': {'class':"form-control",'placeholder':"First Name"}}) }}
+
+                                    </div>
+                                    <div class="form-group">
+                                        Email:
+                                        {{ form_widget(form.email,{'attr': {'class':"form-control",'placeholder':"E-mail"}}) }}
+
+                                    </div>
+                                    <div class="form-group">
+                                        Current password:
+                                        {{ form_widget(form.current_password,{'attr': {'class':"form-control",'placeholder':"Current password"}}) }}
+
+                                    </div>
+                                    {#<div class="form-group">#}
+                                        {#<select class="ps-select" data-placeholder="Popupar product">#}
+                                            {#<option value="01">Popular products</option>#}
+                                            {#<option value="01">Item 01</option>#}
+                                            {#<option value="02">Item 02</option>#}
+                                            {#<option value="03">Item 03</option>#}
+                                        {#</select>#}
+                                    {#</div>#}
+                                    {#<div class="form-group">#}
+                                        {#<textarea class="form-control" rows="6" placeholder="Text your message here..."></textarea>#}
+                                    {#</div>#}
+                                    <div class="form-group mt-30">
+                                        <input type="submit" value="Submit" class="ps-btn ps-btn--sm ps-contact__submit">
+                                    </div>
+                                    {{ form_end(form) }}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
+
+{% endblock %}
+
+{% block jsLibrary %}
+    {{ parent() }}
+
+{% endblock %}
+
+{% block slider %}
+    {{ parent() }}
+
+{% endblock %}
+
+{% block CustomScripts %}
+    {{ parent() }}
+{% endblock  %}

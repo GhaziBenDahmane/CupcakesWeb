@@ -1,0 +1,23 @@
+training_training:
+    resource: "@TrainingBundle/Resources/config/routing/training.yml"
+    prefix:   /Cupadmin/training
+
+training_homepage:
+    path:     /
+    defaults: { _controller: TrainingBundle:Default:index }
+
+add_recipe:
+    path:     /addRecipe
+    defaults: { _controller: TrainingBundle:RecipeAction:addRecipe }
+
+show_recipe:
+    path:     /showRecipe
+    defaults: { _controller: TrainingBundle:RecipeAction:showRecipe }
+
+update_recipe:
+    path:     /updateRecipe
+    defaults: { _controller: TrainingBundle:RecipeAction:updateRecipe }
+
+del_recipe:
+    path:     /delRecipe
+    defaults: { _controller: TrainingBundle:RecipeAction:delRecipe }

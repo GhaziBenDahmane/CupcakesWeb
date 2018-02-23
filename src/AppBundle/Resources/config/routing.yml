@@ -1,0 +1,20 @@
+_cupcakes_homepage:
+    path:     /
+    defaults: { _controller: AppBundle:Default:index }
+_Cupcakes_front_logout:
+    path:     /logout
+    defaults: { _controller: AppBundle:Default:index}
+
+_cupcakes_blog-listing:
+    path:     /blog-listing
+    defaults: { _controller: AppBundle:Blog:bloglisting }
+_cupcakes_blog-detail:
+    path:     /blog-detail
+    defaults: { _controller: AppBundle:Blog:blogdetail }
+_cupcakes_about:
+    path:     /About
+    defaults: { _controller: AppBundle:About:About }
+
+_cupcakes_contact:
+    path:     /Contact
+    defaults: { _controller: AppBundle:Contact:Contact }
