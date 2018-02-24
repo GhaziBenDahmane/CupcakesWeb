@@ -174,7 +174,7 @@ class ProductController extends Controller
         $editForm = $this->createEditForm($entity);
 
 
-        return $this->render('@ECommerce/product/edit.html.twig', array(
+        return $this->render('@ECommerce/Product/edit.html.twig', array(
             'product'      => $entity,
             'edit_form'   => $editForm->createView(),
 
