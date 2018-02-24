@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Product
  *
- * @ORM\Table(name="product)
+ * @ORM\Table(name="product")
  * @ORM\Entity(repositoryClass="ECommerceBundle\Repository\ProductRepository")
  */
 class Product
@@ -41,6 +41,52 @@ class Product
      * @ORM\Column(name="price", type="float")
      */
     private $price;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="nb_viewed", type="integer", nullable=true)
+     */
+    private $nb_viewed;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="nb_seller", type="integer", nullable=true)
+     */
+    private $nb_seller;
+
+    /**
+     * @return int
+     */
+    public function getNbViewed()
+    {
+        return $this->nb_viewed;
+    }
+
+    /**
+     * @param int $nb_viewed
+     */
+    public function setNbViewed($nb_viewed)
+    {
+        $this->nb_viewed = $nb_viewed;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNbSeller()
+    {
+        return $this->nb_seller;
+    }
+
+    /**
+     * @param mixed $nb_seller
+     */
+    public function setNbSeller($nb_seller)
+    {
+        $this->nb_seller = $nb_seller;
+    }
 
     /**
      * @var string
@@ -196,4 +242,3 @@ class Product
         return $this->photo;
     }
 }
-
