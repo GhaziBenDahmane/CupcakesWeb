@@ -16,3 +16,9 @@ _cupcakes_about:
 _cupcakes_contact:
     path:     /contact
     defaults: { _controller: AppBundle:Contact:Contact }
+my_app_mail_accuse:
+    path: /success
+    defaults: { _controller: AppBundle:Contact:success }
+back_office_contact:
+    resource: "@AppBundle/Resources/config/routing/contact.yml"
+    prefix:   /admin/contact

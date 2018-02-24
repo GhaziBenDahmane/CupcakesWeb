@@ -25,12 +25,8 @@
 
                 <div id="main-wrapper">
                     <div class="row">
-                        {%  for flashMessage in app.session.flashbag.get('succes') %}
-                            <div class="alert-success">
-                                {{ flashMessage   }}
-                            </div>
-                        {% endfor %}
-                        {{ render(controller('ECommerceBundle:Product:new')) }}
+
+                        {{ render(controller('ECommerceBundle:Product:new')) }}<br><br>
                         <div class="col-md-12">
                             <div class="panel panel-white">
                                 <div class="panel-heading clearfix">

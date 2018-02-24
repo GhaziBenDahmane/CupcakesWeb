@@ -1,45 +1,35 @@
-// Add Record
-function addRecord() {
-    // get values
-    var name = $("#name").val();
-    var type = $("#type").val();
-    var price = $("#price").val();
-    var photo = $("#photo").val();
-    var promotion = $("#promotion").val();
+$("#CSubmit").click(function(){
 
-    // Add record
-    $.post("ajax/addRecord.php", {
-        name: name,
-        type: type,
-        price: price,
-        photo: photo,
-        promotion: promotion
-    }, function (data, status) {
-        // close the popup
-        $("#add_new_record_modal").modal("hide");
+    axios.post('admin/contact/new', {
+        firstName: $("#CFirstName").val(),
+        email: $("#CEmail").val(),
+        message: $("#CMsg").val(),
+        tel: $("#CTel").val(),
+        ajax: "true"
 
-        // read records again
-        readRecords();
+    })
+        .then(function (response) {
+            $("#CFirstName").val("");
+            $("#CEmail").val("");
+            $("#CMsg").val("");
+            $("#CTel").val("");
+            $('.alert').append(' ' +
+                ' <strong>successful!</strong>  ');
 
-        // clear fields from the popup
-        $("#name").val("");
-        $("#type").val("");
-        $("#price").val("");
-        $("#photo").val("");
-        $("#promotion").val("");
-    });
-}
+            $('.alert').attr("class","alert alert-success");
 
-// READ records
-function readRecords() {
-    $.get("ajax/readRecords.php", {}, function (data, status) {
-        $(".records_content").html(data);
-    });
-}
+        })
+        .catch(function (error) {
+            $('.alert').append(' ' +
+                ' <strong>error!</strong>  ');
+
+            $('.alert').attr("class","alert alert-danger");
+        });
+});
 
 
 function DeleteUser(id) {
-    var conf = confirm("Are you sure, do you really want to delete User?");
+    var conf = confirm("Are you sure, do you really want to delete Contact?");
     if (conf == true) {
         $.post("ajax/deleteUser.php", {
                 id: id

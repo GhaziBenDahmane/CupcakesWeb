@@ -1,0 +1,61 @@
+
+    <div class="bd-example">
+        <button type="button" class="btn btn-default" id="" data-toggle="modal" data-target="#exampleModal{{ contact.id }}" data-whatever="@getbootstrap"> <i class="fa fa-magic"> </i> </button>
+        <div class="modal fade" id="exampleModal{{ contact.id }}"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <br><br><br>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="exampleModalLabel">Update Contact</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        {{ form_start(edit_form) }}
+                            <div class="form-group">
+                                <label for="name"> Name</label>
+                                {{ form_widget(edit_form.firstName,{'attr':{'class':'form-control'}} ) }}
+                            </div>
+                        <div class="form-group">
+                            <label for="telephone">Telephone</label>
+                            {{ form_widget(edit_form.tel,{'attr':{'class':'form-control'}} ) }}
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            {{ form_widget(edit_form.message,{'attr':{'class':'form-control'}} ) }}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email"> Email</label>
+                            {{ form_widget(edit_form.email,{'attr':{'class':'form-control'}} ) }}
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <table border="0" align="right"><tr>
+
+                                <td>
+                                {{ form_row(edit_form.submit,{'attr':{'class':'btn btn-primary'}}) }}
+
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="ajout()">Cancel</button>
+                            </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                    {{ form_rest(edit_form) }}
+                    {{ form_end(edit_form) }}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+

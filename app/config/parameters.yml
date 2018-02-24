@@ -5,8 +5,9 @@ parameters:
     database_name: sql11222383
     database_user: sql11222383
     database_password: 6TuZt5JUMi
-    mailer_transport: smtp
+    mailer_transport: gmail
     mailer_host: 127.0.0.1
-    mailer_user: lamia@esprit.tn
-    mailer_password: notnull
+    mailer_user: anis.helaoui@aiesec.net
+    mailer_password: zelda741963
     secret: 7070fa7df747f4009815c9ddb111a1802a6e9794
+

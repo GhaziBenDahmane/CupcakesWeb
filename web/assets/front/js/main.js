@@ -147,7 +147,7 @@ function validate_row(id){
     });
     $("#CSubmit").click(function(){
 
-        axios.post('/Contact', {
+        axios.post('/contact', {
             firstName: $("#CFirstName").val(),
             email: $("#CEmail").val(),
             message: $("#CMsg").val(),
@@ -156,6 +156,10 @@ function validate_row(id){
 
         })
             .then(function (response) {
+                $("#CFirstName").val("");
+                $("#CEmail").val("");
+                $("#CMsg").val("");
+                $("#CTel").val("");
                     $('.alert').append(' ' +
                         ' <strong>successful!</strong>  ');
 
@@ -163,9 +167,15 @@ function validate_row(id){
 
             })
             .catch(function (error) {
-                console.log(error);
+                $('.alert').append(' ' +
+                    ' <strong>error!</strong>  ');
+
+                $('.alert').attr("class","alert alert-danger");
             });
     });
+
+
+
     $("#PSubmit").click(function(){
 
         axios.post('/partnership/new', {

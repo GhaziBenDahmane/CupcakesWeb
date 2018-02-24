@@ -1,0 +1,159 @@
+
+{% extends 'layoutAdmin.html.twig' %}
+{% block header %}
+    {{ parent() }}
+    <link href="{{ asset('assets/back/plugins/datatables/css/jquery.datatables.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('assets/back/plugins/datatables/css/jquery.datatables_themeroller.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('assets/back/plugins/bootstrap-datepicker/css/datepicker3.css') }}" rel="stylesheet" type="text/css">
+
+{% endblock %}
+{% block menu %}
+    {{ parent() }}
+{% endblock %}
+{% block content %}
+    <!-- Page Container -->
+    <div class="page-container">
+        <!-- Page Content -->
+        <div class="page-content">
+            <!-- Page Header -->
+          <!-- /Page Header -->
+            <!-- Page Inner -->
+            <div class="page-inner">
+                <div class="page-title">
+                    <h3 class="breadcrumb-header">Contacts</h3>
+                </div>
+
+                <div id="main-wrapper">
+                    <div class="row">
+
+                        <br><br>
+                        <div class="col-md-12">
+                            <div class="panel panel-white">
+                                <div class="panel-heading clearfix">
+                                </div>
+                                <div class="panel-body">
+                                    <div class="table-responsive">
+                                        <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
+                                            <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Name</th>
+                                                <th>Telephone</th>
+                                                <th>Email</th>
+                                                <th>Message</th>
+                                                <th>Update</th>
+                                                <th>Delete</th>
+                                                <th>Informations</th>
+                                            </tr>
+                                            </thead>
+                                            <tfoot>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Name</th>
+                                                <th>Telephone</th>
+                                                <th>Email</th>
+                                                <th>Message</th>
+                                                <th>Update</th>
+                                                <th>Delete</th>
+                                                <th>Informations</th>
+                                            </tr>
+                                            </tfoot>
+                                            <tbody>
+                                            {% for contacts in contact %}
+                                                <tr role="row" class="even">
+                                                    <td class="sorting_1"><a href="{{ path('contact_show', { 'id': contacts.id }) }}">{{ contacts.id }}</a></td>
+                                                    <td>{{ contacts.firstName }}</td>
+                                                    <td>{{ contacts.tel }}</td>
+                                                    <td>{{ contacts.email }}</td>
+                                                    <td>{{ contacts.message}}</td>
+                                                    <td>
+                                                        {{ render(controller('AppBundle:Contact:edit',{'id':contacts.id})) }}
+                                                    </td>
+                                                    <td>
+                                                        <a href="" class="btn btn-danger" data-placement="top" title="" data-original-title="Supprimer"  data-toggle="modal" data-target="#deleteModal{{ contacts.id }}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>    </a>
+                                                        <div class="modal fade" id="deleteModal{{ contacts.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <br><br><br><br>
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                        <h4 class="modal-title">Deletion confirmation :</h4>
+                                                                    </div>
+                                                                    <div class="modal-body" >
+                                                                        <p><span>Are you sure you want to delete <a href="#"></a>  {{ contacts.firstName }}? </span></p>
+
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-default " data-dismiss="modal">Cancel</button>
+                                                                        <a href="{{ path ('contact_delete',{'id': contacts.id}) }}" data-toggle="modal" class="btn btn-danger"  id="lien" >Delete</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+
+                                                        <button type="button" class="btn-info btn" data-toggle="modal" data-target="#myModal{{ contacts.id }}"><i class="fa fa-plus">  </i></button>
+
+                                                        <div class="modal fade" id="myModal{{ contacts.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <br><br><br><br>
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                        <h4 class="modal-title" id="myModalLabel">Informations :</h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="row">
+
+                                                                            <div class="col-lg-6">
+
+                                                                                <ul>
+                                                                                    <li><strong>Name: </strong>  {{ contacts.firstName }}</li> <br>
+                                                                                    <li><strong>Telephone: </strong> {{ contacts.tel }}</li> <br>
+                                                                                    <li><strong>Email: </strong>{{ contacts.email }}</li><br>
+                                                                                    <li><strong>Message: </strong>{{ contacts.message }}</li><br>
+                                                                                </ul>
+
+                                                                            </div>
+                                                                            <div class="col-lg-6">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div><!-- Row -->
+                </div><!-- Main Wrapper -->
+            </div><!-- /Page Inner -->
+
+
+        </div><!-- /Page Content -->
+    </div><!-- /Page Container -->
+{% endblock %}
+{% block nav %}
+    {{ parent() }}
+{% endblock %}
+{% block script %}
+    {{ parent() }}
+    <script src="{{ asset('assets/back/plugins/datatables/js/jquery.datatables.min.js') }}"></script>
+    <script src="{{ asset('assets/back/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ asset('assets/back/js/pages/table-data.js') }}"></script>
+    <script src="{{ asset('assets/back/js/script.js') }}"></script>
+{% endblock %}
+

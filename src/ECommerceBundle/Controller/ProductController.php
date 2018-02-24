@@ -133,34 +133,6 @@ class ProductController extends Controller
         ));
     }
 
-    /**
-     * Displays a form to edit an existing BackProduct entity.
-     *
-     */
-    /**
-    public function editAction(Request $request, Product $product)
-    {
-    $deleteForm = $this->createDeleteForm($product);
-    $editForm = $this->createForm('ECommerceBundle\Form\ProductType     ', $product);
-    $editForm->handleRequest($request);
-
-    if ($editForm->isSubmitted() && $editForm->isValid()) {
-    $this->getDoctrine()->getManager()->flush();
-
-    return $this->redirectToRoute('product_edit', array('id' => $product->getId()));
-    }
-
-    return $this->render('ECommerceBundle:product:edit.html.twig', array(
-    'product' => $product,
-    'edit_form' => $editForm->createView(),
-    'delete_form' => $deleteForm->createView(),
-    ));
-    }
-     * */
-    /**
-     * Displays a form to edit an existing Product entity.
-     *
-     */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
