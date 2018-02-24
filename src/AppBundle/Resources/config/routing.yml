@@ -1,6 +1,7 @@
 _cupcakes_homepage:
-    path:     /index
+    path:     /
     defaults: { _controller: AppBundle:Default:index }
+
 _Cupcakes_front_logout:
     path:     /logout
     defaults: { _controller: AppBundle:Default:index}

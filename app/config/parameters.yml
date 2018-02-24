@@ -1,6 +1,6 @@
 # This file is auto-generated during the composer install
 parameters:
-    database_host: 127.0.0.1
+    database_host: sql11.freemysqlhosting.net
     database_port: 3306
     database_name: sql11222383
     database_user: sql11222383

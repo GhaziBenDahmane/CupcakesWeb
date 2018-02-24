@@ -27,9 +27,9 @@ class User extends BaseUser
     /**
      * @var int
      *
-     * @ORM\Column(name="points", type="integer", nullable=true)
+     * @ORM\Column(name="points", type="integer")
      */
-    private $points;
+    private $points=0;
 
     /**
      * @var string
