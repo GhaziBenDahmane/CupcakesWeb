@@ -12,3 +12,6 @@ back_office_actuality:
 back_office_promotion:
     resource: "@BackOfficeBundle/Resources/config/routing/promotion.yml"
     prefix:   /promotion
+back_office_event:
+    resource: "@BackOfficeBundle/Resources/config/routing/event.yml"
+    prefix:   /event

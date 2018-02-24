@@ -2,7 +2,10 @@
 
 namespace EventBundle\Entity;
 
+use AncaRebeca\FullCalendarBundle\Event\CalendarEvent;
 use Doctrine\ORM\Mapping as ORM;
+use AncaRebeca\FullCalendarBundle\Model\FullCalendarEvent;
+
 
 /**
  * Event
@@ -10,8 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="event")
  * @ORM\Entity(repositoryClass="EventBundle\Repository\EventRepository")
  */
-class Event
+class Event extends CalendarEvent
 {
+
     /**
      * @var int
      *
@@ -238,5 +242,11 @@ class Event
     {
         return $this->cost;
     }
+
+    public function toArray()
+    {
+        // TODO: Implement toArray() method.
+    }
+
 }
 

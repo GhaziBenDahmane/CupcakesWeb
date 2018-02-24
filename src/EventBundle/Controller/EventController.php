@@ -7,6 +7,8 @@ use EventBundle\Entity\Event;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use EventBundle\Entity\Event as MyCustomEvent;
+
 
 /**
  * Event controller.
@@ -29,6 +31,7 @@ class EventController extends Controller
             $request->query->getInt('page', 1)/*page number*/,
             5/*limit per page*/
         );
+
 
         return $this->render('EventBundle:event:index.html.twig', array(
             'events' => $pagination,

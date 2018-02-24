@@ -1,0 +1,53 @@
+
+{% extends 'layoutAdmin.html.twig' %}
+{% block header %}
+    {{ parent() }}
+    <link href="{{ asset('assets/back/plugins/datatables/css/jquery.datatables.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('assets/back/plugins/datatables/css/jquery.datatables_themeroller.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('assets/back/plugins/bootstrap-datepicker/css/datepicker3.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{{ asset('bundles/fullcalendar/css/fullcalendar/fullcalendar.min.css') }}" />
+
+
+{% endblock %}
+{% block menu %}
+    {{ parent() }}
+{% endblock %}
+{% block content %}
+    <!-- Page Container -->
+    <div class="page-container">
+        <!-- Page Content -->
+        <div class="page-content">
+            <!-- Page Header -->
+          <!-- /Page Header -->
+            <!-- Page Inner -->
+            <div class="page-inner">
+                <div class="page-title">
+                    <h3 class="breadcrumb-header">Event</h3>
+                </div>
+
+                <div id="main-wrapper">
+
+                </div><!-- Main Wrapper -->
+                {% include '@FullCalendar/Calendar/calendar.html.twig' %}
+
+            </div><!-- /Page Inner -->
+
+
+        </div><!-- /Page Content -->
+    </div><!-- /Page Container -->
+{% endblock %}
+{% block nav %}
+    {{ parent() }}
+{% endblock %}
+{% block script %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/lib/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/lib/moment.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/fullcalendar.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/fullcalendar.default-settings.js') }}"></script>
+    <script src="{{ asset('assets/back/plugins/datatables/js/jquery.datatables.min.js') }}"></script>
+    <script src="{{ asset('assets/back/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ asset('assets/back/js/pages/table-data.js') }}"></script>
+    <script src="{{ asset('assets/back/js/script.js') }}"></script>
+{% endblock %}
+
