@@ -1,3 +1,4 @@
+
 {% extends 'layoutPages.html.twig' %}
 {% block header %}
     {{ parent() }}
@@ -28,7 +29,7 @@
                             <div class="row">
                                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 "><img class="mb-30" src="{{ asset('assets/front/images/product-banner/012x.jpg') }}" alt="">
                                 </div>
-                                <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 "><img class="mb-30" src="{{ asset('assets/front/images/product-banner/022x.jpg') }}" alt="">
+                                <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 "><img class="mb-30" src="{{ asset('assets/front/images/product-banner/022x.jpg') }}" >
                                 </div>
                             </div>
                         </div>
@@ -36,22 +37,20 @@
                             <div class="row">
                                 <div class="col-lg-5 col-md-4 col-sm-4 col-xs-12 ">
                                     <div class="form-group">
-                                        <label>Short by:</label>
-                                        <select class="ps-select" data-placeholder="Popupar product">
-                                            <option value="01">Popular products</option>
-                                            <option value="01">Item 01</option>
-                                            <option value="02">Item 02</option>
-                                            <option value="03">Item 03</option>
+                                        <label>Popular :</label>
+                                        <select  id="popular" class="ps-select" data-placeholder="Popupar product">
+                                            <option value="1">Most rating</option>
+                                            <option value="2">Most viewed</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-lg-5 col-md-4 col-sm-4 col-xs-12 ">
                                     <div class="form-group">
-                                        <label>Show:</label>
-                                        <select class="ps-select" data-placeholder="Show:">
-                                            <option value="01">SHOW</option>
-                                            <option value="02">Item 02</option>
-                                            <option value="03">Item 03</option>
+                                        <label>Sort By</label>
+                                        <select id="sort"   class="ps-select" data-placeholder="Show:"  >
+                                            <option value="1">Name</option>
+                                            <option value="2">Price</option>
+                                            <option value="3">Type</option>
                                         </select>
                                     </div>
                                 </div>
@@ -63,175 +62,49 @@
                                 </div>
                             </div>
                         </div>
+                        {% for product in products %}
+                            <div id="aasba">
+                                <div id="product" class="ps-product--list ps-product--list-large">
+                                    <div class="ps-product__thumbnail">
+                                        <a class="ps-product__overlay" href="product-detail.html"></a><img src="{{ asset('assets/front/images/cake/img-cake-3.jpg') }}" alt=""></div>
+                                    <div class="ps-product__content">
 
-                        <div class="ps-shop">
-                            <div class="ps-product--list ps-product--list-large">
-                                <div class="ps-product__thumbnail">
-                                    <a class="ps-product__overlay" href="product-detail.html"></a><img src="{{ asset('assets/front/images/cake/img-cake-2.jpg') }}" alt=""></div>
-                                <div class="ps-product__content">
-
-                                    <h4 class="ps-product__title"><a href="product-detail.html">Red sugar flower </a></h4>
-                                    <select class="ps-rating">
-                                        <option value="1">1</option>
-                                        <option value="1">2</option>
-                                        <option value="1">3</option>
-                                        <option value="1">4</option>
-                                        <option value="5">5</option>
-                                    </select>
-
-
-                                    <p class="ps-product__price">
-                                        <del>£25.00</del>£15.00
-                                    </p>
-                                    <p>Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate. Cupcake sweet roll sweet dragée dragée. Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate cake.</p>
-                                    <footer class="ps-product__footer clearfix"><a class="ps-btn ps-btn--sm" href="cart.html">Order now<i class="fa fa-angle-right"></i></a>
-                                        <ul class="ps-product__action">
-                                            <li><a href="#" data-tooltip="Add to wishlist"><i class="ps-icon--heart"></i></a></li>
-                                            <li><a href="#" data-tooltip="Compare"><i class="ps-icon--reload"></i></a></li>
-                                        </ul>
-                                    </footer>
+                                        <h4 id="name" class="ps-product__title"><a href="{{ path('_cupcakes_product-detail',{'id':product.id }) }}">{{ product.name }}</a></h4>
+                                        <select class="ps-rating">
+                                            <option value="1">1</option>
+                                            <option value="1">2</option>
+                                            <option value="1">3</option>
+                                            <option value="1">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                        <p class="ps-product__price">
+                                            <del>{{ product.price }}</del>{{ product.price }}
+                                        </p>
+                                        <p id="desc">Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate. Cupcake sweet roll sweet dragée dragée. Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate cake.</p>
+                                        <footer class="ps-product__footer clearfix"><a class="ps-btn ps-btn--sm" href="{{ path('_cupcakes_cart',{id:product.id}) }}">Order now<i class="fa fa-angle-right"></i></a>
+                                            <ul class="ps-product__action">
+                                                <li><a href="#" data-tooltip="Add to wishlist"><i class="ps-icon--heart"></i></a></li>
+                                                <li><a href="#" data-tooltip="Compare"><i class="ps-icon--reload"></i></a></li>
+                                            </ul>
+                                        </footer>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="ps-product--list ps-product--list-large">
-                                <div class="ps-product__thumbnail">
-                                    <a class="ps-product__overlay" href="product-detail.html"></a><img src="{{ asset('assets/front/images/cake/img-cake-3.jpg') }}" alt=""></div>
-                                <div class="ps-product__content">
-                                    <h4 class="ps-product__title"><a href="product-detail.html">Cupcake Queen</a></h4>
-                                    <select class="ps-rating">
-                                        <option value="1">1</option>
-                                        <option value="1">2</option>
-                                        <option value="1">3</option>
-                                        <option value="1">4</option>
-                                        <option value="5">5</option>
-                                    </select>
-                                    <p class="ps-product__price">
-                                        <del>£25.00</del>£15.00
-                                    </p>
-                                    <p>Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate. Cupcake sweet roll sweet dragée dragée. Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate cake.</p>
-                                    <footer class="ps-product__footer clearfix"><a class="ps-btn ps-btn--sm" href="cart.html">Order now<i class="fa fa-angle-right"></i></a>
-                                        <ul class="ps-product__action">
-                                            <li><a href="#" data-tooltip="Add to wishlist"><i class="ps-icon--heart"></i></a></li>
-                                            <li><a href="#" data-tooltip="Compare"><i class="ps-icon--reload"></i></a></li>
-                                        </ul>
-                                    </footer>
-                                </div>
+                        {% endfor %}
+                        <center>
+                            <div id="page" class="navigation ">
+                                {{ knp_pagination_render(products) }}
                             </div>
-                            <div class="ps-product--list ps-product--list-large">
-                                <div class="ps-product__thumbnail">
-                                    <a class="ps-product__overlay" href="product-detail.html"></a><img src="{{ asset('assets/front/images/cake/img-cake-4.jpg') }}" alt=""></div>
-                                <div class="ps-product__content">
-                                    <h4 class="ps-product__title"><a href="product-detail.html">Cupcake Glory</a></h4>
-                                    <select class="ps-rating">
-                                        <option value="1">1</option>
-                                        <option value="1">2</option>
-                                        <option value="1">3</option>
-                                        <option value="1">4</option>
-                                        <option value="5">5</option>
-                                    </select>
-                                    <p class="ps-product__price">
-                                        <del>£25.00</del>£15.00
-                                    </p>
-                                    <p>Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate. Cupcake sweet roll sweet dragée dragée. Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate cake.</p>
-                                    <footer class="ps-product__footer clearfix"><a class="ps-btn ps-btn--sm" href="cart.html">Order now<i class="fa fa-angle-right"></i></a>
-                                        <ul class="ps-product__action">
-                                            <li><a href="#" data-tooltip="Add to wishlist"><i class="ps-icon--heart"></i></a></li>
-                                            <li><a href="#" data-tooltip="Compare"><i class="ps-icon--reload"></i></a></li>
-                                        </ul>
-                                    </footer>
-                                </div>
-                            </div>
-                            <div class="ps-product--list ps-product--list-large">
-                                <div class="ps-product__thumbnail">
-                                    <a class="ps-product__overlay" href="product-detail.html"></a><img src="{{ asset('assets/front/images/cake/img-cake-5.jpg') }}" alt=""></div>
-                                <div class="ps-product__content">
-                                    <h4 class="ps-product__title"><a href="product-detail.html">Red sugar flower</a></h4>
-                                    <select class="ps-rating">
-                                        <option value="1">1</option>
-                                        <option value="1">2</option>
-                                        <option value="1">3</option>
-                                        <option value="1">4</option>
-                                        <option value="5">5</option>
-                                    </select>
-                                    <p class="ps-product__price">
-                                        <del>£25.00</del>£15.00
-                                    </p>
-                                    <p>Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate. Cupcake sweet roll sweet dragée dragée. Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate cake.</p>
-                                    <footer class="ps-product__footer clearfix"><a class="ps-btn ps-btn--sm" href="cart.html">Order now<i class="fa fa-angle-right"></i></a>
-                                        <ul class="ps-product__action">
-                                            <li><a href="#" data-tooltip="Add to wishlist"><i class="ps-icon--heart"></i></a></li>
-                                            <li><a href="#" data-tooltip="Compare"><i class="ps-icon--reload"></i></a></li>
-                                        </ul>
-                                    </footer>
-                                </div>
-                            </div>
-                            <div class="ps-product--list ps-product--list-large">
-                                <div class="ps-product__thumbnail">
-                                    <a class="ps-product__overlay" href="product-detail.html"></a><img src="{{ asset('assets/front/images/cake/img-cake-6.jpg') }}" alt=""></div>
-                                <div class="ps-product__content">
-                                    <h4 class="ps-product__title"><a href="product-detail.html">Cupcake Queen 2</a></h4>
-                                    <select class="ps-rating">
-                                        <option value="1">1</option>
-                                        <option value="1">2</option>
-                                        <option value="1">3</option>
-                                        <option value="1">4</option>
-                                        <option value="5">5</option>
-                                    </select>
-                                    <p class="ps-product__price">
-                                        <del>£25.00</del>£15.00
-                                    </p>
-                                    <p>Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate. Cupcake sweet roll sweet dragée dragée. Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate cake.</p>
-                                    <footer class="ps-product__footer clearfix"><a class="ps-btn ps-btn--sm" href="cart.html">Order now<i class="fa fa-angle-right"></i></a>
-                                        <ul class="ps-product__action">
-                                            <li><a href="#" data-tooltip="Add to wishlist"><i class="ps-icon--heart"></i></a></li>
-                                            <li><a href="#" data-tooltip="Compare"><i class="ps-icon--reload"></i></a></li>
-                                        </ul>
-                                    </footer>
-                                </div>
-                            </div>
-                            <div class="ps-product--list ps-product--list-large">
-                                <div class="ps-product__thumbnail">
-                                    <a class="ps-product__overlay" href="product-detail.html"></a><img src="{{ asset('assets/front/images/cake/img-cake-1.jpg') }}" alt=""></div>
-                                <div class="ps-product__content">
-                                    <h4 class="ps-product__title"><a href="product-detail.html">Cupcake Glory 2</a></h4>
-                                    <select class="ps-rating">
-                                        <option value="1">1</option>
-                                        <option value="1">2</option>
-                                        <option value="1">3</option>
-                                        <option value="1">4</option>
-                                        <option value="5">5</option>
-                                    </select>
-                                    <p class="ps-product__price">
-                                        <del>£25.00</del>£15.00
-                                    </p>
-                                    <p>Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate. Cupcake sweet roll sweet dragée dragée. Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate cake.</p>
-                                    <footer class="ps-product__footer clearfix"><a class="ps-btn ps-btn--sm" href="cart.html">Order now<i class="fa fa-angle-right"></i></a>
-                                        <ul class="ps-product__action">
-                                            <li><a href="#" data-tooltip="Add to wishlist"><i class="ps-icon--heart"></i></a></li>
-                                            <li><a href="#" data-tooltip="Compare"><i class="ps-icon--reload"></i></a></li>
-                                        </ul>
-                                    </footer>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ps-pagination">
-                            <ul class="pagination">
-                                <li><a href="#"><i class="fa fa-arrow-left"></i></a></li>
-                                <li class="active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#"><i class="fa fa-arrow-right"></i></a></li>
-                            </ul>
-                        </div>
+                        </center>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 col-lg-pull-9 col-md-pull-9">
                     <div class="ps-sidebar">
                         <aside class="ps-widget ps-widget--sidebar ps-widget--search">
-                            <form method="post" action="search-result.html">
-                                <input class="form-control" type="text" placeholder="Type here bakery name...">
-                                <button type="submit"><i class="ps-icon--search"></i></button>
-                            </form>
+
+                            <input id="search" class="form-control" type="text" placeholder="Type here bakery name...">
+                            <button id="validate"><i class="ps-icon--search"></i></button>
+
                         </aside>
                         <aside class="ps-widget ps-widget--sidebar ps-widget--category">
                             <div class="ps-widget__header">
@@ -239,13 +112,9 @@
                             </div>
                             <div class="ps-widget__content">
                                 <ul class="ps-list--circle">
-                                    <li class="current"><a href="product-listing.html"><span class="circle"></span>All bakery (321)</a></li>
-                                    <li><a href="product-listing.html"><span class="circle"></span>Amazin’ Glazin’</a></li>
-                                    <li><a href="product-listing.html"><span class="circle"></span>The Crusty Croissant</a></li>
-                                    <li><a href="product-listing.html"><span class="circle"></span>The Rolling Pin</a></li>
-                                    <li><a href="product-listing.html"><span class="circle"></span>Skippity Scones</a></li>
-                                    <li><a href="product-listing.html"><span class="circle"></span>Mad Batter</a></li>
-                                    <li><a href="product-listing.html"><span class="circle"></span>Confection Connection</a></li>
+                                    {% for type in types  %}
+                                        <li><a id="type" href="javascript:;" ><span class="circle"></span>{{ type.type }}</a></li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                         </aside>
@@ -254,8 +123,10 @@
                                 <h3 class="ps-widget__title">Fillter Prices</h3>
                             </div>
                             <div class="ps-widget__content">
-                                <div class="ac-slider" data-default-min="300" data-default-max="2000" data-max="3450" data-step="50" data-unit="$"></div>
-                                <p class="ac-slider__meta">Price:<span class="ac-slider__value ac-slider__min"></span>-<span class="ac-slider__value ac-slider__max"></span></p><a class="ac-slider__filter ps-btn ps-btn--xs" href="#">Filter</a>
+                                <div id="slider" class="ac-slider" data-default-min="300" data-default-max="2000" data-max="3450" data-step="50" data-unit="$"></div>
+                                <p class="ac-slider__meta">Price:<span class="ac-slider__value ac-slider__min"></span>-<span class="ac-slider__value ac-slider__max"></span></p><button id="filter" name="filter" class="ac-slider__filter ps-btn ps-btn--xs"  >Filter</button>
+                                <script src="{{ asset('jquery.js') }}" ></script>
+
                             </div>
                         </aside>
                         <aside class="ps-widget ps-widget--sidebar ps-widget--ads">
@@ -321,6 +192,154 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+
+        $("#filter").click(function(){
+            axios.post("{{path('_cupcakes_product-grid')}}", {
+                min : $("#slider").slider('values',0),
+                max : $("#slider").slider('values',1),
+                ajax : "true"
+            })
+                    .then(function (response) {
+
+
+                        $("#page").hide();
+
+                        $("#product div").remove();
+                        $("#product").append(response.data);
+                        console.log(response);
+
+
+                        {#$("#product").load("{{path('_cupcakes_product-grid')}}")#}
+
+
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    }); });
+
+        $('[id="type"]').click(function(){
+
+            axios.post("{{path('_cupcakes_product-category')}}", {
+                type : $(this).text(),
+                ajax : "true"
+            })
+                    .then(function (response) {
+
+
+                        $("#page").hide();
+
+                        $("#product div").remove();
+                        $("#product").append(response.data);
+                        console.log(response);
+
+
+
+                        {#$("#product").load("{{path('_cupcakes_product-grid')}}")#}
+
+
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    }); });
+
+        $(function () {
+            $('#popular').change(function() {
+                var value = $(this).val();
+                axios.post("{{path('_cupcakes_product-sort')}}", {
+                    sort :  value,
+                    ajax : "true"
+                })
+                        .then(function (response) {
+
+
+
+                            $("#page").hide();
+
+                            $("#product div").remove();
+                            $("#product").append(response.data);
+                            console.log(response);
+
+
+
+                            {#$("#product").load("{{path('_cupcakes_product-grid')}}")#}
+
+
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+
+            });
+        });
+
+        $(function () {
+            $('#sort').change(function() {
+                var value = $(this).val();
+                axios.post("{{path('_cupcakes_product-sort')}}", {
+                    sort :  value,
+                    ajax : "true"
+                })
+                        .then(function (response) {
+
+
+
+                            $("#page").hide();
+
+                            $("#product div").remove();
+                            $("#product").append(response.data);
+                            console.log(response);
+
+
+
+                            {#$("#product").load("{{path('_cupcakes_product-grid')}}")#}
+
+
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+
+            });
+        });
+
+        $("#search").keyup(
+                function () {
+                    var name=$('#search').val();
+                    axios.post("{{path('_cupcakes_product-search')}}", {
+                        name :  name,
+                        ajax : "true"
+                    })
+                            .then(function (response) {
+
+
+
+                                $("#page").hide();
+
+                                $("#product div").remove();
+                                $("#product").append(response.data);
+                                console.log(response);
+
+
+
+                                {#$("#product").load("{{path('_cupcakes_product-grid')}}")#}
+
+
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
+                });
+
+
+
+
+
+
+
+
+
+    </script>
 {% endblock %}
 
 {% block footer %}

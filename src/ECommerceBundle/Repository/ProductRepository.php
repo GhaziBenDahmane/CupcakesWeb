@@ -10,4 +10,64 @@ namespace ECommerceBundle\Repository;
  */
 class ProductRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function findTypes()
+    {
+        $query=$this->getEntityManager()
+            ->createQuery(" Select DISTINCT p.type from ECommerceBundle:Product p ORDER BY p.name ");
+
+        return $query->getResult();
+    }
+
+    public function findProducts()
+    {
+        $query=$this->getEntityManager()
+            ->createQuery(" SELECT p FROM ECommerceBundle:Product p ORDER BY p.name ");
+
+        return $query->getResult();
+    }
+
+    public function findByPrice($price1,$price2)
+    {
+        $query=$this->getEntityManager()
+            ->createQuery(" SELECT p FROM ECommerceBundle:Product p where p.price>= :price1 AND  p.price<= :price2")
+            ->setParameter('price1',$price1)->setParameter('price2',$price2);
+
+
+        return $query->getResult();
+
+    }
+
+    public function findByCategory($category)
+    {
+        $query=$this->getEntityManager()
+            ->createQuery(" SELECT p FROM ECommerceBundle:Product p where p.type LIKE :category")
+            ->setParameter('category',$category);
+
+
+        return $query->getResult();
+
+    }
+
+    public function SortProductsByType(){
+        $query=$this->getEntityManager()
+            ->createQuery(" SELECT p FROM ECommerceBundle:Product p ORDER BY p.type" );
+        return $query->getResult();
+
+    }
+
+    public function SortProductsByPrice(){
+        $query=$this->getEntityManager()
+            ->createQuery(" SELECT p FROM ECommerceBundle:Product p ORDER BY p.price" );
+        return $query->getResult();
+
+    }
+
+    public function findProductsByName($name){
+        $query=$this->getEntityManager()
+            ->createQuery(" SELECT p FROM ECommerceBundle:Product p WHERE p.name LIKE :nom " )
+            ->setParameter('nom','%'.$name.'%');
+        return $query->getResult();
+
+    }
 }
