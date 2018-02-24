@@ -16,14 +16,19 @@ class ReservationController extends Controller
      * Lists all reservation entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
         $reservations = $em->getRepository('EventBundle:Reservation')->findAll();
-
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $reservations, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            5/*limit per page*/
+        );
         return $this->render('EventBundle:reservation:index.html.twig', array(
-            'reservations' => $reservations,
+            'reservations' => $pagination,
         ));
     }
 
@@ -36,6 +41,20 @@ class ReservationController extends Controller
         $reservation = new Reservation();
         $form = $this->createForm('EventBundle\Form\ReservationType', $reservation);
         $form->handleRequest($request);
+        $content =$request->getContent();
+        $data = json_decode($content, true);
+
+        if($data["ajax"]=="true")
+        {
+
+            $dateReservation = \DateTime::createFromFormat('Y-m-d', $data["dateReservation"]);
+            $reservation->setDateReservation($dateReservation);
+            $reservation->setNbPerson($data["nbPerson"]);
+            $reservation->setNbTable($data["nbTable"]);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($reservation);
+            $em->flush($reservation);
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -94,14 +113,10 @@ class ReservationController extends Controller
      */
     public function deleteAction(Request $request, Reservation $reservation)
     {
-        $form = $this->createDeleteForm($reservation);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($reservation);
+        $em->flush($reservation);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($reservation);
-            $em->flush($reservation);
-        }
 
         return $this->redirectToRoute('reservation_index');
     }

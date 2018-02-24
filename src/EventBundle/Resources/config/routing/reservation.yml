@@ -21,4 +21,3 @@ reservation_edit:
 reservation_delete:
     path:     /{id}/delete
     defaults: { _controller: "EventBundle:Reservation:delete" }
-    methods:  DELETE

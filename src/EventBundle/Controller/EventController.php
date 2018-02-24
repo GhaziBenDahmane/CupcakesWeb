@@ -2,9 +2,11 @@
 
 namespace EventBundle\Controller;
 
+use Doctrine\DBAL\Types\DateType;
 use EventBundle\Entity\Event;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Event controller.
@@ -16,14 +18,20 @@ class EventController extends Controller
      * Lists all event entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
         $events = $em->getRepository('EventBundle:Event')->findAll();
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $events, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            5/*limit per page*/
+        );
 
         return $this->render('EventBundle:event:index.html.twig', array(
-            'events' => $events,
+            'events' => $pagination,
         ));
     }
 
@@ -36,7 +44,30 @@ class EventController extends Controller
         $event = new Event();
         $form = $this->createForm('EventBundle\Form\EventType', $event);
         $form->handleRequest($request);
+        $content =$request->getContent();
+        $data = json_decode($content, true);
 
+
+
+        if($data["ajax"]=="true")
+        {
+            $startingDate = \DateTime::createFromFormat('Y-m-d', $data["startingDate"]);
+            $endingDate = \DateTime::createFromFormat('Y-m-d', $data["endingDate"]);
+            $nbPerson =$data["nbPerson"];
+            $nbTable =$data["nbTable"];
+            $band =$data["band"];
+            $cost =$data["cost"];
+            $event->setStartingDate($startingDate);
+            $event->setEndingDate($endingDate);
+            $event->setNbPerson($nbPerson);
+            $event->setNbTable($nbTable);
+            $event->setBand($band);
+            $event->setCost($cost);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($event);
+            $em->flush($event);
+
+        }
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($event);
@@ -94,31 +125,13 @@ class EventController extends Controller
      */
     public function deleteAction(Request $request, Event $event)
     {
-        $form = $this->createDeleteForm($event);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($event);
             $em->flush($event);
-        }
 
         return $this->redirectToRoute('event_index');
     }
 
-    /**
-     * Creates a form to delete a event entity.
-     *
-     * @param Event $event The event entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Event $event)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('event_delete', array('id' => $event->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
-    }
+
+
 }

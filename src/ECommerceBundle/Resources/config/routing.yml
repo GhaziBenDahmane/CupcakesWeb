@@ -5,10 +5,18 @@ e_commerce_promotion:
     resource: "@ECommerceBundle/Resources/config/routing/promotion.yml"
     prefix:   /admin/promotion
 
+e_commerce_claim:
+    resource: "@ECommerceBundle/Resources/config/routing/claim.yml"
+    prefix:   /claim
+e_commerce_commande:
+    resource: "@ECommerceBundle/Resources/config/routing/commande.yml"
+    prefix:   /commande
+e_commerce_delivery:
+    resource: "@ECommerceBundle/Resources/config/routing/delivery.yml"
+    prefix:   /delivery
 _cupcakes_product-grid:
     path:     /product-grid
     defaults: { _controller: ECommerceBundle:Default:ProductGrid }
-
 _cupcakes_product-detail:
     path:     /product-detail
     defaults: { _controller: ECommerceBundle:Default:ProductDetail}
