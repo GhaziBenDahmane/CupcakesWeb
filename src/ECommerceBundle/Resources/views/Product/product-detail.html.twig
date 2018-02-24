@@ -8,6 +8,7 @@
        <title>Bakery | Product Detail</title>
    {% endblock %}
 
+
     <!-- Heros-->
     <div class="ps-section--hero"><img src="{{ asset('assets/front/images/hero/02.jpg') }}" alt="">
         <div class="ps-section__content text-center">
@@ -15,12 +16,13 @@
             <div class="ps-breadcrumb">
                 <ol class="breadcrumb">
                     <li><a href="{{ path('_cupcakes_homepage') }}">Home</a></li>
-                    <li><a href="{{ path('_cupcakes_product-grid') }}">Shop</a></li>
+                    <li><a href="{{ path('_cupcakes_product-listing') }}">Shop</a></li>
                     <li class="active">Anytime Cakes</li>
                 </ol>
             </div>
         </div>
     </div>
+
     <div class="ps-section pt-80 pb-80">
         <div class="container">
             <div class="ps-product--detail">
@@ -38,9 +40,11 @@
                             <div class="owl-slider second mb-30" data-owl-auto="true" data-owl-loop="false" data-owl-speed="10000" data-owl-gap="20" data-owl-nav="false" data-owl-dots="false" data-owl-animate-in="" data-owl-animate-out="" data-owl-item="4" data-owl-item-xs="2" data-owl-item-sm="3" data-owl-item-md="4" data-owl-item-lg="4" data-owl-nav-left="&lt;i class=&quot;fa fa-angle-left&quot;&gt;&lt;/i&gt;" data-owl-nav-right="&lt;i class=&quot;fa fa-angle-right&quot;&gt;&lt;/i&gt;"><img src="{{ asset('assets/front/images/cake/img-cake-12.jpg') }}" alt=""><img src="{{ asset('assets/front/images/cake/img-cake-11.jpg') }}" alt=""><img src="{{ asset('assets/front/images/cake/img-cake-10.jpg') }}" alt=""><img src="{{ asset('assets/front/images/cake/img-cake-6.jpg') }}" alt=""><img src="{{ asset('assets/front/images/cake/img-cake-5.jpg') }}" alt=""></div>
                         </div>
                     </div>
+
                     <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 ">
                         <header>
-                            <h3 class="ps-product__name">Anytime Cakes</h3>
+
+                            <h3 class="ps-product__name">{{ products.name }}</h3>
                             <select class="ps-rating">
                                 <option value="1">1</option>
                                 <option value="1">2</option>
@@ -48,8 +52,8 @@
                                 <option value="1">4</option>
                                 <option value="5">5</option>
                             </select>
-                            <p class="ps-product__price">£15.00
-                                <del>£25.00</del>
+                            <p id="price" class="ps-product__price">{{ products.price }}
+                                <del>{{ products.price }}</del>
                             </p><a class="ps-product__quickview popup-modal" href="#quickview-modal" data-effect="mfp-zoom-out">QUICK OVERVIEW</a>
                             <div class="ps-product__description">
                                 <p>Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate. Cupcake sweet roll sweet dragée dragée. Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate cake.</p>
@@ -57,21 +61,21 @@
                             </div>
                             <div class="ps-product__meta">
                                 <p><span> Availability: </span> In stock</p>
-                                <p class="category"><span>CATEGORIES: </span><a href="product-grid.html">Cupcake</a>,<a href="product-grid.html"> organic</a>,<a href="product-grid.html"> sugar</a>,<a href="product-grid.html"> sweet</a>,<a href="product-grid.html"> bio</a></p>
+                                <p class="category"><span>CATEGORIES: </span><a >{{ products.type }}</a>
                             </div>
                             <div class="form-group ps-product__size">
                                 <label>Size:</label>
-                                <select class="ps-select" data-placeholder="Popupar product">
+                                <select id="taille" class="ps-select" data-placeholder="Popupar product">
                                     <option value="01">CHOOSE AN OPTION</option>
-                                    <option value="01">Item 01</option>
-                                    <option value="02">Item 02</option>
-                                    <option value="03">Item 03</option>
+                                    <option value="1">Big</option>
+                                    <option value="2">Meduim</option>
+                                    <option value="3">Small</option>
                                 </select>
                             </div>
                             <div class="ps-product__shop">
                                 <div class="form-group--number">
                                     <button class="minus"><span>-</span></button>
-                                    <input class="form-control" type="text" value="1">
+                                    <input id="quantity" class="form-control" type="text" value="1">
                                     <button class="plus"><span>+</span></button>
                                 </div>
                                 <ul class="ps-product__action">
@@ -90,6 +94,7 @@
                             </div>
                         </footer>
                     </div>
+
                 </div>
                 <div class="ps-product__info">
                     <ul class="tab-list" role="tablist">
@@ -282,7 +287,15 @@
         </div>
     </div>
 </section>
+    <script type="text/javascript" src="{{ asset('jquery.js') }}"></script>
+
+    <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript">
+
+    </script>
 {% endblock %}
+
+
 
 {% block footer %}
     {{ parent() }}

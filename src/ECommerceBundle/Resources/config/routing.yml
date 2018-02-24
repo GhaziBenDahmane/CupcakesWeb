@@ -16,20 +16,32 @@ e_commerce_claim:
 #    prefix:   /delivery
 _cupcakes_product-grid:
     path:     /product-grid
-    defaults: { _controller: ECommerceBundle:Default:ProductGrid }
+    defaults: { _controller: ECommerceBundle:Product:showProductsByPrice }
+
+_cupcakes_product-category:
+    path:     /product-category
+    defaults: { _controller: ECommerceBundle:Product:showProductsByCategory }
+_cupcakes_product-search:
+    path:     /product-search
+    defaults: { _controller: ECommerceBundle:Product:findProducts }
+_cupcakes_product-sort:
+    path:     /product-sort
+    defaults: { _controller: ECommerceBundle:Product:sortProducts }
 _cupcakes_product-detail:
-    path:     /product-detail
-    defaults: { _controller: ECommerceBundle:Default:ProductDetail}
+    path:     /product-detail/{id}
+    defaults: { _controller: ECommerceBundle:Product:showProductDetails, id:'33'}
 _cupcakes_product-listing:
     path:     /product-listing
-    defaults: { _controller: ECommerceBundle:Default:ProductListing}
+    defaults: { _controller: ECommerceBundle:Product:showProducts}
+_cupcakes_product-listing_By_Price:
+    path:     /product-listing/{price1,price2}
+    defaults: { _controller: ECommerceBundle:Product:showProductsByPrice}
 _cupcakes_cart:
-    path:     /cart
-    defaults: { _controller: ECommerceBundle:Default:Cart }
-
+    path:     /Cart/{id}
+    defaults: { _controller: ECommerceBundle:Default:Cart,id:'33' }
 _cupcakes_order_form:
-    path:     /order
+    path:     /OrderForm
     defaults: { _controller: ECommerceBundle:Default:OrderForm }
 _cupcakes_checkout:
-    path:     /checkout
+    path:     /Checkout
     defaults: { _controller: ECommerceBundle:Default:Checkout }

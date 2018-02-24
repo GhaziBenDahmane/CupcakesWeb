@@ -3,10 +3,10 @@
 namespace ECommerceBundle\Controller;
 
 use ECommerceBundle\Entity\Product;
-use ECommerceBundle\Form\ProductType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
+
 
 /**
  * Product controller.
@@ -226,5 +226,137 @@ class ProductController extends Controller
             ->setMethod('DELETE')
             ->getForm()
             ;
+    }
+
+    public function showProductsAction(Request $request)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $products = $em->getRepository('ECommerceBundle:Product')->findProducts();
+        $types = $em->getRepository('ECommerceBundle:Product')->findTypes();
+
+
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $products, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            4/*limit per page*/
+        );
+
+        return $this->render('ECommerceBundle:Product:product-listing.html.twig', array('products' => $pagination, 'types' => $types)
+        );
+
+    }
+
+    public function showProductsByPriceAction(Request $request)
+    {
+
+        $content = $request->getContent();
+        $data = json_decode($content, true);
+        $price1 = $data["min"];
+        $price2 = $data["max"];
+        $em = $this->getDoctrine()->getManager();
+        $products = $em->getRepository('ECommerceBundle:Product')->findByPrice($price1, $price2);
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $products, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            9
+        /*limit per page*/
+        );
+
+        return $this->render('ECommerceBundle:Product:product-grid.html.twig', array('products' => $pagination)
+        );
+
+
+    }
+
+    public function showProductsByCategoryAction(Request $request)
+    {
+
+        $content = $request->getContent();
+        $data = json_decode($content, true);
+        $category = $data["type"];
+        $em = $this->getDoctrine()->getManager();
+        $products = $em->getRepository('ECommerceBundle:Product')->findByCategory($category);
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $products, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            9
+        /*limit per page*/
+        );
+
+        return $this->render('ECommerceBundle:Product:product-category.html.twig', array('products' => $pagination)
+        );
+
+    }
+
+    public function findProductsAction(Request $request)
+    {
+
+
+
+
+        $em = $this->getDoctrine()->getManager();
+
+
+        $content = $request->getContent();
+        $data = json_decode($content, true);
+        $name = $data["name"];
+        $products = $em->getRepository('ECommerceBundle:Product')->findProductsByName($name);
+
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $products, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            4
+        /*limit per page*/
+        );
+
+
+        return $this->render('ECommerceBundle:Product:product-sort.html.twig', array('products' => $pagination)
+        );
+
+    }
+
+    public function sortProductsAction(Request $request)
+    {
+        $products=null;
+        $em = $this->getDoctrine()->getManager();
+        $content = $request->getContent();
+        $data = json_decode($content, true);
+        $sort = $data["sort"];
+        if($sort=="3")
+        {
+
+            $products = $em->getRepository('ECommerceBundle:Product')->SortProductsByType();}
+        else if($sort=="2")
+        {
+            $products = $em->getRepository('ECommerceBundle:Product')->SortProductsByPrice();
+        }
+        else{            $products = $em->getRepository('ECommerceBundle:Product')->findProducts();
+        }
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $products, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            4
+        /*limit per page*/
+        );
+
+        return $this->render('ECommerceBundle:Product:product-sort.html.twig', array('products' => $pagination)
+        );
+
+    }
+
+    public function showProductDetailsAction($id)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $products = $em->getRepository('ECommerceBundle:Product')->find($id);
+        $products->setNbViewed($products->getNbViewed()+1);
+
+        return $this->render('ECommerceBundle:Product:product-detail.html.twig', array('products' => $products));
     }
 }
