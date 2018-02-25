@@ -69,7 +69,7 @@
                                                     <td>{{ claim.client }}</td>
                                                     <td>{{ claim.type }}</td>
                                                     <td>{{ claim.description }}</td>
-                                                    <td>{{ claim.answered }}</td>
+                                                    <td>{{ claim.answered ? 'Yes' : 'No' }}</td>
                                                     <td>
                                                         {{ render(controller('BackOfficeBundle:Claim:edit',{'id':claim.id})) }}
                                                     </td>

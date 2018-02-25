@@ -95,27 +95,6 @@ class Claim
         $this->firstname = $firstname;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param mixed $email
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    private $email;
-
 
     /**
      * @return mixed

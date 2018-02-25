@@ -1,19 +1,19 @@
-claim_index:
+claim_front_index:
     path:     /
     defaults: { _controller: "ECommerceBundle:Claim:index" }
 
-claim_show:
+claim_front_show:
     path:     /{id}/show
     defaults: { _controller: "ECommerceBundle:Claim:show" }
 
-claim_new:
+claim_front_new:
     path:     /new
     defaults: { _controller: "ECommerceBundle:Claim:new" }
 
-claim_edit:
+claim_front_edit:
     path:     /{id}/edit
     defaults: { _controller: "ECommerceBundle:Claim:edit" }
 
-claim_delete:
+claim_front_delete:
     path:     /{id}/delete
     defaults: { _controller: "ECommerceBundle:Claim:delete" }

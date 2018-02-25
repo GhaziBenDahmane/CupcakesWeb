@@ -1,7 +1,6 @@
 claim_index:
     path:     /
     defaults: { _controller: "BackOfficeBundle:Claim:index" }
-    methods:  [GET, POST]
 
 claim_show:
     path:     /{id}/show
