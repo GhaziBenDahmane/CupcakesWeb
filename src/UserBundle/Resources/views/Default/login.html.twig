@@ -2,11 +2,16 @@
 {% block section %} {% if error %}
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
+    <script>
+        if(location.pathname == '/login')
+            location.pathname ='/'
+    </script>
     {#{{ path(" fos_user_security_check ") }}#}
     {#{{ path('tmp_Before_Sign_Up') }}#}
     <div id="ab">
         <form class="login100-form validate-form flex-sb flex-w" action="{{ path("fos_user_security_check") }}"
               method="post" id="login_form">
+            <button class="modal-close"><i class="fa fa-remove"></i></button>
             {% if csrf_token %}
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
             {% endif %}
@@ -48,5 +53,6 @@
                 </a>
             </div>
         </form>
+
     </div>
 {% endblock %}

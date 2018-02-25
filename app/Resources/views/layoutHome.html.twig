@@ -73,12 +73,12 @@
 <div class="header--sidebar"></div>
 <header class="header" data-responsive="1199">
     {% if is_granted('ROLE_ADMIN') %}
-    <div class="header__top">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12 ">
-                    <p>You are signed in as an administrator</p>
-                </div>
+        <div class="header__top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12 ">
+                        <p>You are signed in as an administrator</p>
+                    </div>
 
                     <div class="btn-group ps-dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown"
                                                           aria-haspopup="true" aria-expanded="false">Administration<i
@@ -92,7 +92,7 @@
                 </div>
             </div>
         </div>
-    </div>
+        </div>
     {%endif%}
 
     <nav class="navigation">
@@ -1077,15 +1077,14 @@
         </div>
     </div>
     {% endblock %}
-    <div class="mfp-with-anim modal-popup mfp-hide" id="modal--subscribe">
-        <button class="modal-close"><i class="fa fa-remove"></i></button>
-        <div>
-            {% if not app.user %}
+    {% if not app.user %}
+        <div class="mfp-with-anim modal-popup mfp-hide" id="modal--subscribe">
+            <div>
                 {{ render(controller('UserBundle:Default:Login')) }}
                 {{ render(controller('UserBundle:Default:SignUp')) }}
-            {% endif %}
+            </div>
         </div>
-    </div>
+    {% endif %}
     <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -1147,10 +1146,10 @@
     $(function(){
         $('#register_form').toggle()
     });
+
     function toggleRegistration() {
-        $('#register_form').toggle()
-
-
+        $('#register_form').toggle();
+        $('#login_form').toggle();
     }
 </script>
 </body>
