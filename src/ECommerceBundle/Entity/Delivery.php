@@ -20,7 +20,47 @@ class Delivery
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $name;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $phone;
+
+    /**
+     * @return mixed
+     */
+    public function getPhone ()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @param mixed $phone
+     */
+    public function setPhone ($phone)
+    {
+        $this->phone = $phone;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName ()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName ($name)
+    {
+        $this->name = $name;
+    }
     /**
      * @var \DateTime
      *
@@ -29,32 +69,98 @@ class Delivery
     private $dateDelivery;
 
     /**
-     * @var float
+     * @var \DateTime
      *
-     * @ORM\Column(name="cost", type="float")
+     * @ORM\Column(name="contact_time", type="date")
      */
-    private $cost;
+    private $contactTime;
 
     /**
-     * @ORM\OneToOne(targetEntity="ECommerceBundle\Entity\Commande" , mappedBy="id")
+     * @ORM\Column(type="string")
      */
-    private $commande;
+    private $notes;
+
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $email;
 
     /**
      * @return mixed
      */
-    public function getCommande()
+    public function getEmail ()
     {
-        return $this->commande;
+        return $this->email;
     }
 
     /**
-     * @param mixed $commande
+     * @param mixed $email
      */
-    public function setCommande($commande)
+    public function setEmail ($email)
     {
-        $this->commande = $commande;
+        $this->email = $email;
     }
+
+
+    /**
+     * @return \DateTime
+     */
+    public function getContactTime ()
+    {
+        return $this->contactTime;
+    }
+
+    /**
+     * @param \DateTime $contactTime
+     */
+    public function setContactTime ($contactTime)
+    {
+        $this->contactTime = $contactTime;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNotes ()
+    {
+        return $this->notes;
+    }
+
+    /**
+     * @param mixed $notes
+     */
+    public function setNotes ($notes)
+    {
+        $this->notes = $notes;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAdress ()
+    {
+        return $this->adress;
+    }
+
+    /**
+     * @param mixed $adress
+     */
+    public function setAdress ($adress)
+    {
+        $this->adress = $adress;
+    }
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $adress;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="cost", type="float")
+     */
 
     /**
      * Get id
@@ -90,28 +196,6 @@ class Delivery
         return $this->dateDelivery;
     }
 
-    /**
-     * Set cost
-     *
-     * @param float $cost
-     *
-     * @return Delivery
-     */
-    public function setCost($cost)
-    {
-        $this->cost = $cost;
 
-        return $this;
-    }
-
-    /**
-     * Get cost
-     *
-     * @return float
-     */
-    public function getCost()
-    {
-        return $this->cost;
-    }
 }
 

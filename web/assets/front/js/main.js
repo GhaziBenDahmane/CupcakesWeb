@@ -69,18 +69,18 @@ function validate_row(id){
         "cost":$("#cost").val(),
         "ajax":'true'
     } )
-       .then(function () {
-           $('#addr1').html(
-               '<td>'+$("#startingDate").val()+'</td>'+
-               '<td>'+$("#endingDate").val()+'</td>'+
-               '<td>'+$("#nbPerson").val()+'</td>'+
-               '<td>'+$("#nbTable").val()+'</td>'+
-               '<td>'+$("#band").val()+'</td>'+
-               '<td>'+$("#cost").val()+'</td>'+
-               '<td><ul><li><a id=" " class="glyphicon glyphicon-trash" onclick="delete_row(id)"> </a></li>'+
-               '<li><a class="glyphicon glyphicon-ok-circle" onclick="validate_row(id)"></a> </li></ul></td>'
-           );
-           $("#add_row").removeAttr("disabled");
+        .then(function () {
+            $('#addr1').html(
+                '<td>'+$("#startingDate").val()+'</td>'+
+                '<td>'+$("#endingDate").val()+'</td>'+
+                '<td>'+$("#nbPerson").val()+'</td>'+
+                '<td>'+$("#nbTable").val()+'</td>'+
+                '<td>'+$("#band").val()+'</td>'+
+                '<td>'+$("#cost").val()+'</td>'+
+                '<td><ul><li><a id=" " class="glyphicon glyphicon-trash" onclick="delete_row(id)"> </a></li>'+
+                '<li><a class="glyphicon glyphicon-ok-circle" onclick="validate_row(id)"></a> </li></ul></td>'
+            );
+            $("#add_row").removeAttr("disabled");
 
         })
         .catch(function (error) {
@@ -88,37 +88,37 @@ function validate_row(id){
 }
 (function ($) {
     var i=1;
-        $("#add_row").click(function(){
+    $("#add_row").click(function(){
 
-            if( $(location).attr('pathname')=='/reservation/')
-            {
-                $('#table').append(
-                    '<tr id=addr' + i + '>' +
-                    '<td>' + ' <input id="dateReservation" class="form-control form-control-xs"' + ' type="date"  > </td>' +
-                    '<td>' + ' <input id="nbPerson" class="form-control form-control-xs"' + ' type="number"  > </td>' +
-                    '<td>' + ' <input id="nbTable" class="form-control form-control-xs"' + ' type="number"  > </td>' +
-                    '<td>' + ' <a id="' + i + '" class="glyphicon glyphicon-trash" onclick="delete_row(id)"> </a> ' +
-                    '<a class="glyphicon glyphicon-ok-circle" onclick="validate_row_res(id)"></a> ' +
+        if( $(location).attr('pathname')=='/reservation/')
+        {
+            $('#table').append(
+                '<tr id=addr' + i + '>' +
+                '<td>' + ' <input id="dateReservation" class="form-control form-control-xs"' + ' type="date"  > </td>' +
+                '<td>' + ' <input id="nbPerson" class="form-control form-control-xs"' + ' type="number"  > </td>' +
+                '<td>' + ' <input id="nbTable" class="form-control form-control-xs"' + ' type="number"  > </td>' +
+                '<td>' + ' <a id="' + i + '" class="glyphicon glyphicon-trash" onclick="delete_row(id)"> </a> ' +
+                '<a class="glyphicon glyphicon-ok-circle" onclick="validate_row_res(id)"></a> ' +
 
-                    '</td>' +
-                    '</tr>');            }
-            else {
+                '</td>' +
+                '</tr>');            }
+        else {
 
-                $('#table').append(
-                    '<tr id=addr' + i + '>' +
-                    '<td>' + ' <input id="startingDate" class="form-control form-control-xs"' + ' type="date"  > </td>' +
-                    '<td>' + ' <input id="endingDate" class="form-control form-control-xs"' + ' type="date" > </td>' +
-                    '<td>' + ' <input id="nbPerson" class="form-control form-control-xs"' + ' type="number"  > </td>' +
-                    '<td>' + ' <input id="nbTable" class="form-control form-control-xs"' + ' type="number"  > </td>' +
-                    '<td>' + ' <input id="band" class="form-control form-control-xs"' + ' type="text"  > </td>' +
-                    '<td>' + ' <input id="cost" class="form-control form-control-xs"' + ' type="number"  > </td>' +
-                    '<td>' + ' <a id="' + i + '" class="glyphicon glyphicon-trash" onclick="delete_row(id)"> </a> ' +
-                    '<a class="glyphicon glyphicon-ok-circle" onclick="validate_row(id)"></a> ' +
+            $('#table').append(
+                '<tr id=addr' + i + '>' +
+                '<td>' + ' <input id="startingDate" class="form-control form-control-xs"' + ' type="date"  > </td>' +
+                '<td>' + ' <input id="endingDate" class="form-control form-control-xs"' + ' type="date" > </td>' +
+                '<td>' + ' <input id="nbPerson" class="form-control form-control-xs"' + ' type="number"  > </td>' +
+                '<td>' + ' <input id="nbTable" class="form-control form-control-xs"' + ' type="number"  > </td>' +
+                '<td>' + ' <input id="band" class="form-control form-control-xs"' + ' type="text"  > </td>' +
+                '<td>' + ' <input id="cost" class="form-control form-control-xs"' + ' type="number"  > </td>' +
+                '<td>' + ' <a id="' + i + '" class="glyphicon glyphicon-trash" onclick="delete_row(id)"> </a> ' +
+                '<a class="glyphicon glyphicon-ok-circle" onclick="validate_row(id)"></a> ' +
 
-                    '</td>' +
-                    '</tr>');
-            }
-            $("#add_row").attr("disabled", "disabled");
+                '</td>' +
+                '</tr>');
+        }
+        $("#add_row").attr("disabled", "disabled");
 
     });
 
@@ -160,8 +160,43 @@ function validate_row(id){
                 $("#CEmail").val("");
                 $("#CMsg").val("");
                 $("#CTel").val("");
-                    $('.alert').append(' ' +
-                        ' <strong>successful!</strong>  ');
+                $('.alert').append(' ' +
+                    ' <strong>successful!</strong>  ');
+
+                $('.alert').attr("class","alert alert-success");
+
+            })
+            .catch(function (error) {
+                $('.alert').append(' ' +
+                    ' <strong>error!</strong>  ');
+
+                $('.alert').attr("class","alert alert-danger");
+            });
+    });
+    $("#Dsubmit").click(function(){
+
+        axios.post('/order', {
+            Name: $("#Dname").val(),
+            Adress: $("#Daddress").val(),
+            DateDelivery: $("#Ddatedelivery").val(),
+            phone: $("#Dphone").val(),
+            email: $("#Demail").val(),
+            contactTime: $("#DcontactTime").val(),
+            notes: $("#Dnotes").val(),
+
+            ajax: "true"
+
+        })
+            .then(function (response) {
+                $("#Dname").val("");
+                $("#Daddress").val("");
+                $("#Ddatedelivery").val("");
+                $("#Dphone").val("");
+                $("#Demail").val("");
+                $("#DcontactTime").val("");
+                $("#Dnotes").val("");
+                $('.alert').append(' ' +
+                    ' <strong>successful!</strong>  ');
 
                 $('.alert').attr("class","alert alert-success");
 
@@ -501,8 +536,8 @@ function validate_row(id){
 
             })
                 .infowindow({
-                content: map.data('address')
-            }).then(function (infowindow) {
+                    content: map.data('address')
+                }).then(function (infowindow) {
                 var map = this.get(0);
                 var marker = this.get(1);
 

@@ -18,10 +18,13 @@ class DeliveryController extends Controller
         if($data["ajax"]=="true")
         {
 
-            $Delivery->setFirstName($data["firstName"]);
-            $Delivery->setTel($data["tel"]);
+            $Delivery->setName($data["Name"]);
+            $Delivery->setAdress($data["Adress"]);
+            $Delivery->setDateDelivery($data["Ddatedelivery"]);
+            $Delivery->setPhone($data["phone"]);
             $Delivery->setEmail($data["email"]);
-            $Delivery->setMessage($data["message"]);
+            $Delivery->setContactTime($data["contactTime"]);
+            $Delivery->setNotes($data["notes"]);
             $em = $this->getDoctrine()->getManager();
             $em->persist($Delivery);
             $em->flush();
@@ -29,6 +32,6 @@ class DeliveryController extends Controller
         }
 
 
-        return $this->render('AppBundle:Contact:contact.html.html.twig');
+        return $this->render('ECommerceBundle:Default:order-form.html.twig');
     }
 }
