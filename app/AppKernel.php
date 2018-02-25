@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new GamingBundle\GamingBundle(),
             new PastryBundle\PastryBundle(),
             new TrainingBundle\TrainingBundle(),
+            new FormationBundle\FormationBundle(),
             new AppBundle\AppBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Vresh\TwilioBundle\VreshTwilioBundle(),

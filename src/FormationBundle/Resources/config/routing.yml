@@ -1,0 +1,26 @@
+
+
+_AjouterFormation:
+    path: /AjouterFormation
+    defaults: { _controller: FormationBundle:Formation:AjouterFormation }
+
+_SupprimerFormation:
+    path: /SupprimerFormation/{idFormation}
+    defaults: { _controller: FormationBundle:Formation:SupprimerFormation }
+
+formation_index:
+    path:     /admin/formation
+    defaults: { _controller: FormationBundle:Formation:index }
+searchFormation:
+    path:     /searchFormation
+    defaults: { _controller: FormationBundle:Formation:search }
+_AfficherFormation:
+    path: /AfficherFormation
+    defaults: { _controller: FormationBundle:Formation:AfficherFormation }
+_ModifierFormation:
+    path: /ModifierFormation/{idFormation}
+    defaults: { _controller: FormationBundle:Formation:ModifierFormation }
+FrontFormation:
+    path: /formation
+    defaults: { _controller: FormationBundle:Formation:FrontFormation }
+
