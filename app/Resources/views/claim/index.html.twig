@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Claims list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>Answered</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for claim in claims %}
+            <tr>
+                <td><a href="{{ path('claime_show', { 'id': claim.id }) }}">{{ claim.id }}</a></td>
+                <td>{{ claim.description }}</td>
+                <td>{{ claim.type }}</td>
+                <td>{% if claim.answered %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('claime_show', { 'id': claim.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('claime_edit', { 'id': claim.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('claime_new') }}">Create a new claim</a>
+        </li>
+    </ul>
+{% endblock %}

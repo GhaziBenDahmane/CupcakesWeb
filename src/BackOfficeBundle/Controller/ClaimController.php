@@ -27,64 +27,7 @@ class ClaimController extends Controller
         ));
     }
 
-    /**
-     * Creates a new claim entity.
-     *
-     */
-    public function newAction(Request $request)
-    {
-        $claim = new Claim();
-        $form = $this->createForm('ECommerceBundle\Form\ClaimType', $claim);
-        $form->handleRequest($request);
-        $content =$request->getContent();
-        $data = json_decode($content, true);
-
-
-
-        if($data["ajax"]=="true")
-        {
-            $claim->setFirstname($data["firstName"]);
-            $claim->setTel($data["tel"]);
-            $claim->setDescription($data["message"]);
-            $claim->setType($data["type"]);
-            $claim->setEmail($data["email"]);
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($claim);
-            $em->flush($claim);
-
-        }
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($claim);
-            $em->flush($claim);
-
-            return $this->redirectToRoute('claim_show', array('id' => $claim->getId()));
-        }
-
-        return $this->render('ECommerceBundle:claim:new.html.twig', array(
-            'claim' => $claim,
-            'form' => $form->createView(),
-        ));
-    }
-
-    /**
-     * Finds and displays a claim entity.
-     *
-     */
-    public function showAction(Claim $claim)
-    {
-        $deleteForm = $this->createDeleteForm($claim);
-
-        return $this->render('ECommerceBundle:claim:show.html.twig', array(
-            'claim' => $claim,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
-
-    /**
-     * Displays a form to edit an existing claim entity.
-     *
-     */
+    
     public function editAction(Request $request, Claim $claim)
     {
         $deleteForm = $this->createDeleteForm($claim);
