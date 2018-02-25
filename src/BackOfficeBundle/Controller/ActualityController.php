@@ -37,7 +37,7 @@ class ActualityController extends Controller
         $form = $this->createCreateForm($actuality);
         $form->handleRequest($request);
 
-        return $this->render('BackOfficeBundle:actuality:new.html.twig', array(
+        return $this->render('BackOfficeBundle:Actuality:new.html.twig', array(
             'actualities' => $actuality,
             'form'   => $form->createView(),
         ));

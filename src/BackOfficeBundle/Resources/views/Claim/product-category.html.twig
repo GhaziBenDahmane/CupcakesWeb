@@ -1,0 +1,39 @@
+<div class="ps-shop ps-col-tiny">
+    <div class="row">
+        {% for product in products %}
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 ">
+                <div class="ps-product">
+                    <div class="ps-product__thumbnail">
+                        <div class="ps-badge ps-badge--new"><span>New</span></div>
+                        <a class="ps-product__overlay" href="{{ path('_cupcakes_product-detail') }}"></a><img src="{{ asset('assets/front/images/cake/img-cake-7.jpg') }}" alt="">
+                        <ul class="ps-product__action">
+                            <li><a class="popup-modal" href="#quickview-modal" data-effect="mfp-zoom-out" data-tooltip="View"><i class="ps-icon--search"></i></a></li>
+                            <li><a href="#" data-tooltip="Add to wishlist"><i class="ps-icon--heart"></i></a></li>
+                            <li><a href="#" data-tooltip="Compare"><i class="ps-icon--reload"></i></a></li>
+                            <li><a href="#" data-tooltip="Add to cart"><i class="ps-icon--shopping-cart"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="ps-product__content"><a class="ps-product__title" href="{{ path('_cupcakes_product-detail') }}">{{ product.name }}</a>
+                        <div class="ps-product__category"><a class="ps-product__category" href="{{ path('_cupcakes_product-listing') }}">{{ product.type }}</a>
+                        </div>
+                        <select class="ps-rating">
+                            <option value="1">1</option>
+                            <option value="1">2</option>
+                            <option value="1">3</option>
+                            <option value="1">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <p class="ps-product__price">{{ product.price }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+<center>
+    <div id="page" class="navigation ">
+        {{ knp_pagination_render(products) }}
+    </div>
+</center>
