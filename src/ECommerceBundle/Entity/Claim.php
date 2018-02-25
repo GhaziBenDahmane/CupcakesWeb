@@ -34,21 +34,34 @@ class Claim
      * @ORM\Column(name="type", type="string", length=255)
      */
     private $type;
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="answered", type="boolean")
+     */
+    private $answered = false;
+
+    /**
+     * @return bool
+     */
+    public function isAnswered()
+    {
+        return $this->answered;
+    }
+
+    /**
+     * @param bool $answered
+     */
+    public function setAnswered($answered)
+    {
+        $this->answered = $answered;
+    }
 
     /**
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User" , inversedBy="id")
      */
     private $client;
 
-    /**
-     * @ORM\Column(type="string")
-     */
-    private $tel;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    private $firstname;
 
     /**
      * @return mixed

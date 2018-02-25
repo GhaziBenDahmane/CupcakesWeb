@@ -15,3 +15,7 @@ back_office_promotion:
 back_office_event:
     resource: "@BackOfficeBundle/Resources/config/routing/event.yml"
     prefix:   /event
+
+back_office_claim:
+    resource: "@BackOfficeBundle/Resources/config/routing/claim.yml"
+    prefix:   /claim

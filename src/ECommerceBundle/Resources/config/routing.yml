@@ -1,6 +1,7 @@
-e_commerce_product:
+e_commerce_product :
     resource: "@ECommerceBundle/Resources/config/routing/product.yml"
     prefix:   /admin/product
+    
 e_commerce_promotion:
     resource: "@ECommerceBundle/Resources/config/routing/promotion.yml"
     prefix:   /admin/promotion

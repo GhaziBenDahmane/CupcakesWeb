@@ -5,6 +5,8 @@ namespace ECommerceBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
 
 class ClaimType extends AbstractType
 {
@@ -13,7 +15,11 @@ class ClaimType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('description')->add('type')->add('client')        ;
+        $builder->add('description')
+            ->add('type')
+            ->add('client')
+            ->add('submit', SubmitType::class, array('attr' => array('class' => 'save')));
+
     }
     
     /**

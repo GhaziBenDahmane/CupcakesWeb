@@ -1,6 +1,6 @@
 <?php
 
-namespace ECommerceBundle\Controller;
+namespace BackOfficeBundle\Controller;
 
 use ECommerceBundle\Entity\Claim;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -22,7 +22,7 @@ class ClaimController extends Controller
 
         $claims = $em->getRepository('ECommerceBundle:Claim')->findAll();
 
-        return $this->render('ECommerceBundle:claim:index.html.twig', array(
+        return $this->render('BackOfficeBundle:Claim:index.html.twig', array(
             'claims' => $claims,
         ));
     }
@@ -31,6 +31,41 @@ class ClaimController extends Controller
      * Creates a new claim entity.
      *
      */
+    public function newAction(Request $request)
+    {
+        $claim = new Claim();
+        $form = $this->createForm('ECommerceBundle\Form\ClaimType', $claim);
+        $form->handleRequest($request);
+        $content =$request->getContent();
+        $data = json_decode($content, true);
+
+
+
+        if($data["ajax"]=="true")
+        {
+            $claim->setFirstname($data["firstName"]);
+            $claim->setTel($data["tel"]);
+            $claim->setDescription($data["message"]);
+            $claim->setType($data["type"]);
+            $claim->setEmail($data["email"]);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($claim);
+            $em->flush($claim);
+
+        }
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($claim);
+            $em->flush($claim);
+
+            return $this->redirectToRoute('claim_show', array('id' => $claim->getId()));
+        }
+
+        return $this->render('ECommerceBundle:claim:new.html.twig', array(
+            'claim' => $claim,
+            'form' => $form->createView(),
+        ));
+    }
 
     /**
      * Finds and displays a claim entity.
@@ -62,7 +97,7 @@ class ClaimController extends Controller
             return $this->redirectToRoute('claim_edit', array('id' => $claim->getId()));
         }
 
-        return $this->render('ECommerceBundle:claim:edit.html.twig', array(
+        return $this->render('BackOfficeBundle:Claim:edit.html.twig', array(
             'claim' => $claim,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -99,6 +134,7 @@ class ClaimController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('claim_delete', array('id' => $claim->getId())))
             ->setMethod('DELETE')
-            ->getForm();
+            ->getForm()
+            ;
     }
 }
