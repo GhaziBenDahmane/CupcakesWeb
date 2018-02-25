@@ -2,9 +2,9 @@
 
 namespace EventBundle\Entity;
 
-use AncaRebeca\FullCalendarBundle\Event\CalendarEvent;
+
 use Doctrine\ORM\Mapping as ORM;
-use AncaRebeca\FullCalendarBundle\Model\FullCalendarEvent;
+use fadosProduccions\fullCalendarBundle\Entity\Event as BaseEvent;
 
 
 /**
@@ -13,7 +13,7 @@ use AncaRebeca\FullCalendarBundle\Model\FullCalendarEvent;
  * @ORM\Table(name="event")
  * @ORM\Entity(repositoryClass="EventBundle\Repository\EventRepository")
  */
-class Event extends CalendarEvent
+class Event extends BaseEvent
 {
 
     /**
@@ -25,19 +25,7 @@ class Event extends CalendarEvent
      */
     private $id;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="starting_date", type="date")
-     */
-    private $startingDate;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="ending_date", type="date")
-     */
-    private $endingDate;
 
     /**
      * @var int
@@ -97,54 +85,6 @@ class Event extends CalendarEvent
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set startingDate
-     *
-     * @param \DateTime $dateDebut
-     *
-     * @return Event
-     */
-    public function setStartingDate($startingDate)
-    {
-        $this->startingDate = $startingDate;
-
-        return $this;
-    }
-
-    /**
-     * Get startingDate
-     *
-     * @return \DateTime
-     */
-    public function getStartingDate()
-    {
-        return $this->startingDate;
-    }
-
-    /**
-     * Set endingDate
-     *
-     * @param \DateTime $endingDate
-     *
-     * @return Event
-     */
-    public function setEndingDate($endingDate)
-    {
-        $this->endingDate = $endingDate;
-
-        return $this;
-    }
-
-    /**
-     * Get endingDate
-     *
-     * @return \DateTime
-     */
-    public function getEndingDate()
-    {
-        return $this->endingDate;
     }
 
     /**

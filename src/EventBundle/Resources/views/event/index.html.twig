@@ -38,8 +38,8 @@
                     <tbody>
                     {% for event in events %}
                         <tr id="addr{{ event.id }}">
-                            <td>{% if event.startingDate %}{{ event.startingDate|date('Y-m-d') }}{% endif %}</td>
-                            <td>{% if event.endingDate %}{{ event.endingDate|date('Y-m-d') }}{% endif %}</td>
+                            <td>{% if event.StartDatetime %}{{ event.StartDatetime|date('Y-m-d') }}{% endif %}</td>
+                            <td>{% if event.EndDatetime %}{{ event.EndDatetime|date('Y-m-d') }}{% endif %}</td>
                             <td>{{ event.nbPerson }}</td>
                             <td>{{ event.nbTable }}</td>
                             <td>{% if event.band %}Yes{% else %}No{% endif %}</td>

@@ -24,6 +24,7 @@
         "ancarebeca/full-calendar-bundle": "^5.0",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
+        "fados-produccions/full-calendar-bundle": "dev-master",
         "friendsofsymfony/user-bundle": "~2.0",
         "incenteev/composer-parameter-handler": "^2.0",
         "knplabs/knp-paginator-bundle": "^2.7",
@@ -34,7 +35,8 @@
         "symfony/swiftmailer-bundle": "^2.3.10",
         "symfony/symfony": "3.3.*",
         "twig/twig": "^1.0||^2.0",
-        "vresh/twilio-bundle": "dev-master"
+        "vresh/twilio-bundle": "dev-master",
+        "friendsofsymfony/jsrouting-bundle": "~1.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

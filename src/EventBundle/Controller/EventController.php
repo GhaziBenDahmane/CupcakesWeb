@@ -45,8 +45,6 @@ class EventController extends Controller
     public function newAction(Request $request)
     {
         $event = new Event();
-        $form = $this->createForm('EventBundle\Form\EventType', $event);
-        $form->handleRequest($request);
         $content =$request->getContent();
         $data = json_decode($content, true);
 
@@ -60,8 +58,9 @@ class EventController extends Controller
             $nbTable =$data["nbTable"];
             $band =$data["band"];
             $cost =$data["cost"];
-            $event->setStartingDate($startingDate);
-            $event->setEndingDate($endingDate);
+            $event->setTitle("Event Exempleup");
+            $event->setStartDatetime($startingDate);
+            $event->setEndDatetime($endingDate);
             $event->setNbPerson($nbPerson);
             $event->setNbTable($nbTable);
             $event->setBand($band);
@@ -71,17 +70,11 @@ class EventController extends Controller
             $em->flush($event);
 
         }
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($event);
-            $em->flush($event);
 
-            return $this->redirectToRoute('event_show', array('id' => $event->getId()));
-        }
 
         return $this->render('EventBundle:event:new.html.twig', array(
-            'event' => $event,
-            'form' => $form->createView(),
+            'event' => $event
+
         ));
     }
 
