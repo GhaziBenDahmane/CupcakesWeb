@@ -23,13 +23,7 @@ claim_edit:
     path:     /{id}/edit
     defaults: { _controller: "BackOfficeBundle:Claim:edit" }
 
-claim_delete:
-    path:     /{id}/delete
-    defaults: { _controller: "BackOfficeBundle:Actuality:delete" }
-    methods:  [GET, DELETE]
-claim_delete:
-    path:     /{id}/delete
-    defaults: { _controller: "BackOfficeBundle:Actuality:delete" }
-    methods:  [GET, DELETE]
-
+_back_office_claim_delete:
+    path:     /delete/{id}
+    defaults: { _controller: "BackOfficeBundle:Claim:remove" }
 

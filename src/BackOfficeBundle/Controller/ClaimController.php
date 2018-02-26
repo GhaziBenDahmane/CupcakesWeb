@@ -42,11 +42,9 @@ class ClaimController extends Controller
             $claim->setAnswered(true);
             $claim->setAnswer($request->request->get('answer'));
             var_dump($claim);
-            return new Response('lol');
-
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('claim_edit', array('id' => $claim->getId()));
+            return new Response('true');
         }
 
         return $this->render('BackOfficeBundle:Claim:edit.html.twig', array(
@@ -75,13 +73,9 @@ class ClaimController extends Controller
             $claim->getClient()->getPhone(), // Text any number
             "Your Claim was answered "
         );
-        return new Response($claim->getClient()->getPhone());
+        return new Response($claim->getClient());
     }
 
-    /**
-     * Deletes a claim entity.
-     *
-     */
     public function removeAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
@@ -89,35 +83,7 @@ class ClaimController extends Controller
             ->find($id);
         $em->remove($claim);
         $em->flush($claim);
-        return new Response(true);
+        return new Response('done');
     }
 
-    public function deleteAction(Request $request, Claim $claim)
-    {
-        $form = $this->createDeleteForm($claim);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($claim);
-            $em->flush($claim);
-        }
-
-        return $this->redirectToRoute('claim_index');
-    }
-
-    /**
-     * Creates a form to delete a claim entity.
-     *
-     * @param Claim $claim The claim entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Claim $claim)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('claim_delete', array('id' => $claim->getId())))
-            ->setMethod('DELETE')
-            ->getForm();
-    }
 }

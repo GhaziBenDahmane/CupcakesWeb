@@ -64,7 +64,7 @@
                                             </tfoot>
                                             <tbody>
                                             {% for claim in claims %}
-                                                <tr role="row" class="even">
+                                                <tr role="row" class="even" id="{{ claim.id }}">
                                                     <td class="sorting_1">{{ claim.id }}</td>
                                                     <td>{{ claim.client }}</td>
                                                     <td>{{ claim.type }}</td>
@@ -104,8 +104,10 @@
                                                                         <button type="button" class="btn btn-default "
                                                                                 data-dismiss="modal">Cancel
                                                                         </button>
-                                                                        <a href="{{ path ('product_delete',{'id': claim.id}) }}"
-                                                                           data-toggle="modal" class="btn btn-danger"
+
+                                                                        <a href="#"
+                                                                           onclick="delete_claim({{ claim.id }})"
+                                                                           data-dismiss="modal" class="btn btn-danger"
                                                                            id="lien">Delete</a>
                                                                     </div>
                                                                 </div>
@@ -210,5 +212,18 @@
     <script src="{{ asset('assets/back/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
     <script src="{{ asset('assets/back/js/pages/table-data.js') }}"></script>
     <script src="{{ asset('assets/back/js/script.js') }}"></script>
+    <script>
+        function delete_claim(id) {
+            axios.get("/admin/claim/delete/" + id)
+                .then(function (response) {
+                        console.log(response)
+                        $("#" + id).remove();
+                    }
+                ).catch(function (reason) {
+                console.log(reason);
+            })
+
+        }
+    </script>
 {% endblock %}
 

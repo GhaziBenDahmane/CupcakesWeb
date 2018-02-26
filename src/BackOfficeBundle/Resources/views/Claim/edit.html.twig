@@ -36,8 +36,10 @@
                                     Cancel
                                 </button>
                             </td>
-                            <td id="retourServ{{ claim.id }}"></td>
                         </tr>
+                        <div id="retourServ{{ claim.id }}">
+
+                        </div>
 
                     </table>
 
@@ -54,15 +56,14 @@
             answer: $('#answer' + id).val()
 
         }).then(function (response) {
-            console.log(id);
-            $("answeredBy" + id).val(response.data);
-            $("answered" + id).val('Yes');
-            $('.retourServ' + id).append(' ' +
-                ' <strong>Reclamation submited!</strong>  ');
-            console.log($('.retourServ' + id));
-            $('.retourServ' + id).attr("class", "alert alert-success");
+            $("#answeredBy" + id).html(response.data);
+            $("#answered" + id).html('Yes');
+            console.log("#retourServ{{ claim.id }}");
+            $("#retourServ{{ claim.id }}").html('<div class="alert alert-success"><strong>Success!</strong></div>')
+
+
         }).catch(function (reason) {
-            console.log(reason);
+            $("#retourServ{{ claim.id }}").html('<div class="alert alert-danger"> <strong>Error!</strong></div>')
         })
     }
 </script>
