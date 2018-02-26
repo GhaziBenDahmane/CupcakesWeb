@@ -31,7 +31,7 @@ class Claim
     /**
      * @var string
      *
-     * @ORM\Column(name="answer", type="text")
+     * @ORM\Column(name="answer", type="text",nullable=true)
      */
     private $answer;
 
@@ -85,6 +85,26 @@ class Claim
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User" , inversedBy="id")
      */
     private $client;
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User" , inversedBy="id")
+     */
+    private $answeredBy;
+
+    /**
+     * @return mixed
+     */
+    public function getAnsweredBy()
+    {
+        return $this->answeredBy;
+    }
+
+    /**
+     * @param mixed $answeredBy
+     */
+    public function setAnsweredBy($answeredBy)
+    {
+        $this->answeredBy = $answeredBy;
+    }
 
 
     /**
