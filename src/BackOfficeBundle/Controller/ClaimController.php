@@ -5,6 +5,7 @@ namespace BackOfficeBundle\Controller;
 use ECommerceBundle\Entity\Claim;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Claim controller.
@@ -27,14 +28,22 @@ class ClaimController extends Controller
         ));
     }
 
-    
-    public function editAction(Request $request, Claim $claim)
+
+    public function editAction(Request $request, Claim $claim, $id)
     {
-        $deleteForm = $this->createDeleteForm($claim);
         $editForm = $this->createForm('ECommerceBundle\Form\ClaimType', $claim);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            var_dump($id);
+            $claim = $em->getRepository(Claim::class)
+                ->find($id);
+            $claim->setAnswered(true);
+            $claim->setAnswer($request->request->get('answer'));
+            var_dump($claim);
+            return new Response('lol');
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('claim_edit', array('id' => $claim->getId()));
@@ -42,15 +51,47 @@ class ClaimController extends Controller
 
         return $this->render('BackOfficeBundle:Claim:edit.html.twig', array(
             'claim' => $claim,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'edit_form' => $editForm->createView()
         ));
+    }
+
+    public function answerAction($id, Request $request)
+    {
+        $content = $request->getContent();
+        $data = json_decode($content, true);
+
+        $em = $this->getDoctrine()->getManager();
+        $claim = $em->getRepository(Claim::class)
+            ->find($id);
+//        $claim->getClient()->getPhone()
+        $claim->setAnswered(true);
+        $claim->setAnswer($data['answer']);
+        $claim->setAnsweredBy($this->getUser());
+        $em->persist($claim);
+        $em->flush();
+//        $twilio = $this->get('twilio.api');
+//
+//        $message = $twilio->account->messages->sendMessage(
+//            '+19283230909 ', // From a Twilio number in your account
+//            $this->getUser()->getPhone(), // Text any number
+//            "Your Claim was answered "
+//        );
+        return new Response($this->getUser()->getPhone());
     }
 
     /**
      * Deletes a claim entity.
      *
      */
+    public function removeAction($id, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $claim = $em->getRepository(Claim::class)
+            ->find($id);
+        $em->remove($claim);
+        $em->flush($claim);
+        return new Response(true);
+    }
     public function deleteAction(Request $request, Claim $claim)
     {
         $form = $this->createDeleteForm($claim);
@@ -77,7 +118,6 @@ class ClaimController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('claim_delete', array('id' => $claim->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-            ;
+            ->getForm();
     }
 }

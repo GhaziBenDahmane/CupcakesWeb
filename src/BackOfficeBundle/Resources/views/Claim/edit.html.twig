@@ -14,20 +14,12 @@
                 </div>
                 <div class="modal-body">
 
-                    {{ form_start(edit_form) }}
-                    <div class="form-group">
-                        <label for="name">firstname</label>
-                        {{ form_widget(edit_form.client,{'attr':{'class':'form-control'}} ) }}
-                    </div>
-                    <div class="form-group">
-                        <label for="photo"> Photo</label>
-                        {{ form_widget(edit_form.type,{'attr':{'class':'form-control'}} ) }}
-                    </div>
-                    <div class="form-group">
-                        <label for="description"> Description</label>
-                        {{ form_widget(edit_form.description,{'attr':{'class':'form-control'}} ) }}
-                    </div>
-
+                    <form action="">
+                        <div class="form-group">
+                            <label for="name">Answer</label>
+                            <input type="text" class="form-control" aria-rowspan="5" id="answer{{ claim.id }}" required>
+                        </div>
+                    </form>
                 </div>
 
                 <div class="modal-footer">
@@ -35,24 +27,44 @@
                         <tr>
 
                             <td>
-                                {{ form_row(edit_form.submit,{'attr':{'class':'btn btn-primary'}}) }}
-
+                                <button type="button" class="btn btn-parimay" onclick="ajout({{ claim.id }})">
+                                    Answer
+                                </button>
                             </td>
                             <td>
-                                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="ajout()">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
                                     Cancel
                                 </button>
                             </td>
+                            <td id="retourServ{{ claim.id }}"></td>
                         </tr>
+
                     </table>
 
                 </div>
-                {{ form_rest(edit_form) }}
-                {{ form_end(edit_form) }}
 
             </div>
         </div>
     </div>
 </div>
+<script>
+    function ajout(id) {
+        console.log($('#answer' + id).val());
+        axios.post("/admin/claim/answer/" + id, {
+            answer: $('#answer' + id).val()
+
+        }).then(function (response) {
+            console.log(id);
+            $("answeredBy" + id).val(response.data);
+            $("answered" + id).val('Yes');
+            $('.retourServ' + id).append(' ' +
+                ' <strong>Reclamation submited!</strong>  ');
+            console.log($('.retourServ' + id));
+            $('.retourServ' + id).attr("class", "alert alert-success");
+        }).catch(function (reason) {
+            console.log(reason);
+        })
+    }
+</script>
 
 

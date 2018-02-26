@@ -2,10 +2,9 @@ claim_index:
     path:     /
     defaults: { _controller: "BackOfficeBundle:Claim:index" }
 
-claim_show:
-    path:     /{id}/show
-    defaults: { _controller: "BackOfficeBundle:Claim:show" }
-    methods:  GET
+claim_answer:
+    path:     /answer/{id}
+    defaults: { _controller: "BackOfficeBundle:Claim:answer" }
 
 claim_new:
     path:     /new
@@ -22,8 +21,12 @@ claim_update:
 
 claim_edit:
     path:     /{id}/edit
-    defaults: { _controller: "BackOfficeBundle:Actuality:edit" }
+    defaults: { _controller: "BackOfficeBundle:Claim:edit" }
 
+claim_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BackOfficeBundle:Actuality:delete" }
+    methods:  [GET, DELETE]
 claim_delete:
     path:     /{id}/delete
     defaults: { _controller: "BackOfficeBundle:Actuality:delete" }

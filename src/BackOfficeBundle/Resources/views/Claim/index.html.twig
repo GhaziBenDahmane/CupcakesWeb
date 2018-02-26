@@ -43,6 +43,7 @@
                                                 <th>Type</th>
                                                 <th>Description</th>
                                                 <th>answered</th>
+                                                <th>answered by</th>
                                                 <th>Update</th>
                                                 <th>Delete</th>
                                                 <th>Informations</th>
@@ -55,6 +56,7 @@
                                                 <th>Type</th>
                                                 <th>Description</th>
                                                 <th>answered</th>
+                                                <th>answered by</th>
                                                 <th>Update</th>
                                                 <th>Delete</th>
                                                 <th>Informations</th>
@@ -63,13 +65,12 @@
                                             <tbody>
                                             {% for claim in claims %}
                                                 <tr role="row" class="even">
-                                                    <td class="sorting_1"><a
-                                                                href="{{ path('claim_show', { 'id': claim.id }) }}">{{ claim.id }}</a>
-                                                    </td>
+                                                    <td class="sorting_1">{{ claim.id }}</td>
                                                     <td>{{ claim.client }}</td>
                                                     <td>{{ claim.type }}</td>
                                                     <td>{{ claim.description }}</td>
-                                                    <td>{{ claim.answered ? 'Yes' : 'No' }}</td>
+                                                    <td id="answered{{ claim.id }}">{{ claim.answered ? 'Yes' : 'No' }}</td>
+                                                    <td id="answeredBy{{ claim.id }}">{{ claim.answeredBy }}</td>
                                                     <td>
                                                         {{ render(controller('BackOfficeBundle:Claim:edit',{'id':claim.id})) }}
                                                     </td>
@@ -153,6 +154,18 @@
                                                                                         <strong>Answered: </strong>{{ claim.answered ? 'Yes' : 'No' }}
                                                                                     </li>
                                                                                     <br>
+
+                                                                                    {% if claim.answered %}
+                                                                                        <li>
+                                                                                            <strong>Answered
+                                                                                                By: </strong>
+                                                                                            {{ claim.answeredBy }}
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <strong>Answer: </strong>{{ claim.answer }}
+                                                                                        </li>
+
+                                                                                    {% endif %}
                                                                                 </ul>
 
                                                                             </div>

@@ -53,7 +53,7 @@ class ClaimController extends Controller
                 '+19283230909 ', // From a Twilio number in your account
                 '+21626879552', // Text any number
                 "New claim From " . $this->getUser()
-        );
+            );
 
 
         }
