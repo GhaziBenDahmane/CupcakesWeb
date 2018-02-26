@@ -28,11 +28,8 @@ class SignupType extends AbstractType
         $builder
             ->add('username', TextType::class, array('attr' => array('class' => 'form-control')))
             ->add('email', EmailType::class, array('attr' => array('class' => 'form-control')))
-            ->add('plainPassword', RepeatedType::class, array(
-                'type' => PasswordType ::class,
-                'first_options' => array('label' => 'Mot de passe', 'attr' => array('class' => 'form-control')),
-                'second_options' => array('label' => 'Répéter Mot de passe', 'attr' => array('class' => 'form-control')),
-            ))
+            ->add('plainPassword', PasswordType::class)
+            ->add('phone')
             ->add('SignUp', SubmitType::class, array('attr' => array('class' => 'form-control')));
     }
     public function configureOptions(OptionsResolver $resolver)
