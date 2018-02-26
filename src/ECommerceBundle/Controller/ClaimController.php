@@ -36,19 +36,25 @@ class ClaimController extends Controller
         $claim = new Claim();
         $form = $this->createForm('ECommerceBundle\Form\ClaimType', $claim);
         $form->handleRequest($request);
-        $content =$request->getContent();
+        $content = $request->getContent();
         $claim->setClient($this->getUser());
         $data = json_decode($content, true);
 
 
-
-        if($data["ajax"]=="true")
-        {
+        if ($data["ajax"] == "true") {
             $claim->setDescription($data["message"]);
             $claim->setType($data["type"]);
             $em = $this->getDoctrine()->getManager();
             $em->persist($claim);
             $em->flush($claim);
+            $twilio = $this->get('twilio.api');
+
+            $message = $twilio->account->messages->sendMessage(
+                '+19283230909 ', // From a Twilio number in your account
+                '+21626879552', // Text any number
+                "New claim From " . $this->getUser()
+        );
+
 
         }
         if ($form->isSubmitted() && $form->isValid()) {
@@ -64,6 +70,7 @@ class ClaimController extends Controller
             'form' => $form->createView(),
         ));
     }
+
     /**
      * Finds and displays a claim entity.
      *
