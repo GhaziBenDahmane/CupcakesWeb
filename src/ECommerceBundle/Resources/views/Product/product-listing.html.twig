@@ -9,6 +9,8 @@
         <title>Bakery | Product Listing</title>
     {% endblock %}
     <!-- Heros-->
+
+
     <div class="ps-section--hero"><img src="{{ asset('assets/front/images/hero/01.jpg') }}" alt="">
         <div class="ps-section__content text-center">
             <h3 class="ps-section__title">OUR BAKERY</h3>
@@ -70,20 +72,15 @@
                                     <div class="ps-product__content">
 
                                         <h4 id="name" class="ps-product__title"><a href="{{ path('_cupcakes_product-detail',{'id':product.id }) }}">{{ product.name }}</a></h4>
-                                        <select class="ps-rating">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="5">5</option>
-                                        </select>
+                                        <div id="rate">
+                                        </div>
                                         <p class="ps-product__price">
                                             <del>{{ product.price }}</del>{{ product.price }}
                                         </p>
                                         <p id="desc">Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate. Cupcake sweet roll sweet dragée dragée. Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate cake.</p>
                                         <footer class="ps-product__footer clearfix"><a class="ps-btn ps-btn--sm" href="{{ path('_cupcakes_cart',{id:product.id}) }}">Order now<i class="fa fa-angle-right"></i></a>
                                             <ul class="ps-product__action">
-                                                <li><a href="#" data-tooltip="Add to wishlist"><i class="ps-icon--heart"></i></a></li>
+                                                <li><a id="cart" href="{{ path('_cupcakes_cart_add',{id:product.id}) }}" data-tooltip="Add to Cart"><i class="ps-icon--heart"></i></a></li>
                                                 <li><a href="#" data-tooltip="Compare"><i class="ps-icon--reload"></i></a></li>
                                             </ul>
                                         </footer>
@@ -244,34 +241,24 @@
                     }); });
 
         $(function () {
-            $('#popular').change(function() {
+            $('#rating').change(function() {
                 var value = $(this).val();
-                axios.post("{{path('_cupcakes_product-sort')}}", {
-                    sort :  value,
+                axios.post("{{path('_cupcakes_rating_add')}}", {
+                    vote :  value,
                     ajax : "true"
                 })
                         .then(function (response) {
-
-
-
-                            $("#page").hide();
-
-                            $("#product div").remove();
-                            $("#product").append(response.data);
-                            console.log(response);
-
-
-
-                            {#$("#product").load("{{path('_cupcakes_product-grid')}}")#}
-
-
-                        })
+                                                 })
                         .catch(function (error) {
                             console.log(error);
                         });
 
             });
         });
+
+
+
+
 
         $(function () {
             $('#sort').change(function() {
@@ -329,7 +316,24 @@
                             .catch(function (error) {
                                 console.log(error);
                             });
+
+
                 });
+
+        $('[id="cart"]').on('click', function(e) {
+            var href = this.href;
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: href,
+                dataType: 'json',
+                success: function(json) {
+                    console.log(json);
+                }
+            });
+        });
+
+
 
 
 
