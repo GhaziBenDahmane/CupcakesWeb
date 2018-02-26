@@ -63,20 +63,19 @@ class ClaimController extends Controller
         $em = $this->getDoctrine()->getManager();
         $claim = $em->getRepository(Claim::class)
             ->find($id);
-//        $claim->getClient()->getPhone()
         $claim->setAnswered(true);
         $claim->setAnswer($data['answer']);
         $claim->setAnsweredBy($this->getUser());
         $em->persist($claim);
         $em->flush();
-//        $twilio = $this->get('twilio.api');
-//
-//        $message = $twilio->account->messages->sendMessage(
-//            '+19283230909 ', // From a Twilio number in your account
-//            $this->getUser()->getPhone(), // Text any number
-//            "Your Claim was answered "
-//        );
-        return new Response($this->getUser()->getPhone());
+        $twilio = $this->get('twilio.api');
+
+        $message = $twilio->account->messages->sendMessage(
+            '+19283230909 ', // From a Twilio number in your account
+            $claim->getClient()->getPhone(), // Text any number
+            "Your Claim was answered "
+        );
+        return new Response($claim->getClient()->getPhone());
     }
 
     /**
@@ -92,6 +91,7 @@ class ClaimController extends Controller
         $em->flush($claim);
         return new Response(true);
     }
+
     public function deleteAction(Request $request, Claim $claim)
     {
         $form = $this->createDeleteForm($claim);
