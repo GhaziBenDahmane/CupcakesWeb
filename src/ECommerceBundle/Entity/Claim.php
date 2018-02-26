@@ -31,6 +31,30 @@ class Claim
     /**
      * @var string
      *
+     * @ORM\Column(name="answer", type="text")
+     */
+    private $answer;
+
+    /**
+     * @return string
+     */
+    public function getAnswer()
+    {
+        return $this->answer;
+    }
+
+    /**
+     * @param string $answer
+     */
+    public function setAnswer($answer)
+    {
+        $this->answer = $answer;
+    }
+
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="type", type="string", length=255)
      */
     private $type;
