@@ -9,18 +9,25 @@ use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
-    /**
-     * @Route("/", name="homepage")
-     */
+
     public function indexAction(Request $request)
     {
-/*      $twilio = $this->get('twilio.api');
-        $message = $twilio->account->messages->sendMessage(
-            '+19283230909 ', // From a Twilio number in your account
-            '+21626879552', // Text any number
-            "test message!"
-        );*/
         return $this->render('AppBundle::index.html.twig');
+    }
+
+    public function notifAction(Request $request)
+    {
+        $manager = $this->get('mgilet.notification');
+        $notif = $manager->createNotification('Hello world !');
+        $notif->setMessage('This a notification.');
+        $notif->setLink('http://symfony.com/');
+        // or the one-line method :
+        // $manager->createNotification('Notification subject','Some random text','http://google.fr');
+        $manager->addNotification(array($this->getUser()), $notif, true);
+        $notifs=$manager->getNotifications($this->getUser());
+//        return new Response($notifs);
+        return $this->render('AppBundle::notifs.html.twig',array('notifs'=>$notifs));
+        return $this->redirectToRoute('_cupcakes_homepage');
     }
 
 }
