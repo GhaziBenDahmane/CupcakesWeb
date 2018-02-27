@@ -27,7 +27,7 @@
 
                 <div id="main-wrapper">
                     <div class="row">
-                        <select name="" id="" onchange="filter_claims(this)">
+                        <select id="filterclaims" onchange="filter_claims()">
                             <option value="ALL">All</option>
                             <option value="ANSWERED">Answered only</option>
                             <option value="NOTANSWERED">Not answered only</option>
@@ -105,7 +105,7 @@
 
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-default "
+                                                                        <button type="button" class="btn btn-default " onclick="filter_claims()"
                                                                                 data-dismiss="modal">Cancel
                                                                         </button>
 
@@ -217,9 +217,9 @@
     <script src="{{ asset('assets/back/js/pages/table-data.js') }}"></script>
     <script src="{{ asset('assets/back/js/script.js') }}"></script>
     <script>
-        function filter_claims(e) {
+        function filter_claims() {
             console.log();
-            axios.post('/admin/claim/filter', {'filter': e.value}).then(function (res) {
+            axios.post('/admin/claim/filter', {'filter': $('#filterclaims').val()}).then(function (res) {
                 $('tbody').html(res.data);
             })
         }
