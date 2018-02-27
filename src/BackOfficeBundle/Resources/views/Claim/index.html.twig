@@ -27,7 +27,11 @@
 
                 <div id="main-wrapper">
                     <div class="row">
-
+                        <select name="" id="" onchange="filter_claims(this)">
+                            <option value="ALL">All</option>
+                            <option value="ANSWERED">Answered only</option>
+                            <option value="NOTANSWERED">Not answered only</option>
+                        </select>
                         {#{{ render(controller('ECommerceBundle:Product:new')) }}<br><br>#}
                         <div class="col-md-12">
                             <div class="panel panel-white">
@@ -213,6 +217,13 @@
     <script src="{{ asset('assets/back/js/pages/table-data.js') }}"></script>
     <script src="{{ asset('assets/back/js/script.js') }}"></script>
     <script>
+        function filter_claims(e) {
+            console.log();
+            axios.post('/admin/claim/filter', {'filter': e.value}).then(function (res) {
+                $('tbody').html(res.data);
+            })
+        }
+
         function delete_claim(id) {
             axios.get("/admin/claim/delete/" + id)
                 .then(function (response) {

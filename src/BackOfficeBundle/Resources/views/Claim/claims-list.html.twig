@@ -1,0 +1,125 @@
+{% for claim in claims %}
+    <tr role="row" class="even" id="{{ claim.id }}">
+        <td class="sorting_1">{{ claim.id }}</td>
+        <td>{{ claim.client }}</td>
+        <td>{{ claim.type }}</td>
+        <td>{{ claim.description }}</td>
+        <td id="answered{{ claim.id }}">{{ claim.answered ? 'Yes' : 'No' }}</td>
+        <td id="answeredBy{{ claim.id }}">{{ claim.answeredBy }}</td>
+        <td>
+            {{ render(controller('BackOfficeBundle:Claim:edit',{'id':claim.id})) }}
+        </td>
+        <td>
+            <a href="" class="btn btn-danger" data-placement="top" title=""
+               data-original-title="Supprimer" data-toggle="modal"
+               data-target="#deleteModal{{ claim.id }}"><span
+                        class="glyphicon glyphicon-trash"
+                        aria-hidden="true"></span> </a>
+            <div class="modal fade" id="deleteModal{{ claim.id }}"
+                 tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <br><br><br><br>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close"
+                                    data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title">Deletion confirmation
+                                :</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p><span>Are you sure you want to delete <a
+                                            href="#"></a> {{ claim.id }}
+                                    ? </span></p>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default "
+                                    data-dismiss="modal">Cancel
+                            </button>
+
+                            <a href="#"
+                               onclick="delete_claim({{ claim.id }})"
+                               data-dismiss="modal" class="btn btn-danger"
+                               id="lien">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </td>
+        <td>
+
+            <button type="button" class="btn-info btn" data-toggle="modal"
+                    data-target="#myModal{{ claim.id }}"><i
+                        class="fa fa-plus"> </i></button>
+
+            <div class="modal fade" id="myModal{{ claim.id }}" tabindex="-1"
+                 role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <br><br><br><br>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close"
+                                    data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                Informations :</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+
+                                <div class="col-lg-6">
+
+                                    <ul>
+                                        <li>
+                                            <strong>Client: </strong> {{ claim.client }}
+                                        </li>
+                                        <br>
+                                        <li>
+                                            <strong>Type: </strong> {{ claim.type }}
+                                        </li>
+                                        <br>
+                                        <li>
+                                            <strong>Description: </strong>{{ claim.description }}
+                                        </li>
+                                        <br>
+                                        <li>
+                                            <strong>Answered: </strong>{{ claim.answered ? 'Yes' : 'No' }}
+                                        </li>
+                                        <br>
+
+                                        {% if claim.answered %}
+                                            <li>
+                                                <strong>Answered
+                                                    By: </strong>
+                                                {{ claim.answeredBy }}
+                                            </li><br>
+                                            <li>
+                                                <strong>Answer: </strong>{{ claim.answer }}
+                                            </li>
+
+                                        {% endif %}
+                                    </ul>
+
+                                </div>
+                                <div class="col-lg-6">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default"
+                                    data-dismiss="modal">Close
+                            </button>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+{% endfor %}

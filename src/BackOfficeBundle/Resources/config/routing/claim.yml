@@ -1,6 +1,9 @@
 claim_index:
     path:     /
     defaults: { _controller: "BackOfficeBundle:Claim:index" }
+claim_filter:
+    path:     /filter
+    defaults: { _controller: "BackOfficeBundle:Claim:filter" }
 
 claim_answer:
     path:     /answer/{id}

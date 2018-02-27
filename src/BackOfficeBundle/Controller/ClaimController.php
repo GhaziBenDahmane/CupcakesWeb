@@ -28,6 +28,26 @@ class ClaimController extends Controller
         ));
     }
 
+    public function filterAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('ECommerceBundle:Claim');
+        $content = $request->getContent();
+        $data = json_decode($content, true);
+        if ($data["filter"] == "ALL") {
+            $claims = $repo->findAll();
+            return $this->render('BackOfficeBundle:Claim:claims-list.html.twig', array(
+                'claims' => $claims,
+            ));
+        }
+
+        $claims = $repo
+            ->findBy(array('answered' => $data["filter"] == "ANSWERED"));
+        return $this->render('BackOfficeBundle:Claim:claims-list.html.twig', array(
+            'claims' => $claims,
+        ));
+    }
+
 
     public function editAction(Request $request, Claim $claim, $id)
     {
