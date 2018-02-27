@@ -38,11 +38,23 @@ _cupcakes_product-listing_By_Price:
     path:     /product-listing/{price1,price2}
     defaults: { _controller: ECommerceBundle:Product:showProductsByPrice}
 _cupcakes_cart:
-    path:     /Cart/{id}
-    defaults: { _controller: ECommerceBundle:Default:Cart,id:'33' }
+    path:     /Cart
+    defaults: { _controller: ECommerceBundle:Cart:showCart }
 _cupcakes_order_form:
     path:     /OrderForm
     defaults: { _controller: ECommerceBundle:Default:OrderForm }
 _cupcakes_checkout:
     path:     /Checkout
     defaults: { _controller: ECommerceBundle:Default:Checkout }
+_cupcakes_rating:
+    path:     /show_rating/{id}
+    defaults: { _controller: ECommerceBundle:Rating:showRating }
+_cupcakes_rating_add:
+    path:     /add_rating
+    defaults: { _controller: ECommerceBundle:Rating:addRating }
+_cupcakes_cart_add:
+    path:     /add_to_cart/{id}
+    defaults: { _controller: ECommerceBundle:Cart:addToCart }
+_cupcakes_cart_remove:
+    path:     /remove_cart/{id}
+    defaults: { _controller: ECommerceBundle:Cart:removeFromCart }

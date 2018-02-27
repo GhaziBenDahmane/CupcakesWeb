@@ -1,0 +1,3 @@
+admin_coupon_index:
+    path:     /
+    defaults: { _controller: "BackOfficeBundle:Coupon:index" }

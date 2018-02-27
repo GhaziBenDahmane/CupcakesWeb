@@ -1,6 +1,9 @@
 app:
     resource: "@AppBundle/Resources/config/routing.yml"
     prefix:   /
+formation:
+    resource: "@FormationBundle/Resources/config/routing.yml"
+    prefix:   /
 
 training:
     resource: "@TrainingBundle/Resources/config/routing.yml"
@@ -39,3 +42,6 @@ fados_fullcalendar:
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
+mgilet_notifications:
+    resource: "@MgiletNotificationBundle/Controller/"
+    prefix: /notifications

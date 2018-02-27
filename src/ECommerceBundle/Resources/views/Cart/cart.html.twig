@@ -23,8 +23,8 @@
         <div class="container">
             <div class="ps-cart-listing">
                 <p class="hidden-lg"><i>Slide right to view</i></p>
-                <div class="table-responsive">
-                    <table class="table">
+                <div id="table" class="table-responsive">
+                    <table  class="table">
                         <thead>
                         <tr>
                             <th>All Products</th>
@@ -33,27 +33,33 @@
                             <th>Total</th>
                             <th></th>
                         </tr>
-                        </thead>
-                        <tbody>
 
-                        <tr id="a">
+                        </thead>
+
+                        {% for cart in carts  %}
+                        <tbody>
+                        <tr id="{{ cart.id }}">
                             <td>
-                                <div class="ps-product--cart"><img src="{{ asset('assets/front/images/cake/img-cake-7.jpg') }}" alt=""><a href="{{ path('_cupcakes_product-detail') }}">{{ products.name }}</a></div>
+                                <div class="ps-product--cart"><img src="{{ asset('assets/front/images/cake/img-cake-7.jpg') }}" alt=""><a href="{{ path('_cupcakes_product-detail') }}">{{ cart.product.name }}</a></div>
                             </td>
-                            <td>{{ products.price }}</td>
+                            <td><div id="price{{ cart.id }}">{{ cart.product.price }}</div></td>
                             <td>
                                 <div class="form-group--number">
-                                    <button class="minus"><span>-</span></button>
-                                    <input class="form-control" type="text" value="1">
-                                    <button class="plus"><span>+</span></button>
+                                    <button id="{{ cart.id }}" class="minus" onclick="sousAction(this.id);"><span>-</span></button>
+                                    <input id="q{{ cart.id }}" class="form-control" type="text" value="1">
+                                    <button id="{{ cart.id }}" class="plus" onclick="addAction(this.id)"><span>+</span></button>
                                 </div>
                             </td>
-                            <td><span class="total-row">{{ products.price }}</span></td>
+                            <td><span id="total{{ cart.id }}" class="total-row" >{{ cart.product.price }}</span></td>
                             <td>
-                                <div id="remove" class="ps-cart-listing__remove"></div>
+
+                                <a id="remove" href="{{ path('_cupcakes_cart_remove',{id:cart.id }) }}"> <div id="remove"  class="ps-cart-listing__remove"> </div></a>
+
                             </td>
                         </tr>
-                        </tbody>
+                        <tbody>
+
+                        {% endfor %}
                     </table>
                 </div>
                 <div class="ps-cart__process">
@@ -70,7 +76,7 @@
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 ">
                             <div class="ps-cart__total">
-                                <p>Total Price: <span id="total">{{ products.price }}</span></p>
+                                <p>Total Price: <span id="total">{{ price }}</span></p>
                                 <button class="ps-btn ps-btn--sm ps-btn--fullwidth">Process to checkout</button>
                             </div>
                         </div>
@@ -82,25 +88,55 @@
     <script type="text/javascript" src="{{ asset('jquery.js') }}"></script>
     <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/javascript">
-        $("#remove").click(function(){
 
-            axios.post("{{path('_cupcakes_cart',{id:products.id})}}", {
+       $(function () {
+           $('[id="remove"]').on('click', function(e) {
+               location.reload();
+               var href = this.href;
+               e.preventDefault();
+               $.ajax({
+                   type: "POST",
+                   url: href,
+                   dataType: 'json',
+                   success: function(json) {
 
-                ajax : "true"
-            })
-                    .then(function (response) {
+                       console.log(json);
+                   }
+               });
+           });
+       });
+
+       function addAction(ok)
+       {
+
+           var plus=$('#q'+ok).val();
+           $('#q'+ok).val(parseInt(plus)+1);
+           var quantity=parseInt($('#q'+ok).val());
+           var price1 =parseInt($('#price'+ok).text());
+           $('#total'+ok).html(quantity*price1);
+            var total =parseInt($('#total').text())+price1;
+           $('#total').html(total);
+       }
+
+       function sousAction(id)
+       {
+
+               var moin=$('#q'+id).val();
+               if(((parseInt(moin) - 1)>0)) {
+                   $('#q'+id).val(parseInt(moin) - 1);
+                   var quantity=parseInt($('#q'+id).val());
+                   var price1 =parseInt($('#price'+id).text());
+                   $('#total'+id).html(quantity*price1);
+                   var total =parseInt($('#total').text())-price1;
+                   $('#total').html(total);
+               }
+
+       }
 
 
-                        $("#a").hide();
-                        $("#total").html(0);
 
 
 
-
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    }); });
 
     </script>
 {% endblock %}

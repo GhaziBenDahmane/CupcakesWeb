@@ -1,0 +1,75 @@
+{% extends 'layoutPages.html.twig' %}
+{% block header %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    {% block title %}
+        <title>Bakery | Cart</title>
+    {% endblock %}
+    <!--section-->
+    <div class="ps-section--hero"><img src="{{ asset('assets/front/images/hero/01.jpg') }}" alt="">
+        <div class="ps-section__content text-center">
+            <h3 class="ps-section__title">Formation</h3>
+            <div class="ps-breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="{{ path('_cupcakes_homepage') }}">Home</a></li>
+                    <li class="active">Formation</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="ps-section--cart pt-100 pb-100">
+        <div class="container">
+            <div class="ps-cart-listing">
+                <p class="hidden-lg"><i>Slide right to view</i></p>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>All Formations</th>
+                            <th>Starting Date</th>
+                            <th>Ending Date</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for formation in formations %}
+                            <tr>
+                                <td>{{ formation.nom }}</td>
+                                <td>{{ formation.startDateFormation |date('Y-m-d') }}</td>
+                                <td>{{ formation.endDateFormation |date('Y-m-d')}}</td>
+                                <td>{{ formation.status }}</td>
+
+                            </tr>
+                        {% endfor %}
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
+
+{% endblock %}
+
+{% block jsLibrary %}
+    {{ parent() }}
+
+{% endblock %}
+
+{% block slider %}
+    {{ parent() }}
+
+{% endblock %}
+
+{% block CustomScripts %}
+    {{ parent() }}
+{% endblock %}

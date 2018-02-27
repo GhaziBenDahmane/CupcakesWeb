@@ -31,6 +31,53 @@ class Claim
     /**
      * @var string
      *
+     * @ORM\Column(name="answer", type="text",nullable=true)
+     */
+    private $answer;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="posted_on", type="datetime")
+     */
+    private $postedOn;
+
+    /**
+     * @return string
+     */
+    public function getPostedOn()
+    {
+        return $this->postedOn;
+    }
+
+    /**
+     * @param string $postedOn
+     */
+    public function setPostedOn($postedOn)
+    {
+        $this->postedOn = $postedOn;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAnswer()
+    {
+        return $this->answer;
+    }
+
+    /**
+     * @param string $answer
+     */
+    public function setAnswer($answer)
+    {
+        $this->answer = $answer;
+    }
+
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="type", type="string", length=255)
      */
     private $type;
@@ -61,6 +108,26 @@ class Claim
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User" , inversedBy="id")
      */
     private $client;
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User" , inversedBy="id")
+     */
+    private $answeredBy;
+
+    /**
+     * @return mixed
+     */
+    public function getAnsweredBy()
+    {
+        return $this->answeredBy;
+    }
+
+    /**
+     * @param mixed $answeredBy
+     */
+    public function setAnsweredBy($answeredBy)
+    {
+        $this->answeredBy = $answeredBy;
+    }
 
 
     /**
@@ -94,27 +161,6 @@ class Claim
     {
         $this->firstname = $firstname;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param mixed $email
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    private $email;
 
 
     /**

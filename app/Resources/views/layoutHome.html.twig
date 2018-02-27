@@ -50,6 +50,7 @@
     <link rel="stylesheet" href="{{ asset('assets/loginForm/vendor/daterangepicker/daterangepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/loginForm/css/util.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/loginForm/css/main.css') }}">
+    <script type="text/javascript" src="{{ asset('assets/front/js/axios.min.js') }}"></script>
 
 
     <!-- Custom-->
@@ -93,7 +94,7 @@
             </div>
         </div>
         </div>
-    {%endif%}
+    {% endif %}
 
     <nav class="navigation">
         <div class="container">
@@ -1085,7 +1086,8 @@
             </div>
         </div>
     {% endif %}
-    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">Modal header</h3>
@@ -1100,7 +1102,6 @@
     </div>
 </div>
 <!-- JS Library-->
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <script type="text/javascript" src="{{ asset('assets/front/plugins/jquery/dist/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/front/plugins/bootstrap/dist/js/bootstrap.min.js') }}"></script>
@@ -1143,8 +1144,8 @@
 <!-- Custom scripts-->
 <script type="text/javascript" src="{{ asset('assets/front/js/main.js') }}"></script>
 <script>
-    $(function(){
-        $('#register_form').toggle()
+    $(function () {
+        $('#register_form').hide()
     });
 
     function toggleRegistration() {

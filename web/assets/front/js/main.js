@@ -14,27 +14,27 @@ function delete_row(id) {
     $("#add_row").removeAttr("disabled");
 
 }
-function  delete_entry(id) {
-    axios.get('/event/'+id+'/delete')
+function delete_entry(id) {
+    axios.get('/event/' + id + '/delete')
         .then(function (response) {
-            $("#addr"+id).remove();
+            $("#addr" + id).remove();
 
         })
         .catch(function (error) {
             console.log(error);
         });
 }
-function  delete_entry_res(id) {
-    axios.get('/reservation/'+id+'/delete')
+function delete_entry_res(id) {
+    axios.get('/reservation/' + id + '/delete')
         .then(function (response) {
-            $("#addr"+id).remove();
+            $("#addr" + id).remove();
 
         })
         .catch(function (error) {
             console.log(error);
         });
 }
-function  add_Member(id_user,id_event) {
+function add_Member(id_user, id_event) {
     axios.post('/participants/new', {
         id_user: id_user,
         id_event: id_event,
@@ -49,19 +49,19 @@ function  add_Member(id_user,id_event) {
         });
 }
 /*Add Reservation ajax */
-function validate_row_res(id){
+function validate_row_res(id) {
     axios.post("/reservation/new", {
-        dateReservation : $("#dateReservation").val(),
+        dateReservation: $("#dateReservation").val(),
         nbPerson: $("#nbPerson").val(),
         nbTable: $("#nbTable").val(),
-        ajax:"true"
-    } )
+        ajax: "true"
+    })
         .then(function () {
             $('#addr1').html(
-                '<td>'+$("#dateReservation").val()+'</td>'+
-                '<td>'+$("#nbPerson").val()+'</td>'+
-                '<td>'+$("#nbTable").val()+'</td>'+
-                '<td><ul><li><a id=" " class="glyphicon glyphicon-trash" onclick="delete_row(id)"> </a></li>'+
+                '<td>' + $("#dateReservation").val() + '</td>' +
+                '<td>' + $("#nbPerson").val() + '</td>' +
+                '<td>' + $("#nbTable").val() + '</td>' +
+                '<td><ul><li><a id=" " class="glyphicon glyphicon-trash" onclick="delete_row(id)"> </a></li>' +
                 '<li><a class="glyphicon glyphicon-ok-circle" onclick="validate_row(id)"></a> </li></ul></td>'
             );
             $("#add_row").removeAttr("disabled");
@@ -70,39 +70,39 @@ function validate_row_res(id){
         });
 }
 /*Add Event ajax */
-function validate_row(id){
-    var a = parseInt($("#lastidevent").val())+1;
+function validate_row(id) {
+    var a = parseInt($("#lastidevent").val()) + 1;
     axios.post("/event/new", {
-        "title" : $("#title").val(),
-        "startingDate" : $("#startingDate").val(),
+        "title": $("#title").val(),
+        "startingDate": $("#startingDate").val(),
         "endingDate": $("#endingDate").val(),
         "nbPerson": $("#nbPerson").val(),
         "nbTable": $("#nbTable").val(),
         "band": $("#band").val(),
-        "cost":$("#cost").val(),
-        "id" : a,
-        "ajax":'true'
-    } )
-       .then(function () {
-           $('#addr1').html(
-               '<td>'+$("#title").val()+'</td>'+
-               '<td>'+$("#startingDate").val()+'</td>'+
-               '<td>'+$("#endingDate").val()+'</td>'+
-               '<td>'+$("#nbPerson").val()+'</td>'+
-               '<td>'+$("#nbTable").val()+'</td>'+
-               '<td>'+$("#band").val()+'</td>'+
-               '<td>'+$("#cost").val()+'</td>'+
-               '<td><ul><li><a id=" " class="glyphicon glyphicon-trash" onclick="delete_row(id)"> </a></li>'+
-               '<li><a class="glyphicon glyphicon-ok-circle" onclick="validate_row(id)"></a> </li></ul></td>'
-           );
-           $("#add_row").removeAttr("disabled");
+        "cost": $("#cost").val(),
+        "id": a,
+        "ajax": 'true'
+    })
+        .then(function () {
+            $('#addr1').html(
+                '<td>' + $("#title").val() + '</td>' +
+                '<td>' + $("#startingDate").val() + '</td>' +
+                '<td>' + $("#endingDate").val() + '</td>' +
+                '<td>' + $("#nbPerson").val() + '</td>' +
+                '<td>' + $("#nbTable").val() + '</td>' +
+                '<td>' + $("#band").val() + '</td>' +
+                '<td>' + $("#cost").val() + '</td>' +
+                '<td><ul><li><a id=" " class="glyphicon glyphicon-trash" onclick="delete_row(id)"> </a></li>' +
+                '<li><a class="glyphicon glyphicon-ok-circle" onclick="validate_row(id)"></a> </li></ul></td>'
+            );
+            $("#add_row").removeAttr("disabled");
 
         })
         .catch(function (error) {
         });
 }
 (function ($) {
-    
+
     $(".search-query").keyup(function () {
 
         axios.post('/participants/listAll', {
@@ -110,16 +110,16 @@ function validate_row(id){
             ajax: 'true'
         })
             .then(function (response) {
-                var i =0;
-                var html="";
-                $.each(response.data , function () {
+                var i = 0;
+                var html = "";
+                $.each(response.data, function () {
 
-                   html+=     '<tr id="U'+response.data[i].id +'">  '+
-                        '<td>'+response.data[i].username+'</td> ' +
-                       '<td>'+
-                       ' <button id="add_Member" type="button" class="btn btn-secondary btn-xs " onclick="add_Member('+response.data[i].id+','+$("#event_id").val()+')">Add<i class="glyphicon glyphicon-plus-sign"></i></button>'
-                       '</tr>'
-                   i++;
+                    html += '<tr id="U' + response.data[i].id + '">  ' +
+                        '<td>' + response.data[i].username + '</td> ' +
+                        '<td>' +
+                        ' <button id="add_Member" type="button" class="btn btn-secondary btn-xs " onclick="add_Member(' + response.data[i].id + ',' + $("#event_id").val() + ')">Add<i class="glyphicon glyphicon-plus-sign"></i></button>'
+                    '</tr>'
+                    i++;
                 });
 
                 $("#table_member").html(html);
@@ -128,47 +128,47 @@ function validate_row(id){
                 console.log(error);
             });
 
-        });
-    
-    var i=1;
-        $("#add_row").click(function(){
+    });
 
-            if( $(location).attr('pathname')=='/reservation/')
-            {
-                $('#table').append(
-                    '<tr id=addr' + i + '>' +
-                    '<td>' + ' <input id="dateReservation" class="form-control form-control-xs"' + ' type="date"  > </td>' +
-                    '<td>' + ' <input id="nbPerson" class="form-control form-control-xs"' + ' type="number"  > </td>' +
-                    '<td>' + ' <input id="nbTable" class="form-control form-control-xs"' + ' type="number"  > </td>' +
-                    '<td>' + ' <a id="' + i + '" class="glyphicon glyphicon-trash" onclick="delete_row(id)"> </a> ' +
-                    '<a class="glyphicon glyphicon-ok-circle" onclick="validate_row_res(id)"></a> ' +
+    var i = 1;
+    $("#add_row").click(function () {
 
-                    '</td>' +
-                    '</tr>');            }
-            else {
+        if ($(location).attr('pathname') == '/reservation/') {
+            $('#table').append(
+                '<tr id=addr' + i + '>' +
+                '<td>' + ' <input id="dateReservation" class="form-control form-control-xs"' + ' type="date"  > </td>' +
+                '<td>' + ' <input id="nbPerson" class="form-control form-control-xs"' + ' type="number"  > </td>' +
+                '<td>' + ' <input id="nbTable" class="form-control form-control-xs"' + ' type="number"  > </td>' +
+                '<td>' + ' <a id="' + i + '" class="glyphicon glyphicon-trash" onclick="delete_row(id)"> </a> ' +
+                '<a class="glyphicon glyphicon-ok-circle" onclick="validate_row_res(id)"></a> ' +
 
-                $('#table').append(
-                    '<tr id=addr' + i + '>' +
-                    '<td>' + ' <input id="title" class="form-control form-control-xs"' + ' type="text" placeholder="Title" > </td>' +
+                '</td>' +
+                '</tr>');
+        }
+        else {
 
-                    '<td>' + ' <input id="startingDate" class="form-control form-control-xs"' + ' type="date"  > </td>' +
-                    '<td>' + ' <input id="endingDate" class="form-control form-control-xs"' + ' type="date" > </td>' +
-                    '<td>' + ' <input id="nbPerson" class="form-control form-control-xs"' + ' type="number"  > </td>' +
-                    '<td>' + ' <input id="nbTable" class="form-control form-control-xs"' + ' type="number"  > </td>' +
-                    '<td>' + ' <input id="band" class="form-control form-control-xs"' + ' type="text"  > </td>' +
-                    '<td>' + ' <input id="cost" class="form-control form-control-xs"' + ' type="number"  > </td>' +
-                    '<td>' + ' <a id="' + i + '" class="glyphicon glyphicon-trash" onclick="delete_row(id)"> </a> ' +
-                    '<a class="glyphicon glyphicon-ok-circle" onclick="validate_row(id)"></a> ' +
+            $('#table').append(
+                '<tr id=addr' + i + '>' +
+                '<td>' + ' <input id="title" class="form-control form-control-xs"' + ' type="text" placeholder="Title" > </td>' +
 
-                    '</td>' +
-                    '</tr>');
-            }
-            $("#add_row").attr("disabled", "disabled");
+                '<td>' + ' <input id="startingDate" class="form-control form-control-xs"' + ' type="date"  > </td>' +
+                '<td>' + ' <input id="endingDate" class="form-control form-control-xs"' + ' type="date" > </td>' +
+                '<td>' + ' <input id="nbPerson" class="form-control form-control-xs"' + ' type="number"  > </td>' +
+                '<td>' + ' <input id="nbTable" class="form-control form-control-xs"' + ' type="number"  > </td>' +
+                '<td>' + ' <input id="band" class="form-control form-control-xs"' + ' type="text"  > </td>' +
+                '<td>' + ' <input id="cost" class="form-control form-control-xs"' + ' type="number"  > </td>' +
+                '<td>' + ' <a id="' + i + '" class="glyphicon glyphicon-trash" onclick="delete_row(id)"> </a> ' +
+                '<a class="glyphicon glyphicon-ok-circle" onclick="validate_row(id)"></a> ' +
+
+                '</td>' +
+                '</tr>');
+        }
+        $("#add_row").attr("disabled", "disabled");
 
     });
 
 
-    $("#RSubmit").click(function(){
+    $("#RSubmit").click(function () {
 
         axios.post('/claim/new', {
             firstName: $("#RFirstName").val(),
@@ -183,14 +183,14 @@ function validate_row(id){
                 $('.alert').append(' ' +
                     ' <strong>Reclamation submited!</strong>  ');
 
-                $('.alert').attr("class","alert alert-success");
+                $('.alert').attr("class", "alert alert-success");
 
             })
             .catch(function (error) {
                 console.log(error);
             });
     });
-    $("#CSubmit").click(function(){
+    $("#CSubmit").click(function () {
 
         axios.post('/contact', {
             firstName: $("#CFirstName").val(),
@@ -205,23 +205,58 @@ function validate_row(id){
                 $("#CEmail").val("");
                 $("#CMsg").val("");
                 $("#CTel").val("");
-                    $('.alert').append(' ' +
-                        ' <strong>successful!</strong>  ');
+                $('.alert').append(' ' +
+                    ' <strong>successful!</strong>  ');
 
-                $('.alert').attr("class","alert alert-success");
+                $('.alert').attr("class", "alert alert-success");
 
             })
             .catch(function (error) {
                 $('.alert').append(' ' +
                     ' <strong>error!</strong>  ');
 
-                $('.alert').attr("class","alert alert-danger");
+                $('.alert').attr("class", "alert alert-danger");
+            });
+    });
+    $("#Dsubmit").click(function () {
+
+        axios.post('/order', {
+            Name: $("#Dname").val(),
+            Adress: $("#Daddress").val(),
+            DateDelivery: $("#Ddatedelivery").val(),
+            phone: $("#Dphone").val(),
+            email: $("#Demail").val(),
+            contactTime: $("#DcontactTime").val(),
+            notes: $("#Dnotes").val(),
+
+            ajax: "true"
+
+        })
+            .then(function (response) {
+                $("#Dname").val("");
+                $("#Daddress").val("");
+                $("#Ddatedelivery").val("");
+                $("#Dphone").val("");
+                $("#Demail").val("");
+                $("#DcontactTime").val("");
+                $("#Dnotes").val("");
+                $('.alert').append(' ' +
+                    ' <strong>successful!</strong>  ');
+
+                $('.alert').attr("class", "alert alert-success");
+
+            })
+            .catch(function (error) {
+                $('.alert').append(' ' +
+                    ' <strong>error!</strong>  ');
+
+                $('.alert').attr("class", "alert alert-danger");
             });
     });
 
 
 
-    $("#PSubmit").click(function(){
+    $("#PSubmit").click(function () {
 
         axios.post('/partnership/new', {
             firstName: $("#PFirstName").val(),
@@ -238,7 +273,7 @@ function validate_row(id){
                 $('.alert').append(' ' +
                     ' <strong>we will send you a confirmation email</strong>  ');
 
-                $('.alert').attr("class","alert alert-success");
+                $('.alert').attr("class", "alert alert-success");
 
             })
             .catch(function (error) {
@@ -504,7 +539,7 @@ function validate_row(id){
             map.gmap3({
                 center: center,
                 zoom: 13,
-                mapTypeId : google.maps.MapTypeId.ROADMAP,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
                 styles: [{
                     "featureType": "administrative",
                     "elementType": "all",
@@ -546,15 +581,15 @@ function validate_row(id){
 
             })
                 .infowindow({
-                content: map.data('address')
-            }).then(function (infowindow) {
-                var map = this.get(0);
-                var marker = this.get(1);
+                    content: map.data('address')
+                }).then(function (infowindow) {
+                    var map = this.get(0);
+                    var marker = this.get(1);
 
-                marker.addListener('click', function () {
-                    infowindow.open(map, marker);
+                    marker.addListener('click', function () {
+                        infowindow.open(map, marker);
+                    });
                 });
-            });
 
 
 

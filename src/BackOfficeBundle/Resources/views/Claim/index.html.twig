@@ -22,13 +22,13 @@
             <!-- Page Inner -->
             <div class="page-inner">
                 <div class="page-title">
-                    <h3 class="breadcrumb-header">Products</h3>
+                    <h3 class="breadcrumb-header">Claims</h3>
                 </div>
 
                 <div id="main-wrapper">
                     <div class="row">
 
-                        {{ render(controller('ECommerceBundle:Product:new')) }}<br><br>
+                        {#{{ render(controller('ECommerceBundle:Product:new')) }}<br><br>#}
                         <div class="col-md-12">
                             <div class="panel panel-white">
                                 <div class="panel-heading clearfix">
@@ -43,6 +43,7 @@
                                                 <th>Type</th>
                                                 <th>Description</th>
                                                 <th>answered</th>
+                                                <th>answered by</th>
                                                 <th>Update</th>
                                                 <th>Delete</th>
                                                 <th>Informations</th>
@@ -55,6 +56,7 @@
                                                 <th>Type</th>
                                                 <th>Description</th>
                                                 <th>answered</th>
+                                                <th>answered by</th>
                                                 <th>Update</th>
                                                 <th>Delete</th>
                                                 <th>Informations</th>
@@ -62,14 +64,13 @@
                                             </tfoot>
                                             <tbody>
                                             {% for claim in claims %}
-                                                <tr role="row" class="even">
-                                                    <td class="sorting_1"><a
-                                                                href="{{ path('claim_show', { 'id': claim.id }) }}">{{ claim.id }}</a>
-                                                    </td>
+                                                <tr role="row" class="even" id="{{ claim.id }}">
+                                                    <td class="sorting_1">{{ claim.id }}</td>
                                                     <td>{{ claim.client }}</td>
                                                     <td>{{ claim.type }}</td>
                                                     <td>{{ claim.description }}</td>
-                                                    <td>{{ claim.answered }}</td>
+                                                    <td id="answered{{ claim.id }}">{{ claim.answered ? 'Yes' : 'No' }}</td>
+                                                    <td id="answeredBy{{ claim.id }}">{{ claim.answeredBy }}</td>
                                                     <td>
                                                         {{ render(controller('BackOfficeBundle:Claim:edit',{'id':claim.id})) }}
                                                     </td>
@@ -103,8 +104,10 @@
                                                                         <button type="button" class="btn btn-default "
                                                                                 data-dismiss="modal">Cancel
                                                                         </button>
-                                                                        <a href="{{ path ('product_delete',{'id': claim.id}) }}"
-                                                                           data-toggle="modal" class="btn btn-danger"
+
+                                                                        <a href="#"
+                                                                           onclick="delete_claim({{ claim.id }})"
+                                                                           data-dismiss="modal" class="btn btn-danger"
                                                                            id="lien">Delete</a>
                                                                     </div>
                                                                 </div>
@@ -149,6 +152,22 @@
                                                                                         <strong>Description: </strong>{{ claim.description }}
                                                                                     </li>
                                                                                     <br>
+                                                                                    <li>
+                                                                                        <strong>Answered: </strong>{{ claim.answered ? 'Yes' : 'No' }}
+                                                                                    </li>
+                                                                                    <br>
+
+                                                                                    {% if claim.answered %}
+                                                                                        <li>
+                                                                                            <strong>Answered
+                                                                                                By: </strong>
+                                                                                            {{ claim.answeredBy }}
+                                                                                        </li><br>
+                                                                                        <li>
+                                                                                            <strong>Answer: </strong>{{ claim.answer }}
+                                                                                        </li>
+
+                                                                                    {% endif %}
                                                                                 </ul>
 
                                                                             </div>
@@ -193,5 +212,18 @@
     <script src="{{ asset('assets/back/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
     <script src="{{ asset('assets/back/js/pages/table-data.js') }}"></script>
     <script src="{{ asset('assets/back/js/script.js') }}"></script>
+    <script>
+        function delete_claim(id) {
+            axios.get("/admin/claim/delete/" + id)
+                .then(function (response) {
+                        console.log(response)
+                        $("#" + id).remove();
+                    }
+                ).catch(function (reason) {
+                console.log(reason);
+            })
+
+        }
+    </script>
 {% endblock %}
 
