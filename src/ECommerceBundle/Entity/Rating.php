@@ -36,26 +36,27 @@ class Rating
     private  $products;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="nb_votes", type="integer")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User" , inversedBy="id")
      */
-    private $nb_votes;
+    private  $user;
+
+
+
 
     /**
-     * @return int
+     * @return mixed
      */
-    public function getNbVotes()
+    public function getUser()
     {
-        return $this->nb_votes;
+        return $this->user;
     }
 
     /**
-     * @param int $nb_votes
+     * @param mixed $user
      */
-    public function setNbVotes($nb_votes)
+    public function setUser($user)
     {
-        $this->nb_votes = $nb_votes;
+        $this->user = $user;
     }
 
     /**

@@ -29,11 +29,14 @@ class RatingController extends Controller
                $content = $request->getContent();
                $data = json_decode($content, true);
                $vote = $data["vote"];
+               $id = $data["id"];
                $new = new Rating();
-               $new->setNbVotes(1);
-               $product=$em->getRepository('ECommerceBundle:Product')->find(1);
+
+               $product=$em->getRepository('ECommerceBundle:Product')->find($id);
+               $user = $this->get('security.token_storage')->getToken()->getUser();
+               $new->setUser($user);
                $new->setProducts($product);
-               $new->setNote(3);
+               $new->setNote($vote);
                $em->persist($new);
                $em->flush();
 
@@ -41,13 +44,17 @@ class RatingController extends Controller
 
    }
 
-   public function showRatingAction($id=1)
+   public function showRatingAction($id)
    {
        $em = $this->getDoctrine()->getManager();
-       $rating= $em->getRepository('ECommerceBundle:Rating')->find($id);
+       $rating= $em->getRepository('ECommerceBundle:Rating')->findRateByProductAndUser($id);
+       $count= $em->getRepository('ECommerceBundle:Rating')->countRate($id);
+       $sum= $em->getRepository('ECommerceBundle:Rating')->avgRate($id);
 
 
-       return $this->render('ECommerceBundle:Rating:show_rating.html.twig',array('rating'=>$rating) );
+
+       return $this->render('ECommerceBundle:Rating:show_rating.html.twig',array('rating'=>$rating,'count'=>
+   $count,'sum'=>$sum,'id'=>$id) );
 
 
    }

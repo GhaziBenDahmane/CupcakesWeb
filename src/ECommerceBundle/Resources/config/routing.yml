@@ -47,7 +47,7 @@ _cupcakes_checkout:
     path:     /Checkout
     defaults: { _controller: ECommerceBundle:Default:Checkout }
 _cupcakes_rating:
-    path:     /show_rating
+    path:     /show_rating/{id}
     defaults: { _controller: ECommerceBundle:Rating:showRating }
 _cupcakes_rating_add:
     path:     /add_rating

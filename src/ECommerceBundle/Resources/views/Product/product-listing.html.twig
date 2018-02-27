@@ -72,7 +72,11 @@
                                     <div class="ps-product__content">
 
                                         <h4 id="name" class="ps-product__title"><a href="{{ path('_cupcakes_product-detail',{'id':product.id }) }}">{{ product.name }}</a></h4>
-                                        <div id="rate">
+                                        <div>
+                                        {{ render(controller(
+                                        'ECommerceBundle\\Controller\\RatingController::showRatingAction',
+                                        { 'id': product.id  }
+                                        )) }}
                                         </div>
                                         <p class="ps-product__price">
                                             <del>{{ product.price }}</del>{{ product.price }}
@@ -240,21 +244,8 @@
                         console.log(error);
                     }); });
 
-        $(function () {
-            $('#rating').change(function() {
-                var value = $(this).val();
-                axios.post("{{path('_cupcakes_rating_add')}}", {
-                    vote :  value,
-                    ajax : "true"
-                })
-                        .then(function (response) {
-                                                 })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
 
-            });
-        });
+
 
 
 
@@ -332,6 +323,11 @@
                 }
             });
         });
+
+
+
+
+
 
 
 
