@@ -66,13 +66,16 @@ class ClaimController extends Controller
         $claim->setAnsweredBy($this->getUser());
         $em->persist($claim);
         $em->flush();
-        $twilio = $this->get('twilio.api');
+        if (strlen($claim->getClient()->getPhone()) > 8) {
+            $twilio = $this->get('twilio.api');
 
-        $message = $twilio->account->messages->sendMessage(
-            '+19283230909 ', // From a Twilio number in your account
-            $claim->getClient()->getPhone(), // Text any number
-            "Your Claim was answered "
-        );
+            $message = $twilio->account->messages->sendMessage(
+                '+19283230909 ', // From a Twilio number in your account
+                $claim->getClient()->getPhone(), // Text any number
+                "Your Claim was answered "
+            );
+        }
+
         return new Response($claim->getClient());
     }
 
