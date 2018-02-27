@@ -14,8 +14,13 @@ class ClaimController extends Controller
 {
     public function indexAction()
     {
+        $em = $this->getDoctrine()->getManager();
+        $claims = $em->getRepository('ECommerceBundle:Claim')
+            ->findBy(array('client' => $this->getUser()));
 
-        return $this->render('ECommerceBundle:claim:index.html.twig');
+
+        return $this->render('ECommerceBundle:claim:index.html.twig',
+            array('claims' => $claims));
     }
 
     public function newAction(Request $request)
