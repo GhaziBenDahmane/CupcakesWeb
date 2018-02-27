@@ -9,7 +9,7 @@
             <ul class="list-unstyled dropdown-oc">
                 {% for notif in notifs %}
                     <li>
-                        <a href="#"><span class="notification-badge bg-success"><i
+                        <a href="{{ notif.0.link }}"><span class="notification-badge bg-success"><i
                                         class="fa fa-bullhorn"></i></span>
                             <span class="notification-info"><b>{{ notif.0.subject }}</b> <br>
                                 {{ notif.0.message }}<br>

@@ -20,6 +20,8 @@ class ClaimController extends Controller
 
     public function newAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+
         $claim = new Claim();
         $form = $this->createForm('ECommerceBundle\Form\ClaimType', $claim);
         $form->handleRequest($request);
@@ -32,18 +34,25 @@ class ClaimController extends Controller
             $claim->setDescription($data["message"]);
             $claim->setType($data["type"]);
             $claim->setPostedOn(new \DateTime('now'));
-            $em = $this->getDoctrine()->getManager();
             $em->persist($claim);
             $em->flush($claim);
             $twilio = $this->get('twilio.api');
 
             $twilio->account->messages->sendMessage(
-                '+19283230909 ', // From a Twilio number in your account
-                '+21626879552', // Text any number
+                '+19283230909 ',
+                '+21626879552',
                 "New claim From " . $this->getUser()
             );
-
-
+            $users = $em->getRepository('UserBundle:User')->findAll();
+            $manager = $this->get('mgilet.notification');
+            $notif = $manager->createNotification('New Claim !');
+            $notif->setMessage('By ' . $this->getUser() . '.');
+            $notif->setLink('/admin/claim/');
+            foreach ($users as $user) {
+                if ($user->hasRole('ROLE_ADMIN')) {
+                    $manager->addNotification(array($user), $notif, true);
+                }
+            }
         }
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
