@@ -9,3 +9,6 @@ event_homepage:
 event_event:
     resource: "@EventBundle/Resources/config/routing/event.yml"
     prefix:   /event
+event_participants:
+    resource: "@EventBundle/Resources/config/routing/participants.yml"
+    prefix:   /participants

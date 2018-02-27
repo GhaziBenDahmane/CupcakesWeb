@@ -23,9 +23,7 @@ class Event extends BaseEvent
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
-
-
+    public $id;
 
     /**
      * @var int
@@ -56,25 +54,50 @@ class Event extends BaseEvent
     private $cost;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User" , inversedBy="id")
+     * @ORM\OneToMany(targetEntity="EventBundle\Entity\Participants" , mappedBy="idParticipant")
+     * @ORM\Column(type="string" , nullable=true)
      */
-    private $client;
+    private $participants;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $status="Pending";
 
     /**
      * @return mixed
      */
-    public function getClient()
+    public function getStatus()
     {
-        return $this->client;
+        return $this->status;
     }
 
     /**
-     * @param mixed $client
+     * @param mixed $status
      */
-    public function setClient($client)
+    public function setStatus($status)
     {
-        $this->client = $client;
+        $this->status = $status;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getParticipants()
+    {
+        return $this->participants;
+    }
+
+    /**
+     * @param mixed $participants
+     */
+    public function setParticipants($participants)
+    {
+        $this->participants = $participants;
+    }
+
+
+
 
 
     /**
@@ -183,10 +206,7 @@ class Event extends BaseEvent
         return $this->cost;
     }
 
-    public function toArray()
-    {
-        // TODO: Implement toArray() method.
-    }
+
 
 }
 

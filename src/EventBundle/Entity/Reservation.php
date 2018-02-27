@@ -19,7 +19,7 @@ class Reservation
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    public $id;
 
     /**
      * @var \DateTime
@@ -43,15 +43,24 @@ class Reservation
     private $nbPerson;
 
 
+
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
     {
         return $this->id;
     }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+
 
     /**
      * Set dateReservation

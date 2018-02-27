@@ -3,29 +3,24 @@
 namespace EventBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EventType extends AbstractType
+class ParticipantsType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('StartDatetime',DateType::class)->add('EndDatetime',DateType::class)->add('nbPerson')->add('nbTable')->add('band')->add('cost')->add('client')
-         ;
-    }
-    
-    /**
+        $builder->add('date')->add('idEvent')->add('idParticipant');
+    }/**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'EventBundle\Entity\Event'
+            'data_class' => 'EventBundle\Entity\Participants'
         ));
     }
 
@@ -34,7 +29,7 @@ class EventType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'eventbundle_event';
+        return 'eventbundle_participants';
     }
 
 

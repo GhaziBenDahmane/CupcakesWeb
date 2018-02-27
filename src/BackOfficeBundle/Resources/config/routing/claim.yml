@@ -14,7 +14,7 @@ claim_new:
 
 claim_create:
     path:     /create
-    defaults: { _controller: "BackOfficeBundle:Claim:create" }
+    defaults: { _controller: "BackOfficeBundle:Claim:new" }
 
 claim_update:
     path:     /{id}/update

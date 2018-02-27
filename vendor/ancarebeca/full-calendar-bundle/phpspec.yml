@@ -1,5 +1,0 @@
-suites:
-    main:
-        namespace: AncaRebeca\FullCalendarBundle
-        psr4_prefix: AncaRebeca\FullCalendarBundle
-        src_path: .
