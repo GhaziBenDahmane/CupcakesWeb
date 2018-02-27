@@ -36,6 +36,29 @@ class Claim
     private $answer;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="posted_on", type="datetime",nullable=true)
+     */
+    private $postedOn;
+
+    /**
+     * @return string
+     */
+    public function getPostedOn()
+    {
+        return $this->postedOn;
+    }
+
+    /**
+     * @param string $postedOn
+     */
+    public function setPostedOn($postedOn)
+    {
+        $this->postedOn = $postedOn;
+    }
+
+    /**
      * @return string
      */
     public function getAnswer()

@@ -12,25 +12,12 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ClaimController extends Controller
 {
-    /**
-     * Lists all claim entities.
-     *
-     */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
 
-        $claims = $em->getRepository('ECommerceBundle:Claim')->findAll();
-
-        return $this->render('ECommerceBundle:claim:index.html.twig', array(
-            'claims' => $claims,
-        ));
+        return $this->render('ECommerceBundle:claim:index.html.twig');
     }
 
-    /**
-     * Creates a new claim entity.
-     *
-     */
     public function newAction(Request $request)
     {
         $claim = new Claim();
@@ -44,12 +31,13 @@ class ClaimController extends Controller
         if ($data["ajax"] == "true") {
             $claim->setDescription($data["message"]);
             $claim->setType($data["type"]);
+            $claim->setPostedOn(new \DateTime('now'));
             $em = $this->getDoctrine()->getManager();
             $em->persist($claim);
             $em->flush($claim);
             $twilio = $this->get('twilio.api');
 
-            $message = $twilio->account->messages->sendMessage(
+            $twilio->account->messages->sendMessage(
                 '+19283230909 ', // From a Twilio number in your account
                 '+21626879552', // Text any number
                 "New claim From " . $this->getUser()
@@ -71,10 +59,6 @@ class ClaimController extends Controller
         ));
     }
 
-    /**
-     * Finds and displays a claim entity.
-     *
-     */
     public function showAction(Claim $claim)
     {
         $deleteForm = $this->createDeleteForm($claim);
@@ -85,10 +69,6 @@ class ClaimController extends Controller
         ));
     }
 
-    /**
-     * Displays a form to edit an existing claim entity.
-     *
-     */
     public function editAction(Request $request, Claim $claim)
     {
         $deleteForm = $this->createDeleteForm($claim);
@@ -108,36 +88,14 @@ class ClaimController extends Controller
         ));
     }
 
-    /**
-     * Deletes a claim entity.
-     *
-     */
-    public function deleteAction(Request $request, Claim $claim)
+    public function removeAction($id, Request $request)
     {
-        $form = $this->createDeleteForm($claim);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($claim);
-            $em->flush($claim);
-        }
-
-        return $this->redirectToRoute('claim_index');
+        $em = $this->getDoctrine()->getManager();
+        $claim = $em->getRepository(Claim::class)
+            ->find($id);
+        $em->remove($claim);
+        $em->flush($claim);
+        return new Response('done');
     }
 
-    /**
-     * Creates a form to delete a claim entity.
-     *
-     * @param Claim $claim The claim entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Claim $claim)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('claim_delete', array('id' => $claim->getId())))
-            ->setMethod('DELETE')
-            ->getForm();
-    }
 }
