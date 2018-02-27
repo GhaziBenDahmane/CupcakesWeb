@@ -1,0 +1,38 @@
+{% for claim in claims %}
+    <div class="ps-checkout__order">
+        <h3>YOUR CLAIMS</h3>
+        <table class="table">
+            <tbody>
+            <tr>
+                <td>Type:</td>
+                <td>{{ claim.type }}</td>
+            </tr>
+            <tr>
+                <td>Description:</td>
+                <td>{{ claim.description }}</td>
+            </tr>
+            <tr>
+                <td>Posted:</td>
+                <td>{{ claim.postedOn }}</td>
+            </tr>
+            
+            <tr>
+                <td>Answered:</td>
+                <td>{{ claim.answered ? 'Yes' : 'No' }}</td>
+            </tr>
+            {% if  claim.answered %}
+                <tr>
+                    <td>Answer:</td>
+                    <td>{{ claim.answer }}</td>
+                </tr>
+            {% endif %}
+            </tbody>
+        </table>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+            <button class="ps-btn ps-btn--sm" onclick="prevClaim()">Previous</button>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+            <button class="ps-btn ps-btn--sm" onclick="nextClaim()">Next</button>
+        </div>
+    </div> ###
+{% endfor %}

@@ -6,6 +6,7 @@ use ECommerceBundle\Entity\Claim;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Cocur\HumanDate\HumanDate;
 
 /**
  * Claim controller.
@@ -22,7 +23,10 @@ class ClaimController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $claims = $em->getRepository('ECommerceBundle:Claim')->findAll();
-
+        $humanDate = new HumanDate();
+        foreach ($claims as $claim) {
+            $claim->setPostedOn($humanDate->transform($claim->getPostedOn()));
+        }
         return $this->render('BackOfficeBundle:Claim:index.html.twig', array(
             'claims' => $claims,
         ));
@@ -55,7 +59,10 @@ class ClaimController extends Controller
                     ->findBy(array('type' => $data["type"], 'answered' => $data["filter"] == "ANSWERED"));
             }
         }
-
+        $humanDate = new HumanDate();
+        foreach ($claims as $claim) {
+            $claim->setPostedOn($humanDate->transform($claim->getPostedOn()));
+        }
         return $this->render('BackOfficeBundle:Claim:claims-list.html.twig', array(
             'claims' => $claims,
         ));

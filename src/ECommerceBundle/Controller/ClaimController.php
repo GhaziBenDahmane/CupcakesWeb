@@ -4,7 +4,9 @@ namespace ECommerceBundle\Controller;
 
 use ECommerceBundle\Entity\Claim;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Cocur\HumanDate\HumanDate;
 
 /**
  * Claim controller.
@@ -17,9 +19,22 @@ class ClaimController extends Controller
         $em = $this->getDoctrine()->getManager();
         $claims = $em->getRepository('ECommerceBundle:Claim')
             ->findBy(array('client' => $this->getUser()));
-
-
-        return $this->render('ECommerceBundle:claim:index.html.twig',
+        $humanDate = new HumanDate();
+        foreach ($claims as $claim) {
+            $claim->setPostedOn($humanDate->transform($claim->getPostedOn()));
+        }
+        return $this->render('ECommerceBundle:claim:index.html.twig');
+    }
+    public function getClaimsAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $claims = $em->getRepository('ECommerceBundle:Claim')
+            ->findBy(array('client' => $this->getUser()));
+        $humanDate = new HumanDate();
+        foreach ($claims as $claim) {
+            $claim->setPostedOn($humanDate->transform($claim->getPostedOn()));
+        }
+        return $this->render('ECommerceBundle:claim:claims.html.twig',
             array('claims' => $claims));
     }
 
@@ -76,7 +91,6 @@ class ClaimController extends Controller
     public function showAction(Claim $claim)
     {
         $deleteForm = $this->createDeleteForm($claim);
-
         return $this->render('ECommerceBundle:claim:show.html.twig', array(
             'claim' => $claim,
             'delete_form' => $deleteForm->createView(),

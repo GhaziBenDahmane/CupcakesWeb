@@ -21,56 +21,7 @@
         <div class="container">
             <div class="ps-contact">
                 <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
-                        <div class="ps-checkout__order">
-                            <h3>YOUR CLAIMS</h3>
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th class="text-uppercase">Product</th>
-                                    <th class="text-uppercase">Total</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>HABITANT x1</td>
-                                    <td>$300.00</td>
-                                </tr>
-                                <tr>
-                                    <td>Card Subtitle</td>
-                                    <td>$300.00</td>
-                                </tr>
-                                <tr>
-                                    <td>Order Total</td>
-                                    <td>$300.00</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <h3>Payment Method</h3>
-                            <div class="form-group">
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="payment" value="0">Your Claims
-                                    </label>
-                                </div>
-                                <p>Please send your cheque to Store Name, Store Street, Store Town, Store State /
-                                    County, Store Postcode.</p>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="payment" value="1">PAYPAL
-                                    </label>
-                                    <div class="card-list"></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
-                                <button class="ps-btn ps-btn--sm" disabled>Previous</button>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
-                                <button class="ps-btn ps-btn--sm" disabled>Next</button>
-                            </div>
-
-
-                        </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 " id="claim">
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
                         <div class="ps-contact__form">
@@ -117,5 +68,40 @@
     {% endblock %}
 
     {% block CustomScripts %}
-    {{ parent() }}
-{% endblock %}
+
+        {{ parent() }}
+        <script>
+            var claims = [];
+            var claimsNumber = 0;
+            var thisclaim = 0;
+            $(function () {
+
+                getClaims(0);
+
+            });
+
+
+            function prevClaim() {
+                getClaims(thisclaim - 1);
+            }
+
+            function nextClaim() {
+                getClaims(thisclaim + 1);
+
+            }
+
+            function getClaims(claimNumber) {
+                axios.get('/claim/my').then(function (x) {
+                    claims = x.data.split('###');
+                    claims.pop();
+                    claimsNumber = claims.length;
+                    if (claimNumber < 0 || claimNumber > claimsNumber - 1) {
+                        console.log('sorry');
+                        return;
+                    }
+                    thisclaim = claimNumber;
+                    $('#claim').html(claims[thisclaim]);
+                });
+            }
+        </script>
+    {% endblock %}

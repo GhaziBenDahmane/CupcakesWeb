@@ -73,9 +73,10 @@
                                                 <th>Client</th>
                                                 <th>Type</th>
                                                 <th>Description</th>
+                                                <th>Posted</th>
                                                 <th>answered</th>
                                                 <th>answered by</th>
-                                                <th>Update</th>
+                                                <th>Answer</th>
                                                 <th>Delete</th>
                                                 <th>Informations</th>
                                             </tr>
@@ -86,9 +87,10 @@
                                                 <th>Client</th>
                                                 <th>Type</th>
                                                 <th>Description</th>
+                                                <th>Posted</th>
                                                 <th>answered</th>
                                                 <th>answered by</th>
-                                                <th>Update</th>
+                                                <th>Answer</th>
                                                 <th>Delete</th>
                                                 <th>Informations</th>
                                             </tr>
@@ -100,6 +102,7 @@
                                                     <td>{{ claim.client }}</td>
                                                     <td>{{ claim.type }}</td>
                                                     <td>{{ claim.description }}</td>
+                                                    <td>{{ claim.postedOn }}</td>
                                                     <td id="answered{{ claim.id }}">{{ claim.answered ? 'Yes' : 'No' }}</td>
                                                     <td id="answeredBy{{ claim.id }}">{{ claim.answeredBy }}</td>
                                                     <td>
@@ -186,6 +189,10 @@
                                                                                     <br>
                                                                                     <li>
                                                                                         <strong>Answered: </strong>{{ claim.answered ? 'Yes' : 'No' }}
+                                                                                    </li>
+                                                                                    <br>
+                                                                                    <li>
+                                                                                        <strong>Posted: </strong>{{ claim.postedOn }}
                                                                                     </li>
                                                                                     <br>
 
