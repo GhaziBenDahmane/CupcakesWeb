@@ -34,15 +34,28 @@ class ClaimController extends Controller
         $repo = $em->getRepository('ECommerceBundle:Claim');
         $content = $request->getContent();
         $data = json_decode($content, true);
+
         if ($data["filter"] == "ALL") {
-            $claims = $repo->findAll();
-            return $this->render('BackOfficeBundle:Claim:claims-list.html.twig', array(
-                'claims' => $claims,
-            ));
+            if ($data["type"] == "ALL") {
+                $claims = $repo->findAll();
+
+            } else {
+                $claims = $repo
+                    ->findBy(array('type' => $data["type"]));
+            }
+        } else {
+
+
+            if ($data["type"] == "ALL") {
+                $claims = $repo
+                    ->findBy(array('answered' => $data["filter"] == "ANSWERED"));
+
+            } else {
+                $claims = $repo
+                    ->findBy(array('type' => $data["type"], 'answered' => $data["filter"] == "ANSWERED"));
+            }
         }
 
-        $claims = $repo
-            ->findBy(array('answered' => $data["filter"] == "ANSWERED"));
         return $this->render('BackOfficeBundle:Claim:claims-list.html.twig', array(
             'claims' => $claims,
         ));
@@ -53,7 +66,6 @@ class ClaimController extends Controller
     {
         $editForm = $this->createForm('ECommerceBundle\Form\ClaimType', $claim);
         $editForm->handleRequest($request);
-
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
             var_dump($id);

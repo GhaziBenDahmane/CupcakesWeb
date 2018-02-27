@@ -27,11 +27,38 @@
 
                 <div id="main-wrapper">
                     <div class="row">
-                        <select id="filterclaims" onchange="filter_claims()">
-                            <option value="ALL">All</option>
-                            <option value="ANSWERED">Answered only</option>
-                            <option value="NOTANSWERED">Not answered only</option>
-                        </select>
+                        <table>
+                            <tr>
+                                <h3>Filter By :</h3>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    Answered:
+                                </td>
+                                <td>
+                                    <select id="filterclaims" onchange="filter_claims()">
+                                        <option value="ALL">All</option>
+                                        <option value="ANSWERED">Answered only</option>
+                                        <option value="NOTANSWERED">Not answered only</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Type:
+                                </td>
+                                <td>
+                                    <select id="filtertype" onchange="filter_claims()">
+                                        <option value="ALL">All</option>
+                                        <option value="Technical Problem">Technical Only</option>
+                                        <option value="Commercial Problem">Commercial Only</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                        <br>
+
                         {#{{ render(controller('ECommerceBundle:Product:new')) }}<br><br>#}
                         <div class="col-md-12">
                             <div class="panel panel-white">
@@ -66,7 +93,7 @@
                                                 <th>Informations</th>
                                             </tr>
                                             </tfoot>
-                                            <tbody>
+                                            <tbody id="datatablee">
                                             {% for claim in claims %}
                                                 <tr role="row" class="even" id="{{ claim.id }}">
                                                     <td class="sorting_1">{{ claim.id }}</td>
@@ -105,7 +132,8 @@
 
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-default " onclick="filter_claims()"
+                                                                        <button type="button" class="btn btn-default "
+                                                                                onclick="filter_claims()"
                                                                                 data-dismiss="modal">Cancel
                                                                         </button>
 
@@ -219,8 +247,11 @@
     <script>
         function filter_claims() {
             console.log();
-            axios.post('/admin/claim/filter', {'filter': $('#filterclaims').val()}).then(function (res) {
-                $('tbody').html(res.data);
+            axios.post('/admin/claim/filter', {
+                'filter': $('#filterclaims').val(),
+                'type': $('#filtertype').val()
+            }).then(function (res) {
+                $('#datatablee').html(res.data);
             })
         }
 

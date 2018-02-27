@@ -89,6 +89,7 @@
                             <li><a href="#">Japanese</a></li>
                             <li><a href="#">Chinese</a></li>
                         </ul>
+
                     </div>
                 </div>
             </div>
@@ -117,11 +118,9 @@
                             <li><a href="{{ path('_cupcakes_product-detail') }}">Product Detail</a></li>
                         </ul>
                     </li>
-                    <li class="menu-item-has-children"><a href="#">Pages</a>
+                    <li class="menu-item-has-children"><a href="{{ path('_cupcakes_blog-listing') }}">Blogs</a>
                         <ul class="sub-menu">
-                            <li><a href="{{ path('_cupcakes_order_form') }}">Order Form</a></li>
-                            <li><a href="{{ path('_cupcakes_checkout') }}">Checkout</a></li>
-                            <li><a href="{{ path('_cupcakes_cart') }}">Cart</a></li>
+                            <li><a href="{{ path('_cupcakes_blog-detail') }}">Blog Detail</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -130,16 +129,8 @@
                         src="{{ asset('assets/front/images/logo-1.png') }}" alt=""></a>
             <div class="navigation__right">
                 <ul class="menu menu--right">
-                    <li class="menu-item-has-children"><a href="{{ path('_cupcakes_blog-listing') }}">Blogs</a>
-                        <ul class="sub-menu">
-                            <li><a href="{{ path('_cupcakes_blog-detail') }}">Blog Detail</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item-has-children"><a href="#">Contact</a>
-                        <ul class="sub-menu">
-                            <li><a href="{{ path('_cupcakes_contact') }}">Contact 1</a></li>
-                        </ul>
-                    </li>
+
+                    <li><a href="{{ path('_cupcakes_contact') }}">Contact</a></li>
                     {% if not app.user %}
                         <li><a href="#" onclick="showLogin()">Login</a></li>
                     {% else %}
