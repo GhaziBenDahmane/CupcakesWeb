@@ -4,6 +4,7 @@ namespace BackOfficeBundle\Controller;
 
 use GamingBundle\Entity\Coupon;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -32,6 +33,7 @@ class CouponController extends Controller
      * Creates a new coupon entity.
      *
      */
+
     public function newAction(Request $request)
     {
         $coupon = new Coupon();

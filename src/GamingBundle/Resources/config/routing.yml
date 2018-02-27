@@ -9,3 +9,6 @@ gaming_homepage:
 flappy_page:
     path:     /flappy
     defaults: { _controller: GamingBundle:Default:flappy }
+_generate_coupon:
+    path:     /coupon/generate
+    defaults: { _controller: GamingBundle:Coupon:generate }

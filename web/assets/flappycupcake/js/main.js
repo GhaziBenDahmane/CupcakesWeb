@@ -1,9 +1,11 @@
-var game = new Phaser.Game(400, 490);
-
+var game = new Phaser.Game(400, 490, Phaser.AUTO, 'flappyCupcake', null, true);
+$(function () {
+    $('.gameResult').hide();
+})
 var mainState = {
 
     preload: function () {
-        game.stage.backgroundColor = '#71c5cf';
+        // game.stage.backgroundColor = '#71c5cf';
         game.load.spritesheet('play', 'assets/flappycupcake/assets/play.png');
         game.load.spritesheet('shop', 'assets/flappycupcake/assets/shop.png');
         game.load.image('bird', 'assets/flappycupcake/assets/bird.png');
@@ -76,17 +78,15 @@ var mainState = {
     },
 
     gameEnded: function () {
-        button = game.add.button(game.world.centerX - 95, 300, 'shop', function () {
-            location.href = '/store'
-        }, this, 2, 1, 0);
-        button = game.add.button(game.world.centerX - 95, 350, 'play', function () {
-            game.lockRender = false;
-            game.state.start('main')
-        }, this, 2, 1, 0);
-        setTimeout(function () {
-            game.lockRender = true;
-        }, 500)
 
+        game.destroy();
+        axios.get('/coupon/generate')
+            .then(function (response) {
+                $('.gameResult').show();
+                $('#promcode').html(response.data)
+                console.log(response);
+
+            })
 
 
     },
@@ -113,5 +113,8 @@ var mainState = {
     },
 };
 
-game.state.add('main', mainState);
-game.state.start('main'); 
+function startGame() {
+    game.state.add('main', mainState);
+    game.state.start('main');
+
+}

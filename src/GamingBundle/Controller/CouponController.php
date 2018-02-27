@@ -13,10 +13,20 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class CouponController extends Controller
 {
-    /**
-     * Lists all coupon entities.
-     *
-     */
+    public function generateAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $coupon = new Coupon();
+        $coupon->setCode(uniqid());
+        $coupon->setPercentage(0.20);
+        $date = new \DateTime('now');
+        date_add($date, date_interval_create_from_date_string('10 days'));
+        $coupon->setExpirationDate($date);
+        $em->persist($coupon);
+        $em->flush();
+        return new Response($coupon->getCode());
+    }
+
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();

@@ -1,17 +1,80 @@
+{% extends 'layoutPages.html.twig' %}
+{% block header %}
+    {{ parent() }}
+{% endblock %}
 
-<!DOCTYPE html>
-<html>
+{% block content %}
+    <div class="page-wrap">
+        <!--section-->
+        <div class="ps-section--hero"><img src="{{ asset('assets/front/images/hero/01.jpg') }}" alt="">
+            <div class="ps-section__content text-center">
+                <h3 class="ps-section__title">OUR BAKERY</h3>
+                <div class="ps-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li><a href="{{ path('_cupcakes_homepage') }}">Home</a></li>
+                        <li class="active">About Us</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <section class="ps-section ps-section--team ps-section--pattern pt-80 pb-80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+                        <div class="ps-section__header">
+                            <h3 class="ps-section__title ps-section__title--left">GAMES</h3>
+                            <p>Play our game named <b> FLAPPY CUPCAKE</b> and try to win incredible reductions.</p>
+                            <p>Jump using the space bar.</p>
+                            <p>To start playing hit the start button below.</p>
+                            <span class="ps-btn ps-section__morelink" href="#" onclick="startGame()">Start<i
+                                        class="fa fa-angle-right"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 ">
+                        <div class="ps-section__content">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+                                    <article class="ps-people" id="flappyCupcake">
+                                        <div class="ps-people__thumbnail gameResult">
+                                            <a class="ps-people__overlay" href="#"></a><img
+                                                    src="{{ asset('assets/front/images/team/team-1.jpg') }}" alt="">
+                                        </div>
+                                        <div class="ps-people__content gameResult">
+                                            <h4>Christian Gregory</h4><span
+                                                    class="ps-people__position">CEO - Founder</span>
+                                            <p>Congratulation you just won a 20% reduction over your next purchase using
+                                                this code.</p>
+                                            <p style="background-color: #eff0f1" id="promcode"></p>
+                                        </div>
+                                    </article>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 
-<head>
-    <title> Flappy CupCake </title>
-    <meta name="viewport" content="initial-scale=1.0" />
+{% endblock %}
 
-    <script type="text/javascript" src="{{ asset('assets/flappycupcake/js/phaser.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/flappycupcake/js/main.js') }}"></script>
-</head>
+    {% block footer %}
+        {{ parent() }}
 
-<body>
+    {% endblock %}
 
-</body>
+    {% block jsLibrary %}
+        {{ parent() }}
 
-</html>
+    {% endblock %}
+
+    {% block slider %}
+        {{ parent() }}
+
+    {% endblock %}
+
+    {% block CustomScripts %}
+        {{ parent() }}
+        <script type="text/javascript" src="{{ asset('assets/flappycupcake/js/phaser.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('assets/flappycupcake/js/main.js') }}"></script>
+    {% endblock %}
