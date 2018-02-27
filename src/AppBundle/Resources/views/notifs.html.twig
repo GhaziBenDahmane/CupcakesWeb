@@ -1,8 +1,24 @@
-{% for notif in notifs %}
-    {{ notif.0.subject }}
-    {{ notif.0.message }}
-    {{ notif.0.link }}
-    <br><br>
+<li class="dropdown">
+    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"
+       role="button" aria-haspopup="true" aria-expanded="false"><i
+                class="fa fa-bell"></i></a>
+    <ul class="dropdown-menu dropdown-lg dropdown-content">
+        <li class="drop-title">Notifications<a href="#" class="drop-title-link"><i
+                        class="fa fa-angle-right"></i></a></li>
+        <li class="slimscroll dropdown-notifications">
+            <ul class="list-unstyled dropdown-oc">
+                {% for notif in notifs %}
+                    <li>
+                        <a href="#"><span class="notification-badge bg-success"><i
+                                        class="fa fa-bullhorn"></i></span>
+                            <span class="notification-info"><b>{{ notif.0.subject }}</b> <br>
+                                {{ notif.0.message }}<br>
+                                <small class="notification-date">{{ notif.0.date }}</small>
+                                                            </span></a>
+                    </li>
+                {% endfor %}
 
-{% endfor %}
-{{ date }}
+            </ul>
+        </li>
+    </ul>
+</li>

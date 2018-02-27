@@ -16,19 +16,34 @@ class DefaultController extends Controller
         return $this->render('AppBundle::index.html.twig');
     }
 
+    function date_compare($a, $b)
+    {
+        $t1 = strtotime($a[0]->getDate());
+        $t2 = strtotime($b[0]->getDate());
+        return $t2 - $t1;
+    }
+
     public function notifAction(Request $request)
     {
+        $max_notif_chars = 20;
         $manager = $this->get('mgilet.notification');
         $notif = $manager->createNotification('Hello world !');
         $notif->setMessage('This a notification.');
         $notif->setLink('http://symfony.com/');
 
-        $manager->addNotification(array($this->getUser()), $notif, true);
+//        $manager->addNotification(array($this->getUser()), $notif, true);
         $notifs = $manager->getNotifications($this->getUser());
         $humanDate = new HumanDate();
+        foreach ($notifs as $key => $value) {
+            $notifs[$key][0]->setDate($humanDate->transform($notifs[$key][0]->getDate()));
 
-        return $this->render('AppBundle::notifs.html.twig', array('notifs' => $notifs,
-            'date' => $humanDate->transform(new \DateTime('now'))));
+            if (strlen($notifs[$key][0]->getMessage()) > $max_notif_chars) {
+                $notifs[$key][0]->setMessage(substr($notifs[$key][0]->getMessage(), 0, $max_notif_chars) . '..');
+            }
+        }
+        usort($notifs, array($this, 'date_compare'));
+
+        return $this->render('AppBundle::notifs.html.twig', array('notifs' => $notifs));
     }
 
 }
