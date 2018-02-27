@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Cocur\HumanDate\HumanDate;
 
 class DefaultController extends Controller
 {
@@ -21,13 +22,13 @@ class DefaultController extends Controller
         $notif = $manager->createNotification('Hello world !');
         $notif->setMessage('This a notification.');
         $notif->setLink('http://symfony.com/');
-        // or the one-line method :
-        // $manager->createNotification('Notification subject','Some random text','http://google.fr');
+
         $manager->addNotification(array($this->getUser()), $notif, true);
-        $notifs=$manager->getNotifications($this->getUser());
-//        return new Response($notifs);
-        return $this->render('AppBundle::notifs.html.twig',array('notifs'=>$notifs));
-        return $this->redirectToRoute('_cupcakes_homepage');
+        $notifs = $manager->getNotifications($this->getUser());
+        $humanDate = new HumanDate();
+
+        return $this->render('AppBundle::notifs.html.twig', array('notifs' => $notifs,
+            'date' => $humanDate->transform(new \DateTime('now'))));
     }
 
 }

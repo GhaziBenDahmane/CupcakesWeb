@@ -89,6 +89,7 @@ class ComposerStaticInit1c56b9f8baaef3511324c8a024f1eb72
         'C' => 
         array (
             'Composer\\CaBundle\\' => 18,
+            'Cocur\\HumanDate\\' => 16,
         ),
         'A' => 
         array (
@@ -256,6 +257,10 @@ class ComposerStaticInit1c56b9f8baaef3511324c8a024f1eb72
         'Composer\\CaBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/composer/ca-bundle/src',
+        ),
+        'Cocur\\HumanDate\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cocur/human-date/src',
         ),
         'AncaRebeca\\FullCalendarBundle\\' => 
         array (
