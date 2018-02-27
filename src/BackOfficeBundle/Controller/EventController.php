@@ -3,6 +3,8 @@
 namespace BackOfficeBundle\Controller;
 
 use BackOfficeBundle\Entity\Actuality;
+use EventBundle\Entity\Event;
+use http\Env\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,24 +24,7 @@ class EventController extends Controller
 
 
 
-    /**
-     * Creates a new Actuality entity.
-     *
-     */
-    public function newAction(Request $request)
-    {
-        $actuality = new Actuality();
-        $form = $this->createCreateForm($actuality);
-        $form->handleRequest($request);
-
-        return $this->render('BackOfficeBundle:actuality:new.html.twig', array(
-            'actualities' => $actuality,
-            'form'   => $form->createView(),
-        ));
-    }
-
-
-    /**
+      /**
      * Creates a form to create a Actuality entity.
      *
      * @param Actuality $entity The entity
@@ -81,16 +66,16 @@ class EventController extends Controller
 
 
     /**
-     * Finds and displays a Actuality entity.
+     * Finds and displays a Event entity.
      *
      */
-    public function showAction(Actuality $actuality)
+    public function showAction(Request $request)
     {
-        $deleteForm = $this->createDeleteForm($actuality);
+        $em = $this->getDoctrine()->getManager();
 
-        return $this->render('BackOfficeBundle:Actuality:show.html.twig', array(
-            'actualities' => $actuality,
-            'delete_form' => $deleteForm->createView(),
+        $event = $em->getRepository('EventBundle:Event')->find($request->get('id'));
+        return $this->render('BackOfficeBundle:Event:show.html.twig', array(
+            'event' => $event,
         ));
     }
 
@@ -125,46 +110,31 @@ class EventController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createEditForm(Actuality $actuality)
-    {
-        $form = $this->createForm('BackOfficeBundle\Form\ActualityType',$actuality, array(
-            'action' => $this->generateUrl('actuality_update', array('id' => $actuality->getId())),
-            'method' => 'PUT',
-        ));
 
-        $form->add('submit', SubmitType::class, array('label' => 'Update'));
-
-        return $form;
-    }
 
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $actuality = $em->getRepository('BackOfficeBundle:Actuality')->find($id);
+        $event = $em->getRepository('EventBundle:Event')->find($id);
 
-        if (!$actuality) {
-            throw $this->createNotFoundException('Unable to find Actuality entity.');
-        }
+        $content =$request->getContent();
+        $data = json_decode($content, true);
 
 
-        $editForm = $this->createEditForm($actuality);
-        $editForm->handleRequest($request);
 
-        if ($editForm->isValid()) {
+        if($data["ajax"]=="true")
+        {
+            $event->setStatus($data["status"]);
+            ($data["status"]=="reject") ? $event->setBgColor("#ff4500") :  $event->setBgColor("#808000") ;
+            $em->persist($event);
             $em->flush();
-
-            return $this->redirect($this->generateUrl('actuality_index'));
+            return new \Symfony\Component\HttpFoundation\Response("true");
         }
 
-        return $this->render('BackOfficeBundle:Actuality:edit.html.twig', array(
-            'actualities'      => $actuality,
-            'edit_form'   => $editForm->createView(),
-
-        ));
     }
     /**
-     * Deletes a BackActuality entity.
+     * Deletes a Back entity.
      *
      */
     public function deleteAction(Request $request, $id)

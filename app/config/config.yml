@@ -105,3 +105,6 @@ vresh_twilio:
     authToken: '65063fd6f5f0b228ff625955eb0fb4ca'
     #(Optional, default: 1) Number of times to retry failed requests
     retryAttempts: 3
+
+full_calendar:
+     class_manager: EventBundle\Entity\Event

@@ -2,31 +2,27 @@ _back_office_event_index:
     path:     /
     defaults: { _controller: "BackOfficeBundle:Event:index" }
 
-_back_office_promotion_show:
+_back_office_event_show:
     path:     /{id}/show
-    defaults: { _controller: "BackOfficeBundle:PromotionAdmin:show" }
+    defaults: { _controller: "BackOfficeBundle:Event:show" }
     methods:  GET
 
-_back_office_promotion_new:
+_back_office_event_new:
     path:     /new
-    defaults: { _controller: "BackOfficeBundle:PromotionAdmin:new" }
+    defaults: { _controller: "BackOfficeBundle:Event:new" }
 
-_back_office_promotion_create:
-    path:     /create
-    defaults: { _controller: "BackOfficeBundle:PromotionAdmin:create" }
-    requirements: { _method: post }
 
-_back_office_promotion_update:
+_back_office_event_update:
     path:     /{id}/update
-    defaults: { _controller: "BackOfficeBundle:PromotionAdmin:update" }
+    defaults: { _controller: "BackOfficeBundle:Event:update" }
 
 
-_back_office_promotion_edit:
+_back_office_event_edit:
     path:     /{id}/edit
     defaults: { _controller: "BackOfficeBundle:PromotionAdmin:edit" }
 
 
-_back_office_promotion_delete:
+_back_office_event_delete:
     path:     /{id}/delete
     defaults: { _controller: "BackOfficeBundle:PromotionAdmin:delete" }
     methods:  [GET, DELETE]

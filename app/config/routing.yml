@@ -36,8 +36,11 @@ user:
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
-ancarebeca_fullcalendar:
-    resource: "@FullCalendarBundle/Resources/config/routing.yml"
+fados_fullcalendar:
+    resource: "@EventBundle/Resources/config/routing.xml"
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
 mgilet_notifications:
     resource: "@MgiletNotificationBundle/Controller/"

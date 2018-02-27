@@ -2,9 +2,9 @@
 
 namespace EventBundle\Entity;
 
-use AncaRebeca\FullCalendarBundle\Event\CalendarEvent;
+
 use Doctrine\ORM\Mapping as ORM;
-use AncaRebeca\FullCalendarBundle\Model\FullCalendarEvent;
+use fadosProduccions\fullCalendarBundle\Entity\Event as BaseEvent;
 
 
 /**
@@ -13,7 +13,7 @@ use AncaRebeca\FullCalendarBundle\Model\FullCalendarEvent;
  * @ORM\Table(name="event")
  * @ORM\Entity(repositoryClass="EventBundle\Repository\EventRepository")
  */
-class Event extends CalendarEvent
+class Event extends BaseEvent
 {
 
     /**
@@ -23,21 +23,7 @@ class Event extends CalendarEvent
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="starting_date", type="date")
-     */
-    private $startingDate;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="ending_date", type="date")
-     */
-    private $endingDate;
+    public $id;
 
     /**
      * @var int
@@ -68,25 +54,50 @@ class Event extends CalendarEvent
     private $cost;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User" , inversedBy="id")
+     * @ORM\OneToMany(targetEntity="EventBundle\Entity\Participants" , mappedBy="idParticipant")
+     * @ORM\Column(type="string" , nullable=true)
      */
-    private $client;
+    private $participants;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $status="Pending";
 
     /**
      * @return mixed
      */
-    public function getClient()
+    public function getStatus()
     {
-        return $this->client;
+        return $this->status;
     }
 
     /**
-     * @param mixed $client
+     * @param mixed $status
      */
-    public function setClient($client)
+    public function setStatus($status)
     {
-        $this->client = $client;
+        $this->status = $status;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getParticipants()
+    {
+        return $this->participants;
+    }
+
+    /**
+     * @param mixed $participants
+     */
+    public function setParticipants($participants)
+    {
+        $this->participants = $participants;
+    }
+
+
+
 
 
     /**
@@ -97,54 +108,6 @@ class Event extends CalendarEvent
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set startingDate
-     *
-     * @param \DateTime $dateDebut
-     *
-     * @return Event
-     */
-    public function setStartingDate($startingDate)
-    {
-        $this->startingDate = $startingDate;
-
-        return $this;
-    }
-
-    /**
-     * Get startingDate
-     *
-     * @return \DateTime
-     */
-    public function getStartingDate()
-    {
-        return $this->startingDate;
-    }
-
-    /**
-     * Set endingDate
-     *
-     * @param \DateTime $endingDate
-     *
-     * @return Event
-     */
-    public function setEndingDate($endingDate)
-    {
-        $this->endingDate = $endingDate;
-
-        return $this;
-    }
-
-    /**
-     * Get endingDate
-     *
-     * @return \DateTime
-     */
-    public function getEndingDate()
-    {
-        return $this->endingDate;
     }
 
     /**
@@ -243,10 +206,7 @@ class Event extends CalendarEvent
         return $this->cost;
     }
 
-    public function toArray()
-    {
-        // TODO: Implement toArray() method.
-    }
+
 
 }
 

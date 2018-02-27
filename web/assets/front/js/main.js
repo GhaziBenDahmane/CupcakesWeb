@@ -14,7 +14,6 @@ function delete_row(id) {
     $("#add_row").removeAttr("disabled");
 
 }
-
 function  delete_entry(id) {
     axios.get('/event/'+id+'/delete')
         .then(function (response) {
@@ -35,9 +34,21 @@ function  delete_entry_res(id) {
             console.log(error);
         });
 }
+function  add_Member(id_user,id_event) {
+    axios.post('/participants/new', {
+        id_user: id_user,
+        id_event: id_event,
+        ajax: 'true'
+    })
+        .then(function (response) {
 
+
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
 /*Add Reservation ajax */
-
 function validate_row_res(id){
     axios.post("/reservation/new", {
         dateReservation : $("#dateReservation").val(),
@@ -60,13 +71,16 @@ function validate_row_res(id){
 }
 /*Add Event ajax */
 function validate_row(id){
+    var a = parseInt($("#lastidevent").val())+1;
     axios.post("/event/new", {
+        "title" : $("#title").val(),
         "startingDate" : $("#startingDate").val(),
         "endingDate": $("#endingDate").val(),
         "nbPerson": $("#nbPerson").val(),
         "nbTable": $("#nbTable").val(),
         "band": $("#band").val(),
         "cost":$("#cost").val(),
+        "id" : a,
         "ajax":'true'
     } )
         .then(function () {
@@ -81,12 +95,53 @@ function validate_row(id){
                 '<li><a class="glyphicon glyphicon-ok-circle" onclick="validate_row(id)"></a> </li></ul></td>'
             );
             $("#add_row").removeAttr("disabled");
+       .then(function () {
+           $('#addr1').html(
+               '<td>'+$("#title").val()+'</td>'+
+               '<td>'+$("#startingDate").val()+'</td>'+
+               '<td>'+$("#endingDate").val()+'</td>'+
+               '<td>'+$("#nbPerson").val()+'</td>'+
+               '<td>'+$("#nbTable").val()+'</td>'+
+               '<td>'+$("#band").val()+'</td>'+
+               '<td>'+$("#cost").val()+'</td>'+
+               '<td><ul><li><a id=" " class="glyphicon glyphicon-trash" onclick="delete_row(id)"> </a></li>'+
+               '<li><a class="glyphicon glyphicon-ok-circle" onclick="validate_row(id)"></a> </li></ul></td>'
+           );
+           $("#add_row").removeAttr("disabled");
 
         })
         .catch(function (error) {
         });
 }
 (function ($) {
+    
+    $(".search-query").keyup(function () {
+
+        axios.post('/participants/listAll', {
+            key: $(".search-query").val(),
+            ajax: 'true'
+        })
+            .then(function (response) {
+                var i =0;
+                var html="";
+                $.each(response.data , function () {
+
+                   html+=     '<tr id="U'+response.data[i].id +'">  '+
+                        '<td>'+response.data[i].username+'</td> ' +
+                       '<td>'+
+                       ' <button id="add_Member" type="button" class="btn btn-secondary btn-xs " onclick="add_Member('+response.data[i].id+','+$("#event_id").val()+')">Add<i class="glyphicon glyphicon-plus-sign"></i></button>'
+                       '</tr>'
+                   i++;
+                });
+
+                $("#table_member").html(html);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+        });
+    
     var i=1;
     $("#add_row").click(function(){
 
@@ -104,16 +159,18 @@ function validate_row(id){
                 '</tr>');            }
         else {
 
-            $('#table').append(
-                '<tr id=addr' + i + '>' +
-                '<td>' + ' <input id="startingDate" class="form-control form-control-xs"' + ' type="date"  > </td>' +
-                '<td>' + ' <input id="endingDate" class="form-control form-control-xs"' + ' type="date" > </td>' +
-                '<td>' + ' <input id="nbPerson" class="form-control form-control-xs"' + ' type="number"  > </td>' +
-                '<td>' + ' <input id="nbTable" class="form-control form-control-xs"' + ' type="number"  > </td>' +
-                '<td>' + ' <input id="band" class="form-control form-control-xs"' + ' type="text"  > </td>' +
-                '<td>' + ' <input id="cost" class="form-control form-control-xs"' + ' type="number"  > </td>' +
-                '<td>' + ' <a id="' + i + '" class="glyphicon glyphicon-trash" onclick="delete_row(id)"> </a> ' +
-                '<a class="glyphicon glyphicon-ok-circle" onclick="validate_row(id)"></a> ' +
+                $('#table').append(
+                    '<tr id=addr' + i + '>' +
+                    '<td>' + ' <input id="title" class="form-control form-control-xs"' + ' type="text" placeholder="Title" > </td>' +
+
+                    '<td>' + ' <input id="startingDate" class="form-control form-control-xs"' + ' type="date"  > </td>' +
+                    '<td>' + ' <input id="endingDate" class="form-control form-control-xs"' + ' type="date" > </td>' +
+                    '<td>' + ' <input id="nbPerson" class="form-control form-control-xs"' + ' type="number"  > </td>' +
+                    '<td>' + ' <input id="nbTable" class="form-control form-control-xs"' + ' type="number"  > </td>' +
+                    '<td>' + ' <input id="band" class="form-control form-control-xs"' + ' type="text"  > </td>' +
+                    '<td>' + ' <input id="cost" class="form-control form-control-xs"' + ' type="number"  > </td>' +
+                    '<td>' + ' <a id="' + i + '" class="glyphicon glyphicon-trash" onclick="delete_row(id)"> </a> ' +
+                    '<a class="glyphicon glyphicon-ok-circle" onclick="validate_row(id)"></a> ' +
 
                 '</td>' +
                 '</tr>');

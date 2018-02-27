@@ -26,6 +26,7 @@
                 <table class="table" id="table">
                     <thead>
                     <tr>
+                        <th>Title</th>
                         <th>Starting date</th>
                         <th>Ending date</th>
                         <th>Number of person</th>
@@ -38,8 +39,9 @@
                     <tbody>
                     {% for event in events %}
                         <tr id="addr{{ event.id }}">
-                            <td>{% if event.startingDate %}{{ event.startingDate|date('Y-m-d') }}{% endif %}</td>
-                            <td>{% if event.endingDate %}{{ event.endingDate|date('Y-m-d') }}{% endif %}</td>
+                            <td><a href="{{ path('event_show', { 'id': event.id  }) }}">{{ event.title }}</a></td>
+                            <td>{% if event.StartDatetime %}{{ event.StartDatetime|date('Y-m-d') }}{% endif %}</td>
+                            <td>{% if event.EndDatetime %}{{ event.EndDatetime|date('Y-m-d') }}{% endif %}</td>
                             <td>{{ event.nbPerson }}</td>
                             <td>{{ event.nbTable }}</td>
                             <td>{% if event.band %}Yes{% else %}No{% endif %}</td>
@@ -50,7 +52,7 @@
                                         <a id="" class="glyphicon glyphicon-trash" onclick="delete_entry({{ event.id }})"> </a>
                                     </li>
                                     <li>
-                                        <a class="glyphicon glyphicon-ok-circle" onclick="validate_row(id)"></a>
+                                        <a class="glyphicon glyphicon-ok-circle" onclick="validate_row({{ event.id }})"></a>
                                     </li>
                                 </ul>
                             </td>
@@ -67,6 +69,7 @@
             <div class="form-group text-left">
                 <button id="add_row" class="ps-btn">New Event<i class="fa fa-angle-right"></i></button>
             </div>
+            <input id="lastidevent" type="number" value="{{ id }}" hidden >
         </div>
 
         <center>

@@ -1,0 +1,22 @@
+participants_index:
+    path:     /
+    defaults: { _controller: "EventBundle:Participants:index" }
+
+participants_show:
+    path:     /{id}/show
+    defaults: { _controller: "EventBundle:Participants:show" }
+
+participants_new:
+    path:     /new
+    defaults: { _controller: "EventBundle:Participants:new" }
+
+participants_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "EventBundle:Participants:edit" }
+
+participants_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "EventBundle:Participants:delete" }
+participants_listAll:
+    path:     /listAll
+    defaults: { _controller: "EventBundle:Participants:listAll" }

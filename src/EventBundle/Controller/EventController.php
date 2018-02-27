@@ -25,6 +25,8 @@ class EventController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $events = $em->getRepository('EventBundle:Event')->findAll();
+        $last_event_id= $em->getRepository('EventBundle:Event')->findLast();
+
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $events, /* query NOT result */
@@ -35,6 +37,8 @@ class EventController extends Controller
 
         return $this->render('EventBundle:event:index.html.twig', array(
             'events' => $pagination,
+            'id' => $last_event_id['id']
+
         ));
     }
 
@@ -45,8 +49,6 @@ class EventController extends Controller
     public function newAction(Request $request)
     {
         $event = new Event();
-        $form = $this->createForm('EventBundle\Form\EventType', $event);
-        $form->handleRequest($request);
         $content =$request->getContent();
         $data = json_decode($content, true);
 
@@ -60,28 +62,26 @@ class EventController extends Controller
             $nbTable =$data["nbTable"];
             $band =$data["band"];
             $cost =$data["cost"];
-            $event->setStartingDate($startingDate);
-            $event->setEndingDate($endingDate);
+            $title =$data["title"];
+            $event->setTitle($title);
+            $event->setStartDatetime($startingDate);
+            $event->setEndDatetime($endingDate);
             $event->setNbPerson($nbPerson);
             $event->setNbTable($nbTable);
             $event->setBand($band);
             $event->setCost($cost);
+            $event->setUrl("/admin/event/".$data["id"]."/show");
+            $event->setBgColor("#ff5719");
             $em = $this->getDoctrine()->getManager();
             $em->persist($event);
             $em->flush($event);
 
         }
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($event);
-            $em->flush($event);
 
-            return $this->redirectToRoute('event_show', array('id' => $event->getId()));
-        }
 
         return $this->render('EventBundle:event:new.html.twig', array(
-            'event' => $event,
-            'form' => $form->createView(),
+            'event' => $event
+
         ));
     }
 
@@ -91,11 +91,12 @@ class EventController extends Controller
      */
     public function showAction(Event $event)
     {
-        $deleteForm = $this->createDeleteForm($event);
+        $em = $this->getDoctrine()->getManager();
 
+        $users = $em->getRepository('UserBundle:User')->findAll();
         return $this->render('EventBundle:event:show.html.twig', array(
             'event' => $event,
-            'delete_form' => $deleteForm->createView(),
+            'users' => $users,
         ));
     }
 
@@ -105,7 +106,6 @@ class EventController extends Controller
      */
     public function editAction(Request $request, Event $event)
     {
-        $deleteForm = $this->createDeleteForm($event);
         $editForm = $this->createForm('EventBundle\Form\EventType', $event);
         $editForm->handleRequest($request);
 
@@ -118,7 +118,6 @@ class EventController extends Controller
         return $this->render('EventBundle:event:edit.html.twig', array(
             'event' => $event,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 

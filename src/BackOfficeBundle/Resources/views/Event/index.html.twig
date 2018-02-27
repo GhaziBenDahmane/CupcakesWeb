@@ -1,12 +1,14 @@
-
 {% extends 'layoutAdmin.html.twig' %}
 {% block header %}
     {{ parent() }}
-    <link href="{{ asset('assets/back/plugins/datatables/css/jquery.datatables.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('assets/back/plugins/datatables/css/jquery.datatables_themeroller.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('assets/back/plugins/bootstrap-datepicker/css/datepicker3.css') }}" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="{{ asset('bundles/fullcalendar/css/fullcalendar/fullcalendar.min.css') }}" />
-
+    <link href="{{ asset('assets/back/plugins/datatables/css/jquery.datatables.min.css') }}" rel="stylesheet"
+          type="text/css">
+    <link href="{{ asset('assets/back/plugins/datatables/css/jquery.datatables_themeroller.css') }}" rel="stylesheet"
+          type="text/css">
+    <link href="{{ asset('assets/back/plugins/bootstrap-datepicker/css/datepicker3.css') }}" rel="stylesheet"
+          type="text/css">
+    <link rel="stylesheet" href="{{ asset('bundles/fullcalendar/css/fullcalendar.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/fullcalendar/css/fullcalendar.print.css') }}" media="print" />
 
 {% endblock %}
 {% block menu %}
@@ -18,18 +20,27 @@
         <!-- Page Content -->
         <div class="page-content">
             <!-- Page Header -->
-          <!-- /Page Header -->
+            <!-- /Page Header -->
             <!-- Page Inner -->
             <div class="page-inner">
                 <div class="page-title">
-                    <h3 class="breadcrumb-header">Event</h3>
+                    <h3 class="breadcrumb-header">Event Calendar</h3>
                 </div>
 
                 <div id="main-wrapper">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-white">
+                                <div class="panel-heading clearfix">
+                                </div>
+                                <div class="panel-body">
+                                    {{ fullCalendar() }}
 
+                                </div>
+
+                        </div>
+                    </div><!-- Row -->
                 </div><!-- Main Wrapper -->
-                {% include '@FullCalendar/Calendar/calendar.html.twig' %}
-
             </div><!-- /Page Inner -->
 
 
@@ -41,13 +52,15 @@
 {% endblock %}
 {% block script %}
     {{ parent() }}
-    <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/lib/jquery.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/lib/moment.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/fullcalendar.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/fullcalendar.default-settings.js') }}"></script>
     <script src="{{ asset('assets/back/plugins/datatables/js/jquery.datatables.min.js') }}"></script>
     <script src="{{ asset('assets/back/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
     <script src="{{ asset('assets/back/js/pages/table-data.js') }}"></script>
     <script src="{{ asset('assets/back/js/script.js') }}"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/back/js/jquery-1.8.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/moment.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/init.fullCalendar.js') }}"></script>
 {% endblock %}
 

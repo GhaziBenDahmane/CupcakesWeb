@@ -1,3 +1,16 @@
+function event_status(status,id) {
+    axios.post('/admin/event/'+id+'/update', {
+        ajax: 'true',
+        status: status
+    })
+        .then(function (response) {
+            $("#status").text(status);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
 $("#CSubmit").click(function(){
 
     axios.post('admin/contact/new', {

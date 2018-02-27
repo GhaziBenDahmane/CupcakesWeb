@@ -15,7 +15,7 @@ class EventType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('startingDate',DateType::class)->add('endingDate',DateType::class)->add('nbPerson')->add('nbTable')->add('band')->add('cost')->add('client')
+        $builder->add('StartDatetime',DateType::class)->add('EndDatetime',DateType::class)->add('nbPerson')->add('nbTable')->add('band')->add('cost')->add('client')
          ;
     }
     
