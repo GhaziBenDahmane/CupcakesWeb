@@ -4,6 +4,9 @@ _cupcakes_homepage:
 _cupcakes_notif:
     path:     /notif
     defaults: { _controller: AppBundle:Default:notif }
+cupcakes_notif:
+    path:     /notifs/seen
+    defaults: { _controller: AppBundle:Default:seen }
 
 _cupcakes_blog-listing:
     path:     /blog-listing

@@ -28,6 +28,8 @@ class DefaultController extends Controller
         $max_notif_chars = 20;
         $manager = $this->get('mgilet.notification');
         $notifs = $manager->getNotifications($this->getUser());
+        $unseen = $manager->getUnseenNotificationCount($this->getUser());
+        $htmlclass = $unseen ? "fa fa-bell" : "fa fa-bell-o";
         $humanDate = new HumanDate();
         foreach ($notifs as $key => $value) {
             $notifs[$key][0]->setDate($humanDate->transform($notifs[$key][0]->getDate()));
@@ -38,7 +40,14 @@ class DefaultController extends Controller
         }
         usort($notifs, array($this, 'date_compare'));
 
-        return $this->render('AppBundle::notifs.html.twig', array('notifs' => $notifs));
+        return $this->render('AppBundle::notifs.html.twig', array('notifs' => $notifs, 'class' => $htmlclass));
+    }
+
+    public function seenAction(Request $request)
+    {
+        $manager = $this->get('mgilet.notification');
+        $manager->markAllAsSeen($this->getUser());
+        return new Response('done');
     }
 
 }
