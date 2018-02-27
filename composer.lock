@@ -4,57 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b9e0ea4f06c0561c6ec929ac22e50296",
+    "content-hash": "b6fc9542ec08a5bdf477cc748823dd2d",
     "packages": [
-        {
-            "name": "ancarebeca/full-calendar-bundle",
-            "version": "v5.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ancarebeca/FullCalendarBundle.git",
-                "reference": "12096b8fe471832b35a91764729ae9c15d97eba6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ancarebeca/FullCalendarBundle/zipball/12096b8fe471832b35a91764729ae9c15d97eba6",
-                "reference": "12096b8fe471832b35a91764729ae9c15d97eba6",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.9",
-                "symfony/symfony": "^3.1.0"
-            },
-            "require-dev": {
-                "phpspec/phpspec": "^2.2"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-4": {
-                    "AncaRebeca\\FullCalendarBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Rebeca Mora Anca",
-                    "email": "anca.rebeca@gmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Symfony2 integration with the library FullCalendar.js",
-            "homepage": "https://github.com/ancarebeca/FullCalendarBundle",
-            "keywords": [
-                "calendar",
-                "fullcalendar",
-                "jquery calendar",
-                "symfony2 bundle",
-                "symfony2 calendar"
-            ],
-            "time": "2017-05-01T14:35:52+00:00"
-        },
         {
             "name": "cocur/human-date",
             "version": "v0.1",
@@ -228,7 +179,7 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2017-02-24 16:22:25"
+            "time": "2017-12-06T07:11:42+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -302,7 +253,7 @@
                 "cache",
                 "caching"
             ],
-            "time": "2017-07-22 12:49:21"
+            "time": "2017-08-25T07:02:50+00:00"
         },
         {
             "name": "doctrine/collections",
@@ -369,7 +320,7 @@
                 "collections",
                 "iterator"
             ],
-            "time": "2017-01-03 10:49:41"
+            "time": "2017-07-22T10:37:32+00:00"
         },
         {
             "name": "doctrine/common",
@@ -442,7 +393,7 @@
                 "persistence",
                 "spl"
             ],
-            "time": "2017-07-22 08:35:12"
+            "time": "2017-08-31T08:43:38+00:00"
         },
         {
             "name": "doctrine/dbal",
@@ -515,7 +466,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2017-07-22 20:44:48"
+            "time": "2017-11-19T13:38:54+00:00"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -755,7 +706,7 @@
                 "singularize",
                 "string"
             ],
-            "time": "2015-11-06 14:35:42"
+            "time": "2018-01-09T20:05:19+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -809,7 +760,7 @@
                 "constructor",
                 "instantiate"
             ],
-            "time": "2015-06-14 21:17:01"
+            "time": "2017-07-22T11:58:36+00:00"
         },
         {
             "name": "doctrine/lexer",
@@ -945,7 +896,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2017-12-17 02:57:51"
+            "time": "2017-12-20T00:38:15+00:00"
         },
         {
             "name": "fados-produccions/full-calendar-bundle",
@@ -995,7 +946,7 @@
             "keywords": [
                 "fullcalendar"
             ],
-            "time": "2017-07-12 16:44:46"
+            "time": "2017-07-12T16:44:46+00:00"
         },
         {
             "name": "fig/link-util",
@@ -1108,7 +1059,7 @@
                 "javascript",
                 "routing"
             ],
-            "time": "2017-08-25 15:21:42"
+            "time": "2017-08-25T15:21:42+00:00"
         },
         {
             "name": "friendsofsymfony/user-bundle",
@@ -2733,7 +2684,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2017-09-27 18:06:46"
+            "time": "2017-09-27T18:10:31+00:00"
         },
         {
             "name": "twilio/sdk",
@@ -2829,7 +2780,7 @@
             "keywords": [
                 "twilio"
             ],
-            "time": "2016-08-17 18:09:02"
+            "time": "2016-08-17T18:09:02+00:00"
         },
         {
             "name": "willdurand/jsonp-callback-validator",
@@ -2869,7 +2820,7 @@
                 }
             ],
             "description": "JSONP callback validator.",
-            "time": "2014-01-20 22:35:06"
+            "time": "2014-01-20T22:35:06+00:00"
         }
     ],
     "packages-dev": [
@@ -2997,6 +2948,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "cocur/human-date": 0,
+        "fados-produccions/full-calendar-bundle": 20,
         "vresh/twilio-bundle": 20
     },
     "prefer-stable": false,

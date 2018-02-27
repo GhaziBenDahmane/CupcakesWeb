@@ -48,6 +48,5 @@ return array(
     'Doctrine\\Bundle\\DoctrineBundle\\' => array($vendorDir . '/doctrine/doctrine-bundle'),
     'Composer\\CaBundle\\' => array($vendorDir . '/composer/ca-bundle/src'),
     'Cocur\\HumanDate\\' => array($vendorDir . '/cocur/human-date/src'),
-    'AncaRebeca\\FullCalendarBundle\\' => array($vendorDir . '/ancarebeca/full-calendar-bundle'),
     '' => array($baseDir . '/src'),
 );

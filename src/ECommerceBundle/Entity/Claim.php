@@ -38,7 +38,7 @@ class Claim
     /**
      * @var string
      *
-     * @ORM\Column(name="posted_on", type="datetime",nullable=true)
+     * @ORM\Column(name="posted_on", type="datetime")
      */
     private $postedOn;
 

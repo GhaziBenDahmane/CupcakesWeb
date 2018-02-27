@@ -4,17 +4,17 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit1c56b9f8baaef3511324c8a024f1eb72
+class ComposerStaticInita0ce8437a3b5c670e0c8ebf923914399
 {
     public static $files = array (
         '92c8763cd6170fce6fcfe7e26b4e8c10' => __DIR__ . '/..' . '/symfony/phpunit-bridge/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
-        '32dcc8afd4335739640db7d200c1971d' => __DIR__ . '/..' . '/symfony/polyfill-apcu/bootstrap.php',
-        '6a47392539ca2329373e0d33e1dba053' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/bootstrap.php',
-        'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
         '023d27dca8066ef29e6739335ea73bad' => __DIR__ . '/..' . '/symfony/polyfill-php70/bootstrap.php',
+        'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
+        '6a47392539ca2329373e0d33e1dba053' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/bootstrap.php',
+        '32dcc8afd4335739640db7d200c1971d' => __DIR__ . '/..' . '/symfony/polyfill-apcu/bootstrap.php',
         'bccfaf6207f67190a92f35585e9a78b2' => __DIR__ . '/..' . '/twilio/sdk/Services/Twilio.php',
         'd75fd5eaa0d755ac4eaba01660e59ae2' => __DIR__ . '/..' . '/symfony/symfony/src/Symfony/Component/VarDumper/Resources/functions/dump.php',
     );
@@ -74,6 +74,7 @@ class ComposerStaticInit1c56b9f8baaef3511324c8a024f1eb72
         array (
             'Fig\\Link\\' => 9,
             'FOS\\UserBundle\\' => 15,
+            'FOS\\JsRoutingBundle\\' => 20,
         ),
         'D' => 
         array (
@@ -90,10 +91,6 @@ class ComposerStaticInit1c56b9f8baaef3511324c8a024f1eb72
         array (
             'Composer\\CaBundle\\' => 18,
             'Cocur\\HumanDate\\' => 16,
-        ),
-        'A' => 
-        array (
-            'AncaRebeca\\FullCalendarBundle\\' => 30,
         ),
     );
 
@@ -222,6 +219,10 @@ class ComposerStaticInit1c56b9f8baaef3511324c8a024f1eb72
         array (
             0 => __DIR__ . '/..' . '/friendsofsymfony/user-bundle',
         ),
+        'FOS\\JsRoutingBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/friendsofsymfony/jsrouting-bundle',
+        ),
         'Doctrine\\ORM\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/orm/lib/Doctrine/ORM',
@@ -262,10 +263,6 @@ class ComposerStaticInit1c56b9f8baaef3511324c8a024f1eb72
         array (
             0 => __DIR__ . '/..' . '/cocur/human-date/src',
         ),
-        'AncaRebeca\\FullCalendarBundle\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/ancarebeca/full-calendar-bundle',
-        ),
     );
 
     public static $fallbackDirsPsr4 = array (
@@ -273,6 +270,13 @@ class ComposerStaticInit1c56b9f8baaef3511324c8a024f1eb72
     );
 
     public static $prefixesPsr0 = array (
+        'f' => 
+        array (
+            'fadosProduccions\\fullCalendarBundle\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/fados-produccions/full-calendar-bundle',
+            ),
+        ),
         'T' => 
         array (
             'Twig_' => 
@@ -292,6 +296,13 @@ class ComposerStaticInit1c56b9f8baaef3511324c8a024f1eb72
             'Knp\\Component' => 
             array (
                 0 => __DIR__ . '/..' . '/knplabs/knp-components/src',
+            ),
+        ),
+        'J' => 
+        array (
+            'JsonpCallbackValidator' => 
+            array (
+                0 => __DIR__ . '/..' . '/willdurand/jsonp-callback-validator/src',
             ),
         ),
         'D' => 
@@ -331,11 +342,11 @@ class ComposerStaticInit1c56b9f8baaef3511324c8a024f1eb72
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit1c56b9f8baaef3511324c8a024f1eb72::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit1c56b9f8baaef3511324c8a024f1eb72::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInit1c56b9f8baaef3511324c8a024f1eb72::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit1c56b9f8baaef3511324c8a024f1eb72::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit1c56b9f8baaef3511324c8a024f1eb72::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInita0ce8437a3b5c670e0c8ebf923914399::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInita0ce8437a3b5c670e0c8ebf923914399::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInita0ce8437a3b5c670e0c8ebf923914399::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInita0ce8437a3b5c670e0c8ebf923914399::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInita0ce8437a3b5c670e0c8ebf923914399::$classMap;
 
         }, null, ClassLoader::class);
     }
