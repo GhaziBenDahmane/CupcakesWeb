@@ -88,9 +88,15 @@
                                                           aria-haspopup="true" aria-expanded="false">Administration<i
                                     class="fa fa-angle-down"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{{ path('admin_homepage') }}">Index</a></li>
-                            <li><a href="#">Japanese</a></li>
-                            <li><a href="#">Chinese</a></li>
+                            <li><a href="/admin/actuality/">Blogs</a></li>
+                            <li><a href="/admin/contact/">Contact</a></li>
+                            <li><a href="/admin/product/">Products</a></li>
+                            <li><a href="/admin/event/">Events</a></li>
+                            <li><a href="/admin/pastry/">Pastry</a></li>
+                            <li><a href="/admin/claim/">Claims</a></li>
+                            <li><a href="/admin/promotion/">Promotion</a></li>
+                            <li><a href="/admin/delivery/">Delivery</a></li>
+
                         </ul>
 
                     </div>
@@ -105,7 +111,13 @@
             <div class="menu-toggle"><span></span></div>
             <div class="navigation__left">
                 <ul class="menu menu--left">
-                    <li><a href="{{ path('FrontFormation') }}">Formation</a></li>
+                    <li class="menu-item-has-children"><a href="/event">Event</a>
+                        <ul class="sub-menu">
+                            <li><a href="{{ path('FrontFormation') }}">Formation</a></li>
+                            <li><a href="/event">Event</a></li>
+                            <li><a href="/reservation">Reservation</a></li>
+                        </ul>
+                    </li>
                     <li class="menu-item-has-children"><a href="{{ path('_cupcakes_product-listing') }}">Products</a>
                         <ul class="sub-menu">
                             <li><a href="{{ path('_cupcakes_product-listing') }}">Products</a></li>
@@ -137,11 +149,12 @@
                 {% if  app.user %}
 
                     {{ render(controller('AppBundle:Default:userNotifs')) }}
+
+                    <div class="ps-cart"><a class="ps-cart__toggle" href="/Cart"><i
+                                    class="ps-icon--shopping-cart"></i></a>
+                    </div>
                 {% endif %}
 
-                <div class="ps-cart"><a class="ps-cart__toggle" href="/cart"><span><i>20</i></span><i
-                                class="ps-icon--shopping-cart"></i></a>
-                </div>
             </div>
         </div>
     </nav>
@@ -833,32 +846,7 @@
             </div>
         </div>
     </section>
-    <section class="ps-section ps-section--subscribe pt-80 pb-80">
-        <div class="container">
-            <div class="ps-subscribe">
-                <div class="row">
-                    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 ">
-                        <h4>ABOUT US</h4>
-                        <p>Te pri oblique ullamcorper, magna persequeris has eu. Mei prompta dolores examad debet
-                            suavitate. Pri te vocibus electram. Eu eleifend rationibus vis, at.</p>
-                        <p class="text-uppercase ps-subscribe__highlight">240 CENTRAL PARK, LONDON, OR 10019</p>
-                    </div>
-                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 ">
-                        <a class="ps-subscribe__logo" href="{{ path('_cupcakes_homepage') }}"><img
-                                    src="{{ asset('assets/front/images/logo-1.png') }}" alt=""></a>
-                    </div>
-                    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 ">
-                        <h4>SUBSCRIBE EMAIL</h4>
-                        <p>Give us your email, and we shall send regular updates for new stuff and events.</p>
-                        <form class="ps-subscribe__form" method="post" action="_action">
-                            <input class="form-control" type="text" placeholder="Type your email...">
-                            <button class="ps-btn ps-btn--sm">Subscribe</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
     <footer class="ps-footer">
         <div class="container">
             <div class="row">
