@@ -4,6 +4,10 @@ _cupcakes_homepage:
 _cupcakes_notif:
     path:     /notif
     defaults: { _controller: AppBundle:Default:notif }
+user_cupcakes_notif:
+    path:     /userNotifs
+    defaults: { _controller: AppBundle:Default:userNotifs }
+
 cupcakes_notif:
     path:     /notifs/seen
     defaults: { _controller: AppBundle:Default:seen }

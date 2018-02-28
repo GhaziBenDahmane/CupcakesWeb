@@ -115,7 +115,7 @@ class ClaimController extends Controller
             );
         }
 
-        return new Response($claim->getClient());
+        return new Response($this->getUser());
     }
 
     public function removeAction($id, Request $request)
