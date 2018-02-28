@@ -71,6 +71,7 @@ class ClaimController extends Controller
 
     public function editAction(Request $request, Claim $claim, $id)
     {
+
         $editForm = $this->createForm('ECommerceBundle\Form\ClaimType', $claim);
         $editForm->handleRequest($request);
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -94,6 +95,7 @@ class ClaimController extends Controller
 
     public function answerAction($id, Request $request)
     {
+        $humanDate = new HumanDate();
         $content = $request->getContent();
         $data = json_decode($content, true);
 
@@ -114,6 +116,13 @@ class ClaimController extends Controller
                 "Your Claim was answered "
             );
         }
+        $users = $em->getRepository('UserBundle:User')->findAll();
+        $manager = $this->get('mgilet.notification');
+        $notif = $manager->createNotification('Your claim was answered !');
+        $notif->setMessage('Answer :' . substr($claim->getAnswer(), 0, 20));
+        $notif->setLink('/claim/');
+        $manager->addNotification(array($claim->getClient()), $notif, true);
+
 
         return new Response($this->getUser());
     }
