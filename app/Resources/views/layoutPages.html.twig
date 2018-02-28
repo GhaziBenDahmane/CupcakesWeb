@@ -16,6 +16,8 @@
         <title>Bakery</title>
     {% endblock title %}
     <!-- Fonts-->
+    <script type="text/javascript" src="{{ asset('assets/front/plugins/jquery/dist/jquery.min.js') }}"></script>
+
     <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700%7CPacifico%7CVarela+Round%7CPoppins"
           rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/front/plugins/font-awesome/css/font-awesome.min.css') }}">
@@ -37,15 +39,7 @@
     <link rel="stylesheet" href="{{ asset('assets/front/plugins/revolution/css/navigation.css') }}">
     <!-- Custom-->
     <link rel="stylesheet" href="{{ asset('assets/front/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/loginForm/vendor/bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/loginForm/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/loginForm/fonts/Linearicons-Free-v1.0.0/icon-font.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/loginForm/vendor/css-hamburgers/hamburgers.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/loginForm/vendor/animsition/css/animsition.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/loginForm/vendor/select2/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/loginForm/vendor/daterangepicker/daterangepicker.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/loginForm/css/util.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/loginForm/css/main.css') }}">
+
     <script type="text/javascript" src="{{ asset('assets/front/js/axios.min.js') }}"></script>
 
     <!--HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries-->
@@ -437,7 +431,6 @@
 <!-- JS Library-->
 {% block jsLibrary %}
 
-    <script type="text/javascript" src="{{ asset('assets/front/plugins/jquery/dist/jquery.min.js') }}"></script>
     <script type="text/javascript"
             src="{{ asset('assets/front/plugins/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/front/plugins/owl-carousel/owl.carousel.min.js') }}"></script>

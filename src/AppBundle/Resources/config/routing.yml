@@ -41,6 +41,5 @@ _Cupcakes_front_logout:
     defaults: { _controller: AppBundle:Default:index}
 
 contact_history:
-    path:     /contact/{id}/history
+    path:     /contact/history
     defaults: { _controller: "AppBundle:Contact:history" }
-    methods:  [GET, POST]

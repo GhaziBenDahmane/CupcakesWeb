@@ -18,15 +18,14 @@ class ContactController extends Controller
     public function ContactAction(Request $request)
     {
         $contact = new Contact();
-        $content =$request->getContent();
+        $content = $request->getContent();
         $data = json_decode($content, true);
 
-        if($data["ajax"]=="true")
-        {
+        if ($data["ajax"] == "true") {
 
             $contact->setFirstName($data["firstName"]);
             $contact->setTel($data["tel"]);
-            $contact->setEmail($data["email"]);
+            $contact->setEmail($this->getUser()->getEmail());
             $contact->setMessage($data["message"]);
             $contact->setAdress($data["adress"]);
             $em = $this->getDoctrine()->getManager();
@@ -54,7 +53,8 @@ class ContactController extends Controller
         return $this->render('AppBundle:Contact:contact.html.html.twig');
     }
 
-    public function successAction(){
+    public function successAction()
+    {
         return new Response("email envoyé avec succès, Merci de vérifier votre boite mail.");
     }
 
@@ -66,13 +66,14 @@ class ContactController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $contact = $em->getRepository('AppBundle:Contact')->findBy(array('status'=> false));
+        $contact = $em->getRepository('AppBundle:Contact')->findBy(array('status' => false));
 
         return $this->render('AppBundle:Contact:index.html.twig', array(
             'contact' => $contact,
         ));
     }
-    public function historyAction($id)
+
+    public function historyAction()
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -87,7 +88,7 @@ class ContactController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $contact = $em->getRepository('AppBundle:Contact')->findBy(array('status'=> true));
+        $contact = $em->getRepository('AppBundle:Contact')->findBy(array('status' => true));
 
         return $this->render('AppBundle:Contact:archiveContact.html.twig', array(
             'contact' => $contact,
@@ -107,13 +108,13 @@ class ContactController extends Controller
             $this->addFlash(
                 'notice',
                 'Your changes were saved!'
-            );}
-
+            );
+        }
 
 
         return $this->render('@App/Contact/new.html.twig', array(
             'contact' => $product,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -127,7 +128,7 @@ class ContactController extends Controller
      */
     private function createCreateForm(Contact $entity)
     {
-        $form = $this->createForm('AppBundle\Form\addContactType',$entity, array(
+        $form = $this->createForm('AppBundle\Form\addContactType', $entity, array(
             'action' => $this->generateUrl('contact_create'),
             'method' => 'POST',
         ));
@@ -136,6 +137,7 @@ class ContactController extends Controller
 
         return $form;
     }
+
     public function createAction(Request $request)
     {
         $entity = new Contact();
@@ -153,12 +155,9 @@ class ContactController extends Controller
 
         return $this->render('@App/Contact/new.html.twig', array(
             'product' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
-
-
-
 
 
     /**
@@ -193,8 +192,8 @@ class ContactController extends Controller
 
 
         return $this->render('AppBundle:Contact:edit.html.twig', array(
-            'contact'      => $contact,
-            'edit_form'   => $editForm->createView(),
+            'contact' => $contact,
+            'edit_form' => $editForm->createView(),
 
         ));
     }
@@ -208,15 +207,15 @@ class ContactController extends Controller
      */
     private function createEditForm(Contact $contact)
     {
-        $form = $this->createForm('AppBundle\Form\ContactType',$contact, array(
+        $form = $this->createForm('AppBundle\Form\ContactType', $contact, array(
 
             'action' => $this->generateUrl('contact_update', array('id' => $contact->getId())),
             'method' => 'PUT',
         ));
-        $form->add('status', ChoiceType::class , array(
-            'choices' =>array(
-                'Not Contacted'=>'false',
-                'Contacted'=>'true'
+        $form->add('status', ChoiceType::class, array(
+            'choices' => array(
+                'Not Contacted' => 'false',
+                'Contacted' => 'true'
             )
         ));
         $form->add('submit', SubmitType::class, array('label' => 'Update'));
@@ -260,11 +259,12 @@ class ContactController extends Controller
         }
 
         return $this->render('AppBundle:Contact:edit.html.twig', array(
-            'contact'      => $contact,
-            'edit_form'   => $editForm->createView(),
+            'contact' => $contact,
+            'edit_form' => $editForm->createView(),
 
         ));
     }
+
     /**
      * Deletes a Contact entity.
      *
@@ -291,7 +291,6 @@ class ContactController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('contact_delete', array('id' => $contact->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-            ;
+            ->getForm();
     }
 }

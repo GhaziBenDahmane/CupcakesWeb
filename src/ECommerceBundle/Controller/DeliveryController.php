@@ -21,7 +21,6 @@ class DeliveryController extends Controller
         $order = $em->getRepository('ECommerceBundle:Delivery')->findAll();
         $content = $request->getContent();
         $data = json_decode($content, true);
-        var_dump($data);
         if ($data["ajax"] == "true") {
             $dateDelivery = \DateTime::createFromFormat('Y-m-d', $data["datedelivery"]);
             $Delivery->setName($data["name"]);
