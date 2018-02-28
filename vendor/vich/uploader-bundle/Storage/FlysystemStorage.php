@@ -22,8 +22,13 @@ class FlysystemStorage extends AbstractStorage
     /**
      * Constructs a new instance of FlysystemStorage.
      *
+<<<<<<< HEAD
      * @param PropertyMappingFactory $factory      The factory
      * @param MountManager           $mountManager Gaufrete filesystem factory
+=======
+     * @param PropertyMappingFactory $factory      The factory.
+     * @param MountManager           $mountManager Gaufrete filesystem factory.
+>>>>>>> anis
      */
     public function __construct(PropertyMappingFactory $factory, MountManager $mountManager)
     {
@@ -33,7 +38,11 @@ class FlysystemStorage extends AbstractStorage
     }
 
     /**
+<<<<<<< HEAD
      * {@inheritdoc}
+=======
+     * {@inheritDoc}
+>>>>>>> anis
      */
     protected function doUpload(PropertyMapping $mapping, UploadedFile $file, $dir, $name)
     {
@@ -41,6 +50,7 @@ class FlysystemStorage extends AbstractStorage
         $path = !empty($dir) ? $dir.'/'.$name : $name;
 
         $stream = fopen($file->getRealPath(), 'r');
+<<<<<<< HEAD
         $fs->writeStream($path, $stream, [
             'mimetype' => $file->getMimeType(),
         ]);
@@ -48,6 +58,15 @@ class FlysystemStorage extends AbstractStorage
 
     /**
      * {@inheritdoc}
+=======
+        $fs->writeStream($path, $stream, array(
+            'mimetype' => $file->getMimeType(),
+        ));
+    }
+
+    /**
+     * {@inheritDoc}
+>>>>>>> anis
      */
     protected function doRemove(PropertyMapping $mapping, $dir, $name)
     {
@@ -62,7 +81,11 @@ class FlysystemStorage extends AbstractStorage
     }
 
     /**
+<<<<<<< HEAD
      * {@inheritdoc}
+=======
+     * {@inheritDoc}
+>>>>>>> anis
      */
     protected function doResolvePath(PropertyMapping $mapping, $dir, $name, $relative = false)
     {
@@ -77,7 +100,11 @@ class FlysystemStorage extends AbstractStorage
     }
 
     /**
+<<<<<<< HEAD
      * {@inheritdoc}
+=======
+     * {@inheritDoc}
+>>>>>>> anis
      */
     public function resolveStream($obj, $fieldName, $className = null)
     {
@@ -94,7 +121,11 @@ class FlysystemStorage extends AbstractStorage
     }
 
     /**
+<<<<<<< HEAD
      * Get filesystem adapter by key.
+=======
+     * Get filesystem adapter by key
+>>>>>>> anis
      *
      * @param string $key
      *

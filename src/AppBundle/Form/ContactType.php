@@ -3,19 +3,21 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ContactType extends AbstractType
 {
     public function buildForm (FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('tel')
-            ->add('message')
-            ->add('firstName')
-            ->add('email',EmailType::class);
+
+            ->add('imageFile',VichFileType::class);
 
     }
 

@@ -5,7 +5,11 @@ namespace Vich\UploaderBundle\EventListener\Doctrine;
 use Doctrine\Common\EventArgs;
 
 /**
+<<<<<<< HEAD
  * UploadListener.
+=======
+ * UploadListener
+>>>>>>> anis
  *
  * Handles file uploads.
  *
@@ -16,6 +20,7 @@ class UploadListener extends BaseListener
     /**
      * The events the listener is subscribed to.
      *
+<<<<<<< HEAD
      * @return array The array of events
      */
     public function getSubscribedEvents()
@@ -28,6 +33,20 @@ class UploadListener extends BaseListener
 
     /**
      * @param EventArgs $event The event
+=======
+     * @return array The array of events.
+     */
+    public function getSubscribedEvents()
+    {
+        return array(
+            'prePersist',
+            'preUpdate',
+        );
+    }
+
+    /**
+     * @param EventArgs $event The event.
+>>>>>>> anis
      */
     public function prePersist(EventArgs $event)
     {
@@ -43,7 +62,11 @@ class UploadListener extends BaseListener
     }
 
     /**
+<<<<<<< HEAD
      * @param EventArgs $event The event
+=======
+     * @param EventArgs $event The event.
+>>>>>>> anis
      */
     public function preUpdate(EventArgs $event)
     {

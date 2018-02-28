@@ -13,6 +13,14 @@ contact_update:
     path:     /{id}/update
     defaults: { _controller: "AppBundle:Contact:update" }
 
+contact_new:
+    path:     /new
+    defaults: { _controller: "AppBundle:Contact:new" }
+
+contact_create:
+    path:     /create
+    defaults: { _controller: "AppBundle:Contact:create" }
+    requirements: { _method: post }
 
 contact_edit:
     path:     /{id}/edit
@@ -24,4 +32,12 @@ contact_delete:
     defaults: { _controller: "AppBundle:Contact:delete" }
     methods:  [GET, DELETE]
 
+contact_archive:
+    path:     /archive
+    defaults: { _controller: "AppBundle:Contact:archive" }
+    methods:  [GET, POST]
 
+contact_history:
+    path:     /
+    defaults: { _controller: "AppBundle:Contact:index" }
+    methods:  [GET, POST]

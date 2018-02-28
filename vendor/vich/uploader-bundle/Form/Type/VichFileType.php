@@ -3,12 +3,16 @@
 namespace Vich\UploaderBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+<<<<<<< HEAD
 use Symfony\Component\Form\Extension\Core\Type;
+=======
+>>>>>>> anis
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+<<<<<<< HEAD
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -87,6 +91,42 @@ class VichFileType extends AbstractType
         };
 
         $resolver->setNormalizer('download_uri', $downloadUriNormalizer);
+=======
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Translation\TranslatorInterface;
+
+use Vich\UploaderBundle\Form\DataTransformer\FileTransformer;
+use Vich\UploaderBundle\Handler\UploadHandler;
+use Vich\UploaderBundle\Storage\StorageInterface;
+
+class VichFileType extends AbstractType
+{
+    protected $storage;
+    protected $handler;
+    protected $translator;
+
+    public function __construct(StorageInterface $storage, UploadHandler $handler, TranslatorInterface $translator)
+    {
+        $this->storage = $storage;
+        $this->handler = $handler;
+        $this->translator = $translator;
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'allow_delete'  => true,
+            'download_link' => true,
+            'error_bubbling' => false,
+        ));
+    }
+
+    // BC for SF < 2.7
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $this->configureOptions($resolver);
+>>>>>>> anis
     }
 
     /**
@@ -94,12 +134,20 @@ class VichFileType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+<<<<<<< HEAD
         $builder->add('file', Type\FileType::class, [
             'required' => $options['required'],
             'label' => $options['label'],
             'attr' => $options['attr'],
             'translation_domain' => $options['translation_domain'],
         ]);
+=======
+        $builder->add('file', $this->getFieldType('file'), array(
+            'required' => $options['required'],
+            'label'    => $options['label'],
+            'attr'     => $options['attr'],
+        ));
+>>>>>>> anis
 
         $builder->addModelTransformer(new FileTransformer());
 
@@ -108,6 +156,7 @@ class VichFileType extends AbstractType
         }
     }
 
+<<<<<<< HEAD
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options
@@ -116,10 +165,19 @@ class VichFileType extends AbstractType
     {
         // add delete only if there is a file
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($options) {
+=======
+    protected function buildDeleteField(FormBuilderInterface $builder, array $options)
+    {
+        // add delete only if there is a file
+        $storage = $this->storage;
+        $translator = $this->translator;
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($options, $storage, $translator) {
+>>>>>>> anis
             $form = $event->getForm();
             $object = $form->getParent()->getData();
 
             // no object or no uploaded file: no delete button
+<<<<<<< HEAD
             if (null === $object || null === $this->storage->resolveUri($object, $form->getName())) {
                 return;
             }
@@ -137,12 +195,34 @@ class VichFileType extends AbstractType
             $form = $event->getForm();
             $object = $form->getParent()->getData();
             $delete = $form->has('delete') ? $form->get('delete')->getData() : false;
+=======
+            if (null === $object || null === $storage->resolveUri($object, $form->getName())) {
+                return;
+            }
+
+            $form->add('delete', $this->getFieldType('checkbox'), array(
+                'label'     => $translator->trans('form.label.delete', array(), 'VichUploaderBundle'),
+                'required'  => false,
+                'mapped'    => false,
+            ));
+        });
+
+        // delete file if needed
+        $handler = $this->handler;
+        $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) use ($handler) {
+            $delete = $event->getForm()->has('delete') ? $event->getForm()->get('delete')->getData() : false;
+            $entity = $event->getForm()->getParent()->getData();
+>>>>>>> anis
 
             if (!$delete) {
                 return;
             }
 
+<<<<<<< HEAD
             $this->handler->remove($object, $form->getName());
+=======
+            $handler->remove($entity, $event->getForm()->getName());
+>>>>>>> anis
         });
     }
 
@@ -151,6 +231,7 @@ class VichFileType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
+<<<<<<< HEAD
         $object = $form->getParent()->getData();
         $view->vars['object'] = $object;
 
@@ -161,6 +242,12 @@ class VichFileType extends AbstractType
                 $view->vars,
                 $this->resolveDownloadLabel($options['download_label'], $object, $form)
             );
+=======
+        $view->vars['object'] = $form->getParent()->getData();
+
+        if ($options['download_link'] && $view->vars['object']) {
+            $view->vars['download_uri'] = $this->storage->resolveUri($form->getParent()->getData(), $form->getName());
+>>>>>>> anis
         }
     }
 
@@ -172,6 +259,7 @@ class VichFileType extends AbstractType
         return 'vich_file';
     }
 
+<<<<<<< HEAD
     protected function resolveUriOption($uriOption, $object, FormInterface $form)
     {
         if (true === $uriOption) {
@@ -210,5 +298,21 @@ class VichFileType extends AbstractType
         }
 
         return ['download_label' => $downloadLabel];
+=======
+    // BC for SF < 2.8
+    public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    // ugly workaround for SF < 2.8 compatibility
+    protected function getFieldType($shortType)
+    {
+        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
+            return sprintf('Symfony\Component\Form\Extension\Core\Type\%sType', ucfirst($shortType));
+        }
+
+        return $shortType;
+>>>>>>> anis
     }
 }

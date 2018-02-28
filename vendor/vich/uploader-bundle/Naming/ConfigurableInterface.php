@@ -14,7 +14,11 @@ interface ConfigurableInterface
     /**
      * Injects configuration options.
      *
+<<<<<<< HEAD
      * @param array $options The options
+=======
+     * @param array $options The options.
+>>>>>>> anis
      */
     public function configure(array $options);
 }

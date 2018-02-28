@@ -1,0 +1,33 @@
+order_index:
+    path:     /
+    defaults: { _controller: "ECommerceBundle:Delivery:index" }
+    methods:  [GET, POST]
+
+order_show:
+    path:     /{id}/show
+    defaults: { _controller: "ECommerceBundle:Delivery:show" }
+    methods:  GET
+
+
+order_update:
+    path:     /{id}/update
+    defaults: { _controller: "ECommerceBundle:Delivery:update" }
+
+
+order_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ECommerceBundle:Delivery:edit" }
+
+
+order_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ECommerceBundle:Delivery:delete" }
+    methods:  [GET, DELETE]
+
+order_archive:
+    path:     /archive
+    defaults: { _controller: "ECommerceBundle:Delivery:archive" }
+    methods:  [GET, POST]
+
+
+

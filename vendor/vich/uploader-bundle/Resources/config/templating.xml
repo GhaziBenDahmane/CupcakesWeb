@@ -6,7 +6,11 @@
 
     <services>
 
+<<<<<<< HEAD
         <service id="vich_uploader.templating.helper.uploader_helper" class="Vich\UploaderBundle\Templating\Helper\UploaderHelper" public="true">
+=======
+        <service id="vich_uploader.templating.helper.uploader_helper" class="Vich\UploaderBundle\Templating\Helper\UploaderHelper">
+>>>>>>> anis
             <tag name="templating.helper" alias="vich_uploader" />
             <argument type="service" id="vich_uploader.storage" />
         </service>

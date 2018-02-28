@@ -196,8 +196,10 @@ function validate_row(id) {
         axios.post('/contact', {
             firstName: $("#CFirstName").val(),
             email: $("#CEmail").val(),
+            adress: $("#CAdress").val(),
             message: $("#CMsg").val(),
             tel: $("#CTel").val(),
+
             ajax: "true"
 
         })
@@ -205,7 +207,9 @@ function validate_row(id) {
                 $("#CFirstName").val("");
                 $("#CEmail").val("");
                 $("#CMsg").val("");
+                $("#CAdress").val("");
                 $("#CTel").val("");
+
                 $('.alert').append(' ' +
                     ' <strong>successful!</strong>  ');
 
@@ -221,32 +225,43 @@ function validate_row(id) {
     });
     $("#Dsubmit").click(function () {
 
-        axios.post('/order', {
-            Name: $("#Dname").val(),
-            Adress: $("#Daddress").val(),
-            DateDelivery: $("#Ddatedelivery").val(),
-            phone: $("#Dphone").val(),
-            email: $("#Demail").val(),
-            contactTime: $("#DcontactTime").val(),
+    $("#Dtype")
+        .change(function() {
+            var str =$( "select" ).val() ;
+
+            if(str=="Free")
+            {$('#Stype').html("Free service 3 Hours to receive");}
+            else
+            {$('#Stype').html("Premium service 1 Hour to receive");}
+        });
+
+
+    $("#DSubmit").click(function(){
+
+        axios.post('/delivery', {
+            name: $("#Dname").val(),
+            adress: $("#Daddress").val(),
+            datedelivery: $("#Ddatedelivery").val(),
+
+            serviceType: $("#Dtype").val(),
             notes: $("#Dnotes").val(),
 
             ajax: "true"
 
         })
-            .then(function (response) {
-                $("#Dname").val("");
-                $("#Daddress").val("");
-                $("#Ddatedelivery").val("");
-                $("#Dphone").val("");
-                $("#Demail").val("");
-                $("#DcontactTime").val("");
-                $("#Dnotes").val("");
-                $('.alert').append(' ' +
-                    ' <strong>successful!</strong>  ');
+    .then(function (response) {
+            $("#Dname").val("");
+            $("#Daddress").val("");
+            $("#Ddatedelivery").val("");
 
-                $('.alert').attr("class", "alert alert-success");
+            $("#Dtype").val("");
+            $("#Dnotes").val("");
+            $('.alert').append(' ' +
+                ' <strong>successful!</strong>  ');
 
-            })
+            $('.alert').attr("class","alert alert-success");
+
+        })
             .catch(function (error) {
                 $('.alert').append(' ' +
                     ' <strong>error!</strong>  ');
@@ -256,8 +271,7 @@ function validate_row(id) {
     });
 
 
-
-    $("#PSubmit").click(function () {
+    $("#PSubmit").click(function(){
 
         axios.post('/partnership/new', {
             firstName: $("#PFirstName").val(),

@@ -4,12 +4,20 @@ namespace Vich\UploaderBundle\Naming;
 
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+<<<<<<< HEAD
+=======
+
+>>>>>>> anis
 use Vich\UploaderBundle\Exception\NameGenerationException;
 use Vich\UploaderBundle\Mapping\PropertyMapping;
 use Vich\UploaderBundle\Util\Transliterator;
 
 /**
+<<<<<<< HEAD
  * PropertyNamer.
+=======
+ * PropertyNamer
+>>>>>>> anis
  *
  * @author Kévin Gomez <contact@kevingomez.fr>
  */
@@ -29,8 +37,13 @@ class PropertyNamer implements NamerInterface, ConfigurableInterface
 
     /**
      * @param array $options Options for this namer. The following options are accepted:
+<<<<<<< HEAD
      *                       - property: path to the property used to name the file. Can be either an attribute or a method.
      *                       - transliterate: whether the filename should be transliterated or not
+=======
+     *                         - property: path to the property used to name the file. Can be either an attribute or a method.
+     *                         - transliterate: whether the filename should be transliterated or not.
+>>>>>>> anis
      */
     public function configure(array $options)
     {
@@ -43,7 +56,11 @@ class PropertyNamer implements NamerInterface, ConfigurableInterface
     }
 
     /**
+<<<<<<< HEAD
      * {@inheritdoc}
+=======
+     * @inheritDoc
+>>>>>>> anis
      */
     public function name($object, PropertyMapping $mapping)
     {

@@ -57,7 +57,11 @@
                     </li>
                     <li>
                         <a href="{{ path('contact_index') }}">
-                            <i class="menu-icon icon-public"></i><span>Contacts</span>
+                            <i class="menu-icon icon-public"></i><span>Contacts</span><i class="accordion-icon fa fa-angle-left"></i>
+                            <ul class="sub-menu">
+                                <li>Contacts </li>
+                                <li><a href="{{ path('contact_archive') }}">Archive</a></li>
+                            </ul>
                         </a>
                     </li>
                     <li>

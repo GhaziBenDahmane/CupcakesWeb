@@ -20,7 +20,11 @@ class MappingListClassesCommand extends ContainerAwareCommand
     {
         $output->writeln('Looking for uploadable classes.');
 
+<<<<<<< HEAD
         $metadataReader = $this->getContainer()->get('vich_uploader.metadata_reader');
+=======
+        $metadataReader    = $this->getContainer()->get('vich_uploader.metadata_reader');
+>>>>>>> anis
         $uploadableClasses = $metadataReader->getUploadableClasses();
 
         foreach ($uploadableClasses as $class) {

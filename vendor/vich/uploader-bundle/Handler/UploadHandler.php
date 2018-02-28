@@ -19,22 +19,37 @@ use Vich\UploaderBundle\Storage\StorageInterface;
 class UploadHandler extends AbstractHandler
 {
     /**
+<<<<<<< HEAD
      * @var FileInjectorInterface
+=======
+     * @var FileInjectorInterface $injector
+>>>>>>> anis
      */
     protected $injector;
 
     /**
+<<<<<<< HEAD
      * @var EventDispatcherInterface
+=======
+     * @var EventDispatcherInterface $dispatcher
+>>>>>>> anis
      */
     protected $dispatcher;
 
     /**
      * Constructs a new instance of UploaderListener.
      *
+<<<<<<< HEAD
      * @param PropertyMappingFactory   $factory    The mapping factory
      * @param StorageInterface         $storage    The storage
      * @param FileInjectorInterface    $injector   The injector
      * @param EventDispatcherInterface $dispatcher The event dispatcher
+=======
+     * @param PropertyMappingFactory   $factory    The mapping factory.
+     * @param StorageInterface         $storage    The storage.
+     * @param FileInjectorInterface    $injector   The injector.
+     * @param EventDispatcherInterface $dispatcher The event dispatcher.
+>>>>>>> anis
      */
     public function __construct(PropertyMappingFactory $factory, StorageInterface $storage, FileInjectorInterface $injector, EventDispatcherInterface $dispatcher)
     {
@@ -47,8 +62,13 @@ class UploadHandler extends AbstractHandler
     /**
      * Checks for file to upload.
      *
+<<<<<<< HEAD
      * @param object $obj       The object
      * @param string $fieldName The name of the field containing the upload (has to be mapped)
+=======
+     * @param object $obj       The object.
+     * @param string $fieldName The name of the field containing the upload (has to be mapped).
+>>>>>>> anis
      */
     public function upload($obj, $fieldName)
     {
@@ -103,7 +123,11 @@ class UploadHandler extends AbstractHandler
         $this->dispatch(Events::PRE_REMOVE, new Event($obj, $mapping));
 
         $this->storage->remove($obj, $mapping);
+<<<<<<< HEAD
         $mapping->erase($obj);
+=======
+        $mapping->setFileName($obj, null);
+>>>>>>> anis
 
         $this->dispatch(Events::POST_REMOVE, new Event($obj, $mapping));
     }
@@ -117,6 +141,10 @@ class UploadHandler extends AbstractHandler
     {
         $file = $mapping->getFile($obj);
 
+<<<<<<< HEAD
         return null !== $file && $file instanceof UploadedFile;
+=======
+        return $file !== null && $file instanceof UploadedFile;
+>>>>>>> anis
     }
 }

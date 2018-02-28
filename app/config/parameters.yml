@@ -9,6 +9,6 @@ parameters:
     database_password: 6TuZt5JUMi
     mailer_transport: gmail
     mailer_host: 127.0.0.1
-    mailer_user: anis.helaoui@aiesec.net
-    mailer_password: zelda741963
+    mailer_user: bakeryvanilla123@gmail.com
+    mailer_password: vanillavanilla
     secret: 7070fa7df747f4009815c9ddb111a1802a6e9794

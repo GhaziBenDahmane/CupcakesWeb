@@ -111,6 +111,29 @@ vresh_twilio:
     #(Optional, default: 1) Number of times to retry failed requests
     retryAttempts: 3
 
+vich_uploader:
+    db_driver: orm # or mongodb or propel or phpcr
+    mappings:
+            delivery_image:
+                uri_prefix: /uploads/images
+                upload_destination: '%kernel.project_dir%/web/uploads/images/'
+                inject_on_load: false
+                delete_on_update: true
+                delete_on_remove: true
+            contact_pdf:
+                 uri_prefix: /uploads/documents
+                 upload_destination: '%kernel.project_dir%/web/uploads/images/'
+
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\""
+        options:    []
+    image:
+        enabled:    true
+        binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltoimage.exe\""
+        options:    []
+
 full_calendar:
      class_manager: EventBundle\Entity\Event
 nomaya_social:

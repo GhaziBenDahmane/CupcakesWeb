@@ -25,6 +25,10 @@ trait FileExtensionTrait
             return $extension;
         }
 
+<<<<<<< HEAD
         return;
+=======
+        return null;
+>>>>>>> anis
     }
 }

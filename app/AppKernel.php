@@ -31,6 +31,8 @@ class AppKernel extends Kernel
             new fadosProduccions\fullCalendarBundle\fullCalendarBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Nomaya\SocialBundle\NomayaSocialBundle(),
+            new Vich\UploaderBundle\VichUploaderBundle(),
+            new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
 
 
 

@@ -66,6 +66,8 @@ class ComposerStaticInitfdadf97e61e4838d1cc3d2415b7126be
         ),
         'K' => 
         array (
+            'Knp\\Snappy\\' => 11,
+            'Knp\\Bundle\\SnappyBundle\\' => 24,
             'Knp\\Bundle\\PaginatorBundle\\' => 27,
         ),
         'I' => 
@@ -93,6 +95,10 @@ class ComposerStaticInitfdadf97e61e4838d1cc3d2415b7126be
         array (
             'Composer\\CaBundle\\' => 18,
             'Cocur\\HumanDate\\' => 16,
+        ),
+        'A' => 
+        array (
+            'AncaRebeca\\FullCalendarBundle\\' => 30,
         ),
     );
 
@@ -212,6 +218,14 @@ class ComposerStaticInitfdadf97e61e4838d1cc3d2415b7126be
         'Mgilet\\NotificationBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/mgilet/notification-bundle',
+        ),
+        'Knp\\Snappy\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/knplabs/knp-snappy/src/Knp/Snappy',
+        ),
+        'Knp\\Bundle\\SnappyBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/knplabs/knp-snappy-bundle',
         ),
         'Knp\\Bundle\\PaginatorBundle\\' => 
         array (

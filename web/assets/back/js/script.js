@@ -112,6 +112,10 @@ function UpdateUserDetails() {
 }
 
 $(document).ready(function () {
+    if(document.getElementById("#app_bundle_contact_type_firstName"))
+    {
+        $("#app_bundle_contact_type_firstName").remove();
+    }
     // READ recods on page load
     readRecords(); // calling function
 });

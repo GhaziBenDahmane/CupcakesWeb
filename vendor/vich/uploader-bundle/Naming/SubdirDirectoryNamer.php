@@ -16,12 +16,21 @@ class SubdirDirectoryNamer implements DirectoryNamerInterface, ConfigurableInter
 
     /**
      * @param array $options Options for this namer. The following options are accepted:
+<<<<<<< HEAD
      *                       - chars_per_dir: how many chars use for each dir.
      *                       - dirs: how many dirs create
      */
     public function configure(array $options)
     {
         $options = array_merge(['chars_per_dir' => $this->charsPerDir, 'dirs' => $this->dirs], $options);
+=======
+     *   - chars_per_dir: how many chars use for each dir.
+     *   - dirs: how many dirs create.
+     */
+    public function configure(array $options)
+    {
+        $options = array_merge(array('chars_per_dir' => $this->charsPerDir, 'dirs' => $this->dirs), $options);
+>>>>>>> anis
 
         $this->charsPerDir = $options['chars_per_dir'];
         $this->dirs = $options['dirs'];
@@ -34,7 +43,11 @@ class SubdirDirectoryNamer implements DirectoryNamerInterface, ConfigurableInter
     {
         $fileName = $mapping->getFileName($object);
 
+<<<<<<< HEAD
         $parts = [];
+=======
+        $parts = array();
+>>>>>>> anis
         for ($i = 0, $start = 0; $i < $this->dirs; $i++, $start += $this->charsPerDir) {
             $parts[] = substr($fileName, $start, $this->charsPerDir);
         }

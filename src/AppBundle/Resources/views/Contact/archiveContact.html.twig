@@ -1,0 +1,56 @@
+{% extends 'layoutAdmin.html.twig' %}
+{% block header %}
+    {{ parent() }}
+    <link href="{{ asset('assets/back/plugins/datatables/css/jquery.datatables.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('assets/back/plugins/datatables/css/jquery.datatables_themeroller.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('assets/back/plugins/bootstrap-datepicker/css/datepicker3.css') }}" rel="stylesheet" type="text/css">
+
+{% endblock %}
+{% block menu %}
+    {{ parent() }}
+{% endblock %}
+{% block content %}
+
+    <div class="panel panel-white">
+        <div class="panel-heading clearfix">
+            <h4 class="panel-title">Archive des Contacts</h4>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Telephone</th>
+                        <th>Email</th>
+                        <th>Message</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for contacts in contact %}
+                    <tr role="row" class="even">
+                        <td class="sorting_1"><a href="{{ path('contact_show', { 'id': contacts.id }) }}">{{ contacts.id }}</a></td>
+                        <td>{{ contacts.firstName }}</td>
+                        <td>{{ contacts.tel }}</td>
+                        <td>{{ contacts.email }}</td>
+                        <td>{{ contacts.message}}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block nav %}
+    {{ parent() }}
+{% endblock %}
+{% block script %}
+    {{ parent() }}
+    <script src="{{ asset('assets/back/plugins/datatables/js/jquery.datatables.min.js') }}"></script>
+    <script src="{{ asset('assets/back/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ asset('assets/back/js/pages/table-data.js') }}"></script>
+    <script src="{{ asset('assets/back/js/script.js') }}"></script>
+{% endblock %}
