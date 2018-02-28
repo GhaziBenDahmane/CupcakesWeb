@@ -208,9 +208,7 @@
                             <li><a href="{{ path('_cupcakes_contact') }}">Contact</a></li>
                             <li><a href="/claim">Claim</a></li>
                         </ul>
-                    </li> {% if not app.user %}
-                        <li><a href="#" onclick="showLogin()">Login</a></li>
-                    {% else %}
+                    </li> {% if  app.user %}
                         <li class="menu-item-has-children"><a href="#">{{ app.user }}</a>
                             <ul class="sub-menu">
                                 <li><a href="{{ path('flappy_page') }}" id="start_flappy">Flappy Cupcakes</a></li>
