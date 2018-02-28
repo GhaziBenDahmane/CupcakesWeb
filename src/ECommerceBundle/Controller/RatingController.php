@@ -50,11 +50,12 @@ class RatingController extends Controller
        $rating= $em->getRepository('ECommerceBundle:Rating')->findRateByProductAndUser($id);
        $count= $em->getRepository('ECommerceBundle:Rating')->countRate($id);
        $sum= $em->getRepository('ECommerceBundle:Rating')->avgRate($id);
+       $products=$em->getRepository('ECommerceBundle:Product')->findAll();
 
 
 
        return $this->render('ECommerceBundle:Rating:show_rating.html.twig',array('rating'=>$rating,'count'=>
-   $count,'sum'=>$sum,'id'=>$id) );
+   $count,'sum'=>$sum,'id'=>$id,'products'=>$products) );
 
 
    }

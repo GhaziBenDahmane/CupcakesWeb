@@ -1,10 +1,18 @@
 
-<script language="JavaScript1.5" src="{{ asset('jquery.js') }}"></script>
-
 
 {%for r in rating  %}
+    {% if r.note ==0 %}
+        <select id="r{{ r.products.id }}" onchange="addRate({{ r.products.id }})" class="ps-rating">
 
-
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <span id="a{{ r.products.id }}" class="circle"> 0.00/5  </span>
+        <span id="c{{ r.products.id }}">Votes: 0</span>
+{% else %}
 <select id="r{{ r.products.id }}" onchange="addRate({{ r.products.id }})" class="ps-rating">
 
 <option value="1">1</option>
@@ -16,35 +24,44 @@
 
 
 {% for s in sum %}
-<span id="a{{ r.products.id }}" class="circle">{{ (s[1])|number_format(2,'.',',') }}/5  </span>
+<span id="a{{ r.products.id }}" class="circle">{{ ((s[1]))|number_format(2,'.',',') }}/5  </span>
 {% endfor %}
     {% for c in count %}
-<span id="c{{ r.products.id }}">Votes: {{ c[1]|number_format(2,'.',',') }}</span>
+<span id="c{{ r.products.id }}">Votes: {{ c[1]-1 }}</span>
 {% endfor %}
-
-
+    <script language="JavaScript1.5" src="{{ asset('jquery.js') }}"></script>
 <script type="text/javascript">
         $('#r'+{{ r.products.id }}).val({{ r.note }});  //<- here you have your results
 
 
-    function addRate(ide) {
-        var value = $('#r'+ide).val();
-        var  mid = parseInt(ide);
-        alert(value);
-        axios.post("{{ path('_cupcakes_rating_add') }}", {
-            vote: value,
-            id:mid,
-            ajax: "true"
-        })
-                .then(function (response) {
-                    location.load();
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
 
-
-    }
 
 </script>
+
+
+
+    {% endif %}
+
 {% endfor %}
+
+
+<script>
+function addRate(ide) {
+var value = $('#r'+ide).val();
+var  mid = parseInt(ide);
+alert(value);
+axios.post("{{ path('_cupcakes_rating_add') }}", {
+vote: value,
+id:mid,
+ajax: "true"
+})
+.then(function (response) {
+location.load();
+})
+.catch(function (error) {
+console.log(error);
+});
+
+
+}
+</script>

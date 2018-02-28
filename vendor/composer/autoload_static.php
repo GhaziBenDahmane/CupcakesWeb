@@ -23,6 +23,7 @@ class ComposerStaticInita0ce8437a3b5c670e0c8ebf923914399
         'V' => 
         array (
             'Vresh\\TwilioBundle\\' => 19,
+            'Vich\\UploaderBundle\\' => 20,
         ),
         'T' => 
         array (
@@ -45,6 +46,7 @@ class ComposerStaticInita0ce8437a3b5c670e0c8ebf923914399
             'Symfony\\Bridge\\PhpUnit\\' => 23,
             'Symfony\\Bridge\\Monolog\\' => 23,
             'Symfony\\Bridge\\Doctrine\\' => 24,
+            'Stripe\\' => 7,
             'Sensio\\Bundle\\GeneratorBundle\\' => 30,
             'Sensio\\Bundle\\FrameworkExtraBundle\\' => 35,
             'Sensio\\Bundle\\DistributionBundle\\' => 33,
@@ -78,7 +80,6 @@ class ComposerStaticInita0ce8437a3b5c670e0c8ebf923914399
         ),
         'D' => 
         array (
-            'Doctrine\\ORM\\' => 13,
             'Doctrine\\Instantiator\\' => 22,
             'Doctrine\\Common\\Inflector\\' => 26,
             'Doctrine\\Common\\Cache\\' => 22,
@@ -98,6 +99,10 @@ class ComposerStaticInita0ce8437a3b5c670e0c8ebf923914399
         'Vresh\\TwilioBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/vresh/twilio-bundle',
+        ),
+        'Vich\\UploaderBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/vich/uploader-bundle',
         ),
         'Twig\\' => 
         array (
@@ -162,6 +167,10 @@ class ComposerStaticInita0ce8437a3b5c670e0c8ebf923914399
         'Symfony\\Bridge\\Doctrine\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/symfony/src/Symfony/Bridge/Doctrine',
+        ),
+        'Stripe\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/stripe/stripe-php/lib',
         ),
         'Sensio\\Bundle\\GeneratorBundle\\' => 
         array (
@@ -291,6 +300,13 @@ class ComposerStaticInita0ce8437a3b5c670e0c8ebf923914399
                 0 => __DIR__ . '/..' . '/sensiolabs/security-checker',
             ),
         ),
+        'M' => 
+        array (
+            'Metadata\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/jms/metadata/src',
+            ),
+        ),
         'K' => 
         array (
             'Knp\\Component' => 
@@ -307,6 +323,10 @@ class ComposerStaticInita0ce8437a3b5c670e0c8ebf923914399
         ),
         'D' => 
         array (
+            'Doctrine\\ORM\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/doctrine/orm/lib',
+            ),
             'Doctrine\\DBAL\\' => 
             array (
                 0 => __DIR__ . '/..' . '/doctrine/dbal/lib',
@@ -318,6 +338,13 @@ class ComposerStaticInita0ce8437a3b5c670e0c8ebf923914399
             'Doctrine\\Common\\Collections\\' => 
             array (
                 0 => __DIR__ . '/..' . '/doctrine/collections/lib',
+            ),
+        ),
+        'B' => 
+        array (
+            'Behat\\Transliterator' => 
+            array (
+                0 => __DIR__ . '/..' . '/behat/transliterator/src',
             ),
         ),
     );

@@ -3,8 +3,11 @@
 namespace ECommerceBundle\Controller;
 
 use ECommerceBundle\Entity\Product;
+use ECommerceBundle\Entity\Rating;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 
 
@@ -85,26 +88,47 @@ class ProductController extends Controller
 
         if($request->isXmlHttpRequest())
         {
-            var_dump($request);
+
             $name =$request->request->get('name');
             $type =$request->request->get('type');
             $price =$request->request->get('price');
-            $photo =$request->request->get('photo');
             $description =$request->request->get('description');
+
+
             $entity->setName($name);
             $entity->setType($type);
             $entity->setPrice($price);
-            $entity->setPhoto($photo);
+
             $entity->setDescription($description);
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
+
+
 
         }
+        // $file stores the uploaded PDF file
+        /** @var UploadedFile $file */
+        $file = $entity->getPhoto();
+
+        $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+        // moves the file to the directory where brochures are stored
+        $file->move(
+            $this->getParameter('image_directory'),
+            $fileName
+        );
+        $entity->setPhoto($fileName);
+        $file=null;
+
+
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
+            $em->flush();
+            $rating = new Rating();
+            $rating->setProducts($entity);
+            $rating->setUser(null);
+            $rating->setNote(0);
+            $em->persist($rating);
             $em->flush();
 
             return $this->redirect($this->generateUrl('product_index'));
@@ -234,6 +258,9 @@ class ProductController extends Controller
         $em = $this->getDoctrine()->getManager();
         $products = $em->getRepository('ECommerceBundle:Product')->findProducts();
         $types = $em->getRepository('ECommerceBundle:Product')->findTypes();
+        $best =$em->getRepository('ECommerceBundle:Product')->findProductsBestSeller(3);
+        $tag=$em->getRepository('ECommerceBundle:Tag')->findTags();
+
 
 
         $paginator = $this->get('knp_paginator');
@@ -243,7 +270,7 @@ class ProductController extends Controller
             4/*limit per page*/
         );
 
-        return $this->render('ECommerceBundle:Product:product-listing.html.twig', array('products' => $pagination, 'types' => $types)
+        return $this->render('ECommerceBundle:Product:product-listing.html.twig', array('products' => $pagination, 'types' => $types,'bests'=>$best,'tags'=>$tag)
         );
 
     }
@@ -296,11 +323,7 @@ class ProductController extends Controller
     {
 
 
-
-
         $em = $this->getDoctrine()->getManager();
-
-
         $content = $request->getContent();
         $data = json_decode($content, true);
         $name = $data["name"];
@@ -356,7 +379,38 @@ class ProductController extends Controller
         $em = $this->getDoctrine()->getManager();
         $products = $em->getRepository('ECommerceBundle:Product')->find($id);
         $products->setNbViewed($products->getNbViewed()+1);
+        $em->persist($products);
+        $em->flush();
+        $best=$em->getRepository('ECommerceBundle:Product')->findProductsBestSeller(4);
 
-        return $this->render('ECommerceBundle:Product:product-detail.html.twig', array('products' => $products));
+        return $this->render('ECommerceBundle:Product:product-detail.html.twig', array('products' => $products,'bests'=>$best));
     }
+
+    public function showMostProductRatedAction(Request $request)
+    {
+        $products = null;
+        $em = $this->getDoctrine()->getManager();
+        $content = $request->getContent();
+        $data = json_decode($content, true);
+        $sort = $data["sort"];
+        if ($sort == "1") {
+            $products = $em->getRepository('ECommerceBundle:Product')->findProductsMostRated();
+        } else {
+            $products = $em->getRepository('ECommerceBundle:Product')->findProductsMostViewed();
+        }
+        return $this->render('ECommerceBundle:Product:product_most_rating.html.twig', array('products' => $products));
+
+    }
+    public function showProductsByTagsAction(Request $request)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $content = $request->getContent();
+        $data = json_decode($content, true);
+        $name = $data["name"];
+        $products = $em->getRepository('ECommerceBundle:Product')->findProductsByTags($name);
+        return $this->render('ECommerceBundle:Product:product_most_rating.html.twig', array('products' => $products));
+    }
+
+
 }

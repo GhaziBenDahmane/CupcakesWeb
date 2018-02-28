@@ -33,9 +33,14 @@ class CartController extends Controller
     }
 
 
-    public function showCartAction()
-    {   $price=0;
-        $em = $this->getDoctrine()->getManager();
+    public function showCartAction(Request $request)
+
+    {   $em = $this->getDoctrine()->getManager();
+        $content = $request->getContent();
+        $data = json_decode($content, true);
+        $code = $data["code"];
+        $price=0;
+        $promotion= $em->getRepository('ECommerceBundle:Cart')->findCoupon($code);
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $user_id = $user->getId();
 
@@ -45,7 +50,9 @@ class CartController extends Controller
             $price=$price+$cart->product->getPrice();
         }
 
-        return $this->render('ECommerceBundle:Cart:cart.html.twig', array('carts' => $carts,'price'=>$price));
+
+
+        return $this->render('ECommerceBundle:Cart:cart.html.twig', array('carts' => $carts,'price'=>$price,'promtion'=>$promotion));
 
     }
 
@@ -57,6 +64,8 @@ class CartController extends Controller
         $em->flush();
         return new Response('success', 200);
     }
+
+
 
 
 

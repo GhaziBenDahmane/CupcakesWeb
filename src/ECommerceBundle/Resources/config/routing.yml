@@ -58,3 +58,15 @@ _cupcakes_cart_add:
 _cupcakes_cart_remove:
     path:     /remove_cart/{id}
     defaults: { _controller: ECommerceBundle:Cart:removeFromCart }
+_cupcakes_product_most_rated:
+    path:     /product_most_rated
+    defaults: { _controller: ECommerceBundle:Product:showMostProductRated }
+_cupcakes_add_tag:
+    path:     /product_add_tag
+    defaults: { _controller: ECommerceBundle:Tag:addTag }
+_cupcakes_product_tags:
+    path:     /product_tags
+    defaults: { _controller: ECommerceBundle:Product:showProductsByTags }
+_cupcakes_payment:
+    path:     /payment/{price}
+    defaults: { _controller: ECommerceBundle:Payment:payment }

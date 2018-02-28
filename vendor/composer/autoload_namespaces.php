@@ -9,9 +9,12 @@ return array(
     'fadosProduccions\\fullCalendarBundle\\' => array($vendorDir . '/fados-produccions/full-calendar-bundle'),
     'Twig_' => array($vendorDir . '/twig/twig/lib'),
     'SensioLabs\\Security' => array($vendorDir . '/sensiolabs/security-checker'),
+    'Metadata\\' => array($vendorDir . '/jms/metadata/src'),
     'Knp\\Component' => array($vendorDir . '/knplabs/knp-components/src'),
     'JsonpCallbackValidator' => array($vendorDir . '/willdurand/jsonp-callback-validator/src'),
+    'Doctrine\\ORM\\' => array($vendorDir . '/doctrine/orm/lib'),
     'Doctrine\\DBAL\\' => array($vendorDir . '/doctrine/dbal/lib'),
     'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/lib'),
     'Doctrine\\Common\\Collections\\' => array($vendorDir . '/doctrine/collections/lib'),
+    'Behat\\Transliterator' => array($vendorDir . '/behat/transliterator/src'),
 );

@@ -10,3 +10,5 @@ parameters:
     mailer_user: anis.helaoui@aiesec.net
     mailer_password: zelda741963
     secret: 7070fa7df747f4009815c9ddb111a1802a6e9794
+    stripe_public_key: pk_test_qeSon0h55hnK8zjCB3og58qu
+    stripe_secret_key: sk_test_f7CunmPBjBtkkj9z1vl5H3lr

@@ -45,41 +45,29 @@
                         <header>
 
                             <h3 class="ps-product__name">{{ products.name }}</h3>
-                            <select class="ps-rating">
-                                <option value="1">1</option>
-                                <option value="1">2</option>
-                                <option value="1">3</option>
-                                <option value="1">4</option>
-                                <option value="5">5</option>
-                            </select>
+                            <div>
+
+                                {{ render(controller(
+                                'ECommerceBundle\\Controller\\RatingController::showRatingAction',
+                                { 'id': products.id  }
+                                )) }}
+                            </div>
+                            <div id="a" hidden>{{ products.id }}</div>
                             <p id="price" class="ps-product__price">{{ products.price }}
                                 <del>{{ products.price }}</del>
                             </p><a class="ps-product__quickview popup-modal" href="#quickview-modal" data-effect="mfp-zoom-out">QUICK OVERVIEW</a>
                             <div class="ps-product__description">
-                                <p>Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate. Cupcake sweet roll sweet dragée dragée. Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate cake.</p>
-                                <p>Toffee chocolate cake apple pie sugar plum sesame snaps muffin cake pudding cupcake. Muffin danish muffin lollipop biscuit jelly beans oat cake croissant.</p>
+                                <p>{{ products.description }}</p>
                             </div>
                             <div class="ps-product__meta">
                                 <p><span> Availability: </span> In stock</p>
                                 <p class="category"><span>CATEGORIES: </span><a >{{ products.type }}</a>
                             </div>
-                            <div class="form-group ps-product__size">
-                                <label>Size:</label>
-                                <select id="taille" class="ps-select" data-placeholder="Popupar product">
-                                    <option value="01">CHOOSE AN OPTION</option>
-                                    <option value="1">Big</option>
-                                    <option value="2">Meduim</option>
-                                    <option value="3">Small</option>
-                                </select>
-                            </div>
+
                             <div class="ps-product__shop">
-                                <div class="form-group--number">
-                                    <button class="minus"><span>-</span></button>
-                                    <input id="quantity" class="form-control" type="text" value="1">
-                                    <button class="plus"><span>+</span></button>
-                                </div>
+
                                 <ul class="ps-product__action">
-                                    <li><a href="#" data-tooltip="Add to wishlist"><i class="ps-icon--heart"></i></a></li>
+                                    <li><a href="#" data-tooltip="Add to Cart"><i class="ps-icon--heart"></i></a></li>
                                     <li><a href="#" data-tooltip="Compare"><i class="ps-icon--reload"></i></a></li>
                                 </ul>
                             </div>
@@ -139,6 +127,7 @@
                                         <label>Email: *<span>*</span></label>
                                         <input class="form-control" type="email" placeholder="">
                                     </div>
+
                                     <div class="form-group">
                                         <label>Your rating<span></span></label>
                                         <select class="ps-rating">
@@ -164,12 +153,12 @@
                     </div>
                     <div class="tab-pane" role="tabpanel" id="tab_03">
                         <p>Add your tag <span> *</span></p>
-                        <form class="ps-product__tags" action="_action" method="post">
+                        <div class="ps-product__tags">
                             <div class="form-group">
-                                <input class="form-control" type="text" placeholder="">
-                                <button class="ps-btn ps-btn--sm">Add Tag</button>
+                                <input id="i" class="form-control" type="text" placeholder="">
+                                <button id="b" class="ps-btn ps-btn--sm">Add Tag</button>
                             </div>
-                        </form>
+                        </div>
                     </div>
                     <div class="tab-pane" role="tabpanel" id="tab_04">
                         <div class="form-group">
@@ -183,6 +172,7 @@
             </div>
         </div>
     </div>
+
 <section class="ps-section ps-section--best-seller pt-40 pb-100">
     <div class="container">
         <div class="ps-section__header text-center mb-50">
@@ -191,99 +181,36 @@
         </div>
         <div class="ps-section__content">
             <div class="owl-slider owl-slider--best-seller" data-owl-auto="true" data-owl-loop="true" data-owl-speed="100000" data-owl-gap="30" data-owl-nav="true" data-owl-dots="false" data-owl-animate-in="" data-owl-animate-out="" data-owl-item="4" data-owl-item-xs="1" data-owl-item-sm="2" data-owl-item-md="3" data-owl-item-lg="4" data-owl-nav-left="&lt;i class=&quot;ps-icon--back&quot;&gt;&lt;/i&gt;" data-owl-nav-right="&lt;i class=&quot;ps-icon--next&quot;&gt;&lt;/i&gt;">
+               {% for best in bests %}
                 <div class="ps-product">
                     <div class="ps-product__thumbnail">
-                        <a class="ps-product__overlay" href="product-detail.html"></a><img src="{{ asset('assets/front/images/cake/img-cake-7.jpg') }}" alt="">
+                        <a class="ps-product__overlay" href="#"></a><img src="{{ asset('assets/front/images/cake/img-cake-7.jpg') }}" alt="">
                         <ul class="ps-product__action">
                             <li><a class="popup-modal" href="#quickview-modal" data-effect="mfp-zoom-out" data-tooltip="View"><i class="ps-icon--search"></i></a></li>
                             <li><a href="#" data-tooltip="Add to wishlist"><i class="ps-icon--heart"></i></a></li>
-                            <li><a href="#" data-tooltip="Compare"><i class="ps-icon--reload"></i></a></li>
                             <li><a href="#" data-tooltip="Add to cart"><i class="ps-icon--shopping-cart"></i></a></li>
                         </ul>
                     </div>
-                    <div class="ps-product__content"><a class="ps-product__title" href="product-detail.html">Red sugar flower</a>
-                        <div class="ps-product__category"><a class="ps-product__category" href="product-listing.html">cupcake</a><a class="ps-product__category" href="product-listing.html">sweet</a><a class="ps-product__category" href="product-listing.html">bio</a>
+                    <div class="ps-product__content"><a class="ps-product__title" href="product-detail.html">{{ best.name }}</a>
+                        <div class="ps-product__category"><a class="ps-product__category" href="product-listing.html">{{ best.type }}</a>
                         </div>
-                        <select class="ps-rating">
-                            <option value="1">1</option>
-                            <option value="1">2</option>
-                            <option value="1">3</option>
-                            <option value="1">4</option>
-                            <option value="5">5</option>
-                        </select>
-                        <p class="ps-product__price">£5.00</p>
-                    </div>
-                </div>
-                <div class="ps-product">
-                    <div class="ps-product__thumbnail">
-                        <a class="ps-product__overlay" href="product-detail.html"></a><img src="{{ asset('assets/front/images/cake/img-cake-2.jpg') }}" alt="">
-                        <ul class="ps-product__action">
-                            <li><a class="popup-modal" href="#quickview-modal" data-effect="mfp-zoom-out" data-tooltip="View"><i class="ps-icon--search"></i></a></li>
-                            <li><a href="#" data-tooltip="Add to wishlist"><i class="ps-icon--heart"></i></a></li>
-                            <li><a href="#" data-tooltip="Compare"><i class="ps-icon--reload"></i></a></li>
-                            <li><a href="#" data-tooltip="Add to cart"><i class="ps-icon--shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="ps-product__content"><a class="ps-product__title" href="product-detail.html">Cupcake Queen</a>
-                        <div class="ps-product__category"><a class="ps-product__category" href="product-listing.html">cupcake</a><a class="ps-product__category" href="product-listing.html">sweet</a><a class="ps-product__category" href="product-listing.html">bio</a>
+                        <div>
+
+                            {{ render(controller(
+                            'ECommerceBundle\\Controller\\RatingController::showRatingAction',
+                            { 'id': best.id  }
+                            )) }}
                         </div>
-                        <select class="ps-rating">
-                            <option value="1">1</option>
-                            <option value="1">2</option>
-                            <option value="1">3</option>
-                            <option value="1">4</option>
-                            <option value="5">5</option>
-                        </select>
-                        <p class="ps-product__price">£5.00</p>
+                        <p class="ps-product__price">{{ best.price }}</p>
                     </div>
+
                 </div>
-                <div class="ps-product">
-                    <div class="ps-product__thumbnail">
-                        <a class="ps-product__overlay" href="product-detail.html"></a><img src="{{ asset('assets/front/images/cake/img-cake-4.jpg') }}" alt="">
-                        <ul class="ps-product__action">
-                            <li><a class="popup-modal" href="#quickview-modal" data-effect="mfp-zoom-out" data-tooltip="View"><i class="ps-icon--search"></i></a></li>
-                            <li><a href="#" data-tooltip="Add to wishlist"><i class="ps-icon--heart"></i></a></li>
-                            <li><a href="#" data-tooltip="Compare"><i class="ps-icon--reload"></i></a></li>
-                            <li><a href="#" data-tooltip="Add to cart"><i class="ps-icon--shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="ps-product__content"><a class="ps-product__title" href="product-detail.html">Cupcake Glory</a>
-                        <div class="ps-product__category"><a class="ps-product__category" href="product-listing.html">cupcake</a><a class="ps-product__category" href="product-listing.html">sweet</a><a class="ps-product__category" href="product-listing.html">bio</a>
-                        </div>
-                        <select class="ps-rating">
-                            <option value="1">1</option>
-                            <option value="1">2</option>
-                            <option value="1">3</option>
-                            <option value="1">4</option>
-                            <option value="5">5</option>
-                        </select>
-                        <p class="ps-product__price">£5.00</p>
-                    </div>
-                </div>
-                <div class="ps-product">
-                    <div class="ps-product__thumbnail">
-                        <a class="ps-product__overlay" href="product-detail.html"></a><img src="{{ asset('assets/front/images/cake/img-cake-8.jpg') }}" alt="">
-                        <ul class="ps-product__action">
-                            <li><a class="popup-modal" href="#quickview-modal" data-effect="mfp-zoom-out" data-tooltip="View"><i class="ps-icon--search"></i></a></li>
-                            <li><a href="#" data-tooltip="Add to wishlist"><i class="ps-icon--heart"></i></a></li>
-                            <li><a href="#" data-tooltip="Compare"><i class="ps-icon--reload"></i></a></li>
-                            <li><a href="#" data-tooltip="Add to cart"><i class="ps-icon--shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="ps-product__content"><a class="ps-product__title" href="product-detail.html">Sweet Cakes</a>
-                        <div class="ps-product__category"><a class="ps-product__category" href="product-listing.html">cupcake</a><a class="ps-product__category" href="product-listing.html">sweet</a><a class="ps-product__category" href="product-listing.html">bio</a>
-                        </div>
-                        <select class="ps-rating">
-                            <option value="1">1</option>
-                            <option value="1">2</option>
-                            <option value="1">3</option>
-                            <option value="1">4</option>
-                            <option value="5">5</option>
-                        </select>
-                        <p class="ps-product__price">£5.00</p>
-                    </div>
-                </div>
+
+               {% endfor %}
+
+
             </div>
+
         </div>
     </div>
 </section>
@@ -291,6 +218,20 @@
 
     <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/javascript">
+        $("#b").click(function(){
+            var id=$('#a').text();
+            axios.post("{{path('_cupcakes_add_tag')}}", {
+
+                name : $("#i").val(),
+                id:id,
+                ajax : "true"
+            })
+                    .then(function (response) {
+                        $('#i').html("");
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    }); });
 
     </script>
 {% endblock %}

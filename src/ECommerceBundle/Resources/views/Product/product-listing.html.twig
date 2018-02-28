@@ -41,7 +41,7 @@
                                     <div class="form-group">
                                         <label>Popular :</label>
                                         <select  id="popular" class="ps-select" data-placeholder="Popupar product">
-                                            <option value="1">Most rating</option>
+                                            <option value="1">Most rated</option>
                                             <option value="2">Most viewed</option>
                                         </select>
                                     </div>
@@ -65,21 +65,22 @@
                             </div>
                         </div>
                         {% for product in products %}
-                            <div id="aasba">
+                            <div>
                                 <div id="product" class="ps-product--list ps-product--list-large">
                                     <div class="ps-product__thumbnail">
-                                        <a class="ps-product__overlay" href="product-detail.html"></a><img src="{{ asset('assets/front/images/cake/img-cake-3.jpg') }}" alt=""></div>
+                                        <a class="ps-product__overlay" href="product-detail.html"></a><img src="{{ asset('images/products/')}}{{  product.photo }}" alt=""></div>
                                     <div class="ps-product__content">
 
                                         <h4 id="name" class="ps-product__title"><a href="{{ path('_cupcakes_product-detail',{'id':product.id }) }}">{{ product.name }}</a></h4>
                                         <div>
-                                        {{ render(controller(
+
+                                            {{ render(controller(
                                         'ECommerceBundle\\Controller\\RatingController::showRatingAction',
                                         { 'id': product.id  }
                                         )) }}
                                         </div>
                                         <p class="ps-product__price">
-                                            <del>{{ product.price }}</del>{{ product.price }}
+                                            <del>{{ product.price }}</del>{{product.price - product.price *product.promotion.discount }}
                                         </p>
                                         <p id="desc">Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate. Cupcake sweet roll sweet dragée dragée. Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate cake.</p>
                                         <footer class="ps-product__footer clearfix"><a class="ps-btn ps-btn--sm" href="{{ path('_cupcakes_cart',{id:product.id}) }}">Order now<i class="fa fa-angle-right"></i></a>
@@ -124,53 +125,30 @@
                                 <h3 class="ps-widget__title">Fillter Prices</h3>
                             </div>
                             <div class="ps-widget__content">
-                                <div id="slider" class="ac-slider" data-default-min="300" data-default-max="2000" data-max="3450" data-step="50" data-unit="$"></div>
+                                <div id="slider" class="ac-slider" data-default-min="5" data-default-max="30" data-max="100" data-step="5" data-unit="$"></div>
                                 <p class="ac-slider__meta">Price:<span class="ac-slider__value ac-slider__min"></span>-<span class="ac-slider__value ac-slider__max"></span></p><button id="filter" name="filter" class="ac-slider__filter ps-btn ps-btn--xs"  >Filter</button>
-                                <script src="{{ asset('jquery.js') }}" ></script>
+
 
                             </div>
                         </aside>
-                        <aside class="ps-widget ps-widget--sidebar ps-widget--ads">
-                            <div class="ps-widget__header">
-                                <h3 class="ps-widget__title">Ads Banner</h3>
-                            </div>
-                            <div class="ps-widget__content"><img src="{{ asset('assets/front/images/widget/banner2x.png') }}" alt=""></div>
-                        </aside>
+
                         <aside class="ps-widget ps-widget--sidebar ps-widget--best-seller">
                             <div class="ps-widget__header">
                                 <h3 class="ps-widget__title">Best seller</h3>
                             </div>
                             <div class="ps-widget__content">
+                                {% for best in bests %}
                                 <div class="ps-product--sidebar">
                                     <div class="ps-product__thumbnail">
-                                        <a class="ps-product__overlay" href="product-detail.html"></a><img src="{{ asset('assets/front/images/cake/img-cake-12.jpg') }}" alt=""></div>
+                                        <a class="ps-product__overlay" ></a><img src="{{ asset('assets/front/images/cake/img-cake-12.jpg') }}" alt=""></div>
                                     <div class="ps-product__content">
-                                        <h4 class="ps-product__title"><a href="product-detail.html">Amazin’ Glazin’</a></h4>
+                                        <h4 class="ps-product__title"><a href="product-detail.html">{{ best.name }}’</a></h4>
                                         <p class="ps-product__price">
-                                            <del>£25.00</del>£15.00
-                                        </p><a class="ps-btn ps-btn--xs" href="product-detail.html">Purchase</a>
+                                            <del>{{ best.price }}</del>{{best.price - best.price *best.promotion.discount }}
+                                        </p><a class="ps-btn ps-btn--xs" href="product-detail.html">Add to Cart</a>
                                     </div>
                                 </div>
-                                <div class="ps-product--sidebar">
-                                    <div class="ps-product__thumbnail">
-                                        <a class="ps-product__overlay" href="product-detail.html"></a><img src="{{ asset('assets/front/images/cake/img-cake-3.jpg') }}" alt=""></div>
-                                    <div class="ps-product__content">
-                                        <h4 class="ps-product__title"><a href="product-detail.html">The Crusty Croissant</a></h4>
-                                        <p class="ps-product__price">
-                                            <del>£25.00</del>£15.00
-                                        </p><a class="ps-btn ps-btn--xs" href="product-detail.html">Purchase</a>
-                                    </div>
-                                </div>
-                                <div class="ps-product--sidebar">
-                                    <div class="ps-product__thumbnail">
-                                        <a class="ps-product__overlay" href="product-detail.html"></a><img src="{{ asset('assets/front/images/cake/img-cake-7.jpg') }}" alt=""></div>
-                                    <div class="ps-product__content">
-                                        <h4 class="ps-product__title"><a href="product-detail.html">The Rolling Pin</a></h4>
-                                        <p class="ps-product__price">
-                                            <del>£25.00</del>£15.00
-                                        </p><a class="ps-btn ps-btn--xs" href="product-detail.html">Purchase</a>
-                                    </div>
-                                </div>
+                                {% endfor %}
                             </div>
                         </aside>
                         <aside class="ps-widget ps-widget--sidebar ps-widget--tags">
@@ -179,12 +157,10 @@
                             </div>
                             <div class="ps-widget__content">
                                 <ul class="ps-tags">
-                                    <li><a href="#">Cupcake</a></li>
-                                    <li><a href="#">vanila</a></li>
-                                    <li><a href="#">sugar flower</a></li>
-                                    <li><a href="#">vanila</a></li>
-                                    <li><a href="#">coconut</a></li>
-                                    <li><a href="#">vanila</a></li>
+                                    {% for tag in tags %}
+                                    <li><a href="javascript:;" onclick="findbytag(this.id)" id="{{ tag.name }}">{{ tag.name }}</a></li>
+                                    {% endfor %}
+
                                 </ul>
                             </div>
                         </aside>
@@ -193,31 +169,32 @@
             </div>
         </div>
     </div>
+    <script language="JavaScript1.5" src="{{ asset('jquery.js') }}"></script>
+
     <script type="text/javascript">
+$(document).ready(function() {
+    $("#filter").click(function(){
+        axios.post("{{path('_cupcakes_product-grid')}}", {
 
-        $("#filter").click(function(){
-            axios.post("{{path('_cupcakes_product-grid')}}", {
-                min : $("#slider").slider('values',0),
-                max : $("#slider").slider('values',1),
-                ajax : "true"
-            })
-                    .then(function (response) {
+            max : $("#slider").slider('values',1),
+            min : $("#slider").slider('values',0),
+            ajax : "true"
+        })
+                .then(function (response) {
 
+                    $("#page").hide();
 
-                        $("#page").hide();
+                    $("#product div").remove();
+                    $("#product").append(response.data);
+                    console.log(response);
 
-                        $("#product div").remove();
-                        $("#product").append(response.data);
-                        console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                }); });
 
+});
 
-                        {#$("#product").load("{{path('_cupcakes_product-grid')}}")#}
-
-
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    }); });
 
         $('[id="type"]').click(function(){
 
@@ -267,12 +244,6 @@
                             $("#product div").remove();
                             $("#product").append(response.data);
                             console.log(response);
-
-
-
-                            {#$("#product").load("{{path('_cupcakes_product-grid')}}")#}
-
-
                         })
                         .catch(function (error) {
                             console.log(error);
@@ -280,6 +251,50 @@
 
             });
         });
+
+        $(function () {
+            $('#popular').change(function() {
+                var value = $(this).val();
+                axios.post("{{path('_cupcakes_product_most_rated')}}", {
+                    sort :  value,
+                    ajax : "true"
+                })
+                        .then(function (response) {
+
+
+                            $("#page").hide();
+
+                            $("#product div").remove();
+                            $("#product").append(response.data);
+                            console.log(response);
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+
+            });
+        });
+
+function findbytag(name) {
+
+
+            axios.post("{{ path('_cupcakes_product_tags') }}", {
+                name:name,
+                ajax: "true"
+            })
+                    .then(function (response) {
+
+
+                        $("#page").hide();
+
+                        $("#product div").remove();
+                        $("#product").append(response.data);
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+}
 
         $("#search").keyup(
                 function () {
@@ -289,20 +304,11 @@
                         ajax : "true"
                     })
                             .then(function (response) {
-
-
-
                                 $("#page").hide();
 
                                 $("#product div").remove();
                                 $("#product").append(response.data);
                                 console.log(response);
-
-
-
-                                {#$("#product").load("{{path('_cupcakes_product-grid')}}")#}
-
-
                             })
                             .catch(function (error) {
                                 console.log(error);
@@ -338,9 +344,10 @@
 
 
 
-
     </script>
+
 {% endblock %}
+
 
 {% block footer %}
     {{ parent() }}

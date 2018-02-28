@@ -32,7 +32,8 @@ class RatingRepository extends \Doctrine\ORM\EntityRepository
     public function avgRate($id)
     {
         $query = $this->getEntityManager()
-            ->createQuery(" SELECT AVG (r.note) FROM ECommerceBundle:Rating r  WHERE IDENTITY(r.products)= :id_produit 
+            ->createQuery(" SELECT AVG (r.note) FROM ECommerceBundle:Rating r  WHERE IDENTITY(r.products)= :id_produit
+  AND r.note != 0
             ")
             ->setParameter('id_produit', $id)
         ;

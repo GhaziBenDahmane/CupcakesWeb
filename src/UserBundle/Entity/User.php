@@ -49,6 +49,27 @@ class User extends BaseUser implements NotifiableInterface
      */
     private $phone;
 
+    /**
+     * @ORM\Column(name="charge_id", type="string", length=255, nullable=true)
+     */
+    protected $chargeId;
+
+    /**
+     * @return mixed
+     */
+    public function getChargeId()
+    {
+        return $this->chargeId;
+    }
+
+    /**
+     * @param mixed $chargeId
+     */
+    public function setChargeId($chargeId)
+    {
+        $this->chargeId = $chargeId;
+    }
+
 
     /**
      * Get id

@@ -1,29 +1,32 @@
+</div>
 {% for product in products %}
-<div >
-    <div id="product" class="ps-product--list ps-product--list-large">
-        <div class="ps-product__thumbnail">
-            <a class="ps-product__overlay" href="{{ path('_cupcakes_product-detail') }}"></a><img src="{{ asset('assets/front/images/cake/img-cake-3.jpg') }}" alt=""></div>
-        <div class="ps-product__content">
-            <h4 id="name" class="ps-product__title"><a href="{{ path('_cupcakes_product-detail') }}">{{ product.name }}</a></h4>
-            <select class="ps-rating">
-                <option value="1">1</option>
-                <option value="1">2</option>
-                <option value="1">3</option>
-                <option value="1">4</option>
-                <option value="5">5</option>
-            </select>
-            <p class="ps-product__price">
-                <del>{{ product.price }}</del>{{ product.price }}
-            </p>
-            <p id="desc">Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate. Cupcake sweet roll sweet dragée dragée. Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate cake.</p>
-            <footer class="ps-product__footer clearfix"><a class="ps-btn ps-btn--sm" href="cart.html">Order now<i class="fa fa-angle-right"></i></a>
-                <ul class="ps-product__action">
-                    <li><a href="#" data-tooltip="Add to wishlist"><i class="ps-icon--heart"></i></a></li>
-                    <li><a href="#" data-tooltip="Compare"><i class="ps-icon--reload"></i></a></li>
-                </ul>
-            </footer>
+    <div>
+        <div id="product" class="ps-product--list ps-product--list-large">
+            <div class="ps-product__thumbnail">
+                <a class="ps-product__overlay" href="product-detail.html"></a><img src="{{ asset('assets/front/images/cake/img-cake-3.jpg') }}" alt=""></div>
+            <div class="ps-product__content">
+
+                <h4 id="name" class="ps-product__title"><a href="{{ path('_cupcakes_product-detail',{'id':product.id }) }}">{{ product.name }}</a></h4>
+                <div>
+
+                    {{ render(controller(
+                    'ECommerceBundle\\Controller\\RatingController::showRatingAction',
+                    { 'id': product.id  }
+                    )) }}
+                </div>
+                <p class="ps-product__price">
+                    <del>{{ product.price }}</del>{{product.price - product.price *product.promotion.discount }}
+                </p>
+                <p id="desc">Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate. Cupcake sweet roll sweet dragée dragée. Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate cake.</p>
+                <footer class="ps-product__footer clearfix"><a class="ps-btn ps-btn--sm" href="{{ path('_cupcakes_cart',{id:product.id}) }}">Order now<i class="fa fa-angle-right"></i></a>
+                    <ul class="ps-product__action">
+                        <li><a id="cart" href="{{ path('_cupcakes_cart_add',{id:product.id}) }}" data-tooltip="Add to Cart"><i class="ps-icon--heart"></i></a></li>
+                        <li><a href="#" data-tooltip="Compare"><i class="ps-icon--reload"></i></a></li>
+                    </ul>
+                </footer>
+            </div>
         </div>
     </div>
-</div>
 {% endfor %}
-
+<script type="text/javascript" src="{{ asset('assets/front/plugins/jquery-bar-rating/dist/jquery.barrating.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/front/js/main.js') }}"></script>
