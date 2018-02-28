@@ -20,6 +20,8 @@
     <meta name="description" content="#{description}">
     {% block title %}<title>Bakery | Homepage</title>{% endblock %}
     <!-- Fonts-->
+    <script type="text/javascript" src="{{ asset('assets/front/plugins/jquery/dist/jquery.min.js') }}"></script>
+
     <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700%7CPacifico%7CVarela+Round%7CPoppins"
           rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/front/plugins/font-awesome/css/font-awesome.min.css') }}">
@@ -144,7 +146,7 @@
                     {% endif %}
 
                 </ul>
-
+                {{ render(controller('AppBundle:Default:userNotifs')) }}
 
                 <div class="ps-cart"><a class="ps-cart__toggle" href="#"><span><i>20</i></span><i
                                 class="ps-icon--shopping-cart"></i></a>
@@ -1096,7 +1098,6 @@
 </div>
 <!-- JS Library-->
 
-<script type="text/javascript" src="{{ asset('assets/front/plugins/jquery/dist/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/front/plugins/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/front/plugins/owl-carousel/owl.carousel.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/front/plugins/overflow-text.js') }}"></script>

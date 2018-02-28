@@ -1,46 +1,29 @@
-<div class="ps-cart"><a class="ps-cart__toggle" href="#"><span><i>20</i></span><i
-                class="ps-icon--shopping-cart"></i></a>
+<div class="ps-cart" id="bouttonNotifUser"><a class="ps-cart__toggle" href="#"><span
+                id="notifUser"><i>{{ count }}</i></span><i
+                class="fa fa-bell-o"></i></a>
     <div class="ps-cart__listing">
         <div class="ps-cart__content">
-            <div class="ps-cart-item">
-                <a class="ps-cart-item__close" href="#"></a>
-                <div class="ps-cart-item__thumbnail">
-                    <a href="{{ path('_cupcakes_product-detail') }}"></a><img
-                            src="{{ asset('assets/front/images/cake/img-cake-1.jpg') }}" alt=""></div>
-                <div class="ps-cart-item__content"><a class="ps-cart-item__title"
-                                                      href="{{ path('_cupcakes_product-detail') }}">Amazin’
-                        Glazin’</a>
-                    <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
+            {% for notif in notifs %}
+                <div class="ps-cart-item">
+                    <div class="ps-cart-item__thumbnail">
+                        <div class="ps-cart-item__content"><a class="ps-cart-item__title"
+                                                              href="{{ notif.0.link }}">{{ notif.0.subject }}
+                                <p><span><i>{{ notif.0.date }}</i></span>
+                                    <span>{{ notif.0.message }}</span>
+                                </p></a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="ps-cart-item">
-                <a class="ps-cart-item__close" href="#"></a>
-                <div class="ps-cart-item__thumbnail">
-                    <a href="{{ path('_cupcakes_product-detail') }}"></a><img
-                            src="{{ asset('assets/front/images/cake/img-cake-2.jpg') }}" alt=""></div>
-                <div class="ps-cart-item__content"><a class="ps-cart-item__title"
-                                                      href="{{ path('_cupcakes_product-detail') }}">The
-                        Crusty Croissant</a>
-                    <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                </div>
-            </div>
-            <div class="ps-cart-item">
-                <a class="ps-cart-item__close" href="#"></a>
-                <div class="ps-cart-item__thumbnail">
-                    <a href="{{ path('_cupcakes_product-detail') }}"></a><img
-                            src="{{ asset('assets/front/images/cake/img-cake-3.jpg') }}" alt=""></div>
-                <div class="ps-cart-item__content"><a class="ps-cart-item__title"
-                                                      href="{{ path('_cupcakes_product-detail') }}">The
-                        Rolling Pin</a>
-                    <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                </div>
-            </div>
+            {% endfor %}
         </div>
-        <div class="ps-cart__total">
-            <p>Number of items:<span>36</span></p>
-            <p>Item Total:<span>£528.00</span></p>
-        </div>
-        <div class="ps-cart__footer"><a class="ps-btn ps-btn--view-bag"
-                                        href="{{ path('_cupcakes_cart') }}">View bag</a></div>
     </div>
 </div>
+<script>
+    $(
+        function () {
+            $('#bouttonNotifUser').mouseover(function () {
+                $('#notifUser').remove();
+            })
+        }
+    )
+</script>
