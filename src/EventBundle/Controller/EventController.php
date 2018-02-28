@@ -33,10 +33,10 @@ class EventController extends Controller
             $request->query->getInt('page', 1)/*page number*/,
             5/*limit per page*/
         );
-
+        var_dump($last_event_id);
         return $this->render('EventBundle:event:index.html.twig', array(
             'events' => $pagination,
-            'id' => $last_event_id['id']
+            'id' => $last_event_id[0]['id']
         ));
     }
 
@@ -54,6 +54,8 @@ class EventController extends Controller
 
         if($data["ajax"]=="true")
         {
+            $user = $this->get('security.token_storage')->getToken()->getUser();
+
             $startingDate = \DateTime::createFromFormat('Y-m-d', $data["startingDate"]);
             $endingDate = \DateTime::createFromFormat('Y-m-d', $data["endingDate"]);
             $nbPerson =$data["nbPerson"];
@@ -70,6 +72,7 @@ class EventController extends Controller
             $event->setCost($cost);
             $event->setUrl("/admin/event/".$data["id"]."/show");
             $event->setBgColor("#ff5719");
+            $event->setUser($user);
             $em = $this->getDoctrine()->getManager();
             $em->persist($event);
             $em->flush($event);
@@ -90,11 +93,16 @@ class EventController extends Controller
     public function showAction(Event $event)
     {
         $em = $this->getDoctrine()->getManager();
+        $user = $this->get('security.token_storage')->getToken()->getUser();
 
         $users = $em->getRepository('UserBundle:User')->findAll();
+        $participants = $em->getRepository('EventBundle:Participants')->findParticipant($event->getId());
         return $this->render('EventBundle:event:show.html.twig', array(
             'event' => $event,
             'users' => $users,
+            'current_user' => $user,
+            'participants' => $participants
+
         ));
     }
 

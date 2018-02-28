@@ -16,6 +16,17 @@ class ParticipantsRepository extends \Doctrine\ORM\EntityRepository
             ->createQuery(" Select  u from UserBundle:User u where u.username LIKE :username ")
             ->setParameter('username','%'.$key.'%');
 
+        return $query->getSingleResult();
+    }
+
+    public function findParticipant($id_event)
+    {
+        $query=$this->getEntityManager()
+            ->createQuery(" Select  u from UserBundle:User u join EventBundle:Participants p where u.id=p.idParticipant and p.idEvent= :event")
+           // ->createQuery(" Select  p from EventBundle:Participants p join UserBundle:User u where u.id=p.idParticipant and p.idEvent= :event")
+            ->setParameter('event',$id_event);
+
         return $query->getResult();
     }
+
 }

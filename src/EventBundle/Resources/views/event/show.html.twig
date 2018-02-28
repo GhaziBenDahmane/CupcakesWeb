@@ -55,8 +55,10 @@
                         </tbody>
                     </table>
                 </div>
-
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ps-checkout__order">
+                    {% if event.user== current_user %}
+
+                    {% if event.status=="accept" %}
                     <h3>ADD MEMBERS</h3>
                     <div id="custom-search-input">
                         <div class="input-group col-md-12">
@@ -80,13 +82,46 @@
                                     </td>
                                 </tr>
                             {% endfor %}
+
+
                         </table>
                     </div>
+                        {% endif %}
+                        {% endif %}
 
-                </div>
+                    {% if event.status=="reject" %}
+                        <h3>Event rejected by administration</h3>
+
+                    {% endif %}
+                    {% if event.status=="Pending" %}
+                        <h3>Pending</h3>
+
+                    {% endif %}
+
+
+                    {% if event.user!=current_user %}
+                    {% if event.status=="accept" %}
+                        <h3>Participants List</h3>
+
+                        <div style="height:100px;overflow:scroll;margin-right:15px;">
+                            <table class="table" id="table_member">
+                                {% for paticipant in participants %}
+                                    <tr id="U{{ paticipant.id }}">
+                                        <td>{{ paticipant.username }}</td>
+
+                                    </tr>
+                                {% endfor %}
+
+
+                            </table>
+                        </div>
+                        {% endif %}
+                    {% endif %}
+
+                        </div>
             </div>
             <div class="form-group text-left">
-                <button id="add_row" class="ps-btn">New Event<i class="fa fa-angle-right"></i></button>
+                <a id="add_row" class="ps-btn" href="{{ path('event_index') }}">Event List<i class="fa fa-angle-right"></i></a>
             </div>
         </div>
 

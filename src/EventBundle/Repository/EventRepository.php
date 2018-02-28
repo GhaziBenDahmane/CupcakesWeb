@@ -14,7 +14,7 @@ class EventRepository extends \Doctrine\ORM\EntityRepository
         $query=$this->getEntityManager()
             ->createQuery(" Select  e.id from EventBundle:Event e Order by e.id DESC")->setMaxResults(1);
 
-        return $query->getSingleResult();
+        return $query->getResult();
 
 
     }
