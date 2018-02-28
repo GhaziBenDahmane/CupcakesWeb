@@ -30,6 +30,8 @@ class AppKernel extends Kernel
             new Mgilet\NotificationBundle\MgiletNotificationBundle(),
             new fadosProduccions\fullCalendarBundle\fullCalendarBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new Nomaya\SocialBundle\NomayaSocialBundle(),
+
 
 
 

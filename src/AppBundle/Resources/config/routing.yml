@@ -1,13 +1,13 @@
+user_cupcakes_notif:
+    path:     /userNotifs
+    defaults: { _controller: AppBundle:Default:userNotifs }
+
 _cupcakes_homepage:
     path:     /
     defaults: { _controller: AppBundle:Default:index }
 _cupcakes_notif:
     path:     /notif
     defaults: { _controller: AppBundle:Default:notif }
-user_cupcakes_notif:
-    path:     /userNotifs
-    defaults: { _controller: AppBundle:Default:userNotifs }
-
 cupcakes_notif:
     path:     /notifs/seen
     defaults: { _controller: AppBundle:Default:seen }
@@ -16,11 +16,12 @@ _cupcakes_blog-listing:
     path:     /blog-listing
     defaults: { _controller: AppBundle:Blog:bloglisting }
 _cupcakes_blog-detail:
-    path:     /blog-detail
+    path:     /blog-detail/{id}
     defaults: { _controller: AppBundle:Blog:blogdetail }
 _cupcakes_about:
     path:     /about
     defaults: { _controller: AppBundle:About:About }
+
 
 
 _cupcakes_contact:
@@ -30,6 +31,7 @@ _cupcakes_contact:
 my_app_mail_accuse:
     path: /success
     defaults: { _controller: AppBundle:Contact:success }
+
 back_office_contact:
     resource: "@AppBundle/Resources/config/routing/contact.yml"
     prefix:   /admin/contact

@@ -41,6 +41,29 @@ class Actuality
      * @ORM\Column(name="photo", type="string", length=255)
      */
     private $photo;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="date", type="datetime")
+     */
+
+    private $date;
+
+    /**
+     * @return mixed
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param mixed $date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
 
 
     /**
