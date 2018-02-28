@@ -101,8 +101,9 @@ function validate_row(id) {
         .catch(function (error) {
         });
 }
-(function ($) {
 
+(function ($) {
+    
     $(".search-query").keyup(function () {
 
         axios.post('/participants/listAll', {
@@ -591,7 +592,26 @@ function validate_row(id) {
                     });
                 });
 
+            axios.post('/pastryList', {
+                ajax: "true"
 
+            })
+                .then(function (response) {
+                    var i =0;
+                    $.each(response.data , function () {
+                        i=i+1;
+                        map.gmap3().marker(
+                            [
+                                {
+                                    address:response.data[i], icon: "http://maps.google.com/mapfiles/marker_grey.png"
+                                }
+                            ]
+                        )
+                    });
+
+                })
+                .catch(function (error) {
+                });
 
 
         }
@@ -612,28 +632,53 @@ function validate_row(id) {
 
     function countDown() {
         //Call countdown plugin
-        var time = $(".ps-countdown__time");
-        time.each(function () {
-            var el = $(this),
-                value = $(this).data('time');
-            var countDownDate = new Date(value).getTime();
-            var timeout = setInterval(function () {
-                var now = new Date().getTime(),
-                    distance = countDownDate - now;
-                var days = Math.floor(distance / (1000 * 60 * 60 * 24)),
-                    hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-                    minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-                    seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                // el.find('.days').html(days);
-                el.find('.hours').html(days * 24 + hours);
-                el.find('.minutes').html(minutes);
-                el.find('.seconds').html(seconds);
-                if (distance < 0) {
-                    clearInterval(timeout);
-                    el.closest('.ps-section').hide();
-                }
-            }, 1000);
-        });
+
+        axios.post('/promotion/list', {
+            ajax: 'true',
+        })
+            .then(function (response) {
+
+
+                var time = response.data[1];
+
+                    var el = $(".ps-countdown__time");
+                $("#discount").text(response.data[3]*100+'%');
+
+                    var countDownDate = new Date(time).getTime();
+
+                var timeout = setInterval(function () {
+                        var now = new Date().getTime(),
+                            distance = countDownDate - now;
+                        var days = Math.floor(distance / (1000 * 60 * 60 * 24)),
+                            hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+                            minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+                            seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                        // el.find('.days').html(days);
+                        el.find('.hours').html(days * 24 + hours);
+                        el.find('.minutes').html(minutes);
+                        el.find('.seconds').html(seconds);
+                        if (distance < 0) {
+                            clearInterval(timeout);
+                            el.closest('.ps-section').hide();
+                            axios.get('/promotion/'+response.data[0]+'/delete')
+                                .then(function (response) {
+                                    countDown();
+                                })
+                                .catch(function (error) {
+                                    console.log(error);
+                                });
+                        }
+                    }, 1000);
+
+            })
+            .catch(function (error) {
+                $(".ps-countdown__time").closest('.ps-section').hide();
+            });
+
+
+
+
+
     }
 
     function magnificPopup() {

@@ -5,7 +5,9 @@ e_commerce_product :
 e_commerce_promotion:
     resource: "@ECommerceBundle/Resources/config/routing/promotion.yml"
     prefix:   /admin/promotion
-
+e_commerce_front_promotion:
+    resource: "@ECommerceBundle/Resources/config/routing/promotion.yml"
+    prefix:   /promotion
 e_commerce_claim:
     resource: "@ECommerceBundle/Resources/config/routing/claim.yml"
     prefix:   /claim

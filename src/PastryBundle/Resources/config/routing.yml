@@ -1,51 +1,8 @@
-pastry_homepage:
-    path:     /
-    defaults: { _controller: PastryBundle:Default:index }
+_stock:
+    resource: "@PastryBundle/Resources/config/Pastry/pastry.yml"
+    prefix:   /stock
+_pastry:
+    resource: "@PastryBundle/Resources/config/Pastry/pastry.yml"
+    prefix:   /
 
-add_ingredient:
-    path:     /addIngredient
-    defaults: { _controller: PastryBundle:Ingredient:addIngredient }
 
-show_ingredient:
-    path:     /showIngredient
-    defaults: { _controller: PastryBundle:Ingredient:showIngredient }
-
-update_ingredient:
-    path:     /updateIngredient
-    defaults: { _controller: PastryBundle:Ingredient:updateIngredient }
-
-del_ingredient:
-    path:     /delIngredient
-    defaults: { _controller: PastryBundle:Ingredient:delIngredient }
-
-add_pastry:
-    path:     /addPastry
-    defaults: { _controller: PastryBundle:Pastry:addPastry }
-
-show_pastry:
-    path:     /showPastry
-    defaults: { _controller: PastryBundle:Pastry:showPastry }
-
-update_pastry:
-    path:     /updatePastry
-    defaults: { _controller: PastryBundle:Pastry:updatePastry }
-
-del_pastry:
-    path:     /delPastry
-    defaults: { _controller: PastryBundle:Pastry:delPastry }
-
-add_stock:
-    path:     /addStock
-    defaults: { _controller: PastryBundle:Stock:addStock }
-
-show_stock:
-    path:     /showStock
-    defaults: { _controller: PastryBundle:Stock:showStock }
-
-update_stock:
-    path:     /updateStock
-    defaults: { _controller: PastryBundle:Stock:updateStock }
-
-del_stock:
-    path:     /delStock
-    defaults: { _controller: PastryBundle:Stock:delStock }

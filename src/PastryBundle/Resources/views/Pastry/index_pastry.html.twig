@@ -1,0 +1,148 @@
+
+{% extends 'layoutAdmin.html.twig' %}
+{% block header %}
+    {{ parent() }}
+    <link href="{{ asset('assets/back/plugins/datatables/css/jquery.datatables.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('assets/back/plugins/datatables/css/jquery.datatables_themeroller.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('assets/back/plugins/bootstrap-datepicker/css/datepicker3.css') }}" rel="stylesheet" type="text/css">
+
+{% endblock %}
+{% block menu %}
+    {{ parent() }}
+{% endblock %}
+{% block content %}
+    <!-- Page Container -->
+    <div class="page-container">
+        <!-- Page Content -->
+        <div class="page-content">
+            <!-- Page Header -->
+            <!-- /Page Header -->
+            <!-- Page Inner -->
+            <div class="page-inner">
+                <div class="page-title">
+                    <h3 class="breadcrumb-header">pastry</h3>
+                </div>
+
+                <div id="main-wrapper">
+
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <div class="panel panel-white">
+                                <div class="panel-heading clearfix">
+                                </div>
+                                <div class="panel-body">
+                                    <div class="table-responsive">
+
+
+                                        <a href="" class="btn btn-social btn-success" data-placement="top" title="" data-original-title="Supprimer"  data-toggle="modal" data-target="#deleteModal"><i class="fa fa-plus">  </i>    </a>
+                                        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <br><br><br><br>
+                                                <div class="modal-content">
+
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                        <h4 class="modal-title">Add new pastry</h4>
+                                                        <div class="form-group">
+                                                            <label for="name">address</label>
+                                                            <input id="address" type="text"  required="required" maxlength="50" class="form-control">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="name">Number of table</label>
+                                                            <input id="nbtable" type="text"  required="required" maxlength="50" class="form-control">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger  " data-dismiss="modal" onclick="addPastry()">Submit</button>
+                                                        <button type="button" class="btn btn-default " data-dismiss="modal">Cancel</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+
+
+
+
+
+                                        <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
+                                            <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Address</th>
+                                                <th>Number of table</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                            </thead>
+                                            <tfoot>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Address</th>
+                                                <th>Number of table</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                            </tfoot>
+                                            <tbody>
+                                            {% for pastry in pastries %}
+                                                <tr role="row" class="even">
+                                                    <td class="sorting_1"><a href="{{ path('show_pastry', { 'id': pastry.id }) }}">{{ pastry.id }}</a></td>
+                                                    <td>{{ pastry.address}}</td>
+                                                    <td>{{ pastry.nbTable }}</td>
+                                                    <td>
+                                                        <a href="" class="btn btn-danger btn-rounded" data-placement="top" title="" data-original-title="Supprimer"  data-toggle="modal" data-target="#deleteModal{{ pastry.id }}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>    </a>
+                                                        <div class="modal fade" id="deleteModal{{ pastry.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <br><br><br><br>
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                        <h4 class="modal-title">Deletion confirmation :</h4>
+                                                                    </div>
+                                                                    <div class="modal-body" >
+                                                                        <p><span>Are you sure you want to delete <a href="#"></a>  {{ pastry.address }}? </span></p>
+
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <a href="{{ path ('del_pastry',{'id': pastry.id}) }}" data-toggle="modal" class="btn btn-danger"  id="lien" >Delete</a>
+                                                                        <button type="button" class="btn btn-default " data-dismiss="modal">Cancel</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div><!-- Row -->
+                </div><!-- Main Wrapper -->
+            </div><!-- /Page Inner -->
+
+
+        </div><!-- /Page Content -->
+    </div><!-- /Page Container -->
+{% endblock %}
+{% block nav %}
+    {{ parent() }}
+{% endblock %}
+{% block script %}
+    {{ parent() }}
+    <script src="{{ asset('assets/back/plugins/datatables/js/jquery.datatables.min.js') }}"></script>
+    <script src="{{ asset('assets/back/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ asset('assets/back/js/pages/table-data.js') }}"></script>
+    <script src="{{ asset('assets/back/js/script.js') }}"></script>
+{% endblock %}
+

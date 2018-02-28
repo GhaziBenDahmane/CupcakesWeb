@@ -10,4 +10,12 @@ namespace ECommerceBundle\Repository;
  */
 class PromotionRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findPromotionBystartDate() {
+        $query=$this->getEntityManager()
+            ->createQuery(" Select  p from ECommerceBundle:Promotion p Order by p.startingDate ")->setMaxResults(1);
+
+        return $query->getSingleResult();
+
+
+    }
 }

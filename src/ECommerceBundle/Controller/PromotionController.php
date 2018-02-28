@@ -6,16 +6,41 @@ use BackOfficeBundle\Entity\Actuality;
 use ECommerceBundle\Entity\Promotion;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class PromotionController extends Controller
 
 {
+    public function listAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $content =$request->getContent();
+        $data = json_decode($content, true);
+
+
+        if($data["ajax"]=="true")
+        {
+            $promotion = $em->getRepository('ECommerceBundle:Promotion')->findPromotionBystartDate();
+            $start_date=$promotion->getEndingDate();
+
+            $array = array();
+            array_push($array,$promotion->getId(),$promotion->getEndingDate()->format('Y-m-d H:i:s'),$promotion->getStartingDate()->format('Y-m-d H:i:s'),$promotion->getDiscount());
+
+            return new JsonResponse($array);
+
+        }
+
+
+    }
     /**
      * Lists all Actuality entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -180,6 +205,10 @@ class PromotionController extends Controller
         $promotion = $em->getRepository('ECommerceBundle:Promotion')->find($id);
         $em->remove($promotion);
         $em->flush();
+        if ($request->isXmlHttpRequest())
+        {
+            return new Response("true");
+        }
         return $this->redirectToRoute('_promotion_index');
     }
 
