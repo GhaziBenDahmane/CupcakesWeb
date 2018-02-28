@@ -31,5 +31,9 @@ _promotion_delete:
     path:     /{id}/delete
     defaults: { _controller: "ECommerceBundle:Promotion:delete" }
     methods:  [GET, DELETE]
+_promotion_index_list:
+    path:     /list
+    defaults: { _controller: "ECommerceBundle:Promotion:list" }
+    methods:  [GET, POST]
 
 

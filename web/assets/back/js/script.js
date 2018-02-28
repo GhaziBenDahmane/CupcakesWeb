@@ -10,7 +10,19 @@ function event_status(status,id) {
             console.log(error);
         });
 }
-
+function addPastry() {
+    axios.post('/admin/pastry/addPastry', {
+        ajax: 'true',
+        address: $("#address").val(),
+        nbtable : $("#nbtable").val()
+    })
+        .then(function (response) {
+            body.toggleClass("modal-dialog");
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
 $("#CSubmit").click(function(){
 
     axios.post('admin/contact/new', {

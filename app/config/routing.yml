@@ -39,3 +39,6 @@ fados_fullcalendar:
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
+_pastry_homepage:
+    path:     /pastryList
+    defaults: { _controller: PastryBundle:Pastry:listPastry }

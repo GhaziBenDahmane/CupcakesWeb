@@ -34,11 +34,9 @@ class EventController extends Controller
             5/*limit per page*/
         );
 
-
         return $this->render('EventBundle:event:index.html.twig', array(
             'events' => $pagination,
             'id' => $last_event_id['id']
-
         ));
     }
 

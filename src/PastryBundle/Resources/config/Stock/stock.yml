@@ -1,0 +1,11 @@
+add_stock:
+    path:     /addStock
+    defaults: { _controller: PastryBundle:Stock:addStock }
+
+show_stock:
+    path:     /showStock
+    defaults: { _controller: PastryBundle:Stock:showStock }
+
+update_stock:
+    path:     /updateStock
+    defaults: { _controller: PastryBundle:Stock:updateStock }

@@ -20,6 +20,7 @@ class DefaultController extends Controller
             '+21626879552', // Text any number
             "test message!"
         );*/
+
         return $this->render('AppBundle::index.html.twig');
     }
 

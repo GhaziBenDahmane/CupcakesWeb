@@ -40,7 +40,7 @@ class ClaimController extends Controller
     {
         $deleteForm = $this->createDeleteForm($claim);
 
-        return $this->render('ECommerceBundle:claim:show.html.twig', array(
+        return $this->render('ECommerceBundle:claim:show_pastry.html.twig', array(
             'claim' => $claim,
             'delete_form' => $deleteForm->createView(),
         ));

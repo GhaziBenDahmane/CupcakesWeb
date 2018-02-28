@@ -127,7 +127,7 @@ class ProductController extends Controller
     {
         $deleteForm = $this->createDeleteForm($product);
 
-        return $this->render('ECommerceBundle:product:show.html.twig', array(
+        return $this->render('ECommerceBundle:product:show_pastry.html.twig', array(
             'product' => $product,
             'delete_form' => $deleteForm->createView(),
         ));
