@@ -90,7 +90,7 @@ class FormationController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $formation = $em->getRepository('FormationBundle:Formation')->findAll();
-        return $this->render('FormationBundle:Formation:index.html.twig', array('formations' => $formation));
+        return $this->render('FormationBundle:formation:index.html.twig', array('formations' => $formation));
 
     }
 
