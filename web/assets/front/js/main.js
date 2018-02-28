@@ -8,15 +8,17 @@ function showLogin() {
     }, 0);
 
 }
+
 function delete_row(id) {
 
     $("#addr1").remove();
     $("#add_row").removeAttr("disabled");
 
 }
+
 function delete_entry(id) {
     axios.get('/event/' + id + '/delete')
-        .then(function (response) {
+        .then(function () {
             $("#addr" + id).remove();
 
         })
@@ -24,9 +26,10 @@ function delete_entry(id) {
             console.log(error);
         });
 }
+
 function delete_entry_res(id) {
     axios.get('/reservation/' + id + '/delete')
-        .then(function (response) {
+        .then(function () {
             $("#addr" + id).remove();
 
         })
@@ -34,13 +37,14 @@ function delete_entry_res(id) {
             console.log(error);
         });
 }
+
 function add_Member(id_user, id_event) {
     axios.post('/participants/new', {
         id_user: id_user,
         id_event: id_event,
         ajax: 'true'
     })
-        .then(function (response) {
+        .then(function () {
 
 
         })
@@ -48,6 +52,7 @@ function add_Member(id_user, id_event) {
             console.log(error);
         });
 }
+
 /*Add Reservation ajax */
 function validate_row_res(id) {
     axios.post("/reservation/new", {
@@ -66,9 +71,10 @@ function validate_row_res(id) {
             );
             $("#add_row").removeAttr("disabled");
         })
-        .catch(function (error) {
+        .catch(function () {
         });
 }
+
 /*Add Event ajax */
 function validate_row(id) {
     var a = parseInt($("#lastidevent").val()) + 1;
@@ -98,12 +104,11 @@ function validate_row(id) {
             $("#add_row").removeAttr("disabled");
 
         })
-        .catch(function (error) {
+        .catch(function () {
         });
 }
 
 (function ($) {
-    
     $(".search-query").keyup(function () {
 
         axios.post('/participants/listAll', {
@@ -196,10 +201,8 @@ function validate_row(id) {
         axios.post('/contact', {
             firstName: $("#CFirstName").val(),
             email: $("#CEmail").val(),
-            adress: $("#CAdress").val(),
             message: $("#CMsg").val(),
             tel: $("#CTel").val(),
-
             ajax: "true"
 
         })
@@ -207,9 +210,7 @@ function validate_row(id) {
                 $("#CFirstName").val("");
                 $("#CEmail").val("");
                 $("#CMsg").val("");
-                $("#CAdress").val("");
                 $("#CTel").val("");
-
                 $('.alert').append(' ' +
                     ' <strong>successful!</strong>  ');
 
@@ -225,43 +226,32 @@ function validate_row(id) {
     });
     $("#Dsubmit").click(function () {
 
-    $("#Dtype")
-        .change(function() {
-            var str =$( "select" ).val() ;
-
-            if(str=="Free")
-            {$('#Stype').html("Free service 3 Hours to receive");}
-            else
-            {$('#Stype').html("Premium service 1 Hour to receive");}
-        });
-
-
-    $("#DSubmit").click(function(){
-
-        axios.post('/delivery', {
-            name: $("#Dname").val(),
-            adress: $("#Daddress").val(),
-            datedelivery: $("#Ddatedelivery").val(),
-
-            serviceType: $("#Dtype").val(),
+        axios.post('/order', {
+            Name: $("#Dname").val(),
+            Adress: $("#Daddress").val(),
+            DateDelivery: $("#Ddatedelivery").val(),
+            phone: $("#Dphone").val(),
+            email: $("#Demail").val(),
+            contactTime: $("#DcontactTime").val(),
             notes: $("#Dnotes").val(),
 
             ajax: "true"
 
         })
-    .then(function (response) {
-            $("#Dname").val("");
-            $("#Daddress").val("");
-            $("#Ddatedelivery").val("");
+            .then(function (response) {
+                $("#Dname").val("");
+                $("#Daddress").val("");
+                $("#Ddatedelivery").val("");
+                $("#Dphone").val("");
+                $("#Demail").val("");
+                $("#DcontactTime").val("");
+                $("#Dnotes").val("");
+                $('.alert').append(' ' +
+                    ' <strong>successful!</strong>  ');
 
-            $("#Dtype").val("");
-            $("#Dnotes").val("");
-            $('.alert').append(' ' +
-                ' <strong>successful!</strong>  ');
+                $('.alert').attr("class", "alert alert-success");
 
-            $('.alert').attr("class","alert alert-success");
-
-        })
+            })
             .catch(function (error) {
                 $('.alert').append(' ' +
                     ' <strong>error!</strong>  ');
@@ -271,7 +261,7 @@ function validate_row(id) {
     });
 
 
-    $("#PSubmit").click(function(){
+    $("#PSubmit").click(function () {
 
         axios.post('/partnership/new', {
             firstName: $("#PFirstName").val(),
@@ -558,39 +548,39 @@ function validate_row(id) {
                 styles: [{
                     "featureType": "administrative",
                     "elementType": "all",
-                    "stylers": [{ "visibility": "on" }, { "lightness": 33 }]
+                    "stylers": [{"visibility": "on"}, {"lightness": 33}]
                 }, {
                     "featureType": "landscape",
                     "elementType": "all",
-                    "stylers": [{ "color": "#f2e5d4" }]
+                    "stylers": [{"color": "#f2e5d4"}]
                 }, {
                     "featureType": "poi.park",
                     "elementType": "geometry",
-                    "stylers": [{ "color": "#c5dac6" }]
+                    "stylers": [{"color": "#c5dac6"}]
                 }, {
                     "featureType": "poi.park",
                     "elementType": "labels",
-                    "stylers": [{ "visibility": "on" }, { "lightness": 20 }]
+                    "stylers": [{"visibility": "on"}, {"lightness": 20}]
                 }, {
                     "featureType": "road",
                     "elementType": "all",
-                    "stylers": [{ "lightness": 20 }]
+                    "stylers": [{"lightness": 20}]
                 }, {
                     "featureType": "road.highway",
                     "elementType": "geometry",
-                    "stylers": [{ "color": "#c5c6c6" }]
+                    "stylers": [{"color": "#c5c6c6"}]
                 }, {
                     "featureType": "road.arterial",
                     "elementType": "geometry",
-                    "stylers": [{ "color": "#e4d7c6" }]
+                    "stylers": [{"color": "#e4d7c6"}]
                 }, {
                     "featureType": "road.local",
                     "elementType": "geometry",
-                    "stylers": [{ "color": "#fbfaf7" }]
+                    "stylers": [{"color": "#fbfaf7"}]
                 }, {
                     "featureType": "water",
                     "elementType": "all",
-                    "stylers": [{ "visibility": "on" }, { "color": "#acbcc9" }]
+                    "stylers": [{"visibility": "on"}, {"color": "#acbcc9"}]
                 }]
 
 
@@ -598,26 +588,26 @@ function validate_row(id) {
                 .infowindow({
                     content: map.data('address')
                 }).then(function (infowindow) {
-                    var map = this.get(0);
-                    var marker = this.get(1);
+                var map = this.get(0);
+                var marker = this.get(1);
 
-                    marker.addListener('click', function () {
-                        infowindow.open(map, marker);
-                    });
+                marker.addListener('click', function () {
+                    infowindow.open(map, marker);
                 });
+            });
 
             axios.post('/pastryList', {
                 ajax: "true"
 
             })
                 .then(function (response) {
-                    var i =0;
-                    $.each(response.data , function () {
-                        i=i+1;
+                    var i = 0;
+                    $.each(response.data, function () {
+                        i = i + 1;
                         map.gmap3().marker(
                             [
                                 {
-                                    address:response.data[i], icon: "http://maps.google.com/mapfiles/marker_grey.png"
+                                    address: response.data[i], icon: "http://maps.google.com/mapfiles/marker_grey.png"
                                 }
                             ]
                         )
@@ -655,42 +645,39 @@ function validate_row(id) {
 
                 var time = response.data[1];
 
-                    var el = $(".ps-countdown__time");
-                $("#discount").text(response.data[3]*100+'%');
+                var el = $(".ps-countdown__time");
+                $("#discount").text(response.data[3] * 100 + '%');
 
-                    var countDownDate = new Date(time).getTime();
+                var countDownDate = new Date(time).getTime();
 
                 var timeout = setInterval(function () {
-                        var now = new Date().getTime(),
-                            distance = countDownDate - now;
-                        var days = Math.floor(distance / (1000 * 60 * 60 * 24)),
-                            hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-                            minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-                            seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                        // el.find('.days').html(days);
-                        el.find('.hours').html(days * 24 + hours);
-                        el.find('.minutes').html(minutes);
-                        el.find('.seconds').html(seconds);
-                        if (distance < 0) {
-                            clearInterval(timeout);
-                            el.closest('.ps-section').hide();
-                            axios.get('/promotion/'+response.data[0]+'/delete')
-                                .then(function (response) {
-                                    countDown();
-                                })
-                                .catch(function (error) {
-                                    console.log(error);
-                                });
-                        }
-                    }, 1000);
+                    var now = new Date().getTime(),
+                        distance = countDownDate - now;
+                    var days = Math.floor(distance / (1000 * 60 * 60 * 24)),
+                        hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+                        minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+                        seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    // el.find('.days').html(days);
+                    el.find('.hours').html(days * 24 + hours);
+                    el.find('.minutes').html(minutes);
+                    el.find('.seconds').html(seconds);
+                    if (distance < 0) {
+                        clearInterval(timeout);
+                        el.closest('.ps-section').hide();
+                        axios.get('/promotion/' + response.data[0] + '/delete')
+                            .then(function (response) {
+                                countDown();
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
+                    }
+                }, 1000);
 
             })
             .catch(function (error) {
                 $(".ps-countdown__time").closest('.ps-section').hide();
             });
-
-
-
 
 
     }
@@ -779,8 +766,8 @@ function validate_row(id) {
     }
 
     function dateTimePicker() {
-        $('.date-picker').datetimepicker({ format: 'DD/MM/YYYY' });
-        $('.time-picker').datetimepicker({ format: 'DD/MM/YYYY hh:mm' });
+        $('.date-picker').datetimepicker({format: 'DD/MM/YYYY'});
+        $('.time-picker').datetimepicker({format: 'DD/MM/YYYY hh:mm'});
     }
 
     function backToTop() {

@@ -3,10 +3,6 @@
 namespace Vich\UploaderBundle\Event;
 
 use Symfony\Component\EventDispatcher\Event as BaseEvent;
-<<<<<<< HEAD
-=======
-
->>>>>>> anis
 use Vich\UploaderBundle\Mapping\PropertyMapping;
 
 /**

@@ -2,7 +2,6 @@
 
 namespace Vich\UploaderBundle\Form\Type;
 
-<<<<<<< HEAD
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -50,19 +49,10 @@ class VichImageType extends VichFileType
     }
 
     /**
-=======
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormView;
-
-class VichImageType extends VichFileType
-{
-    /**
->>>>>>> anis
      * {@inheritdoc}
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-<<<<<<< HEAD
         $object = $form->getParent()->getData();
         $view->vars['object'] = $object;
         $view->vars['image_uri'] = null;
@@ -92,14 +82,6 @@ class VichImageType extends VichFileType
         // required for BC
         //TODO: remove for 2.0
         $view->vars['show_download_link'] = !empty($view->vars['download_uri']);
-=======
-        $view->vars['object'] = $form->getParent()->getData();
-        $view->vars['show_download_link'] = $options['download_link'];
-
-        if ($view->vars['object']) {
-            $view->vars['download_uri'] = $this->storage->resolveUri($form->getParent()->getData(), $form->getName());
-        }
->>>>>>> anis
     }
 
     /**
@@ -109,13 +91,4 @@ class VichImageType extends VichFileType
     {
         return 'vich_image';
     }
-<<<<<<< HEAD
-=======
-
-    // BC for SF < 2.8
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
->>>>>>> anis
 }

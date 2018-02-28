@@ -16,21 +16,12 @@ class HashNamer implements NamerInterface, ConfigurableInterface
 
     /**
      * @param array $options Options for this namer. The following options are accepted:
-<<<<<<< HEAD
      *                       - algorithm: wich hash algorithm to use.
      *                       - length: limit file name length
      */
     public function configure(array $options)
     {
         $options = array_merge(['algorithm' => $this->algorithm, 'length' => $this->length], $options);
-=======
-     *   - algorithm: wich hash algorithm to use.
-     *   - length: limit file name length.
-     */
-    public function configure(array $options)
-    {
-        $options = array_merge(array('algorithm' => $this->algorithm, 'length' => $this->length), $options);
->>>>>>> anis
 
         $this->algorithm = $options['algorithm'];
         $this->length = $options['length'];

@@ -4,7 +4,6 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-<<<<<<< HEAD
         <service id="vich_uploader.form.type.file" class="Vich\UploaderBundle\Form\Type\VichFileType" public="true">
             <argument type="service" id="vich_uploader.storage" />
             <argument type="service" id="vich_uploader.upload_handler" />
@@ -19,21 +18,6 @@
             <argument type="service" id="vich_uploader.property_mapping_factory" />
             <argument type="service" id="property_accessor" />
             <argument type="service" id="liip_imagine.cache.manager" on-invalid="null" />
-=======
-        <service id="vich_uploader.form.type.file" class="Vich\UploaderBundle\Form\Type\VichFileType">
-            <argument type="service" id="vich_uploader.storage" />
-            <argument type="service" id="vich_uploader.upload_handler" />
-            <argument type="service" id="translator" />
-
-            <tag name="form.type" alias="vich_file" />
-        </service>
-
-        <service id="vich_uploader.form.type.image" class="Vich\UploaderBundle\Form\Type\VichImageType">
-            <argument type="service" id="vich_uploader.storage" />
-            <argument type="service" id="vich_uploader.upload_handler" />
-            <argument type="service" id="translator" />
-
->>>>>>> anis
             <tag name="form.type" alias="vich_image" />
         </service>
     </services>

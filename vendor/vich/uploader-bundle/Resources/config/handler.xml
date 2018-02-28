@@ -4,21 +4,13 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <!-- download handler -->
-<<<<<<< HEAD
         <service id="vich_uploader.download_handler" class="Vich\UploaderBundle\Handler\DownloadHandler" public="true">
-=======
-        <service id="vich_uploader.download_handler" class="Vich\UploaderBundle\Handler\DownloadHandler">
->>>>>>> anis
             <argument type="service" id="vich_uploader.property_mapping_factory" />
             <argument type="service" id="vich_uploader.storage" />
         </service>
 
         <!-- global handler -->
-<<<<<<< HEAD
         <service id="vich_uploader.upload_handler" class="Vich\UploaderBundle\Handler\UploadHandler" public="true">
-=======
-        <service id="vich_uploader.upload_handler" class="Vich\UploaderBundle\Handler\UploadHandler">
->>>>>>> anis
             <argument type="service" id="vich_uploader.property_mapping_factory" />
             <argument type="service" id="vich_uploader.storage" />
             <argument type="service" id="vich_uploader.file_injector" />

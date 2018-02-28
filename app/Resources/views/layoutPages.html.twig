@@ -37,6 +37,15 @@
     <link rel="stylesheet" href="{{ asset('assets/front/plugins/revolution/css/navigation.css') }}">
     <!-- Custom-->
     <link rel="stylesheet" href="{{ asset('assets/front/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/loginForm/vendor/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/loginForm/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/loginForm/fonts/Linearicons-Free-v1.0.0/icon-font.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/loginForm/vendor/css-hamburgers/hamburgers.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/loginForm/vendor/animsition/css/animsition.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/loginForm/vendor/select2/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/loginForm/vendor/daterangepicker/daterangepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/loginForm/css/util.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/loginForm/css/main.css') }}">
     <script type="text/javascript" src="{{ asset('assets/front/js/axios.min.js') }}"></script>
 
     <!--HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries-->
@@ -417,7 +426,14 @@
     </div>
     </div>
 {% endblock %}
-
+{% if not app.user %}
+    <div class="mfp-with-anim modal-popup mfp-hide" id="modal--subscribe">
+        <div>
+            {{ render(controller('UserBundle:Default:Login')) }}
+            {{ render(controller('UserBundle:Default:SignUp')) }}
+        </div>
+    </div>
+{% endif %}
 <!-- JS Library-->
 {% block jsLibrary %}
 
@@ -443,6 +459,16 @@
     <script type="text/javascript" src="{{ asset('assets/front/plugins/gmap3.min.js') }}"></script>
     <script type="text/javascript"
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAx39JFH5nhxze1ZydH-Kl8xXM3OK4fvcg&amp;region=GB"></script>
+    <script>
+        $(function () {
+            $('#register_form').hide()
+        });
+
+        function toggleRegistration() {
+            $('#register_form').toggle();
+            $('#login_form').toggle();
+        }
+    </script>
 {% endblock %}
 
 <!-- Revolution - slider-->

@@ -54,6 +54,27 @@ class Event extends BaseEvent
     private $cost;
 
     /**
+     *
+     * @ORM\Column(name="user", type="text",length=255)
+     */
+    private $user;
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+    /**
      * @ORM\OneToMany(targetEntity="EventBundle\Entity\Participants" , mappedBy="idParticipant")
      * @ORM\Column(type="string" , nullable=true)
      */
@@ -62,7 +83,7 @@ class Event extends BaseEvent
     /**
      * @ORM\Column(type="string")
      */
-    private $status="Pending";
+    private $status = "Pending";
 
     /**
      * @return mixed
@@ -95,9 +116,6 @@ class Event extends BaseEvent
     {
         $this->participants = $participants;
     }
-
-
-
 
 
     /**
@@ -205,7 +223,6 @@ class Event extends BaseEvent
     {
         return $this->cost;
     }
-
 
 
 }

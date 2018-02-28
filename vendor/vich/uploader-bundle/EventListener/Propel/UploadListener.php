@@ -5,11 +5,7 @@ namespace Vich\UploaderBundle\EventListener\Propel;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
-<<<<<<< HEAD
  * UploadListener.
-=======
- * UploadListener
->>>>>>> anis
  *
  * Handles file uploads.
  *
@@ -20,7 +16,6 @@ class UploadListener extends BaseListener
     /**
      * The events the listener is subscribed to.
      *
-<<<<<<< HEAD
      * @return array The array of events
      */
     public static function getSubscribedEvents()
@@ -33,20 +28,6 @@ class UploadListener extends BaseListener
 
     /**
      * @param GenericEvent $event The event
-=======
-     * @return array The array of events.
-     */
-    public static function getSubscribedEvents()
-    {
-        return array(
-            'propel.pre_insert' => 'onUpload',
-            'propel.pre_update' => 'onUpload',
-        );
-    }
-
-    /**
-     * @param GenericEvent $event The event.
->>>>>>> anis
      */
     public function onUpload(GenericEvent $event)
     {

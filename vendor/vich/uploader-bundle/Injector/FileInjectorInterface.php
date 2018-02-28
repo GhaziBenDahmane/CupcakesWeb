@@ -17,13 +17,8 @@ interface FileInjectorInterface
      * The field is populated with a \Symfony\Component\HttpFoundation\File\File
      * instance.
      *
-<<<<<<< HEAD
      * @param object          $obj     The object
      * @param PropertyMapping $mapping The mapping representing the field to populate
-=======
-     * @param object          $obj     The object.
-     * @param PropertyMapping $mapping The mapping representing the field to populate.
->>>>>>> anis
      */
     public function injectFile($obj, PropertyMapping $mapping);
 }

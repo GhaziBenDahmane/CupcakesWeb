@@ -2,7 +2,6 @@
 
 namespace Vich\UploaderBundle\Metadata\Driver;
 
-<<<<<<< HEAD
 use Metadata\Driver\AbstractFileDriver;
 use Symfony\Component\Yaml\Yaml as YmlParser;
 use Vich\UploaderBundle\Metadata\ClassMetadata;
@@ -10,21 +9,10 @@ use Vich\UploaderBundle\Metadata\ClassMetadata;
 /**
  * @author Kévin Gomez <contact@kevingomez.fr>
  * @author Konstantin Myakshin <koc-dp@yandex.ru>
-=======
-use Symfony\Component\Yaml\Yaml as YmlParser;
-
-use Vich\UploaderBundle\Metadata\ClassMetadata;
-
-/**
- * Yaml driver
- *
- * @author Kévin Gomez <contact@kevingomez.fr>
->>>>>>> anis
  */
 class YamlDriver extends AbstractFileDriver
 {
     /**
-<<<<<<< HEAD
      * {@inheritdoc}
      */
     protected function loadMetadataFromFile(\ReflectionClass $class, $file)
@@ -49,32 +37,6 @@ class YamlDriver extends AbstractFileDriver
         }
 
         return $classMetadata;
-=======
-     * {@inheritDoc}
-     */
-    protected function loadMetadataFromFile($file, \ReflectionClass $class = null)
-    {
-        $config = $this->loadMappingFile($file);
-        $className = $this->guessClassName($file, $config, $class);
-        $metadata = new ClassMetadata($className);
-
-        foreach ($config[$className] as $field => $mappingData) {
-            $fieldMetadata = array(
-                'mapping'           => $mappingData['mapping'],
-                'propertyName'      => $field,
-                'fileNameProperty'  => isset($mappingData['filename_property']) ? $mappingData['filename_property'] : null,
-            );
-
-            $metadata->fields[$field] = $fieldMetadata;
-        }
-
-        return $metadata;
-    }
-
-    protected function getClassNameFromFile($file)
-    {
-        return $this->guessClassName($file, $this->loadMappingFile($file));
->>>>>>> anis
     }
 
     protected function loadMappingFile($file)
@@ -83,11 +45,7 @@ class YamlDriver extends AbstractFileDriver
     }
 
     /**
-<<<<<<< HEAD
      * {@inheritdoc}
-=======
-     * {@inheritDoc}
->>>>>>> anis
      */
     protected function getExtension()
     {
@@ -96,11 +54,7 @@ class YamlDriver extends AbstractFileDriver
 
     protected function guessClassName($file, array $config, \ReflectionClass $class = null)
     {
-<<<<<<< HEAD
         if (null === $class) {
-=======
-        if ($class === null) {
->>>>>>> anis
             return current(array_keys($config));
         }
 

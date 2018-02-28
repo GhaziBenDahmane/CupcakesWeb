@@ -4,15 +4,15 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitfdadf97e61e4838d1cc3d2415b7126be
+class ComposerStaticInit1b540ddfed388cef3962a47c781aa229
 {
     public static $files = array (
         '92c8763cd6170fce6fcfe7e26b4e8c10' => __DIR__ . '/..' . '/symfony/phpunit-bridge/bootstrap.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '023d27dca8066ef29e6739335ea73bad' => __DIR__ . '/..' . '/symfony/polyfill-php70/bootstrap.php',
         'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '6a47392539ca2329373e0d33e1dba053' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/bootstrap.php',
         '32dcc8afd4335739640db7d200c1971d' => __DIR__ . '/..' . '/symfony/polyfill-apcu/bootstrap.php',
         'bccfaf6207f67190a92f35585e9a78b2' => __DIR__ . '/..' . '/twilio/sdk/Services/Twilio.php',
@@ -95,10 +95,6 @@ class ComposerStaticInitfdadf97e61e4838d1cc3d2415b7126be
         array (
             'Composer\\CaBundle\\' => 18,
             'Cocur\\HumanDate\\' => 16,
-        ),
-        'A' => 
-        array (
-            'AncaRebeca\\FullCalendarBundle\\' => 30,
         ),
     );
 
@@ -387,11 +383,11 @@ class ComposerStaticInitfdadf97e61e4838d1cc3d2415b7126be
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitfdadf97e61e4838d1cc3d2415b7126be::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitfdadf97e61e4838d1cc3d2415b7126be::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInitfdadf97e61e4838d1cc3d2415b7126be::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitfdadf97e61e4838d1cc3d2415b7126be::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitfdadf97e61e4838d1cc3d2415b7126be::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit1b540ddfed388cef3962a47c781aa229::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit1b540ddfed388cef3962a47c781aa229::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInit1b540ddfed388cef3962a47c781aa229::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit1b540ddfed388cef3962a47c781aa229::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit1b540ddfed388cef3962a47c781aa229::$classMap;
 
         }, null, ClassLoader::class);
     }

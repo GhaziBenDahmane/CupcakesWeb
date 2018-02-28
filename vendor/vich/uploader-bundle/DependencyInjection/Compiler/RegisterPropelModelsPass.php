@@ -4,18 +4,10 @@ namespace Vich\UploaderBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-<<<<<<< HEAD
 use Vich\UploaderBundle\Exception\MappingNotFoundException;
 
 /**
  * Register the uploadable models in BazingaPropelEventDispatcherBundle.
-=======
-
-use Vich\UploaderBundle\Exception\MappingNotFoundException;
-
-/**
- * Register the uploadable models in BazingaPropelEventDispatcherBundle
->>>>>>> anis
  *
  * @author Kévin Gomez <contact@kevingomez.fr>
  */
@@ -34,14 +26,9 @@ class RegisterPropelModelsPass implements CompilerPassInterface
         $hasPropelMapping = false;
 
         foreach ($mappings as $mapping) {
-<<<<<<< HEAD
             if ('propel' === $mapping['db_driver']) {
                 $hasPropelMapping = true;
 
-=======
-            if ($mapping['db_driver'] === 'propel') {
-                $hasPropelMapping = true;
->>>>>>> anis
                 break;
             }
         }
@@ -50,15 +37,9 @@ class RegisterPropelModelsPass implements CompilerPassInterface
             return;
         }
 
-<<<<<<< HEAD
         $serviceTypes = [
             'inject', 'clean', 'remove', 'upload',
         ];
-=======
-        $serviceTypes = array(
-            'inject', 'clean', 'remove', 'upload',
-        );
->>>>>>> anis
 
         $metadata = $container->get('vich_uploader.metadata_reader');
 
@@ -70,11 +51,7 @@ class RegisterPropelModelsPass implements CompilerPassInterface
 
                 $mapping = $mappings[$field['mapping']];
 
-<<<<<<< HEAD
                 if ('propel' !== $mapping['db_driver']) {
-=======
-                if ($mapping['db_driver'] !== 'propel') {
->>>>>>> anis
                     continue;
                 }
 
@@ -86,11 +63,7 @@ class RegisterPropelModelsPass implements CompilerPassInterface
                     $definition = $container->getDefinition(sprintf('vich_uploader.listener.%s.%s', $type, $field['mapping']));
                     $definition->setClass($container->getDefinition($definition->getParent())->getClass());
                     $definition->setPublic(true);
-<<<<<<< HEAD
                     $definition->addTag('propel.event_subscriber', ['class' => $class]);
-=======
-                    $definition->addTag('propel.event_subscriber', array('class' => $class));
->>>>>>> anis
                 }
             }
         }
