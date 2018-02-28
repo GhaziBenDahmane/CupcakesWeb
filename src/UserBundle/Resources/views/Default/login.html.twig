@@ -3,11 +3,9 @@
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
     <script>
-        if(location.pathname == '/login')
-            location.pathname ='/'
-    </script>
-    {#{{ path(" fos_user_security_check ") }}#}
-    {#{{ path('tmp_Before_Sign_Up') }}#}
+        if (location.pathname == '/login')
+            location.pathname = '/'
+    </script>}
     <div id="ab">
         <form class="login100-form validate-form flex-sb flex-w" action="{{ path("fos_user_security_check") }}"
               method="post" id="login_form">
@@ -32,9 +30,6 @@
 							Password
 						</span>
 
-                <a href="#" class="txt2 bo1 m-l-5" id="forgotpassword">
-                    Forgot?
-                </a>
             </div>
             <div class="wrap-input100 validate-input" data-validate="Password is required">
                 <input class="input100" type="password" name="_password">
