@@ -15,6 +15,11 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    image_directory: '%kernel.project_dir%/web/images/products'
+    payment:
+            currency: GBP
+            decimal: true
+            premium_amount: 1
 framework:
     translator: ~
     #esi: ~
@@ -105,3 +110,4 @@ vresh_twilio:
     authToken: '65063fd6f5f0b228ff625955eb0fb4ca'
     #(Optional, default: 1) Number of times to retry failed requests
     retryAttempts: 3
+

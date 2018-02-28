@@ -3,6 +3,9 @@
 namespace ECommerceBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 
 /**
  * Product
@@ -57,6 +60,33 @@ class Product
     private $nb_seller;
 
     /**
+     * @var string
+     * @ORM\Column(name="photo" ,type="string", length=255)
+     * @Assert\File()
+     */
+    private $photo;
+
+    /**
+     * @return string
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    /**
+     * @param string $photo
+     */
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+    }
+
+
+
+
+
+    /**
      * @return int
      */
     public function getNbViewed()
@@ -88,12 +118,7 @@ class Product
         $this->nb_seller = $nb_seller;
     }
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="photo", type="text")
-     */
-    private $photo;
+
     /**
      * @ORM\Column(type="string")
      */
@@ -218,27 +243,5 @@ class Product
         return $this->price;
     }
 
-    /**
-     * Set photo
-     *
-     * @param string $photo
-     *
-     * @return Product
-     */
-    public function setPhoto($photo)
-    {
-        $this->photo = $photo;
 
-        return $this;
-    }
-
-    /**
-     * Get photo
-     *
-     * @return string
-     */
-    public function getPhoto()
-    {
-        return $this->photo;
-    }
 }

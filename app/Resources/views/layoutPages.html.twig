@@ -1,7 +1,4 @@
-<!DOCTYPE html>
-<!--[if IE 7]><html class="ie ie7"><![endif]-->
-<!--[if IE 8]><html class="ie ie8"><![endif]-->
-<!--[if IE 9]><html class="ie ie9"><![endif]-->
+
 <html lang="en">
 
 {% block header %}
@@ -236,6 +233,7 @@
 
         {% endblock header %}
         {% block content %}
+
             <div>Create your own content</div>
         {% endblock content %}
 
@@ -409,6 +407,7 @@
 
     <!-- JS Library-->
     {% block jsLibrary %}
+
         <script type="text/javascript" src="{{ asset('assets/front/plugins/jquery/dist/jquery.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('assets/front/plugins/bootstrap/dist/js/bootstrap.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('assets/front/plugins/owl-carousel/owl.carousel.min.js') }}"></script>

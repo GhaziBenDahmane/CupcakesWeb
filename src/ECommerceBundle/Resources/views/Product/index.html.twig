@@ -67,7 +67,6 @@
                                                     <td>{{ product.price }}</td>
                                                     <td>{{ product.photo }}</td>
                                                     <td>
-                                                        {{ render(controller('ECommerceBundle:Product:edit',{'id':product.id})) }}
                                                     </td>
                                                     <td>
                                                         <a href="" class="btn btn-danger" data-placement="top" title="" data-original-title="Supprimer"  data-toggle="modal" data-target="#deleteModal{{ product.id }}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>    </a>

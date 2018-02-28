@@ -70,4 +70,42 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
         return $query->getResult();
 
     }
+
+    public function findProductsMostRated(){
+        $query=$this->getEntityManager()
+            ->createQuery(" SELECT DISTINCT (p.id),p.id,p.name,p.price FROM ECommerceBundle:Product p JoiN ECommerceBundle:Rating e where p.id=IDENTITY(e.products) 
+           GROUP BY p.id HAVING AVG (e.note)>3" );
+
+
+        return $query->getResult();
+    }
+
+    public function findProductsMostViewed(){
+        $query=$this->getEntityManager()
+            ->createQuery(" SELECT  p from ECommerceBundle:Product p ORDER by p.nb_viewed" );
+
+
+        return $query->getResult();
+    }
+
+    public function findProductsBestSeller($limit){
+        $query=$this->getEntityManager()
+            ->createQuery(" SELECT  p from ECommerceBundle:Product p ORDER BY p.nb_seller" )
+        ->setMaxResults($limit);
+
+
+        return $query->getResult();
+    }
+
+    public function findProductsByTags($tag)
+    {
+        $query=$this->getEntityManager()
+            ->createQuery(" SELECT DISTINCT p FROM ECommerceBundle:Product p JoiN ECommerceBundle:Tag t where p.id=IDENTITY(t.product) 
+               AND  t.name like :tag")->setParameter('tag',$tag);
+        return $query->getResult();
+
+    }
+
+
+
 }

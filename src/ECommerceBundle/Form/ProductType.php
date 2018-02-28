@@ -4,9 +4,11 @@ namespace ECommerceBundle\Form;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ProductType extends AbstractType
 {
@@ -19,7 +21,7 @@ class ProductType extends AbstractType
             ->add('name')
             ->add('type')
             ->add('price')
-            ->add('photo')
+            ->add('photo',FileType::class,array('label' => 'Product (Image)'))
             ->add('promotion',EntityType::class,array('class'=>'ECommerceBundle\Entity\Promotion','choice_label'=>'discount'))
             ->add('description',\Symfony\Component\Form\Extension\Core\Type\TextType::class, array('label' => 'description'))
             ->add('submit', SubmitType::class, array('attr' => array('class' => 'save')));

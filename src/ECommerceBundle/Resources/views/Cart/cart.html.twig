@@ -71,13 +71,14 @@
                                 </div>
                             </div>
                             <div class="form-groupform-order">
-                                <button class="ps-cart__shopping">Continue Shopping</button>
+                                <button   class="ps-cart__shopping">Continue Shopping</button>
                             </div>
+                            <a href="{{path('_cupcakes_payment',{price:price*100})}}">Buy</a>
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 ">
                             <div class="ps-cart__total">
                                 <p>Total Price: <span id="total">{{ price }}</span></p>
-                                <button class="ps-btn ps-btn--sm ps-btn--fullwidth">Process to checkout</button>
+                                <input type="button" id="check"  value="Buy" >
                             </div>
                         </div>
                     </div>
@@ -85,9 +86,15 @@
             </div>
         </div>
     </div>
+
+
+
     <script type="text/javascript" src="{{ asset('jquery.js') }}"></script>
-    <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
     <script type="text/javascript">
+
+
 
        $(function () {
            $('[id="remove"]').on('click', function(e) {

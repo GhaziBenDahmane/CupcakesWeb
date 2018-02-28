@@ -35,4 +35,20 @@ class CartRepository extends \Doctrine\ORM\EntityRepository
 
 
     }
+
+    public function VerifyCoupon($code)
+    {
+        $query=$this->getEntityManager()
+            ->createQuery(" SELECT c FROM GamingBundle:Coupon c where c.code= :code 
+             and c.expirationDate>CURRENT_DATE AND  c.used = 0")
+
+            ->setParameter('code',$code);
+
+
+        return $query->getResult();
+
+
+    }
+
+
 }

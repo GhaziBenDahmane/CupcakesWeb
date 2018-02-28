@@ -1,40 +1,34 @@
 
-<div class="ps-shop ps-col-tiny">
-    <div class="row">
-        {% for product in products %}
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 ">
-                <div class="ps-product">
-                    <div class="ps-product__thumbnail">
-                        <div class="ps-badge ps-badge--new"><span>New</span></div>
-                        <a class="ps-product__overlay" href="{{ path('_cupcakes_product-detail') }}"></a><img src="{{ asset('assets/front/images/cake/img-cake-7.jpg') }}" alt="">
-                        <ul class="ps-product__action">
-                            <li><a class="popup-modal" href="#quickview-modal" data-effect="mfp-zoom-out" data-tooltip="View"><i class="ps-icon--search"></i></a></li>
-                            <li><a href="#" data-tooltip="Add to wishlist"><i class="ps-icon--heart"></i></a></li>
-                            <li><a href="#" data-tooltip="Compare"><i class="ps-icon--reload"></i></a></li>
-                            <li><a href="#" data-tooltip="Add to cart"><i class="ps-icon--shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="ps-product__content"><a class="ps-product__title" href="{{ path('_cupcakes_product-detail') }}">{{ product.name }}</a>
-                        <div class="ps-product__category"><a class="ps-product__category" href="{{ path('_cupcakes_product-listing') }}">{{ product.type }}</a>
-                        </div>
-                        <select class="ps-rating">
-                            <option value="1">1</option>
-                            <option value="1">2</option>
-                            <option value="1">3</option>
-                            <option value="1">4</option>
-                            <option value="5">5</option>
-                        </select>
-                        <p class="ps-product__price">{{ product.price }}</p>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
 
 </div>
+{% for product in products %}
+    <div>
+        <div id="product" class="ps-product--list ps-product--list-large">
+            <div class="ps-product__thumbnail">
+                <a class="ps-product__overlay" href="product-detail.html"></a><img src="{{ asset('assets/front/images/cake/img-cake-3.jpg') }}" alt=""></div>
+            <div class="ps-product__content">
 
-<center>
-    <div id="page" class="navigation ">
-        {{ knp_pagination_render(products) }}
+                <h4 id="name" class="ps-product__title"><a href="{{ path('_cupcakes_product-detail',{'id':product.id }) }}">{{ product.name }}</a></h4>
+                <div>
+
+                    {{ render(controller(
+                    'ECommerceBundle\\Controller\\RatingController::showRatingAction',
+                    { 'id': product.id  }
+                    )) }}
+                </div>
+                <p class="ps-product__price">
+                    <del>{{ product.price }}</del>{{product.price - product.price *product.promotion.discount }}
+                </p>
+                <p id="desc">Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate. Cupcake sweet roll sweet dragée dragée. Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate cake.</p>
+                <footer class="ps-product__footer clearfix"><a class="ps-btn ps-btn--sm" href="{{ path('_cupcakes_cart',{id:product.id}) }}">Order now<i class="fa fa-angle-right"></i></a>
+                    <ul class="ps-product__action">
+                        <li><a id="cart" href="{{ path('_cupcakes_cart_add',{id:product.id}) }}" data-tooltip="Add to Cart"><i class="ps-icon--heart"></i></a></li>
+                        <li><a href="#" data-tooltip="Compare"><i class="ps-icon--reload"></i></a></li>
+                    </ul>
+                </footer>
+            </div>
+        </div>
     </div>
-</center>
+{% endfor %}
+<script type="text/javascript" src="{{ asset('assets/front/plugins/jquery-bar-rating/dist/jquery.barrating.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/front/js/main.js') }}"></script>
