@@ -326,7 +326,7 @@ class ProductController extends Controller
         $em = $this->getDoctrine()->getManager();
         $content = $request->getContent();
         $data = json_decode($content, true);
-        $name = $data["name"];
+        $name = $data["n"];
         $products = $em->getRepository('ECommerceBundle:Product')->findProductsByName($name);
 
         $paginator = $this->get('knp_paginator');

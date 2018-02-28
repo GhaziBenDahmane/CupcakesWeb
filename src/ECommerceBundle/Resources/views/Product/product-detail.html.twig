@@ -31,13 +31,9 @@
                         <div class="ps-product__thumbnail">
                             <div class="ps-badge"><span>50%</span></div>
                             <div class="owl-slider primary" data-owl-auto="true" data-owl-loop="false" data-owl-speed="10000" data-owl-gap="0" data-owl-nav="false" data-owl-dots="false" data-owl-animate-in="" data-owl-animate-out="" data-owl-item="1" data-owl-item-xs="1" data-owl-item-sm="1" data-owl-item-md="1" data-owl-item-lg="1" data-owl-nav-left="&lt;i class=&quot;fa fa-angle-left&quot;&gt;&lt;/i&gt;" data-owl-nav-right="&lt;i class=&quot;fa fa-angle-right&quot;&gt;&lt;/i&gt;">
-                                <div class="ps-product__image"><img src="{{ asset('assets/front/images/cake/img-cake-12.jpg') }}" alt=""></div>
-                                <div class="ps-product__image"><img src="{{ asset('assets/front/images/cake/img-cake-11.jpg') }}" alt=""></div>
-                                <div class="ps-product__image"><img src="{{ asset('assets/front/images/cake/img-cake-10.jpg') }}" alt=""></div>
-                                <div class="ps-product__image"><img src="{{ asset('assets/front/images/cake/img-cake-6.jpg') }}" alt=""></div>
-                                <div class="ps-product__image"><img src="{{ asset('assets/front/images/cake/img-cake-5.jpg') }}" alt=""></div>
+                                <div class="ps-product__image"><img src="{{ asset('images/products/')}}{{  products.photo }}" alt=""></div>
+
                             </div>
-                            <div class="owl-slider second mb-30" data-owl-auto="true" data-owl-loop="false" data-owl-speed="10000" data-owl-gap="20" data-owl-nav="false" data-owl-dots="false" data-owl-animate-in="" data-owl-animate-out="" data-owl-item="4" data-owl-item-xs="2" data-owl-item-sm="3" data-owl-item-md="4" data-owl-item-lg="4" data-owl-nav-left="&lt;i class=&quot;fa fa-angle-left&quot;&gt;&lt;/i&gt;" data-owl-nav-right="&lt;i class=&quot;fa fa-angle-right&quot;&gt;&lt;/i&gt;"><img src="{{ asset('assets/front/images/cake/img-cake-12.jpg') }}" alt=""><img src="{{ asset('assets/front/images/cake/img-cake-11.jpg') }}" alt=""><img src="{{ asset('assets/front/images/cake/img-cake-10.jpg') }}" alt=""><img src="{{ asset('assets/front/images/cake/img-cake-6.jpg') }}" alt=""><img src="{{ asset('assets/front/images/cake/img-cake-5.jpg') }}" alt=""></div>
                         </div>
                     </div>
 
@@ -67,14 +63,13 @@
                             <div class="ps-product__shop">
 
                                 <ul class="ps-product__action">
-                                    <li><a href="#" data-tooltip="Add to Cart"><i class="ps-icon--heart"></i></a></li>
-                                    <li><a href="#" data-tooltip="Compare"><i class="ps-icon--reload"></i></a></li>
+                                    <li><a href="{{ path('_cupcakes_cart_add',{id:products.id}) }}" data-tooltip="Add to Cart"><i class="ps-icon--heart"></i></a></li>
                                 </ul>
                             </div>
                         </header>
                         <footer>
                             <div class="row">
-                                <div class="col-lg-6 col-md-5 col-sm-6 col-xs-12 "><a class="ps-btn--fullwidth ps-btn" href="#">Purchase Now<i class="fa fa-angle-right"></i></a>
+                                <div class="col-lg-6 col-md-5 col-sm-6 col-xs-12 "><a class="ps-btn--fullwidth ps-btn" href="{{ path('_cupcakes_cart')}}">Go To Cart<i class="fa fa-angle-right"></i></a>
                                 </div>
                                 <div class="col-lg-6 col-md-7 col-sm-6 col-xs-12 ">
                                     <p class="ps-product__sharing">Share with:<a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-google-plus"></i></a><a href="#"><i class="fa fa-twitter"></i></a></p>
@@ -186,9 +181,8 @@
                     <div class="ps-product__thumbnail">
                         <a class="ps-product__overlay" href="#"></a><img src="{{ asset('assets/front/images/cake/img-cake-7.jpg') }}" alt="">
                         <ul class="ps-product__action">
-                            <li><a class="popup-modal" href="#quickview-modal" data-effect="mfp-zoom-out" data-tooltip="View"><i class="ps-icon--search"></i></a></li>
-                            <li><a href="#" data-tooltip="Add to wishlist"><i class="ps-icon--heart"></i></a></li>
-                            <li><a href="#" data-tooltip="Add to cart"><i class="ps-icon--shopping-cart"></i></a></li>
+                            <li><a  href="{{ path('_cupcakes_product-detail',{id: best.id}) }}" ><i class="ps-icon--search"></i></a></li>
+                            <li><a href="{{ path('_cupcakes_cart_add',{id: best.id}) }} data-tooltip="Add to wishlist"><i class="ps-icon--heart"></i></a></li>
                         </ul>
                     </div>
                     <div class="ps-product__content"><a class="ps-product__title" href="product-detail.html">{{ best.name }}</a>

@@ -40,6 +40,12 @@ class PaymentController extends Controller
                     $this->addFlash('warning', sprintf('Unable to take payment, %s', $e instanceof \Stripe\Error\Card ? lcfirst($e->getMessage()) : 'please try again.'));
                     $this->generateUrl('premium_payment');
                 } finally {
+                    $user = $this->get('security.token_storage')->getToken()->getUser();
+                    $user_id = $user->getId();
+                    $em = $this->getDoctrine()->getManager();
+                    $em->getRepository('ECommerceBundle:Cart')->deleteAllFromCart($user_id);
+                    return $this->render('AppBundle::index.html.twig');
+
 
                 }
             }

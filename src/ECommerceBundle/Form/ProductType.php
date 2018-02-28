@@ -21,7 +21,7 @@ class ProductType extends AbstractType
             ->add('name')
             ->add('type')
             ->add('price')
-            ->add('photo',FileType::class,array('label' => 'Product (Image)'))
+            ->add('photo',FileType::class,array('label' => 'Product (Image)','data_class'=>null))
             ->add('promotion',EntityType::class,array('class'=>'ECommerceBundle\Entity\Promotion','choice_label'=>'discount'))
             ->add('description',\Symfony\Component\Form\Extension\Core\Type\TextType::class, array('label' => 'description'))
             ->add('submit', SubmitType::class, array('attr' => array('class' => 'save')));
