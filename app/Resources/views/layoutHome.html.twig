@@ -105,27 +105,15 @@
             <div class="menu-toggle"><span></span></div>
             <div class="navigation__left">
                 <ul class="menu menu--left">
-                    <li class="current menu-item-has-children"><a href="{{ path('_cupcakes_homepage') }}">Home</a>
-                        <ul class="sub-menu">
-                            <li><a href="#">Hot Demo</a></li>
-                            <li class="end-block"><a href="#">Trending</a></li>
-                            <li class="current "><a href="{{ path('_cupcakes_homepage') }}">HOMEPAGE 1</a></li>
-                            <li class="try-theme"><a href="#">Try Theme Now</a></li>
-                        </ul>
-                    </li>
                     <li><a href="{{ path('FrontFormation') }}">Formation</a></li>
-                    <li class="menu-item-has-children"><a href="{{ path('_cupcakes_product-grid') }}">Products</a>
+                    <li class="menu-item-has-children"><a href="{{ path('_cupcakes_product-listing') }}">Products</a>
                         <ul class="sub-menu">
-                            <li><a href="{{ path('_cupcakes_product-listing') }}">Product Listing</a></li>
-                            <li><a href="{{ path('_cupcakes_product-grid') }}">Product Grid</a></li>
-                            <li><a href="{{ path('_cupcakes_product-detail') }}">Product Detail</a></li>
+                            <li><a href="{{ path('_cupcakes_product-listing') }}">Products</a></li>
+                            <li><a href="/delivery">Delivery</a></li>
                         </ul>
                     </li>
-                    <li class="menu-item-has-children"><a href="{{ path('_cupcakes_blog-listing') }}">Blogs</a>
-                        <ul class="sub-menu">
-                            <li><a href="{{ path('_cupcakes_blog-detail') }}">Blog Detail</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="{{ path('_cupcakes_blog-listing') }}">Blog</a></li>
+
                 </ul>
             </div>
             <a class="ps-logo" href="{{ path('_cupcakes_homepage') }}"><img
@@ -152,51 +140,8 @@
                     {{ render(controller('AppBundle:Default:userNotifs')) }}
                 {% endif %}
 
-                <div class="ps-cart"><a class="ps-cart__toggle" href="#"><span><i>20</i></span><i
+                <div class="ps-cart"><a class="ps-cart__toggle" href="/cart"><span><i>20</i></span><i
                                 class="ps-icon--shopping-cart"></i></a>
-                    <div class="ps-cart__listing">
-                        <div class="ps-cart__content">
-                            <div class="ps-cart-item">
-                                <a class="ps-cart-item__close" href="#"></a>
-                                <div class="ps-cart-item__thumbnail">
-                                    <a href="{{ path('_cupcakes_product-detail') }}"></a><img
-                                            src="{{ asset('assets/front/images/cake/img-cake-1.jpg') }}" alt=""></div>
-                                <div class="ps-cart-item__content"><a class="ps-cart-item__title"
-                                                                      href="{{ path('_cupcakes_product-detail') }}">Amazin’
-                                        Glazin’</a>
-                                    <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                                </div>
-                            </div>
-                            <div class="ps-cart-item">
-                                <a class="ps-cart-item__close" href="#"></a>
-                                <div class="ps-cart-item__thumbnail">
-                                    <a href="{{ path('_cupcakes_product-detail') }}"></a><img
-                                            src="{{ asset('assets/front/images/cake/img-cake-2.jpg') }}" alt=""></div>
-                                <div class="ps-cart-item__content"><a class="ps-cart-item__title"
-                                                                      href="{{ path('_cupcakes_product-detail') }}">The
-                                        Crusty Croissant</a>
-                                    <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                                </div>
-                            </div>
-                            <div class="ps-cart-item">
-                                <a class="ps-cart-item__close" href="#"></a>
-                                <div class="ps-cart-item__thumbnail">
-                                    <a href="{{ path('_cupcakes_product-detail') }}"></a><img
-                                            src="{{ asset('assets/front/images/cake/img-cake-3.jpg') }}" alt=""></div>
-                                <div class="ps-cart-item__content"><a class="ps-cart-item__title"
-                                                                      href="{{ path('_cupcakes_product-detail') }}">The
-                                        Rolling Pin</a>
-                                    <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ps-cart__total">
-                            <p>Number of items:<span>36</span></p>
-                            <p>Item Total:<span>£528.00</span></p>
-                        </div>
-                        <div class="ps-cart__footer"><a class="ps-btn ps-btn--view-bag"
-                                                        href="{{ path('_cupcakes_cart') }}">View bag</a></div>
-                    </div>
                 </div>
             </div>
         </div>
