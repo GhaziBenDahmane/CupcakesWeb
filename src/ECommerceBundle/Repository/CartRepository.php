@@ -36,11 +36,11 @@ class CartRepository extends \Doctrine\ORM\EntityRepository
 
     }
 
-    public function VerifyCoupon($code)
+    public function verifyCoupon($code)
     {
         $query=$this->getEntityManager()
-            ->createQuery(" SELECT c FROM GamingBundle:Coupon c where c.code= :code 
-             and c.expirationDate>CURRENT_DATE AND  c.used = 0")
+            ->createQuery(" SELECT COUNT (c) FROM GamingBundle:Coupon c where c.code = :code 
+              ")
 
             ->setParameter('code',$code);
 
@@ -48,6 +48,14 @@ class CartRepository extends \Doctrine\ORM\EntityRepository
         return $query->getResult();
 
 
+    }
+
+    public function deleteAllFromCart($user)
+    {
+        $query=$this->getEntityManager()
+            ->createQuery('Delete   ECommerceBundle:Cart p where IDENTITY(p.user)= :user
+              ')->setParameter('user',$user);
+        return $query->getResult();
     }
 
 

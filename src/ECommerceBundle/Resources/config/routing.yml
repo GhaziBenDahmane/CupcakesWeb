@@ -70,3 +70,6 @@ _cupcakes_product_tags:
 _cupcakes_payment:
     path:     /payment/{price}
     defaults: { _controller: ECommerceBundle:Payment:payment }
+_cupcakes_coupon:
+    path:     /coupone
+    defaults: { _controller: ECommerceBundle:Cart:verifyCoupon }
