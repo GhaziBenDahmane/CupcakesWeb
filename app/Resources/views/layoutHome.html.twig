@@ -147,7 +147,10 @@
                     {% endif %}
 
                 </ul>
-                {{ render(controller('AppBundle:Default:userNotifs')) }}
+                {% if  app.user %}
+
+                    {{ render(controller('AppBundle:Default:userNotifs')) }}
+                {% endif %}
 
                 <div class="ps-cart"><a class="ps-cart__toggle" href="#"><span><i>20</i></span><i
                                 class="ps-icon--shopping-cart"></i></a>
