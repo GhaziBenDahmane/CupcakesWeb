@@ -27,6 +27,8 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Vresh\TwilioBundle\VreshTwilioBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new Vich\UploaderBundle\VichUploaderBundle(),
+            new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
             new AncaRebeca\FullCalendarBundle\FullCalendarBundle(),
 
 

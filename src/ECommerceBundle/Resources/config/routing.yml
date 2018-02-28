@@ -9,12 +9,11 @@ e_commerce_promotion:
 e_commerce_claim:
     resource: "@ECommerceBundle/Resources/config/routing/claim.yml"
     prefix:   /claim
-#e_commerce_commande:
-#    resource: "@ECommerceBundle/Resources/config/routing/commande.yml"
-#    prefix:   /commande
-#e_commerce_delivery:
-#    resource: "@ECommerceBundle/Resources/config/routing/delivery.yml"
-#    prefix:   /delivery
+e_commerce_order:
+    resource: "@ECommerceBundle/Resources/config/routing/delivery.yml"
+    prefix:   /admin/delivery
+
+
 _cupcakes_product-grid:
     path:     /product-grid
     defaults: { _controller: ECommerceBundle:Product:showProductsByPrice }
@@ -40,9 +39,18 @@ _cupcakes_product-listing_By_Price:
 _cupcakes_cart:
     path:     /Cart
     defaults: { _controller: ECommerceBundle:Cart:showCart }
+
+
 _cupcakes_order_form:
-    path:     /OrderForm
-    defaults: { _controller: ECommerceBundle:Default:OrderForm }
+    path:     /delivery
+    defaults: { _controller: ECommerceBundle:Delivery:Delivery }
+
+
+order_history:
+    path:     /delivery/history
+    defaults: { _controller: "ECommerceBundle:Delivery:histroy" }
+    methods:  [GET, POST]
+
 _cupcakes_checkout:
     path:     /Checkout
     defaults: { _controller: ECommerceBundle:Default:Checkout }

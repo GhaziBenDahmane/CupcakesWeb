@@ -1,0 +1,83 @@
+{% extends 'layoutPages.html.twig' %}
+{% block header %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="ps-section--hero"><img src="{{ asset('assets/front/images/hero/01.jpg') }}" alt="">
+        <div class="ps-section__content text-center">
+            <h3 class="ps-section__title">Your Delivery History</h3>
+            <div class="ps-breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="{{ path('_cupcakes_homepage') }}">Home</a></li>
+                    <li class="active">Formation</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="ps-section--cart pt-100 pb-100">
+        <div class="container">
+            <div class="ps-cart-listing">
+                <p class="hidden-lg"><i>Slide right to view</i></p>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Command ID</th>
+            <th>Your Adress</th>
+            <th>Delivery Type</th>
+            <th>Email</th>
+            <th>Date delivery</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for orders in order %}
+        <tr role="row" class="even">
+            <td>{{ orders.id }}</td>
+            <td>10</td>
+            <td>{{ orders.adress }}</td>
+            <td>{{ orders.serviceType  }}</td>
+            <td>{{ orders.email }}</td>
+            <td>{{ orders.dateDelivery|date("m/d/Y")}}</td>
+            <td>{{ orders.status ? 'Delivered' : 'Not Delivered' }}</td>
+            {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+
+    </div>
+    </div>
+    </div>
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
+
+{% endblock %}
+
+{% block jsLibrary %}
+    {{ parent() }}
+
+{% endblock %}
+
+{% block slider %}
+    {{ parent() }}
+
+{% endblock %}
+
+{% block CustomScripts %}
+    {{ parent() }}
+
+{% endblock  %}

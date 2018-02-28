@@ -1,0 +1,60 @@
+
+
+    <button class="btn btn-success" data-toggle="modal" data-target="#add_new_record_modal">Add Contact</button>
+    <div class="modal fade" id="add_new_record_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        {{ form_start(form) }}
+        {%  for flashMessage in app.session.flashbag.get('succes') %}
+            <div class="alert-success">
+                {{ flashMessage   }}
+            </div>
+        {% endfor %}
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span> </button>
+                    <h4 class="modal-title" id="myModalLabel">Add Contact</h4>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="name"> Name</label>
+                        {{ form_widget(form.firstName,{'attr':{'class':'form-control'}} ) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="telephone">Telephone</label>
+                        {{ form_widget(form.tel,{'attr':{'class':'form-control'}} ) }}
+
+                    </div>
+                    <div class="form-group">
+                        <label for="email"> Email</label>
+                        {{ form_widget(form.email,{'attr':{'class':'form-control'}} ) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="email"> Message</label>
+                        {{ form_widget(form.message,{'attr':{'class':'form-control'}} ) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="Contract"> Contract</label>
+                        {{ form_widget(form.imageFile,{'attr':{'class':'form-control'}} ) }}
+                    </div>
+
+                <div class="modal-footer">
+                    <table border="0" align="right"><tr>
+
+                            <td>
+                                {{ form_row(form.submit,{'attr':{'class':'btn btn-primary'}}) }}
+
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="ajout()">Cancel</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            {{ form_rest(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+    </div>

@@ -21,10 +21,7 @@ class DefaultController extends Controller
     {
         return $this->render('ECommerceBundle:Default:cart.html.twig');
     }
-    public function OrderFormAction()
-    {
-        return $this->render('ECommerceBundle:Default:order-form.html.twig');
-    }
+
     public function CheckoutAction()
     {
         return $this->render('ECommerceBundle:Default:checkout.html.twig', array(

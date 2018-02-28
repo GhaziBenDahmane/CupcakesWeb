@@ -10,4 +10,8 @@ namespace ECommerceBundle\Repository;
  */
 class DeliveryRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function sortDelivery(){
+        $em = $this->getEntityManager()->createQuery('select d from ECommerceBundle:Delivery d WHERE d.serviceType LIKE :free OR d.serviceType
+LIKE :premium ORDER BY d.dateDelivery ASC ')->setParameter('free','Free')->setParameter('premium','Premium');
+   return $em->getResult();}
 }

@@ -22,7 +22,7 @@
                 <div class="page-title">
                     <h3 class="breadcrumb-header">Contacts</h3>
                 </div>
-
+                {{ render(controller('AppBundle:Contact:new')) }}
                 <div id="main-wrapper">
                     <div class="row">
 
@@ -41,7 +41,8 @@
                                                 <th>Telephone</th>
                                                 <th>Email</th>
                                                 <th>Message</th>
-                                                <th>Update</th>
+                                                <th>Status</th>
+                                                <th>Validate</th>
                                                 <th>Delete</th>
                                                 <th>Informations</th>
                                             </tr>
@@ -53,7 +54,8 @@
                                                 <th>Telephone</th>
                                                 <th>Email</th>
                                                 <th>Message</th>
-                                                <th>Update</th>
+                                                <th>Status</th>
+                                                <th>Validate</th>
                                                 <th>Delete</th>
                                                 <th>Informations</th>
                                             </tr>
@@ -66,6 +68,7 @@
                                                     <td>{{ contacts.tel }}</td>
                                                     <td>{{ contacts.email }}</td>
                                                     <td>{{ contacts.message}}</td>
+                                                    <td>{{ contacts.status ? 'Contacted' : 'Not Contacted' }}</td>
                                                     <td>
                                                         {{ render(controller('AppBundle:Contact:edit',{'id':contacts.id})) }}
                                                     </td>
