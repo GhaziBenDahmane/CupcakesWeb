@@ -119,6 +119,7 @@ class ClaimController extends Controller
         $users = $em->getRepository('UserBundle:User')->findAll();
         $manager = $this->get('mgilet.notification');
         $notif = $manager->createNotification('Your claim was answered !');
+        $notif->setDate(new \DateTime('now'));
         $notif->setMessage('Answer :' . substr($claim->getAnswer(), 0, 20));
         $notif->setLink('/claim/');
         $manager->addNotification(array($claim->getClient()), $notif, true);

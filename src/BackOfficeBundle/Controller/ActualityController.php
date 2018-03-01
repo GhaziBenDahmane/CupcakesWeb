@@ -26,7 +26,6 @@ class ActualityController extends Controller
     }
 
 
-
     /**
      * Creates a new Actuality entity.
      *
@@ -36,10 +35,12 @@ class ActualityController extends Controller
         $actuality = new Actuality();
         $form = $this->createCreateForm($actuality);
         $form->handleRequest($request);
+        $actuality->setDate(new \DateTime('now'));
+
 
         return $this->render('BackOfficeBundle:Actuality:new.html.twig', array(
             'actualities' => $actuality,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -53,7 +54,7 @@ class ActualityController extends Controller
      */
     private function createCreateForm(Actuality $actuality)
     {
-        $form = $this->createForm('BackOfficeBundle\Form\ActualityType',$actuality, array(
+        $form = $this->createForm('BackOfficeBundle\Form\ActualityType', $actuality, array(
             'action' => $this->generateUrl('actuality_create'),
             'method' => 'POST',
         ));
@@ -62,6 +63,7 @@ class ActualityController extends Controller
 
         return $form;
     }
+
     public function createAction(Request $request)
     {
         $actuality = new Actuality();
@@ -70,6 +72,7 @@ class ActualityController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $actuality->setDate(new \DateTime('now'));
             $em->persist($actuality);
             $em->flush();
 
@@ -78,11 +81,9 @@ class ActualityController extends Controller
 
         return $this->render('BackOfficeBundle:Actuality:new.html.twig', array(
             'actualities' => $actuality,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
-
-
 
 
     /**
@@ -117,8 +118,8 @@ class ActualityController extends Controller
 
 
         return $this->render('BackOfficeBundle:Actuality:edit.html.twig', array(
-            'actualities'      => $actuality,
-            'edit_form'   => $editForm->createView(),
+            'actualities' => $actuality,
+            'edit_form' => $editForm->createView(),
 
         ));
     }
@@ -132,7 +133,7 @@ class ActualityController extends Controller
      */
     private function createEditForm(Actuality $actuality)
     {
-        $form = $this->createForm('BackOfficeBundle\Form\ActualityType',$actuality, array(
+        $form = $this->createForm('BackOfficeBundle\Form\ActualityType', $actuality, array(
             'action' => $this->generateUrl('actuality_update', array('id' => $actuality->getId())),
             'method' => 'PUT',
         ));
@@ -163,11 +164,12 @@ class ActualityController extends Controller
         }
 
         return $this->render('BackOfficeBundle:Actuality:edit.html.twig', array(
-            'actualities'      => $actuality,
-            'edit_form'   => $editForm->createView(),
+            'actualities' => $actuality,
+            'edit_form' => $editForm->createView(),
 
         ));
     }
+
     /**
      * Deletes a BackActuality entity.
      *
@@ -194,7 +196,6 @@ class ActualityController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('actuality_delete', array('id' => $product->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-            ;
+            ->getForm();
     }
 }

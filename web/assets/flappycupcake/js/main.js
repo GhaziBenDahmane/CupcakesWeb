@@ -1,6 +1,6 @@
 $(function () {
     $('.gameResult').hide();
-})
+});
 
 
 function startGame() {

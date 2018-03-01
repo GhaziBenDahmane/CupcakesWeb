@@ -33,7 +33,7 @@ class DefaultController extends Controller
         $humanDate = new HumanDate();
         foreach ($notifs as $key => $value) {
             $notifs[$key][0]->setDate($humanDate->transform($notifs[$key][0]->getDate()));
-
+            
             if (strlen($notifs[$key][0]->getMessage()) > $max_notif_chars) {
                 $notifs[$key][0]->setMessage(substr($notifs[$key][0]->getMessage(), 0, $max_notif_chars) . '..');
             }

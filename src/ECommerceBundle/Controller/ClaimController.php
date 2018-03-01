@@ -25,6 +25,7 @@ class ClaimController extends Controller
         }
         return $this->render('ECommerceBundle:claim:index.html.twig');
     }
+
     public function getClaimsAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
@@ -67,6 +68,7 @@ class ClaimController extends Controller
             $manager = $this->get('mgilet.notification');
             $notif = $manager->createNotification('New Claim !');
             $notif->setMessage('By ' . $this->getUser() . '.');
+            $notif->setDate(new \DateTime('now'));
             $notif->setLink('/admin/claim/');
             foreach ($users as $user) {
                 if ($user->hasRole('ROLE_ADMIN')) {
