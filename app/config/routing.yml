@@ -48,3 +48,7 @@ _pastry_homepage:
 mgilet_notifications:
     resource: "@MgiletNotificationBundle/Controller/"
     prefix: /notifications
+
+
+fos_oauth_server_token:
+    resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"

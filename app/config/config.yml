@@ -164,3 +164,18 @@ nomaya_social:
         pinterest:
             url: null
     theme: 'default'  #  optional
+
+fos_oauth_server:
+    db_driver:           orm
+    client_class:        UserBundle\Entity\Client
+    access_token_class:  UserBundle\Entity\AccessToken
+    refresh_token_class: UserBundle\Entity\RefreshToken
+    auth_code_class:     UserBundle\Entity\AuthCode
+    service:
+        user_provider: fos_user.user_provider.username
+
+fos_rest:
+    param_fetcher_listener: true
+    routing_loader:
+        default_format: json                            # All responses should be JSON formated
+        include_format: false

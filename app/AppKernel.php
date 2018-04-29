@@ -33,8 +33,9 @@ class AppKernel extends Kernel
             new Nomaya\SocialBundle\NomayaSocialBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
             new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
-
-
+            new JMS\SerializerBundle\JMSSerializerBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
 
 
         ];

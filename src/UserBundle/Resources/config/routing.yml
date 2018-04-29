@@ -17,3 +17,8 @@ login_page:
 profile_page:
     path:     /profile
     defaults: { _controller: UserBundle:Profile:edit }
+
+
+register_api:
+    path:     /api/register
+    defaults: { _controller: UserBundle:Registration:register }
