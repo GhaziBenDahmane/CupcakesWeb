@@ -83,14 +83,11 @@ class UserApiController extends FOSRestController
         if ($paramFetcher->get('password')) {
             $user->setPlainPassword($paramFetcher->get('password'));
         }
-        if ($paramFetcher->get('name')) {
-            $user->setName($paramFetcher->get('name'));
-        }
-        if ($paramFetcher->get('lastname')) {
-            $user->setLastname($paramFetcher->get('lastname'));
-        }
         if ($paramFetcher->get('photo')) {
             $user->setProfilePicture($paramFetcher->get('photo'));
+        }
+        if ($paramFetcher->get('phone')) {
+            $user->setPhone($paramFetcher->get('photo'));
         }
 
         $view = View::create();
