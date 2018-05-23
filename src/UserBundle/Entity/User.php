@@ -48,6 +48,12 @@ class User extends BaseUser implements NotifiableInterface
      * @ORM\Column(name="phone", type="string", length=255, nullable=true)
      */
     private $phone;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="picture", type="string", length=255, nullable=true)
+     */
+    private $profilePicture;
 
     /**
      * @ORM\Column(name="charge_id", type="string", length=255, nullable=true)
@@ -180,6 +186,7 @@ class User extends BaseUser implements NotifiableInterface
     public function __construct()
     {
         parent::__construct();
+        $this->salt = null;
         // your own logic
     }
 }

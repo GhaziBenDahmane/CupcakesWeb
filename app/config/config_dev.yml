@@ -2,6 +2,9 @@ imports:
     - { resource: config.yml }
 
 swiftmailer:
+    transport: gmail
+    username: bakeryvanilla123@gmail.com
+    password: vanillavanilla
 
 framework:
     router:
