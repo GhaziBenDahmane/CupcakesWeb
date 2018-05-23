@@ -77,6 +77,7 @@ require(dirname(__FILE__) . '/lib/ExchangeRate.php');
 require(dirname(__FILE__) . '/lib/FileUpload.php');
 require(dirname(__FILE__) . '/lib/Invoice.php');
 require(dirname(__FILE__) . '/lib/InvoiceItem.php');
+require(dirname(__FILE__) . '/lib/IssuerFraudRecord.php');
 require(dirname(__FILE__) . '/lib/LoginLink.php');
 require(dirname(__FILE__) . '/lib/Order.php');
 require(dirname(__FILE__) . '/lib/OrderReturn.php');
@@ -96,6 +97,7 @@ require(dirname(__FILE__) . '/lib/Token.php');
 require(dirname(__FILE__) . '/lib/Topup.php');
 require(dirname(__FILE__) . '/lib/Transfer.php');
 require(dirname(__FILE__) . '/lib/TransferReversal.php');
+require(dirname(__FILE__) . '/lib/UsageRecord.php');
 
 // OAuth
 require(dirname(__FILE__) . '/lib/OAuth.php');

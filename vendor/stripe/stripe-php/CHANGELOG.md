@@ -1,5 +1,27 @@
 # Changelog
 
+## 6.7.1 - 2018-05-13
+* [#468](https://github.com/stripe/stripe-php/pull/468) Update fields in PHP docs for accuracy
+
+## 6.7.0 - 2018-05-09
+* [#466](https://github.com/stripe/stripe-php/pull/466) Add support for issuer fraud records
+
+## 6.6.0 - 2018-04-11
+* [#460](https://github.com/stripe/stripe-php/pull/460) Add support for flexible billing primitives
+
+## 6.5.0 - 2018-04-05
+* [#461](https://github.com/stripe/stripe-php/pull/461) Don't zero keys on non-`metadata` subobjects
+
+## 6.4.2 - 2018-03-17
+* [#458](https://github.com/stripe/stripe-php/pull/458) Add PHPDoc for `account` on `\Stripe\Event`
+
+## 6.4.1 - 2018-03-02
+* [#455](https://github.com/stripe/stripe-php/pull/455) Fix namespaces in PHPDoc
+* [#456](https://github.com/stripe/stripe-php/pull/456) Fix namespaces for some exceptions
+
+## 6.4.0 - 2018-02-28
+* [#453](https://github.com/stripe/stripe-php/pull/453) Add constants for `reason` (`REASON_*`) and `status` (`STATUS_*`) on `\Stripe\Dispute`
+
 ## 6.3.2 - 2018-02-27
 * [#452](https://github.com/stripe/stripe-php/pull/452) Add PHPDoc for `amount_paid` and `amount_remaining` on `\Stripe\Invoice`
 

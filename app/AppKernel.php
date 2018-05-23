@@ -35,6 +35,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
 
 
+            //new FOS\RestBundle\FOSRestBundle(),
 
 
         ];
