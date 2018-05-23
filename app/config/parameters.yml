@@ -14,6 +14,12 @@ parameters:
     mailer_auth_mode: login
     mailer_port: 465
 =======
+    database_port: 3306
+    database_name: symfony
+    database_user: root
+    database_password: ''
+    mailer_transport: gmail
+    mailer_host: 127.0.0.1
 >>>>>>> 5dbe2dc71f1ba5b78c67e13ad209920bf3fce00f
     mailer_user: bakeryvanilla123@gmail.com
     mailer_password: vanillavanilla
