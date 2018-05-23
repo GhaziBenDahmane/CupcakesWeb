@@ -47,4 +47,3 @@ _pastry_homepage:
     defaults: { _controller: PastryBundle:Pastry:listPastry }
 mgilet_notifications:
     resource: "@MgiletNotificationBundle/Controller/"
-    prefix: /notifications

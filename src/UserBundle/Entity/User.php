@@ -56,6 +56,22 @@ class User extends BaseUser implements NotifiableInterface
     private $profilePicture;
 
     /**
+     * @return string
+     */
+    public function getProfilePicture()
+    {
+        return $this->profilePicture;
+    }
+
+    /**
+     * @param string $profilePicture
+     */
+    public function setProfilePicture($profilePicture)
+    {
+        $this->profilePicture = $profilePicture;
+    }
+
+    /**
      * @ORM\Column(name="charge_id", type="string", length=255, nullable=true)
      */
     protected $chargeId;

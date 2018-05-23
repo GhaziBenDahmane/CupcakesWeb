@@ -43,3 +43,14 @@ _Cupcakes_front_logout:
 contact_history:
     path:     /contact/history
     defaults: { _controller: "AppBundle:Contact:history" }
+
+claim_api:
+    type: rest
+    resource: AppBundle\Controller\ClaimApiController
+    prefix: /api
+
+
+user_api:
+    type: rest
+    resource: AppBundle\Controller\UserApiController
+    prefix: /api
