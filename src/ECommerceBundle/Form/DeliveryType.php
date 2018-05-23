@@ -21,13 +21,7 @@ class DeliveryType extends AbstractType
     {
         $builder
 
-            ->add('status',ChoiceType::class , array(
-                'choices' =>array(
-                    'Not Delivered'=>'false',
-                    'Delivered'=>'true'
 
-                )
-            ))
             ->add('imageFile', VichImageType::class);
 
     }

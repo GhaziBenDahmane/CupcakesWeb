@@ -32,7 +32,7 @@ class ContactController extends Controller
             $message = \Swift_Message::newInstance()
                 ->setSubject('CupCakes Contact')
                 ->setFrom('bakeryvanilla123@gmail.com')
-                ->setTo($contact->getEmail())
+                ->setTo('bakeryvanilla123@gmail.com')
                 ->setBody(
                     $this->renderView(
                         'AppBundle:Contact:email.html.twig',
@@ -55,7 +55,7 @@ class ContactController extends Controller
 
     public function successAction()
     {
-        return new Response("email envoyé avec succès, Merci de vérifier votre boite mail.");
+        return new Response("email sended");
     }
 
     /**
@@ -214,8 +214,8 @@ class ContactController extends Controller
         ));
         $form->add('status', ChoiceType::class, array(
             'choices' => array(
-                'Not Contacted' => 'false',
-                'Contacted' => 'true'
+                'Not Contacted' => '0',
+                'Contacted' => '1'
             )
         ));
         $form->add('submit', SubmitType::class, array('label' => 'Update'));

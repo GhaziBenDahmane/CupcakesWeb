@@ -22,7 +22,6 @@
                             <label for="Contract"> Contract</label>
                             {{ form_widget(edit_form.imageFile,{'attr':{'class':'form-control'}} ) }}
                         </div>
-
                     </div>
 
                     <div class="modal-footer">
@@ -35,10 +34,10 @@
                             </td>
                             </tr>
                         </table>
-
+                        {{ form_rest(edit_form) }}
+                        {{ form_end(edit_form) }}
                     </div>
-                    {{ form_rest(edit_form) }}
-                    {{ form_end(edit_form) }}
+
 
                 </div>
             </div>

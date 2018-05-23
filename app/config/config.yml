@@ -76,10 +76,15 @@ doctrine:
 # Swiftmailer Configuration
 swiftmailer:
     transport: '%mailer_transport%'
+    encryption: '%mailer_encryption%'
+    port: '%mailer_port%'
+    auth_mode:  '%mailer_auth_mode%'
     host: '%mailer_host%'
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
+
+
 fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
     firewall_name: main
@@ -127,11 +132,11 @@ vich_uploader:
 knp_snappy:
     pdf:
         enabled:    true
-        binary:     /usr/bin/wkhtmltopdf #"\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\"" for Windows users
+        binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\""
         options:    []
     image:
         enabled:    true
-        binary:     /usr/bin/wkhtmltoimage #"\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltoimage.exe\"" for Windows users
+        binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltoimage.exe\""
         options:    []
 full_calendar:
      class_manager: EventBundle\Entity\Event

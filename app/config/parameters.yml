@@ -2,13 +2,16 @@
 parameters:
     stripe_public_key: pk_test_qeSon0h55hnK8zjCB3og58qu
     stripe_secret_key: sk_test_f7CunmPBjBtkkj9z1vl5H3lr
-    database_host: sql11.freemysqlhosting.net
-    database_port: 3306
-    database_name: sql11222383
-    database_user: sql11222383
-    database_password: 6TuZt5JUMi
-    mailer_transport: gmail
-    mailer_host: 127.0.0.1
+    database_host: localhost
+    database_port: null
+    database_name: symfony
+    database_user: root
+    database_password: null
+    mailer_host: smtp.gmail.com
+    mailer_transport: smtp
+    mailer_encryption: ssl
+    mailer_auth_mode: login
+    mailer_port: 465
     mailer_user: bakeryvanilla123@gmail.com
     mailer_password: vanillavanilla
     secret: 7070fa7df747f4009815c9ddb111a1802a6e9794
