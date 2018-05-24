@@ -33,15 +33,9 @@ class AppKernel extends Kernel
             new Nomaya\SocialBundle\NomayaSocialBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
             new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
-<<<<<<< HEAD
-            //new FOS\RestBundle\FOSRestBundle(),
-=======
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new FOS\RestBundle\FOSRestBundle(),
-            new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
->>>>>>> 5dbe2dc71f1ba5b78c67e13ad209920bf3fce00f
-
-
+            new FOS\OAuthServerBundle\FOSOAuthServerBundle()
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

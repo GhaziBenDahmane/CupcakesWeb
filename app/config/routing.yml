@@ -47,3 +47,8 @@ _pastry_homepage:
     defaults: { _controller: PastryBundle:Pastry:listPastry }
 mgilet_notifications:
     resource: "@MgiletNotificationBundle/Controller/"
+    prefix: /notifications
+
+
+fos_oauth_server_token:
+    resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"

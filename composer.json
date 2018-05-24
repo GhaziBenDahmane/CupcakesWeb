@@ -27,10 +27,7 @@
         "doctrine/orm": "^2.5",
         "fados-produccions/full-calendar-bundle": "dev-master",
         "friendsofsymfony/jsrouting-bundle": "~1.1",
-<<<<<<< HEAD
-=======
         "friendsofsymfony/oauth-server-bundle": "^1.6",
->>>>>>> 5dbe2dc71f1ba5b78c67e13ad209920bf3fce00f
         "friendsofsymfony/rest-bundle": "^2.3",
         "friendsofsymfony/user-bundle": "~2.0",
         "incenteev/composer-parameter-handler": "^2.0",

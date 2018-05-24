@@ -19,7 +19,6 @@ class addContactType extends AbstractType
             ->add('tel')
             ->add('firstName')
             ->add('message')
-            ->add('adress')
             ->add('email',EmailType::class)
             ->add('imageFile',VichFileType::class);
 
