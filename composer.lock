@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "dc4922603099e45dad4f3cff3e0eba1e",
+    "content-hash": "0a0d8e1a1e69938c473c829afa6b94da",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -3893,16 +3893,16 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v4.0.10",
+            "version": "v3.4.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "30d8eed8b7b3b94ee1a8b4cd2d0aa1f4ed6950e5"
+                "reference": "63cdae00a75862fa543b765ba63d55f6b6397d0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/30d8eed8b7b3b94ee1a8b4cd2d0aa1f4ed6950e5",
-                "reference": "30d8eed8b7b3b94ee1a8b4cd2d0aa1f4ed6950e5",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/63cdae00a75862fa543b765ba63d55f6b6397d0c",
+                "reference": "63cdae00a75862fa543b765ba63d55f6b6397d0c",
                 "shasum": ""
             },
             "require": {
@@ -3921,7 +3921,7 @@
             "type": "symfony-bridge",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.0-dev"
+                    "dev-master": "3.4-dev"
                 },
                 "thanks": {
                     "name": "phpunit/phpunit",
@@ -3955,7 +3955,7 @@
             ],
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
-            "time": "2018-05-11T15:58:37+00:00"
+            "time": "2018-05-16T12:49:49+00:00"
         }
     ],
     "aliases": [],

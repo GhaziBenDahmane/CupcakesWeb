@@ -39,7 +39,7 @@
                         <td>{{ orders.email }}</td>
                         <td>{{ orders.dateDelivery|date("m/d/Y")}}</td>
                         <td>{{ orders.serviceType  }}</td>
-                        <td>{{ orders.status ? 'Not Delivered' : 'Delivered'  }}</td>
+                        <td>{{ orders.status ?  'Delivered'  }}</td>
                     </tr>
                     {% endfor %}
                     </tbody>

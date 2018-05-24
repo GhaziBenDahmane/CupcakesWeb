@@ -11,22 +11,16 @@
                     </button>
                     <h4 class="modal-title" id="exampleModalLabel">Update Delivery</h4>
                 </div>
+                {{ form_start(edit_form) }}
                 <div class="modal-body">
-
-                    {{ form_start(edit_form) }}
-
-
-
                     <div class="form-group">
                         <label for="Type">Status</label>
                         {{ form_widget(edit_form.status ,{'attr':{'class':'form-control'}} ) }}
 
                     </div>
-
                     <div class="form-group">
-                        <label for="Type">image</label>
-                        {{ form_widget(edit_form.imageFile ,{'attr':{'class':'form-control'}} ) }}
-
+                        <label for="report"> Report</label>
+                        {{ form_widget(edit_form.imageFile,{'attr':{'class':'form-control'}} ) }}
                     </div>
 
                 </div>
@@ -43,10 +37,10 @@
                             </td>
                         </tr>
                     </table>
-
+                    {{ form_rest(edit_form) }}
+                    {{ form_end(edit_form) }}
                 </div>
-                {{ form_rest(edit_form) }}
-                {{ form_end(edit_form) }}
+
 
             </div>
         </div>
