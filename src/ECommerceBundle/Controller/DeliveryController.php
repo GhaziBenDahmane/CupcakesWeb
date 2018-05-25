@@ -4,6 +4,7 @@ namespace ECommerceBundle\Controller;
 
 use ECommerceBundle\Entity\Delivery;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,6 +28,7 @@ class DeliveryController extends Controller
             $Delivery->setAdress($data["adress"]);
             $Delivery->setServiceType($data["serviceType"]);
             $Delivery->setDateDelivery($dateDelivery);
+            $Delivery->setContactTime($dateDelivery);
             $Delivery->setPhone($this->getUser()->getPhone());
             $Delivery->setEmail($this->getUser()->getEmail());
             $Delivery->setNotes($data["notes"]);
@@ -35,26 +37,26 @@ class DeliveryController extends Controller
                 $filename = rand();
                 $container = $this->get('knp_snappy.pdf');
                 $container
-                ->generateFromHtml(
-                    $this->renderView(
-                        'ECommerceBundle:order/deliver:freeDeliver.html.twig',
-                        array(
-                            'id' =>$Delivery->getId(),
-                            'date'=>$today,
-                            'name' =>$Delivery->getName(),
-                            'adress' =>$Delivery->getAdress(),
-                            'Service Type' =>$Delivery->getServiceType(),
-                            'Phone' =>$Delivery->getPhone(),
-                            'email' =>$Delivery->getEmail(),
-                            'some'  => $container
-                        )
-                    ),
-                    'C:\\Users\\Anis-PC\\Desktop\\PiWeb\\web\\uploads\\documents\\'.$filename.'.pdf'
-                );
+                    ->generateFromHtml(
+                        $this->renderView(
+                            'ECommerceBundle:order/deliver:freeDeliver.html.twig',
+                            array(
+                                'id' =>$Delivery->getId(),
+                                'date'=>$today,
+                                'name' =>$Delivery->getName(),
+                                'adress' =>$Delivery->getAdress(),
+                                'Service Type' =>$Delivery->getServiceType(),
+                                'Phone' =>$Delivery->getPhone(),
+                                'email' =>$Delivery->getEmail(),
+                                'some'  => $container
+                            )
+                        ),
+                        'uploads/documents/'.$filename.'.pdf'
+                    );
                 $message = \Swift_Message::newInstance()
                     ->setSubject('Free Delivery')
                     ->setFrom('bakeryvanilla123@gmail.com')
-                    ->setTo($Delivery->getEmail())
+                    ->setTo('bakeryvanilla123@gmail.com')
 
                     ->setBody(
                         $this->renderView(
@@ -65,7 +67,7 @@ class DeliveryController extends Controller
                         ),
                         'text/html'
                     )
-                ->attach(\Swift_Attachment::fromPath('uploads/documents/'.$filename.'.pdf'));
+                    ->attach(\Swift_Attachment::fromPath('uploads/documents/'.$filename.'.pdf'));
             } else {
                 $filename2 = rand();
                 $container = $this->get('knp_snappy.pdf');
@@ -84,12 +86,12 @@ class DeliveryController extends Controller
                                 'some'  => $container
                             )
                         ),
-                        'C:\\Users\\Anis-PC\\Desktop\\PiWeb\\web\\uploads\\documents\\'.$filename2.'.pdf'
+                        'uploads/documents/'.$filename2.'.pdf'
                     );
                 $message = \Swift_Message::newInstance()
                     ->setSubject('Premium Delivery')
                     ->setFrom('bakeryvanilla123@gmail.com')
-                    ->setTo($Delivery->getEmail())
+                    ->setTo('bakeryvanilla123@gmail.com')
 
                     ->setBody(
                         $this->renderView(
@@ -197,6 +199,13 @@ class DeliveryController extends Controller
         $form = $this->createForm('ECommerceBundle\Form\DeliveryType', $delivery, array(
             'action' => $this->generateUrl('order_update', array('id' => $delivery->getId())),
             'method' => 'PUT',
+        ));
+        $form->add('status',ChoiceType::class , array(
+            'choices' =>array(
+                'Not Delivered'=>'0',
+                'Delivered'=>'1'
+
+            )
         ));
 
         $form->add('submit', SubmitType::class, array('label' => 'Update'));
