@@ -39,4 +39,15 @@ class RatingRepository extends \Doctrine\ORM\EntityRepository
         ;
         return $query->getResult();
     }
+
+    public function deleteRating($id)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery(" delete from ECommerceBundle:Rating r where IDENTITY (r.products)= :id_produit
+            ")
+            ->setParameter('id_produit', $id)
+        ;
+        return $query->getResult();
+
+    }
 }

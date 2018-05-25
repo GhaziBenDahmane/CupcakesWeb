@@ -245,9 +245,10 @@ class ProductController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $product = $em->getRepository('ECommerceBundle:Product')->find($id);
-        $rating = $em->getRepository('ECommerceBundle:Rating')->find($id);
+        $rating = $em->getRepository('ECommerceBundle:Rating')->deleteRating($id);
+
         $em->remove($product);
-        $em->remove($rating);
+
         $em->flush();
         return $this->redirectToRoute('product_index');
     }
