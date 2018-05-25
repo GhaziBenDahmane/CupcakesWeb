@@ -154,7 +154,7 @@
 
                     {{ render(controller('AppBundle:Default:userNotifs')) }}
 
-                    <div class="ps-cart"><a class="ps-cart__toggle" href="/Cart"><i
+                    <div class="ps-cart"><a class="ps-cart__toggle" href={{ path('_cupcakes_cart') }}><i
                                     class="ps-icon--shopping-cart"></i></a>
                     </div>
                 {% endif %}

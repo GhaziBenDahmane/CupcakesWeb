@@ -60,6 +60,14 @@ class Product
     private $nb_seller;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="barcode", type="integer", nullable=true)
+     */
+    private $barcode;
+
+
+    /**
      * @var string
      * @ORM\Column(name="photo" ,type="string", length=255)
      * @Assert\File()
@@ -242,6 +250,25 @@ class Product
     {
         return $this->price;
     }
+
+    /**
+     * @return int
+     */
+    public function getBarcode()
+    {
+        return $this->barcode;
+    }
+
+    /**
+     * @param int $barcode
+     */
+    public function setBarcode($barcode)
+    {
+        $this->barcode = $barcode;
+    }
+
+
+
 
 
 }

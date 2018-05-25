@@ -91,12 +91,14 @@ class ProductController extends Controller
 
             $name =$request->request->get('name');
             $type =$request->request->get('type');
+            $barcode = $request->request->get('barcode');
             $price =$request->request->get('price');
             $description =$request->request->get('description');
 
 
             $entity->setName($name);
             $entity->setType($type);
+            $entity->setBarcode($barcode);
             $entity->setPrice($price);
 
             $entity->setDescription($description);
@@ -209,6 +211,18 @@ class ProductController extends Controller
 
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
+        /** @var UploadedFile $file */
+        $file = $entity->getPhoto();
+
+        $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+        // moves the file to the directory where brochures are stored
+        $file->move(
+            $this->getParameter('image_directory'),
+            $fileName
+        );
+        $entity->setPhoto($fileName);
+        $file=null;
 
         if ($editForm->isValid()) {
             $em->flush();
@@ -231,7 +245,9 @@ class ProductController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $product = $em->getRepository('ECommerceBundle:Product')->find($id);
+        $rating = $em->getRepository('ECommerceBundle:Rating')->find($id);
         $em->remove($product);
+        $em->remove($rating);
         $em->flush();
         return $this->redirectToRoute('product_index');
     }

@@ -20,17 +20,21 @@ class CartController extends Controller
     {
         $em=$this->getDoctrine()->getManager();
         $product = $em->getRepository('ECommerceBundle:Product')->find($id);
-        $product->setNbSeller($product->getNbSeller()+1);
         $user = $this->get('security.token_storage')->getToken()->getUser();
-        $cart= new Cart();
-        $cart->setUser($user);
-        $cart->setProduct($product);
-        $cart->setQuantite(2);
-        $em->persist($cart);
-        $em->persist($product);
-        $em->flush();
 
-        return new Response("succesful");
+
+            $product->setNbSeller($product->getNbSeller() + 1);
+            $cart = new Cart();
+            $cart->setUser($user);
+            $cart->setProduct($product);
+            $cart->setQuantite(2);
+            $em->persist($cart);
+            $em->persist($product);
+            $em->flush();
+
+
+            return new Response("succesful");
+
 
     }
 
@@ -61,7 +65,7 @@ class CartController extends Controller
         {
             $em = $this->getDoctrine()->getManager();
             $product = $em->getRepository('ECommerceBundle:Cart')->find($id);
-            $product1 = $em->getRepository('ECommerceBundle:Product')->find($id);
+            $product1 = $em->getRepository('ECommerceBundle:Product')->find($product->getProduct()->getId());
             if ($product1->getNbSeller() > 0) {
 
             $product1->setNbSeller($product1->getNbSeller() - 1);

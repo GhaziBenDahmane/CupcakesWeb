@@ -12,9 +12,12 @@ class CartRepository extends \Doctrine\ORM\EntityRepository
 {
     public function findByUser($id)
     {
-        $query=$this->getEntityManager()
-            ->createQuery(" SELECT c FROM ECommerceBundle:Cart c where IDENTITY(c.user)= :user_id")
-            ->setParameter('user_id',$id);
+        $query=$this->createQueryBuilder('c')
+            ->select('c')
+            ->where('IDENTITY(c.user)= :user_id')
+            ->setParameter('user_id',$id)
+        ->distinct('IDENTITY(c.product)')
+        ->getQuery();
 
 
         return $query->getResult();
@@ -28,13 +31,15 @@ class CartRepository extends \Doctrine\ORM\EntityRepository
             ->createQuery(" SELECT c FROM ECommerceBundle:Cart c where IDENTITY(c.product)= :product_id
             AND IDENTITY(c.user)= :user_id ")
             ->setParameter('product_id',$idp)
-            ->setParameter('user_id',idu);
+            ->setParameter('user_id',$idu);
 
 
         return $query->getResult();
 
 
     }
+
+
 
     public function verifyCoupon($code)
     {
@@ -57,6 +62,9 @@ class CartRepository extends \Doctrine\ORM\EntityRepository
               ')->setParameter('user',$user);
         return $query->getResult();
     }
+
+
+
 
 
 }

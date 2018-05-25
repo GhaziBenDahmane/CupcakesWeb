@@ -1,9 +1,10 @@
+
 </div>
 {% for product in products %}
     <div>
         <div id="product" class="ps-product--list ps-product--list-large">
             <div class="ps-product__thumbnail">
-                <a class="ps-product__overlay" href="product-detail.html"></a><img src="{{ asset('images/products/')}}{{  product.photo }}" alt=""></div>
+                <a class="ps-product__overlay" ></a><img src="{{ asset('images/products/')}}{{  product.photo }}" alt=""></div>
             <div class="ps-product__content">
 
                 <h4 id="name" class="ps-product__title"><a href="{{ path('_cupcakes_product-detail',{'id':product.id }) }}">{{ product.name }}</a></h4>
@@ -15,9 +16,9 @@
                     )) }}
                 </div>
                 <p class="ps-product__price">
-                    <del>{{ product.price }}</del>{{ product.price }}
+                    <del>{{ product.price }}</del>{{product.price - product.price *product.promotion.discount }}
                 </p>
-                <p id="desc">Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate. Cupcake sweet roll sweet dragée dragée. Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate cake.</p>
+                <p id="desc">{{ product.description }}</p>
                 <footer class="ps-product__footer clearfix"><a class="ps-btn ps-btn--sm" href="{{ path('_cupcakes_cart',{id:product.id}) }}">Order now<i class="fa fa-angle-right"></i></a>
                     <ul class="ps-product__action">
                         <li><a id="cart" href="{{ path('_cupcakes_cart_add',{id:product.id}) }}" data-tooltip="Add to Cart"><i class="ps-icon--heart"></i></a></li>

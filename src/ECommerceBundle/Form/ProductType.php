@@ -20,6 +20,7 @@ class ProductType extends AbstractType
         $builder
             ->add('name')
             ->add('type')
+            ->add('barcode')
             ->add('price')
             ->add('photo',FileType::class,array('label' => 'Product (Image)','data_class'=>null))
             ->add('promotion',EntityType::class,array('class'=>'ECommerceBundle\Entity\Promotion','choice_label'=>'discount'))

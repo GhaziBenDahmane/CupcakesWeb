@@ -82,7 +82,7 @@
                                         <p class="ps-product__price">
                                             <del>{{ product.price }}</del>{{product.price - product.price *product.promotion.discount }}
                                         </p>
-                                        <p id="desc">Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate. Cupcake sweet roll sweet dragée dragée. Lollipop dessert donut marzipan cookie bonbon sesame snaps chocolate cake.</p>
+                                        <p id="desc"> {{ product.description }}</p>
                                         <footer class="ps-product__footer clearfix"><a class="ps-btn ps-btn--sm" href="{{ path('_cupcakes_cart',{id:product.id}) }}">Order now<i class="fa fa-angle-right"></i></a>
                                             <ul class="ps-product__action">
                                                 <li><a id="cart" href="{{ path('_cupcakes_cart_add',{id:product.id}) }}" data-tooltip="Add to Cart"><i class="ps-icon--shopping-cart"></i></a></li>
@@ -138,15 +138,17 @@
                             </div>
                             <div class="ps-widget__content">
                                 {% for best in bests %}
-                                <div class="ps-product--sidebar">
+                                <div id="best" class="ps-product--sidebar">
                                     <div class="ps-product__thumbnail">
-                                        <a class="ps-product__overlay" ></a><img src="{{ asset('assets/front/images/cake/img-cake-12.jpg') }}" alt=""></div>
+                                        <a class="ps-product__overlay" ></a><img src="{{ asset('images/products/')}}{{  best.photo }}" alt=""></div>
                                     <div class="ps-product__content">
-                                        <h4 class="ps-product__title"><a href="product-detail.html">{{ best.name }}’</a></h4>
+                                        <h4 class="ps-product__title"><a href="#">{{ best.name }}’</a></h4>
                                         <p class="ps-product__price">
                                             <del>{{ best.price }}</del>{{best.price - best.price *best.promotion.discount }}
-                                        </p><a class="ps-btn ps-btn--xs" href="product-detail.html">Add to Cart</a>
-                                    </div>
+                                        <ul class="ps-product__action">
+                                            <li><a id="best" href="{{ path('_cupcakes_cart_add',{id:best.id}) }}" data-tooltip="Add to Cart"><i class="ps-icon--shopping-cart"></i></a></li>
+                                            <li><a href="{{ path('_cupcakes_product-detail',{id:best.id}) }}" data-tooltip="Go to details"><i class="ps-icon--search"></i></a></li>
+                                        </ul>                                    </div>
                                 </div>
                                 {% endfor %}
                             </div>
@@ -329,6 +331,19 @@ function findbytag(name) {
                 }
             });
         });
+
+$('[id="best"]').on('click', function(e) {
+    var href = this.href;
+    e.preventDefault();
+    $.ajax({
+        type: "POST",
+        url: href,
+        dataType: 'json',
+        success: function(json) {
+            console.log(json);
+        }
+    });
+});
 
 
 

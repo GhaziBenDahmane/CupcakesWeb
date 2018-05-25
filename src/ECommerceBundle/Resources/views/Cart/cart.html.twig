@@ -46,11 +46,11 @@
                             <td>
                                 <div class="form-group--number">
                                     <button id="{{ cart.id }}" class="minus" onclick="sousAction(this.id);"><span>-</span></button>
-                                    <input id="q{{ cart.id }}" class="form-control" type="text" value="1">
+                                    <input id="q{{ cart.id }}" class="form-control" type="text" value="0">
                                     <button id="{{ cart.id }}" class="plus" onclick="addAction(this.id)"><span>+</span></button>
                                 </div>
                             </td>
-                            <td><span id="total{{ cart.id }}" class="total-row" >{{ cart.product.price - cart.product.promotion.discount * cart.product.price }}</span></td>
+                            <td><span id="total{{ cart.id }}" class="total-row" >0</span></td>
                             <td>
 
                                 <a id="remove" href="{{ path('_cupcakes_cart_remove',{id:cart.id }) }}"> <div id="remove"  class="ps-cart-listing__remove"> </div></a>
@@ -79,7 +79,13 @@
                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 ">
                             <div class="ps-cart__total">
                                 <p>Total Price: <span id="total">{{ price }}</span></p>
-                                <h4  class="ps-product__name" ><a href="{{path('_cupcakes_payment',{price:price*100})}}">Purchase</a></h4>
+                                <h4  class="ps-product__name" ><a id="h" href='javascript:;' >Purchase</a></h4>
+
+                            </div>
+                            <div id="p" >
+                                {{ render(controller(
+                                'ECommerceBundle\\Controller\\PaymentController::PaymentAction',{price:140400}
+                                )) }}
                             </div>
                         </div>
                     </div>
@@ -95,10 +101,16 @@
 
     <script type="text/javascript">
 
+
+
+
+
+
+
         $("#pro").click(
                 function () {
                     var name=$('#promotion').val();
-                    var total = parseInt($('#total').val());
+                    var total = parseFloat($('#total').text());
                     axios.post("{{path('_cupcakes_coupon')}}", {
                         code :  name,
                         ajax : "true"
@@ -107,8 +119,8 @@
                                 $('#ac').html(response.data);
 
 
-                                total=total*0.2;
-                                $('#total').val(total);
+                                total=total-total*0.1;
+                                $('#total').html(total.toFixed(2));
 
 
                             })
@@ -116,50 +128,50 @@
                                 console.log(error);
                             });});
 
-       $(function () {
-           $('[id="remove"]').on('click', function(e) {
-               location.reload();
-               var href = this.href;
-               e.preventDefault();
-               $.ajax({
-                   type: "POST",
-                   url: href,
-                   dataType: 'json',
-                   success: function(json) {
+        $(function () {
+            $('[id="remove"]').on('click', function(e) {
+                location.reload();
+                var href = this.href;
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: href,
+                    dataType: 'json',
+                    success: function(json) {
 
-                       console.log(json);
-                   }
-               });
-           });
-       });
+                        console.log(json);
+                    }
+                });
+            });
+        });
 
-       function addAction(ok)
-       {
+        function addAction(ok)
+        {
 
-           var plus=$('#q'+ok).val();
-           $('#q'+ok).val(parseInt(plus)+1);
-           var quantity=parseInt($('#q'+ok).val());
-           var price1 =parseFloat($('#price'+ok).text()).toFixed(2);
+            var plus=$('#q'+ok).val();
+            $('#q'+ok).val(parseInt(plus)+1);
+            var quantity=parseInt($('#q'+ok).val());
+            var price1 =parseFloat($('#price'+ok).text());
 
-           $('#total'+ok).html(quantity*price1);
-            var total =parseFloat($('#total').text()).toFixed(2)+price1;
-           $('#total').html(total);
-       }
+            $('#total'+ok).html((quantity*price1).toFixed(2));
+            var total =parseFloat($('#total').text())+price1;
+            $('#total').html(total.toFixed(2));
+        }
 
-       function sousAction(id)
-       {
+        function sousAction(id)
+        {
 
-               var moin=$('#q'+id).val();
-               if(((parseInt(moin) - 1)>0)) {
-                   $('#q'+id).val(parseInt(moin) - 1);
-                   var quantity=parseInt($('#q'+id).val());
-                   var price1 =parseFloat($('#price'+id).text()).toFixed(2);
-                   $('#total'+id).html(quantity*price1);
-                   var total =parseFloat($('#total').text()).toFixed(2)-price1;
-                   $('#total').html(total);
-               }
+            var moin=$('#q'+id).val();
+            if(((parseInt(moin) - 1)>0)) {
+                $('#q'+id).val(parseInt(moin) - 1);
+                var quantity=parseInt($('#q'+id).val());
+                var price1 =parseFloat($('#price'+id).text());
+                $('#total'+id).html((quantity*price1).toFixed(2));
+                var total =parseFloat($('#total').text())-price1;
+                $('#total').html(total.toFixed(2));
+            }
 
-       }
+        }
 
 
 

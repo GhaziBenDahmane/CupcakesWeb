@@ -73,8 +73,8 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
 
     public function findProductsMostRated(){
         $query=$this->getEntityManager()
-            ->createQuery(" SELECT DISTINCT (p.id),p.id,p.name,p.price FROM ECommerceBundle:Product p JoiN ECommerceBundle:Rating e where p.id=IDENTITY(e.products) 
-           GROUP BY p.id HAVING AVG (e.note)>3" );
+            ->createQuery(" SELECT DISTINCT p FROM ECommerceBundle:Product p JoiN ECommerceBundle:Rating e where p.id=IDENTITY(e.products) 
+           GROUP BY p.id HAVING (SELECT AVG(r.note) from ECommerceBundle:Rating r where p.id=IDENTITY(r.products) ) >2" );
 
 
         return $query->getResult();
