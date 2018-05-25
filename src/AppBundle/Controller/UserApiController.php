@@ -40,6 +40,19 @@ class UserApiController extends FOSRestController
         $view = $this->view($entity);
         return $this->handleView($view);
     }
+    public function getUserClaimsAction($slug)
+    {
+        $userManager = $this->container->get('fos_user.user_manager');
+        $entity = $userManager->findUserByUsernameOrEmail($slug);
+
+        $em = $this->getDoctrine()->getManager();
+        $claims= $em->getRepository('ECommerceBundle:Claim')->findBy(array("client"=>$entity));
+        if (!$claims) {
+            throw $this->createNotFoundException('Data not found.');
+        }
+        $view = $this->view($claims);
+        return $this->handleView($view);
+    }
 
 
     public function postUserAction(ParamFetcher $paramFetcher)
@@ -101,7 +114,27 @@ class UserApiController extends FOSRestController
             return $view;
         }
     }
+    public function getFormationsAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $claims= $em->getRepository('FormationBundle:Formation')->findAll();
+        $view = $this->view($claims);
+        return $this->handleView($view);
+    }
 
+    public function deleteFormationAction($slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity= $em->getRepository('FormationBundle:Formation')->find($slug);
+        if (!$entity) {
+            throw $this->createNotFoundException('Data not found.');
+        }
+        $em->remove($entity);
+        $em->flush();
+        $view = View::create();
+        $view->setData("Formation deleted.")->setStatusCode(204);
+        return $view;
+    }
 
     public function deleteUserAction($slug)
     {
